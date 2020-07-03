@@ -3,7 +3,7 @@
 ## An anti-corruption JSON database made with the Node runtime
 
 **QDB4 is still heavily under development.**
-**If you'd like to clone/contribute the stable project, head over to the v3 branch.**
+**If you'd like to clone/contribute the stable project, head over to the master branch.**
 
 > QDB is a high level JSON database, which you can import for storing local JavaScript Objects without corruptions.
 > Connect to multiple local JSON files, apart or in a pool. Edit data directly or use built-in utility functions. Use polling for multi-process access and create backups of your databases if something were to go wrong.
