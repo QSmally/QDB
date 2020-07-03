@@ -1,0 +1,30 @@
+{
+  "name": "qdatabase",
+  "version": "4.0.0",
+  "description": "An anti-corruption JSON database",
+  "main": "QDB.js",
+
+  "scripts": {
+    "main":      "node -v && npm -v && node .",
+    "test":      "node Test/Main.js",
+    "benchmark": "node Test/Benchmark.js"
+  },
+
+  "keywords": [
+    "database",
+    "management",
+    "utility",
+    "JSON",
+    "backend",
+    "Qulity"
+  ],
+
+  "homepage":   "https://qdb.qbot.eu/",
+  "repository": "github:QSmally/QDB",
+
+  "author":  "QSmally",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/QSmally/QDB/issues"
+  }
+}
