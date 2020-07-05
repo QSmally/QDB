@@ -1,0 +1,12 @@
+
+# Testing
+Test/
+Deploy/
+
+# Miscellaneous
+.git/
+.DS_Store
+.gitignore
+
+# Packages
+node_modules/
