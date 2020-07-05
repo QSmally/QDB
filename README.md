@@ -33,3 +33,8 @@ const MyDB = new QDB.Connection("./Databases/Users.json");
 
 # Usage
 For Qulity usage, check out [the Github](https://github.com/QSmally/Qulity#README).
+
+# Issues, Contributing & License
+If you've found a bug or want to suggest a feature, please ensure that it hasn't already been reported/suggested - Then, feel free to create an issue! If you'd like to contribute to the project, feel free to fork [the repository](https://github.com/QSmally/QDB) and create a pull request.
+
+This module is licensed under [Apache 2.0](http://www.apache.org/licenses/LICENSE-2.0).
