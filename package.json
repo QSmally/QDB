@@ -23,7 +23,7 @@
   "repository": "github:QSmally/QDB",
 
   "author":  "QSmally",
-  "license": "MIT",
+  "license": "Apache-2.0",
   "bugs": {
     "url": "https://github.com/QSmally/QDB/issues"
   }
