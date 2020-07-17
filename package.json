@@ -16,11 +16,15 @@
     "backend",
     "qulity"
   ],
-  "homepage":   "https://github.com/QSmally/QDB#readme",
+  "homepage": "https://github.com/QSmally/QDB#readme",
   "repository": "github:QSmally/QDB",
-  "author":  "QSmally",
+  "author": "QSmally",
   "license": "Apache-2.0",
   "bugs": {
     "url": "https://github.com/QSmally/QDB/issues"
+  },
+  "dependencies": {
+    "better-sqlite3": "^7.1.0",
+    "qulity": "^1.0.0-pre"
   }
 }
