@@ -1,27 +1,23 @@
 {
   "name": "qdatabase",
   "version": "4.0.0",
-  "description": "An anti-corruption JSON database",
+  "description": "An optimised SQL database",
   "main": "QDB.js",
-
   "scripts": {
-    "main":      "node -v && npm -v && node .",
-    "test":      "node Test/Main.js",
-    "benchmark": "node Test/Benchmark.js"
+    "test": "node Development/Test/Main.js",
+    "debug": "node Development/Test/Main.js -d",
+    "docs": "node Development/Gen/Main.js",
+    "benchmark": "node Development/Test/Benchmark.js"
   },
-
   "keywords": [
+    "data",
     "database",
-    "management",
-    "utility",
-    "JSON",
+    "db",
     "backend",
-    "Qulity"
+    "qulity"
   ],
-
-  "homepage":   "https://qdb.qbot.eu/",
+  "homepage":   "https://github.com/QSmally/QDB#readme",
   "repository": "github:QSmally/QDB",
-
   "author":  "QSmally",
   "license": "Apache-2.0",
   "bugs": {
