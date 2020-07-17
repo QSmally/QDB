@@ -5,3 +5,4 @@ package-lock.json
 
 # Miscellaneous
 .DS_Store
+*.zip
