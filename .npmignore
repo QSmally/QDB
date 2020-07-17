@@ -1,12 +1,14 @@
 
 # Testing
-Test/
 Deploy/
+Development/
+Documentation/
 
 # Miscellaneous
 .git/
 .DS_Store
 .gitignore
+*.zip
 
 # Packages
 node_modules/
