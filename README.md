@@ -8,10 +8,14 @@
 
 
 # Main Features
-* [Connection States]()
+<!-- * [Connection States]()
 * [JSONConnection]()
 * [Optimised Caches]()
-* [Simple Interface]()
+* [Simple Interface]() -->
+* Connection States
+* JSONConnection
+* Optimised Caches
+* Simple Interface
 
 ## Links
 * [Website](https://qdb.qbot.eu/) (Not updated for version 4)
