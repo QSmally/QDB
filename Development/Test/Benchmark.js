@@ -2,16 +2,24 @@
 const QDB = require("../../QDB");
 const MyDB = new QDB.Connection("Development/Test/Users.qdb");
 
-MyDB.Set("9a51dy", {
-    Name: "QSmally",
-    Age: 19,
-    Hobbies: ["Programming", "Sleeping"]
+MyDB.API.prepare("DELETE FROM 'QDB' WHERE Key = ?").run("8v_65ver85b5");
+MyDB.Set("8v_65ver85b5", {
+    Name: "Molly",
+    Age: 18,
+    Description: "f"
 });
 
-MyDB.Set("9a51dy.Age", 20);
+// console.log({Cached: MyDB.CacheSize, Fetched: MyDB.Size, Rows: MyDB.API.prepare("SELECT * FROM 'QDB'").all(), Cache: MyDB.Cache});
 
-console.log(MyDB.Fetch("9a51dy"));
+console.log(MyDB.Fetch("8v_65ver85b5"));
+console.log(MyDB.Fetch("p6_fhtkuyxtb"));
+console.log(MyDB.Fetch("b5_lvee9uszh"));
+console.log(MyDB.Fetch("8v_65ver85b5"));
 
-console.log(MyDB.Fetch("9a51dy.Hobbies.0"));
+MyDB.Set("8v_65ver85b5.Age", 200);
+
+console.log(MyDB.Fetch("8v_65ver85b5"));
+
+console.log({Cached: MyDB.CacheSize, Fetched: MyDB.Size, Rows: MyDB.API.prepare("SELECT * FROM 'QDB'").all(), Cache: MyDB.Cache});
 
 MyDB.Disconnect();
