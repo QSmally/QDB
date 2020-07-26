@@ -25,6 +25,6 @@
   },
   "dependencies": {
     "better-sqlite3": "^7.1.0",
-    "qulity": "^1.0.0-pre"
+    "qulity": "^1.2.0"
   }
 }
