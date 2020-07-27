@@ -8,14 +8,17 @@
 
 
 # Main Features
-<!-- * [Connection States]()
-* [JSONConnection]()
-* [Optimised Caches]()
-* [Simple Interface]() -->
 * Connection States
-* JSONConnection
+<!-- * Database Pool -->
+<!-- * JSONConnection -->
 * Optimised Caches
 * Simple Interface
+
+## Public Todo
+* Create [usage](#usage)
+* Implement pool
+* Add JSONConnection support (v3)
+* Update website for v4
 
 ## Links
 * [Website](https://qdb.qbot.eu/) (Not updated for version 4)
