@@ -14,12 +14,6 @@
 * Optimised Caches
 * Simple Interface
 
-## Public Todo
-* Create [usage](#usage)
-* Implement pool
-* Add JSONConnection support (v3)
-* Update website for v4
-
 ## Links
 * [Website](https://qdb.qbot.eu/) (Not updated for version 4)
 * [Documentations](https://github.com/QSmally/QDB/blob/v4/Documentation/Index.mc)
@@ -35,6 +29,12 @@ const QDB = require("qdatabase");
 
 
 # Usage
+
+## [Connection](https://github.com/QSmally/QDB/blob/b4/Documentation/Connection.md)
+The main interface for interacting with QDB.
+```js
+const MyDB = new QDB.Connection(Path, Options?);
+```
 
 # Issues, Contributing & License
 If you've found a bug or want to suggest a feature, please ensure that it hasn't already been reported/suggested - Then, feel free to create an [issue](https://github.com/QSmally/QDB/issues)! If you'd like to contribute to the project, feel free to fork [the repository](https://github.com/QSmally/QDB) and create a pull request.
