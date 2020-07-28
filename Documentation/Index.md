@@ -9,7 +9,7 @@ const QDB = require("qdatabase");
 ```
 
 ### Current implemented classes
-* [BaseConnection](https://github.com/QSmally/QDB/blob/master/Documentation/BaseConnection.md)
-* [PartialConnection](https://github.com/QSmally/QDB/blob/master/Documentation/PartialConnection.md)
-* [Connection](https://github.com/QSmally/QDB/blob/master/Documentation/Connection.md)
-* [JSONConnection](https://github.com/QSmally/QDB/blob/master/Documentation/JSONConnection.md)
+* [BaseConnection](https://github.com/QSmally/QDB/blob/v4/Documentation/BaseConnection.md)
+* [PartialConnection](https://github.com/QSmally/QDB/blob/v4/Documentation/PartialConnection.md)
+* [Connection](https://github.com/QSmally/QDB/blob/v4/Documentation/Connection.md)
+* [JSONConnection](https://github.com/QSmally/QDB/blob/v4/Documentation/JSONConnection.md)
