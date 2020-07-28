@@ -18,8 +18,6 @@ module.exports = {
 
     BaseConnection:    require("./lib/BaseConnection"),
     PartialConnection: require("./lib/PartialConnection"),
-    Connection:        require("./lib/Connection"),
-
-    ...Qulity
+    Connection:        require("./lib/Connection")
 
 };
