@@ -2,10 +2,8 @@
     "Source": "lib/",
     "Out":    "Documentation/",
 
-    "Additional": {
-        
-    },
+    "Additional": {},
 
-    "Repository": "https://github.com/QSmally/Docgen/blob/master",
+    "Repository": "https://github.com/QSmally/Docgen/blob/v4",
     "Keys": "QDB.js"
 }
