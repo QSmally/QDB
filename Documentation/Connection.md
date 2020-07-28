@@ -31,6 +31,16 @@ const MyDB = new QDB.Connection("lib/Databases/Users.qdb");
 >
 > Type **{String}**
 
+## [.Size](https://github.com/QSmally/QDB/blob/v4/lib/Connection.js#L104)
+> Fetches all the rows of this database.
+>
+> Type **{Number}**
+
+## [.CacheSize](https://github.com/QSmally/QDB/blob/v4/lib/Connection.js#L114)
+> Retrieves all the in-memory cached rows of this Connection. Extension of what would be `<Connection>.Cache.size`, but checks for the ready state.
+>
+> Type **{Number}**
+
 # Methods
 ## [.Disconnect()](https://github.com/QSmally/QDB/blob/v4/lib/Connection.js#L125)
 > Disconnects from the database, clears in-memory rows.
