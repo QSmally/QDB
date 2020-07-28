@@ -6,8 +6,8 @@
   "scripts": {
     "test": "node Development/Test/Main.js",
     "debug": "node Development/Test/Main.js -d",
-    "docs": "node Development/Gen/Main.js",
-    "benchmark": "node Development/Test/Benchmark.js"
+    "benchmark": "node Test/Benchmark.js",
+    "docs": "gendocs Test/DocConf.json"
   },
   "keywords": [
     "data",
@@ -26,5 +26,8 @@
   "dependencies": {
     "better-sqlite3": "^7.1.0",
     "qulity": "^1.2.0"
+  },
+  "devDependencies": {
+    "docgen": "github:QSmally/Docgen"
   }
 }
