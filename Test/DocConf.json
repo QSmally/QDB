@@ -1,9 +1,14 @@
 {
     "Source": "lib/",
     "Out":    "Documentation/",
+    "Index":  true,
 
-    "Additional": {},
+    "Additional": {
 
-    "Repository": "https://github.com/QSmally/Docgen/blob/v4",
-    "Keys": "QDB.js"
+    },
+
+    "Repository": "https://github.com/QSmally/QDB/blob/v4/",
+
+    "Keys": "QDB.js",
+    "Typedefs": ["Types"]
 }
