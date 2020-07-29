@@ -13,6 +13,12 @@ The main interface for interacting with QDB.
 const MyDB = new QDB.Connection("lib/Databases/Users.qdb");
 ```
 
+> | Key | Type | Description |
+> | --- | --- | --- |
+> | PathURL | Pathlike | Path to the database file. |
+> | RawOptions? | RawOptions | Options for this Connection. |
+> | Pool? | Pool | Pool reference when this database was initialised in a Pool. |
+
 
 
 # Values
@@ -47,22 +53,22 @@ const MyDB = new QDB.Connection("lib/Databases/Users.qdb");
 >
 > Returns **{PartialConnection}** 
 
-## [.AsObject()](https://github.com/QSmally/QDB/blob/v4/lib/Connection.js#L139)
+## [.AsObject()](https://github.com/QSmally/QDB/blob/v4/lib/Connection.js#L140)
 > Converts this database to an Object. To use dotaccess, use `Fetch` instead.
 >
 > Returns **{Object}** An Object instance with the key/value pairs.
 
-## [.ToInstance(Instance, Pathlike?, {...Any})](https://github.com/QSmally/QDB/blob/v4/lib/Connection.js#L149)
+## [.ToInstance(Instance, Pathlike?, Args?)](https://github.com/QSmally/QDB/blob/v4/lib/Connection.js#L150)
 > Converts this database, or a part of it using dotaccess, to any Map-form instance.
 > | Key | Type | Description |
 > | --- | --- | --- |
 > | Instance | Function | Instance to be converted to. Should either be an instance of a Map or Set, and this can include extended classes like Collections and DataStores. |
 > | Pathlike? | String | Optional dotaccess path pointing towards what to serialise. |
-> | {...Any} |  | [Args] Additional arguments to pass on to the instance. |
+> | Args? | ...Any | Additional arguments to pass on to the instance. |
 >
 > Returns **{Any}** The instance with the target as entries.
 
-## [.ToDataStore(Pathlike?)](https://github.com/QSmally/QDB/blob/v4/lib/Connection.js#L168)
+## [.ToDataStore(Pathlike?)](https://github.com/QSmally/QDB/blob/v4/lib/Connection.js#L169)
 > Converts this database, or a part of it using dotaccess, to a DataStore instance.
 > | Key | Type | Description |
 > | --- | --- | --- |
@@ -70,7 +76,7 @@ const MyDB = new QDB.Connection("lib/Databases/Users.qdb");
 >
 > Returns **{DataStore}** A DataStore instance with the key/model pairs.
 
-## [.ToIntegratedManager(Pathlike?, Holds?)](https://github.com/QSmally/QDB/blob/v4/lib/Connection.js#L177)
+## [.ToIntegratedManager(Pathlike?, Holds?)](https://github.com/QSmally/QDB/blob/v4/lib/Connection.js#L178)
 > Converts this database, or a part of it using dotaccess, to a Manager instance.
 > | Key | Type | Description |
 > | --- | --- | --- |
@@ -79,16 +85,16 @@ const MyDB = new QDB.Connection("lib/Databases/Users.qdb");
 >
 > Returns **{Manager}** A Manager instance with the key/model pairs.
 
-## [.Set(KeyOrPath, Value)](https://github.com/QSmally/QDB/blob/v4/lib/Connection.js#L260)
+## [.Set(KeyOrPath, Value)](https://github.com/QSmally/QDB/blob/v4/lib/Connection.js#L261)
 > Manages the elements of the database.
 > | Key | Type | Description |
 > | --- | --- | --- |
 > | KeyOrPath | String | Specifies at what row to insert or replace the element at. Use dotaccess notation to edit in-depth values. |
-> | Value | Object|Array|Any | Data to set into the row, at the location of the key or path. |
+> | Value | Object, Array, Any | Data to set into the row, at the location of the key or path. |
 >
 > Returns **{Connection}** Returns the updated database.
 
-## [.Fetch(KeyOrPath, Cache?)](https://github.com/QSmally/QDB/blob/v4/lib/Connection.js#L281)
+## [.Fetch(KeyOrPath, Cache?)](https://github.com/QSmally/QDB/blob/v4/lib/Connection.js#L282)
 > Manages the retrieval of the database.
 > | Key | Type | Description |
 > | --- | --- | --- |

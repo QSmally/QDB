@@ -15,7 +15,7 @@
 > | --- | --- | --- |
 > | FetchAll? | Boolean | Whether to fetch all entries on startup. |
 > | SweepInterval? | Number | Integer to indicate the interval of cache sweeping. |
-> | Backups? | String|Boolean | String for the path of the backup directory, otherwise 'false'. |
+> | Backups? | String, Boolean | String for the path of the backup directory, otherwise 'false'. |
 > | Cache? | Boolean | Boolean to indicate whether to cache newly fetched entries. (This WILL increase memory usage.) |
 > | WAL? | Boolean | Boolean to indicate whether to use Write Ahead Logging as journal mode. |
 >
