@@ -34,3 +34,37 @@ console.log(`memory usage: ${process.memoryUsage().heapUsed / 1024 / 1024} MB`);
 //         foo: "bar"
 //     });
 // }
+
+
+
+// START THREAD
+// const {Worker, isMainThread, parentPort, workerData} = require("worker_threads");
+// const Indexes = Guilds.API.prepare("SELECT * FROM 'QDB';").all().map(v => v.Key);
+
+// if (isMainThread) {
+//     console.time("time-for-one-thread");
+//     const Id = Indexes[Math.round(Math.random() * Indexes.length)];
+
+//     new Worker(__filename, {
+//         workerData: Id
+//     })
+
+//     .on("message", m => console.log(m))
+//     .on("error", e => console.log(`[Error Received] ${e}`))
+//     .on("exit", c => {
+//         console.log(`Thread exited with code ${c}`);
+//         console.timeEnd("time-for-one-thread");
+//     });
+
+//     console.time("time-for-main-process");
+//     for (let i = 0; i < 10; i++) {
+//         const Id = Indexes[Math.round(Math.random() * Indexes.length)];
+//         const data = Guilds.Fetch(Id);
+//     }
+//     console.timeEnd("time-for-main-process");
+// } else {
+//     for (let i = 0; i < 10; i++) {
+//         const data = Guilds.Fetch(workerData);
+//         parentPort.postMessage(data);
+//     }
+// }

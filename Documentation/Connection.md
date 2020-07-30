@@ -102,3 +102,19 @@ const MyDB = new QDB.Connection("lib/Databases/Users.qdb");
 > | Cache? | Boolean | Whether to, when not already, cache this entry in results that the next retrieval would be much faster. |
 >
 > Returns **{Object|Array|Any}** Value of the row, or the property when using dotaccess.
+
+## [.Evict(Keys?)](https://github.com/QSmally/QDB/blob/v4/lib/Connection.js#L308)
+> Removes elements from this Connection's cache.
+> | Key | Type | Description |
+> | --- | --- | --- |
+> | Keys? | ...String | A key or multiple keys to remove from the cache. If none, the cache will get cleared entirely. |
+>
+> Returns **{Connection}** Returns the updated database.
+
+## [.Erase(Keys)](https://github.com/QSmally/QDB/blob/v4/lib/Connection.js#L320)
+> Removes elements from this database.
+> | Key | Type | Description |
+> | --- | --- | --- |
+> | Keys | ...String | A key or multiple keys to remove from the database. These elements will also get removed from this Connection's internal cache. |
+>
+> Returns **{Connection}** Returns the updated database.
