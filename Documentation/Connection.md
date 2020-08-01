@@ -30,35 +30,35 @@ const MyDB = new QDB.Connection("lib/Databases/Users.qdb");
 ## [.ValOptions](https://github.com/QSmally/QDB/blob/v4/lib/Connection.js#L36)
 > Validated options for this Connection. [**Read Only**]
 >
-> Type **{Object}**
+> Type **{RawOptions}**
 
-## [.Table](https://github.com/QSmally/QDB/blob/v4/lib/Connection.js#L52)
+## [.Table](https://github.com/QSmally/QDB/blob/v4/lib/Connection.js#L53)
 > Table name for this Connection. [**Read Only**]
 >
 > Type **{String}**
 
-## [.Size](https://github.com/QSmally/QDB/blob/v4/lib/Connection.js#L104)
+## [.Size](https://github.com/QSmally/QDB/blob/v4/lib/Connection.js#L120)
 > Fetches all the rows of this database.
 >
 > Type **{Number}**
 
-## [.CacheSize](https://github.com/QSmally/QDB/blob/v4/lib/Connection.js#L114)
+## [.CacheSize](https://github.com/QSmally/QDB/blob/v4/lib/Connection.js#L130)
 > Retrieves all the in-memory cached rows of this Connection. Extension of what would be `<Connection>.Cache.size`, but checks for the ready state.
 >
 > Type **{Number}**
 
 # Methods
-## [.Disconnect()](https://github.com/QSmally/QDB/blob/v4/lib/Connection.js#L125)
+## [.Disconnect()](https://github.com/QSmally/QDB/blob/v4/lib/Connection.js#L141)
 > Disconnects from the database, clears in-memory rows.
 >
 > Returns **{PartialConnection}** 
 
-## [.AsObject()](https://github.com/QSmally/QDB/blob/v4/lib/Connection.js#L140)
+## [.AsObject()](https://github.com/QSmally/QDB/blob/v4/lib/Connection.js#L159)
 > Converts this database to an Object. To use dotaccess, use `Fetch` instead.
 >
 > Returns **{Object}** An Object instance with the key/value pairs.
 
-## [.ToInstance(Instance, Pathlike?, Args?)](https://github.com/QSmally/QDB/blob/v4/lib/Connection.js#L150)
+## [.ToInstance(Instance, Pathlike?, Args?)](https://github.com/QSmally/QDB/blob/v4/lib/Connection.js#L169)
 > Converts this database, or a part of it using dotaccess, to any Map-form instance.
 > | Key | Type | Description |
 > | --- | --- | --- |
@@ -68,7 +68,7 @@ const MyDB = new QDB.Connection("lib/Databases/Users.qdb");
 >
 > Returns **{Any}** The instance with the target as entries.
 
-## [.ToDataStore(Pathlike?)](https://github.com/QSmally/QDB/blob/v4/lib/Connection.js#L169)
+## [.ToDataStore(Pathlike?)](https://github.com/QSmally/QDB/blob/v4/lib/Connection.js#L188)
 > Converts this database, or a part of it using dotaccess, to a DataStore instance.
 > | Key | Type | Description |
 > | --- | --- | --- |
@@ -76,7 +76,7 @@ const MyDB = new QDB.Connection("lib/Databases/Users.qdb");
 >
 > Returns **{DataStore}** A DataStore instance with the key/model pairs.
 
-## [.ToIntegratedManager(Pathlike?, Holds?)](https://github.com/QSmally/QDB/blob/v4/lib/Connection.js#L178)
+## [.ToIntegratedManager(Pathlike?, Holds?)](https://github.com/QSmally/QDB/blob/v4/lib/Connection.js#L197)
 > Converts this database, or a part of it using dotaccess, to a Manager instance.
 > | Key | Type | Description |
 > | --- | --- | --- |
@@ -85,7 +85,7 @@ const MyDB = new QDB.Connection("lib/Databases/Users.qdb");
 >
 > Returns **{Manager}** A Manager instance with the key/model pairs.
 
-## [.Set(KeyOrPath, Value)](https://github.com/QSmally/QDB/blob/v4/lib/Connection.js#L261)
+## [.Set(KeyOrPath, Value)](https://github.com/QSmally/QDB/blob/v4/lib/Connection.js#L293)
 > Manages the elements of the database.
 > | Key | Type | Description |
 > | --- | --- | --- |
@@ -94,16 +94,16 @@ const MyDB = new QDB.Connection("lib/Databases/Users.qdb");
 >
 > Returns **{Connection}** Returns the updated database.
 
-## [.Fetch(KeyOrPath, Cache?)](https://github.com/QSmally/QDB/blob/v4/lib/Connection.js#L282)
+## [.Fetch(KeyOrPath, Cache?)](https://github.com/QSmally/QDB/blob/v4/lib/Connection.js#L314)
 > Manages the retrieval of the database.
 > | Key | Type | Description |
 > | --- | --- | --- |
 > | KeyOrPath | String | Specifies which row to fetch or get from cache. Use dotaccess notation to retrieve in-depth values. |
 > | Cache? | Boolean | Whether to, when not already, cache this entry in results that the next retrieval would be much faster. |
 >
-> Returns **{Object|Array|Any}** Value of the row, or the property when using dotaccess.
+> Returns **{Object|Array|DataModel|Any}** Value of the row, or the property when using dotaccess.
 
-## [.Evict(Keys?)](https://github.com/QSmally/QDB/blob/v4/lib/Connection.js#L308)
+## [.Evict(Keys?)](https://github.com/QSmally/QDB/blob/v4/lib/Connection.js#L340)
 > Removes elements from this Connection's cache.
 > | Key | Type | Description |
 > | --- | --- | --- |
@@ -111,7 +111,7 @@ const MyDB = new QDB.Connection("lib/Databases/Users.qdb");
 >
 > Returns **{Connection}** Returns the updated database.
 
-## [.Erase(Keys)](https://github.com/QSmally/QDB/blob/v4/lib/Connection.js#L320)
+## [.Erase(Keys)](https://github.com/QSmally/QDB/blob/v4/lib/Connection.js#L352)
 > Removes elements from this database.
 > | Key | Type | Description |
 > | --- | --- | --- |
