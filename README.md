@@ -2,20 +2,19 @@
 # QDB4
 ## An optimised SQL database
 
-**QDB4 is not in a usable state, only a few methods and very few features are implemented. Please use the master branch instead!** [[Contribute](#issues-contributing--license)] [[Documentation](https://github.com/QSmally/QDB/blob/v4/Documentation/Index.md)]
+**QDB4 is not in a usable state, only a few methods and very few features are implemented. Please use the [legacy repository](https://github.com/QSmally/QDB-Legacy)!** [[Contribute](#issues-contributing--license)] [[Documentation](https://github.com/QSmally/QDB/blob/v4/Documentation/Index.md)]
 
 > QDB is a high level database module which is based around JavaScript Objects. Connect to multiple files, apart or in an optimised pool.
 
 
 # Main Features
-* Connection States
+* Connection states
+* Optimised caches
+* Simple class interface
 <!-- * Database Pool -->
 <!-- * JSONConnection -->
-* Optimised Caches
-* Simple Interface
 
 ## Links
-* [Website](https://qdb.qbot.eu/) (Not updated for version 4)
 * [Documentations](https://github.com/QSmally/QDB/blob/v4/Documentation/Index.mc)
 * [Github](https://github.com/QSmally/QDB)
 * [Discord Server](https://qdb.qbot.eu/discord)
