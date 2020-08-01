@@ -3,7 +3,7 @@ const QDB = require("../QDB");
 
 const Guilds = new QDB.Connection("Test/Guilds.qdb", {
     // Change this to true/false for (no) caching
-    Cache: false
+    // Cache: false
 });
 
 // START READ TIME
@@ -23,6 +23,8 @@ for (let i = 0; i < 1000 * 1000; i++) {
 console.log(`cache size: ${Guilds.CacheSize}`);
 console.timeEnd("time-for-million-reads");
 console.log(`memory usage: ${process.memoryUsage().heapUsed / 1024 / 1024} MB`);
+
+Guilds.Disconnect();
 
 
 
