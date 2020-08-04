@@ -5,7 +5,7 @@
 * [PartialConnection](https://github.com/QSmally/QDB/blob/v4/Documentation/PartialConnection.md)
 * [Connection](https://github.com/QSmally/QDB/blob/v4/Documentation/Connection.md)
 
-Base class of the Connection.
+Class when a database failed to connect.
 
 
 
