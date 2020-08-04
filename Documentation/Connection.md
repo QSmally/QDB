@@ -40,8 +40,24 @@ const Users = new QDB.Connection("lib/Databases/Users.qdb");
 >
 > Type **{String}**
 
+## [.Size](https://github.com/QSmally/QDB/blob/v4/lib/Connections/Connection.js#L124)
+> Fetches asll the rows of this database.
+>
+> Type **{Number}**
+
+## [.CacheSize](https://github.com/QSmally/QDB/blob/v4/lib/Connections/Connection.js#L134)
+> Retrieves all the in-memory cached rows of this Connection. Extension of what would be `<Connection>.Cache.size`, but checks for the ready state.
+>
+> Type **{Number}**
+
+# Methods
+## [.Disconnect()](https://github.com/QSmally/QDB/blob/v4/lib/Connections/Connection.js#L145)
+> Disconnects from this Connection, clears in-memory rows.
+>
+> Returns **{Conncetion}** 
+
 # Typedefs
-## [.RawOptions](https://github.com/QSmally/QDB/blob/v4/lib/Connections/Connection.js#L128)
+## [.RawOptions](https://github.com/QSmally/QDB/blob/v4/lib/Connections/Connection.js#L162)
 > Options for a database Connection. All integer related options are in milliseconds. 
 > | Key | Type | Description |
 > | --- | --- | --- |
