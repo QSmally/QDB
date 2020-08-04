@@ -14,4 +14,7 @@
 
 module.exports = {
 
+    PartialConnection: require("./lib/Connections/PartialConnection"),
+    Connection:        require("./lib/Connections/Connection")
+
 };
