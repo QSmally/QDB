@@ -7,7 +7,7 @@ const Guilds = new QDB.Connection("Test/Guilds.qdb", {
 });
 
 // START READ TIME
-const Indexes = Guilds.API.prepare("SELECT * FROM 'QDB';").all().map(v => v.Key);
+const Indexes = Guilds.Indexes;
 
 console.time("time-for-million-reads");
 
