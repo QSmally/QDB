@@ -25,7 +25,6 @@
   },
   "dependencies": {
     "better-sqlite3": "^7.1.0",
-    "defaults-deep": "github:QSmally/defaults-deep",
     "qulity": "^1.3.0"
   },
   "devDependencies": {
