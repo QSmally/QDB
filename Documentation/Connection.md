@@ -56,17 +56,26 @@ const Users = new QDB.Connection("lib/Databases/Users.qdb");
 >
 > Returns **{Array}** Returns a list of indexes.
 
-## [.Disconnect()](https://github.com/QSmally/QDB/blob/v4/lib/Connections/Connection.js#L177)
+## [.On(Event, Fn)](https://github.com/QSmally/QDB/blob/v4/lib/Connections/Connection.js#L177)
+> *
+> | Key | Type | Description |
+> | --- | --- | --- |
+> | Event | String | String to represent which event you're applying to the function. |
+> | Fn | Function | Function to execute when this event triggers. |
+>
+> Returns **{Boolean}** Whether this event was registered.
+
+## [.Disconnect()](https://github.com/QSmally/QDB/blob/v4/lib/Connections/Connection.js#L192)
 > Disconnects from this Connection, clears in-memory rows. Only run this method when you are exiting the program, or want to fully disconnect from this database.
 >
 > Returns **{Connection}** 
 
-## [.AsObject()](https://github.com/QSmally/QDB/blob/v4/lib/Connections/Connection.js#L283)
+## [.AsObject()](https://github.com/QSmally/QDB/blob/v4/lib/Connections/Connection.js#L298)
 > Converts this database's rows into an Object. To use dotaccess, use {@link Fetch} instead.
 >
 > Returns **{Object}** An object instance with the key/value pairs of this database.
 
-## [.ToIntegratedManager(Pathlike?, Holds?)](https://github.com/QSmally/QDB/blob/v4/lib/Connections/Connection.js#L293)
+## [.ToIntegratedManager(Pathlike?, Holds?)](https://github.com/QSmally/QDB/blob/v4/lib/Connections/Connection.js#L308)
 > Converts this database, or a part of it using dotaccess, to a Manager instance.
 > | Key | Type | Description |
 > | --- | --- | --- |
@@ -75,7 +84,7 @@ const Users = new QDB.Connection("lib/Databases/Users.qdb");
 >
 > Returns **{Manager}** A Manager instance with the key/model pairs.
 
-## [.Set(KeyOrPath, Value)](https://github.com/QSmally/QDB/blob/v4/lib/Connections/Connection.js#L312)
+## [.Set(KeyOrPath, Value)](https://github.com/QSmally/QDB/blob/v4/lib/Connections/Connection.js#L327)
 > Manages the elements of the database.
 > | Key | Type | Description |
 > | --- | --- | --- |
@@ -84,7 +93,7 @@ const Users = new QDB.Connection("lib/Databases/Users.qdb");
 >
 > Returns **{Connection}** Returns the updated database.
 
-## [.Fetch(KeyOrPath, Cache?)](https://github.com/QSmally/QDB/blob/v4/lib/Connections/Connection.js#L333)
+## [.Fetch(KeyOrPath, Cache?)](https://github.com/QSmally/QDB/blob/v4/lib/Connections/Connection.js#L350)
 > Manages the retrieval of the database.
 > | Key | Type | Description |
 > | --- | --- | --- |
@@ -93,7 +102,7 @@ const Users = new QDB.Connection("lib/Databases/Users.qdb");
 >
 > Returns **{Object|Array|DataModel|Any}** Value of the row, or the property when using dotaccess.
 
-## [.Evict({...Pathlike})](https://github.com/QSmally/QDB/blob/v4/lib/Connections/Connection.js#L359)
+## [.Evict({...Pathlike})](https://github.com/QSmally/QDB/blob/v4/lib/Connections/Connection.js#L378)
 > Erases elements from this Connection's internal cache.
 > | Key | Type | Description |
 > | --- | --- | --- |
@@ -101,7 +110,7 @@ const Users = new QDB.Connection("lib/Databases/Users.qdb");
 >
 > Returns **{Connection}** Returns the updated database.
 
-## [.Erase({...Pathlike})](https://github.com/QSmally/QDB/blob/v4/lib/Connections/Connection.js#L373)
+## [.Erase({...Pathlike})](https://github.com/QSmally/QDB/blob/v4/lib/Connections/Connection.js#L392)
 > Manages the deletion of the database.
 > | Key | Type | Description |
 > | --- | --- | --- |
@@ -110,7 +119,7 @@ const Users = new QDB.Connection("lib/Databases/Users.qdb");
 > Returns **{Connection}** Returns the updated database.
 
 # Typedefs
-## [.RawOptions](https://github.com/QSmally/QDB/blob/v4/lib/Connections/Connection.js#L394)
+## [.RawOptions](https://github.com/QSmally/QDB/blob/v4/lib/Connections/Connection.js#L414)
 > Options for a database Connection. All integer related options are in milliseconds. 
 > | Key | Type | Description |
 > | --- | --- | --- |
