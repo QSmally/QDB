@@ -7,24 +7,26 @@ const Guilds = new QDB.Connection("Test/Guilds.qdb", {
 });
 
 // START READ TIME
-const Indexes = Guilds.Indexes;
-
-console.time("time-for-million-reads");
-
-for (let i = 0; i < 1000 * 1000; i++) {
-    const Id = Indexes[Math.round(Math.random() * Indexes.length)];
-    if (!Id) continue;
-
-    // console.time("per-fetch");
-    const Ft = Guilds.Fetch(Id);
-    // console.timeEnd("per-fetch");
-}
-
-console.log(`cache size: ${Guilds.CacheSize}`);
-console.timeEnd("time-for-million-reads");
-console.log(`memory usage: ${process.memoryUsage().heapUsed / 1024 / 1024} MB`);
-
+console.log(Guilds.Exists());
 Guilds.Disconnect();
+// const Indexes = Guilds.Indexes;
+
+// console.time("time-for-million-reads");
+
+// for (let i = 0; i < 1000 * 1000; i++) {
+//     const Id = Indexes[Math.round(Math.random() * Indexes.length)];
+//     if (!Id) continue;
+
+//     // console.time("per-fetch");
+//     const Ft = Guilds.Fetch(Id);
+//     // console.timeEnd("per-fetch");
+// }
+
+// console.log(`cache size: ${Guilds.CacheSize}`);
+// console.timeEnd("time-for-million-reads");
+// console.log(`memory usage: ${process.memoryUsage().heapUsed / 1024 / 1024} MB`);
+
+// Guilds.Disconnect();
 
 
 
