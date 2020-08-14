@@ -70,12 +70,12 @@ const Users = new QDB.Connection("lib/Databases/Users.qdb");
 >
 > Returns **{Connection}** 
 
-## [.AsObject()](https://github.com/QSmally/QDB/blob/v4/lib/Connections/Connection.js#L298)
+## [.AsObject()](https://github.com/QSmally/QDB/blob/v4/lib/Connections/Connection.js#L301)
 > Converts this database's rows into an Object. To use dotaccess, use {@link Fetch} instead.
 >
 > Returns **{Object}** An object instance with the key/value pairs of this database.
 
-## [.ToIntegratedManager(Pathlike?, Holds?)](https://github.com/QSmally/QDB/blob/v4/lib/Connections/Connection.js#L308)
+## [.ToIntegratedManager(Pathlike?, Holds?)](https://github.com/QSmally/QDB/blob/v4/lib/Connections/Connection.js#L311)
 > Converts this database, or a part of it using dotaccess, to a Manager instance.
 > | Key | Type | Description |
 > | --- | --- | --- |
@@ -84,7 +84,7 @@ const Users = new QDB.Connection("lib/Databases/Users.qdb");
 >
 > Returns **{Manager}** A Manager instance with the key/model pairs.
 
-## [.Set(KeyOrPath, Value)](https://github.com/QSmally/QDB/blob/v4/lib/Connections/Connection.js#L327)
+## [.Set(KeyOrPath, Value)](https://github.com/QSmally/QDB/blob/v4/lib/Connections/Connection.js#L330)
 > Manages the elements of the database.
 > | Key | Type | Description |
 > | --- | --- | --- |
@@ -93,7 +93,7 @@ const Users = new QDB.Connection("lib/Databases/Users.qdb");
 >
 > Returns **{Connection}** Returns the updated database.
 
-## [.Fetch(KeyOrPath, Cache?)](https://github.com/QSmally/QDB/blob/v4/lib/Connections/Connection.js#L350)
+## [.Fetch(KeyOrPath, Cache?)](https://github.com/QSmally/QDB/blob/v4/lib/Connections/Connection.js#L354)
 > Manages the retrieval of the database.
 > | Key | Type | Description |
 > | --- | --- | --- |
@@ -102,7 +102,7 @@ const Users = new QDB.Connection("lib/Databases/Users.qdb");
 >
 > Returns **{Object|Array|DataModel|Any}** Value of the row, or the property when using dotaccess.
 
-## [.Evict({...Pathlike})](https://github.com/QSmally/QDB/blob/v4/lib/Connections/Connection.js#L378)
+## [.Evict({...Pathlike})](https://github.com/QSmally/QDB/blob/v4/lib/Connections/Connection.js#L383)
 > Erases elements from this Connection's internal cache.
 > | Key | Type | Description |
 > | --- | --- | --- |
@@ -110,7 +110,7 @@ const Users = new QDB.Connection("lib/Databases/Users.qdb");
 >
 > Returns **{Connection}** Returns the updated database.
 
-## [.Erase({...Pathlike})](https://github.com/QSmally/QDB/blob/v4/lib/Connections/Connection.js#L392)
+## [.Erase({...Pathlike})](https://github.com/QSmally/QDB/blob/v4/lib/Connections/Connection.js#L397)
 > Manages the deletion of the database.
 > | Key | Type | Description |
 > | --- | --- | --- |
@@ -118,8 +118,36 @@ const Users = new QDB.Connection("lib/Databases/Users.qdb");
 >
 > Returns **{Connection}** Returns the updated database.
 
+## [.Exists(Key, Cache?)](https://github.com/QSmally/QDB/blob/v4/lib/Connections/Connection.js#L417)
+> Returns whether or not a row in this database exists. This method also caches the row internally, so getting it would be much faster.
+> | Key | Type | Description |
+> | --- | --- | --- |
+> | Key | Pathlike | Specifies which row to see if it exists. |
+> | Cache? | Boolean | Whether or not to cache the fetched entry. |
+>
+> Returns **{Boolean}** Whether a row exists in this database.
+
+## [.Find(Fn, Cache?)](https://github.com/QSmally/QDB/blob/v4/lib/Connections/Connection.js#L430)
+> Iterates through all the keys, returns the first element found.
+> | Key | Type | Description |
+> | --- | --- | --- |
+> | Fn | Function | Function used to test with. |
+> | Cache? | Boolean | Whether or not to cache the fetched entry. |
+>
+> Returns **{Any}** Returns the row found, or nil.
+
+## [.Accumulate(KeyOrPath, Fn, Cache?)](https://github.com/QSmally/QDB/blob/v4/lib/Connections/Connection.js#L446)
+> Accumulates as function on a row, essentially a fetch wrapped in a method. Changes are not recorded into the database.
+> | Key | Type | Description |
+> | --- | --- | --- |
+> | KeyOrPath | Pathlike | Specifies which row to fetch. Use dotaccess to retrieve properties. |
+> | Fn | Function | Callback function used to return the row or property. |
+> | Cache? | Boolean | Whether or not to cache the fetched entry. |
+>
+> Returns **{Connection}** Returns the current Connection.
+
 # Typedefs
-## [.RawOptions](https://github.com/QSmally/QDB/blob/v4/lib/Connections/Connection.js#L414)
+## [.RawOptions](https://github.com/QSmally/QDB/blob/v4/lib/Connections/Connection.js#L469)
 > Options for a database Connection. All integer related options are in milliseconds. 
 > | Key | Type | Description |
 > | --- | --- | --- |
@@ -128,11 +156,11 @@ const Users = new QDB.Connection("lib/Databases/Users.qdb");
 > | WAL | Boolean | Whether or not to enable Write Ahead Logging mode.  |
 > | Cache | Boolean | Whether to enable in-memory caching of entries in results that the next retrieval would be much faster. |
 > | FetchAll | Boolean | Whether or not to fetch all the database entries on start-up of this Connection. |
+> | UtilCache | Boolean | Whether or not to cache entries while performing utility tasks, such as the Exists and Accumulate methods. |
 > | SweepInterval | Number | Integer to indicate at what interval to sweep the entries of this Connection's internal cache. |
 > | SweepLifetime | Number | The minimum age of an entry in the cache to consider being sweepable after an interval.  |
-> | Backups | Boolean | Whether to enable database backups for this Connection's database. |
-> | BackupInterval | Number | Integer to indicate at what interval to create a low-level backup. |
 > | BackupLifetime | Number | After how many intervals to merge the latest low-level into one. |
+> | BackupInterval | Number | Integer to indicate at what interval to create a low-level backup. |
 > | BackupDirectory | Pathlike | A path URL to the directory to place all the backups in. |
 >
 > Type **{Object}**
