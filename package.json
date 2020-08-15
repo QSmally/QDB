@@ -4,8 +4,8 @@
   "description": "An optimised SQL database",
   "main": "QDB.js",
   "scripts": {
-    "test": "node Development/Test/Main.js",
-    "debug": "node Development/Test/Main.js -d",
+    "test": "node Test/Main.js",
+    "debug": "node Test/Main.js -d",
     "benchmark": "node Test/Benchmark.js",
     "docs": "gendocs Test/DocConf.json"
   },
