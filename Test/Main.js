@@ -36,7 +36,8 @@ try {
     }
 
 } catch (Err) {
-    console.error(`Failed to run tests\n${Err}`);
+    console.error("Failed to run tests");
+    console.error(Err);
 } finally {
     if (process.argv.includes("-d")) console.debug(Entries);
 }
