@@ -50,6 +50,11 @@ module.exports = (QDB, Tap) => {
     Tap("Con#Find2", Con.Find(e => e === "1289"), undefined);
     Tap("Con#CacheSize11", Con.CacheSize, 3);
 
+    Tap("Con#Evict", Con.Evict().CacheSize, 0);
+
+    Tap("Con#Set", Con.Set("2345.Age", 30).Size, 3);
+    Tap("Con#Fetch6", Con.Fetch("2345"), {Name: "bar", Age: 30, _DataStore: "2345"});
+
     Con.Disconnect();
 
 }
