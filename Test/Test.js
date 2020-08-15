@@ -1,3 +1,4 @@
+const Fetch = require("../lib/Executors/Fetch");
 
 module.exports = (QDB, Tap) => {
 
@@ -52,8 +53,30 @@ module.exports = (QDB, Tap) => {
 
     Tap("Con#Evict", Con.Evict().CacheSize, 0);
 
-    Tap("Con#Set", Con.Set("2345.Age", 30).Size, 3);
+    Tap("Con#Set5", Con.Set("2345.Age", 30).Size, 3);
     Tap("Con#Fetch6", Con.Fetch("2345"), {Name: "bar", Age: 30, _DataStore: "2345"});
+
+    const IdxList = Con.Indexes;
+    for (const Idx in IdxList)
+    Tap(`Con#Set${parseInt(Idx) + 6}`, Con.Set(`${IdxList[Idx]}.Hobbies`, []).Size, 3);
+    
+    Tap("Con#Push1", Con.Push("3456", "wontWork"), null);
+    Tap("Con#Push2", Con.Push("3456.Hobbies", "foo").Fetch("3456.Hobbies.length"), 1);
+    Tap("Con#Push3", Con.Push("3456.Hobbies", "bar").Fetch("3456.Hobbies.length"), 2);
+    Tap("Con#Push4", Con.Push("2345.Hobbies", "roo").Fetch("2345.Hobbies.length"), 1);
+
+    Tap("Con#Pop1", Con.Pop("3456"), null);
+    Tap("Con#Pop2", Con.Pop("3456.Hobbies").Fetch("3456.Hobbies.length"), 1);
+    Tap("Con#Pop3", Con.Pop("2345.Hobbies").Fetch("2345.Hobbies.length"), 0);
+    Tap("Con#Pop4", Con.Pop("2345.Hobbies").Fetch("2345.Hobbies.length"), 0);
+
+    Tap("Con#Push5", Con.Push("3456.Hobbies", "goo").Fetch("3456.Hobbies.length"), 2);
+    Tap("Con#Push6", Con.Push("3456.Hobbies", "loo").Fetch("3456.Hobbies.length"), 3);
+
+    Tap("Con#Remove1", Con.Remove("3456", F => F === "goo"), null);
+    Tap("Con#Remove2", Con.Remove("3456.Hobbies", F => F === "foo").Fetch("3456.Hobbies.length"), 2);
+
+    Tap("Con#Set10", Con.Set("2345.Hobbies", ["one", "two", "three", "four"]).Fetch("2345.Hobbies.length"), 4);
 
     Con.Disconnect();
 
