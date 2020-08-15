@@ -1,0 +1,322 @@
+{
+    "PartialConnection": [
+        {
+            "Value": "State",
+            "Flags": [
+                "Variable",
+                "ReadOnly"
+            ],
+            "Line": 11,
+            "Description": "Current state of this Connection.",
+            "Type": "{String}"
+        }
+    ],
+    "Connection": [
+        {
+            "Value": "Path",
+            "Flags": [
+                "Variable",
+                "ReadOnly"
+            ],
+            "Line": 28,
+            "Description": "Path string to the database.",
+            "Type": "{Pathlike}"
+        },
+        {
+            "Value": "ValOptions",
+            "Flags": [
+                "Variable",
+                "ReadOnly"
+            ],
+            "Line": 39,
+            "Description": "Options for this Connection.",
+            "Type": "{RawOptions}"
+        },
+        {
+            "Value": "Pool",
+            "Flags": [
+                "Variable"
+            ],
+            "Line": 63,
+            "Description": "Whether this Connection is used in a Pool.",
+            "Type": "{Pool|null}"
+        },
+        {
+            "Value": "Table",
+            "Flags": [
+                "Variable",
+                "ReadOnly"
+            ],
+            "Line": 73,
+            "Description": "Table name of this Connection.",
+            "Type": "{String}"
+        },
+        {
+            "Value": "API",
+            "Flags": [
+                "Variable",
+                "Private",
+                "ReadOnly"
+            ],
+            "Line": 83,
+            "Description": "Raw SQL property.",
+            "Type": "{SQL}"
+        },
+        {
+            "Value": "Cache",
+            "Flags": [
+                "Variable",
+                "Private",
+                "ReadOnly"
+            ],
+            "Line": 94,
+            "Description": "In-memory cached rows.",
+            "Type": "{DataStore}"
+        },
+        {
+            "Value": "_Executors",
+            "Flags": [
+                "Variable",
+                "Private"
+            ],
+            "Line": 118,
+            "Description": "An object with all additional active operators. I.e. schema, sweep intervals, backups, fetch all.",
+            "Type": "{Object}"
+        },
+        {
+            "Value": "Size",
+            "Flags": [
+                "Variable"
+            ],
+            "Line": 133,
+            "Description": "Fetches all the rows of this database.",
+            "Action": "Getter",
+            "Refer": "Size",
+            "Type": "{Number}"
+        },
+        {
+            "Value": "CacheSize",
+            "Flags": [
+                "Variable"
+            ],
+            "Line": 144,
+            "Description": "Retrieves all the in-memory cached rows of this Connection. Extension of what would be `<Connection>.Cache.size`, but checks for the ready state.",
+            "Action": "Getter",
+            "Refer": "CacheSize",
+            "Type": "{Number}"
+        },
+        {
+            "Value": "get",
+            "Flags": [],
+            "Line": 155,
+            "Description": "Retrieves all the keys of this database table.",
+            "Returns": "{Array} Returns a list of indexes."
+        },
+        {
+            "Value": "Disconnect",
+            "Flags": [],
+            "Line": 165,
+            "Description": "Disconnects from this Connection, clears in-memory rows. Only run this method when you are exiting the program, or want to fully disconnect from this database.",
+            "Returns": "{Connection}"
+        },
+        {
+            "Value": "_Ready",
+            "Flags": [
+                "Variable",
+                "Private"
+            ],
+            "Line": 185,
+            "Description": "Internal method. Checks whether this database is ready for execution.",
+            "Action": "Getter",
+            "Refer": "_Ready",
+            "Type": "{Boolean}"
+        },
+        {
+            "Value": "_Resolve",
+            "Flags": [
+                "Private"
+            ],
+            "Line": 198,
+            "Description": "Internal method. Resolves a dotaccess path or key and parses it.",
+            "Params": [
+                "{Pathlike} Pathlike String input to be formed and parsed."
+            ],
+            "Returns": "{Array<String, Array|undefined>} Array containnig a 'Key', and optionally a 'Path'."
+        },
+        {
+            "Value": "_Patch",
+            "Flags": [
+                "Private"
+            ],
+            "Line": 210,
+            "Description": "Internal method. Sets or patches something in this Connection's internal cache.",
+            "Params": [
+                "{String|Number} Key As address to memory map this value.",
+                "{Object|Array} Value The value to cache in the memory."
+            ],
+            "Returns": "{DataStore} Returns the updated cache."
+        },
+        {
+            "Value": "_CastPath",
+            "Flags": [
+                "Private"
+            ],
+            "Line": 225,
+            "Description": "Internal method. Finds a relative dotaccess pathway of a frame.",
+            "Params": [
+                "{Object|Array} Frame The object-like beginning to cast.",
+                "{Array} Pathlike A dotaccess notation path as an Array. Preferred `Path` from {@link _Resolve}.",
+                "{Object} [Options] Additional queries for the caster to use."
+            ],
+            "Returns": "{*}"
+        },
+        {
+            "Value": "AsObject",
+            "Flags": [],
+            "Line": 274,
+            "Description": "Converts this database's rows into an Object. To use dotaccess, use {@link Fetch} instead.",
+            "Returns": "{Object} An object instance with the key/value pairs of this database."
+        },
+        {
+            "Value": "ToIntegratedManager",
+            "Flags": [],
+            "Line": 284,
+            "Description": "Converts this database, or a part of it using dotaccess, to a Manager instance.",
+            "Params": [
+                "{Pathlike} [Pathlike] Optional dotaccess path pointing towards what to serialise.",
+                "{Function} [Holds] Given optional class for which instance this Manager is for."
+            ],
+            "Returns": "{Manager} A Manager instance with the key/model pairs."
+        },
+        {
+            "Value": "Set",
+            "Flags": [],
+            "Line": 303,
+            "Description": "Manages the elements of the database.",
+            "Params": [
+                "{Pathlike} KeyOrPath Specifies at what row to insert or replace the element at. Use dotaccess notation to edit properties.",
+                "{Object|Array|*} Value Data to set at the row address, at the location of the key or path."
+            ],
+            "Returns": "{Connection} Returns the updated database."
+        },
+        {
+            "Value": "Fetch",
+            "Flags": [],
+            "Line": 325,
+            "Description": "Manages the retrieval of the database.",
+            "Params": [
+                "{Pathlike} KeyOrPath Specifies which row to fetch or get from cache. Use dotaccess to retrieve properties.",
+                "{Boolean} [Cache] Whether to, if not already, cache this entry in results that the next retrieval would be much faster."
+            ],
+            "Returns": "{Object|Array|DataModel|*} Value of the row, or the property when using dotaccess."
+        },
+        {
+            "Value": "Evict",
+            "Flags": [],
+            "Line": 352,
+            "Description": "Erases elements from this Connection's internal cache.",
+            "Params": [
+                " {...Pathlike} [Keys] A key or multiple keys to remove from cache. If none, the cache will get cleared entirely."
+            ],
+            "Returns": "{Connection} Returns the updated database."
+        },
+        {
+            "Value": "Erase",
+            "Flags": [],
+            "Line": 366,
+            "Description": "Manages the deletion of the database.",
+            "Params": [
+                " {...Pathlike} Keys A key or multiple keys to remove from the database. These elements will also get removed from this Connection's internal cache."
+            ],
+            "Returns": "{Connection} Returns the updated database."
+        },
+        {
+            "Value": "Exists",
+            "Flags": [],
+            "Line": 388,
+            "Description": "Returns whether or not a row in this database exists. This method also caches the row internally, so getting it would be much faster.",
+            "Params": [
+                "{Pathlike} Key Specifies which row to see if it exists.",
+                "{Boolean} [Cache] Whether or not to cache the fetched entry."
+            ],
+            "Returns": "{Boolean} Whether a row exists in this database."
+        },
+        {
+            "Value": "Find",
+            "Flags": [],
+            "Line": 401,
+            "Description": "Iterates through all the keys, returns the first element found.",
+            "Params": [
+                "{Function} Fn Function used to test with.",
+                "{Boolean} [Cache] Whether or not to cache the fetched entry."
+            ],
+            "Returns": "{*} Returns the row found, or nil."
+        },
+        {
+            "Value": "Accumulate",
+            "Flags": [],
+            "Line": 417,
+            "Description": "Accumulates as function on a row, essentially a fetch wrapped in a method. Changes are not recorded into the database.",
+            "Params": [
+                "{Pathlike} KeyOrPath Specifies which row to fetch. Use dotaccess to retrieve properties.",
+                "{Function} Fn Callback function used to return the row or property.",
+                "{Boolean} [Cache] Whether or not to cache the fetched entry."
+            ],
+            "Returns": "{Connection} Returns the current Connection."
+        },
+        {
+            "Value": "Push",
+            "Flags": [],
+            "Line": 438,
+            "Description": "Pushes something to an array at the path output.",
+            "Params": [
+                "{Pathlike} KeyOrPath Specifies which row or nested array to push to.",
+                "{*} Value A value to push to this array."
+            ],
+            "Returns": "{Connection} Returns the updated database."
+        },
+        {
+            "Value": "Pop",
+            "Flags": [],
+            "Line": 457,
+            "Description": "Pops something from an array at the path output.",
+            "Params": [
+                "{Pathlike} KeyOrPath Specifies which row or nested array to pop from."
+            ],
+            "Returns": "{Connection} Returns the updated database."
+        },
+        {
+            "Value": "Remove",
+            "Flags": [],
+            "Line": 475,
+            "Description": "Removes a specific element from this endpoint array.",
+            "Params": [
+                "{Pathlike} KeyOrPath Specifies which row or nested array to remove from.",
+                "{Function} Fn A function that returns a boolean to which value to remove."
+            ],
+            "Returns": "{Connection} Returns the updated database."
+        },
+        {
+            "Value": "",
+            "Flags": [
+                "Typedef"
+            ],
+            "Line": 504,
+            "Description": "Options for a database Connection. All integer related options are in milliseconds. ",
+            "Typedef": "{Object} RawOptions",
+            "Params": [
+                "{String} Table A name for the table to use at this path.",
+                "{Schema} Schema Link to a database Schema class for automatic migration.",
+                "{Boolean} WAL Whether or not to enable Write Ahead Logging mode. ",
+                "{Boolean} Cache Whether to enable in-memory caching of entries in results that the next retrieval would be much faster.",
+                "{Boolean} FetchAll Whether or not to fetch all the database entries on start-up of this Connection.",
+                "{Boolean} UtilCache Whether or not to cache entries while performing utility tasks, such as the Exists and Accumulate methods.",
+                "{Number} SweepInterval Integer to indicate at what interval to sweep the entries of this Connection's internal cache.",
+                "{Number} SweepLifetime The minimum age of an entry in the cache to consider being sweepable after an interval. ",
+                "{Number} BackupLifetime After how many intervals to merge the latest low-level into one.",
+                "{Number} BackupInterval Integer to indicate at what interval to create a low-level backup.",
+                "{Pathlike} BackupDirectory A path URL to the directory to place all the backups in."
+            ]
+        }
+    ]
+}
