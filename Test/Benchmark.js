@@ -6,32 +6,26 @@ const Guilds = new QDB.Connection("Test/Guilds.qdb", {
     // Cache: false
 });
 
-// TESTS
-console.log(Guilds.Exists("9_k84ezszmof"));
-console.log(Guilds.Exists("9_k84ezszmof.foo"));
-console.log(Guilds.Exists("9_k84ezszmof.doesNotExist"));
-Guilds.Disconnect();
-
 // START READ TIME
-// const Indexes = Guilds.Indexes;
+const Indexes = Guilds.Indexes;
 
-// console.time("time-for-million-reads");
+console.time("time-for-million-reads");
 
-// for (let i = 0; i < 1000 * 1000; i++) {
-//     const Id = Indexes[Math.round(Math.random() * Indexes.length)];
-//     if (!Id) continue;
+for (let i = 0; i < 1000 * 1000; i++) {
+    const Id = Indexes[Math.round(Math.random() * Indexes.length)];
+    if (!Id) continue;
 
-//     // console.time("per-fetch");
-//     const Ft = Guilds.Fetch(Id);
-//     // console.timeEnd("per-fetch");
-// }
+    // console.time("per-fetch");
+    const Ft = Guilds.Fetch(Id);
+    // console.timeEnd("per-fetch");
+}
 
-// // console.log(Guilds.Cache);
-// console.log(`cache size: ${Guilds.CacheSize}`);
-// console.timeEnd("time-for-million-reads");
-// console.log(`memory usage: ${process.memoryUsage().heapUsed / 1024 / 1024} MB`);
+// console.log(Guilds.Cache);
+console.log(`cache size: ${Guilds.CacheSize}`);
+console.timeEnd("time-for-million-reads");
+console.log(`memory usage: ${process.memoryUsage().heapUsed / 1024 / 1024} MB`);
 
-// Guilds.Disconnect();
+Guilds.Disconnect();
 
 
 
