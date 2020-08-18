@@ -78,6 +78,24 @@ module.exports = (QDB, Tap) => {
 
     Tap("Con#Set10", Con.Set("2345.Hobbies", ["one", "two", "three", "four"]).Fetch("2345.Hobbies.length"), 4);
 
+    Tap("Con#Ensure1", Con.Ensure("2345", {Name: "nope", Age: -1, Hobbies: []}), false);
+    Tap("Con#Ensure2", Con.Ensure("6789", {Name: "Untitled", Age: -1, Hobbies: []}), true);
+
+    Tap("Con#Modify1", Con.Modify("6789.Name", Name => {
+        Name = "moo";
+        return Name;
+    }), {Name: "moo", Age: -1, Hobbies: [], _DataStore: "6789"});
+
+    Tap("Con#Modify2", Con.Modify("6789.Hobbies", Hob => {
+        Hob.push({Programming: false});
+        return Hob;
+    }), {Name: "moo", Age: -1, Hobbies: [{Programming: false}], _DataStore: "6789"});
+
+    Tap("Con#Invert1", Con.Invert("6789.Hobbies.0.Programming"), true);
+    Tap("Con#Invert2", Con.Invert("6789.Hobbies.0.Programming"), false);
+    Tap("Con#Invert3", Con.Invert("6789.Hobbies.0.Programming"), true);
+    Tap("Con#Invert4", Con.Invert("6789.Hobbies.0.Programming"), false);
+
     Con.Disconnect();
 
 }
