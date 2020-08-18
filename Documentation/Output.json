@@ -80,7 +80,7 @@
                 "Private"
             ],
             "Line": 118,
-            "Description": "An object with all additional active operators. I.e. schema, sweep intervals, backups, fetch all.",
+            "Description": "An object with all additional active operators. I.e. sweep intervals, backups, fetch all entries.",
             "Type": "{Object}"
         },
         {
@@ -106,16 +106,20 @@
             "Type": "{Number}"
         },
         {
-            "Value": "get",
-            "Flags": [],
+            "Value": "Indexes",
+            "Flags": [
+                "Variable"
+            ],
             "Line": 155,
             "Description": "Retrieves all the keys of this database table.",
-            "Returns": "{Array} Returns a list of indexes."
+            "Action": "Getter",
+            "Refer": "Indexes",
+            "Type": "{Array}"
         },
         {
             "Value": "Disconnect",
             "Flags": [],
-            "Line": 165,
+            "Line": 166,
             "Description": "Disconnects from this Connection, clears in-memory rows. Only run this method when you are exiting the program, or want to fully disconnect from this database.",
             "Returns": "{Connection}"
         },
@@ -125,7 +129,7 @@
                 "Variable",
                 "Private"
             ],
-            "Line": 185,
+            "Line": 186,
             "Description": "Internal method. Checks whether this database is ready for execution.",
             "Action": "Getter",
             "Refer": "_Ready",
@@ -136,7 +140,7 @@
             "Flags": [
                 "Private"
             ],
-            "Line": 198,
+            "Line": 199,
             "Description": "Internal method. Resolves a dotaccess path or key and parses it.",
             "Params": [
                 "{Pathlike} Pathlike String input to be formed and parsed."
@@ -148,7 +152,7 @@
             "Flags": [
                 "Private"
             ],
-            "Line": 210,
+            "Line": 211,
             "Description": "Internal method. Sets or patches something in this Connection's internal cache.",
             "Params": [
                 "{String|Number} Key As address to memory map this value.",
@@ -161,7 +165,7 @@
             "Flags": [
                 "Private"
             ],
-            "Line": 225,
+            "Line": 226,
             "Description": "Internal method. Finds a relative dotaccess pathway of a frame.",
             "Params": [
                 "{Object|Array} Frame The object-like beginning to cast.",
@@ -173,14 +177,14 @@
         {
             "Value": "AsObject",
             "Flags": [],
-            "Line": 274,
+            "Line": 275,
             "Description": "Converts this database's rows into an Object. To use dotaccess, use {@link Fetch} instead.",
             "Returns": "{Object} An object instance with the key/value pairs of this database."
         },
         {
             "Value": "ToIntegratedManager",
             "Flags": [],
-            "Line": 284,
+            "Line": 285,
             "Description": "Converts this database, or a part of it using dotaccess, to a Manager instance.",
             "Params": [
                 "{Pathlike} [Pathlike] Optional dotaccess path pointing towards what to serialise.",
@@ -191,7 +195,7 @@
         {
             "Value": "Set",
             "Flags": [],
-            "Line": 303,
+            "Line": 304,
             "Description": "Manages the elements of the database.",
             "Params": [
                 "{Pathlike} KeyOrPath Specifies at what row to insert or replace the element at. Use dotaccess notation to edit properties.",
@@ -202,7 +206,7 @@
         {
             "Value": "Fetch",
             "Flags": [],
-            "Line": 325,
+            "Line": 326,
             "Description": "Manages the retrieval of the database.",
             "Params": [
                 "{Pathlike} KeyOrPath Specifies which row to fetch or get from cache. Use dotaccess to retrieve properties.",
@@ -213,27 +217,27 @@
         {
             "Value": "Evict",
             "Flags": [],
-            "Line": 352,
+            "Line": 353,
             "Description": "Erases elements from this Connection's internal cache.",
             "Params": [
-                " {...Pathlike} [Keys] A key or multiple keys to remove from cache. If none, the cache will get cleared entirely."
+                "{...Pathlike} [Keys] A key or multiple keys to remove from cache. If none, the cache will get cleared entirely."
             ],
             "Returns": "{Connection} Returns the updated database."
         },
         {
             "Value": "Erase",
             "Flags": [],
-            "Line": 366,
+            "Line": 369,
             "Description": "Manages the deletion of the database.",
             "Params": [
-                " {...Pathlike} Keys A key or multiple keys to remove from the database. These elements will also get removed from this Connection's internal cache."
+                "{...Pathlike} Keys A key or multiple keys to remove from the database. These elements will also get removed from this Connection's internal cache."
             ],
             "Returns": "{Connection} Returns the updated database."
         },
         {
             "Value": "Exists",
             "Flags": [],
-            "Line": 388,
+            "Line": 393,
             "Description": "Returns whether or not a row in this database exists. This method also caches the row internally, so getting it would be much faster.",
             "Params": [
                 "{Pathlike} Key Specifies which row to see if it exists.",
@@ -244,7 +248,7 @@
         {
             "Value": "Find",
             "Flags": [],
-            "Line": 401,
+            "Line": 406,
             "Description": "Iterates through all the keys, returns the first element found.",
             "Params": [
                 "{Function} Fn Function used to test with.",
@@ -255,7 +259,7 @@
         {
             "Value": "Accumulate",
             "Flags": [],
-            "Line": 417,
+            "Line": 422,
             "Description": "Accumulates as function on a row, essentially a fetch wrapped in a method. Changes are not recorded into the database.",
             "Params": [
                 "{Pathlike} KeyOrPath Specifies which row to fetch. Use dotaccess to retrieve properties.",
@@ -267,7 +271,7 @@
         {
             "Value": "Push",
             "Flags": [],
-            "Line": 438,
+            "Line": 443,
             "Description": "Pushes something to an array at the path output.",
             "Params": [
                 "{Pathlike} KeyOrPath Specifies which row or nested array to push to.",
@@ -278,7 +282,7 @@
         {
             "Value": "Pop",
             "Flags": [],
-            "Line": 457,
+            "Line": 464,
             "Description": "Pops something from an array at the path output.",
             "Params": [
                 "{Pathlike} KeyOrPath Specifies which row or nested array to pop from."
@@ -288,7 +292,7 @@
         {
             "Value": "Remove",
             "Flags": [],
-            "Line": 475,
+            "Line": 484,
             "Description": "Removes a specific element from this endpoint array.",
             "Params": [
                 "{Pathlike} KeyOrPath Specifies which row or nested array to remove from.",
@@ -297,11 +301,43 @@
             "Returns": "{Connection} Returns the updated database."
         },
         {
+            "Value": "Ensure",
+            "Flags": [],
+            "Line": 514,
+            "Description": "Inserts an input into a row or nested object if the key or path wasn't found at the endpoint. This behaves like `if (!DB[Element]) DB[Element] = Input;`.",
+            "Params": [
+                "{Pathlike} KeyOrPath Context key to see if it exists, either a row or nested property, and optionally insert the new value.",
+                "{*} Input A value to input if the row or nested property wasn't found in the database."
+            ],
+            "Returns": "{Boolean} Whether or not the new value was inserted."
+        },
+        {
+            "Value": "Modify",
+            "Flags": [],
+            "Line": 536,
+            "Description": "Updates a value in the database by fetching it and passing it onto the callback function.",
+            "Params": [
+                "{Pathlike} KeyOrPath Specifies which row or nested property to fetch.",
+                "{Function} Fn Callback which includes the original value of the fetched row or property."
+            ],
+            "Returns": "{*} Returns the new row of the updated property."
+        },
+        {
+            "Value": "Invert",
+            "Flags": [],
+            "Line": 553,
+            "Description": "Inverts a boolean, i.e. from true to false and vice-versa, at the endpoint of the path.",
+            "Params": [
+                "{Pathlike} KeyOrPath Specifies which row or nested property to boolean-invert."
+            ],
+            "Returns": "{Boolean} Updated boolean value of the property."
+        },
+        {
             "Value": "",
             "Flags": [
                 "Typedef"
             ],
-            "Line": 504,
+            "Line": 574,
             "Description": "Options for a database Connection. All integer related options are in milliseconds. ",
             "Typedef": "{Object} RawOptions",
             "Params": [
