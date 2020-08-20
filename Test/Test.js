@@ -1,4 +1,3 @@
-const Fetch = require("../lib/Executors/Fetch");
 
 module.exports = (QDB, Tap) => {
 
@@ -51,7 +50,7 @@ module.exports = (QDB, Tap) => {
     Tap("Con#Find2", Con.Find(e => e === "1289"), undefined);
     Tap("Con#CacheSize11", Con.CacheSize, 3);
 
-    Tap("Con#Evict", Con.Evict().CacheSize, 0);
+    Tap("Con#Evict3", Con.Evict().CacheSize, 0);
 
     Tap("Con#Set5", Con.Set("2345.Age", 30).Size, 3);
     Tap("Con#Fetch6", Con.Fetch("2345"), {Name: "bar", Age: 30, _DataStore: "2345"});
@@ -66,17 +65,22 @@ module.exports = (QDB, Tap) => {
     Tap("Con#Push4", Con.Push("2345.Hobbies", "roo").Fetch("2345.Hobbies.length"), 1);
 
     Tap("Con#Pop1", Con.Pop("3456"), null);
-    Tap("Con#Pop2", Con.Pop("3456.Hobbies").Fetch("3456.Hobbies.length"), 1);
-    Tap("Con#Pop3", Con.Pop("2345.Hobbies").Fetch("2345.Hobbies.length"), 0);
-    Tap("Con#Pop4", Con.Pop("2345.Hobbies").Fetch("2345.Hobbies.length"), 0);
+    Con.Pop("3456.Hobbies");
+    Tap("Con#Pop2", Con.Fetch("3456.Hobbies.length"), 1);
+    Con.Pop("3456.Hobbies");
+    Tap("Con#Pop3", Con.Fetch("3456.Hobbies.length"), 0);
+    Con.Pop("3456.Hobbies");
+    Tap("Con#Pop4", Con.Fetch("3456.Hobbies.length"), 0);
 
-    Tap("Con#Push5", Con.Push("3456.Hobbies", "goo").Fetch("3456.Hobbies.length"), 2);
-    Tap("Con#Push6", Con.Push("3456.Hobbies", "loo").Fetch("3456.Hobbies.length"), 3);
+    Tap("Con#Evict4", Con.Evict("3456").CacheSize, 2);
+
+    Tap("Con#Push5", Con.Push("3456.Hobbies", "goo").Fetch("3456.Hobbies.length"), 1);
+    Tap("Con#Push6", Con.Push("3456.Hobbies", "loo").Fetch("3456.Hobbies.length"), 2);
 
     Tap("Con#Remove1", Con.Remove("3456", F => F === "goo"), null);
     Tap("Con#Remove2", Con.Remove("3456.Hobbies", F => F === "foo").Fetch("3456.Hobbies.length"), 2);
 
-    Tap("Con#Push5", Con.Push("3456.Hobbies", "1", "2", "3").Fetch("3456.Hobbies.length"), 5);
+    Tap("Con#Push6", Con.Push("3456.Hobbies", "1", "2", "3").Fetch("3456.Hobbies.length"), 5);
 
     Tap("Con#Set10", Con.Set("2345.Hobbies", ["one", "two", "three", "four"]).Fetch("2345.Hobbies.length"), 4);
 
