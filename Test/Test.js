@@ -84,6 +84,7 @@ module.exports = (QDB, Tap) => {
 
     Tap("Con#Shift1", Con.Shift("3456.Hobbies"), 4);
     Tap("Con#Shift2", Con.Shift("3456.Hobbies", "-5"), 5);
+    Tap("Con#Shift3", Con.Shift("3456.Hobbies", "one", "two", "three"), 8);
 
     Tap("Con#Set10", Con.Set("2345.Hobbies", ["one", "two", "three", "four"]).Fetch("2345.Hobbies.length"), 4);
 
