@@ -269,30 +269,52 @@
             "Returns": "{Connection} Returns the current Connection."
         },
         {
+            "Value": "Each",
+            "Flags": [],
+            "Line": 440,
+            "Description": "Iterates through this database's entries.",
+            "Params": [
+                "{Function} Fn A function which passes on the iterating entries.",
+                "{Boolean} [Evict] Whether to evict the entries from cache afterwards. Disabling this option would increase memory usage indefinitely!"
+            ],
+            "Returns": "{Connection} Returns this database."
+        },
+        {
             "Value": "Push",
             "Flags": [],
-            "Line": 443,
+            "Line": 468,
             "Description": "Pushes something to an array at the path output.",
             "Params": [
                 "{Pathlike} KeyOrPath Specifies which row or nested array to push to.",
-                "{*} Value A value to push to this array."
+                "{...Any} Values Values to insert and push to this array."
             ],
             "Returns": "{Connection} Returns the updated database."
+        },
+        {
+            "Value": "Shift",
+            "Flags": [],
+            "Line": 490,
+            "Description": "Inserts (if defined) or removes a value to/from the front of the array.",
+            "Params": [
+                "{Pathlike} KeyOrPath Specifies which row or nested array to insert to/remove from.",
+                "{...Any} [Values] If defined, inserts new values at the front of the array."
+            ],
+            "Returns": "{Number} Returns the new length of the array."
         },
         {
             "Value": "Pop",
             "Flags": [],
-            "Line": 464,
+            "Line": 512,
             "Description": "Pops something from an array at the path output.",
             "Params": [
                 "{Pathlike} KeyOrPath Specifies which row or nested array to pop from."
             ],
-            "Returns": "{Connection} Returns the updated database."
+            "Returns": "{*} Returns the popped value."
         },
         {
             "Value": "Remove",
             "Flags": [],
-            "Line": 484,
+            "Line": 532,
             "Description": "Removes a specific element from this endpoint array.",
             "Params": [
                 "{Pathlike} KeyOrPath Specifies which row or nested array to remove from.",
@@ -303,8 +325,8 @@
         {
             "Value": "Ensure",
             "Flags": [],
-            "Line": 514,
-            "Description": "Inserts an input into a row or nested object if the key or path wasn't found at the endpoint. This behaves like `if (!DB[Element]) DB[Element] = Input;`.",
+            "Line": 562,
+            "Description": "Inserts an input into a row or nested object if the key or path wasn't found at the endpoint. It can be used as a default schema of the database elements, that gets inserted if there's no entry already. This behaves like `if (!DB[Element]) DB[Element] = Input;`.",
             "Params": [
                 "{Pathlike} KeyOrPath Context key to see if it exists, either a row or nested property, and optionally insert the new value.",
                 "{*} Input A value to input if the row or nested property wasn't found in the database."
@@ -314,7 +336,7 @@
         {
             "Value": "Modify",
             "Flags": [],
-            "Line": 536,
+            "Line": 585,
             "Description": "Updates a value in the database by fetching it and passing it onto the callback function.",
             "Params": [
                 "{Pathlike} KeyOrPath Specifies which row or nested property to fetch.",
@@ -325,7 +347,7 @@
         {
             "Value": "Invert",
             "Flags": [],
-            "Line": 553,
+            "Line": 602,
             "Description": "Inverts a boolean, i.e. from true to false and vice-versa, at the endpoint of the path.",
             "Params": [
                 "{Pathlike} KeyOrPath Specifies which row or nested property to boolean-invert."
@@ -337,7 +359,7 @@
             "Flags": [
                 "Typedef"
             ],
-            "Line": 574,
+            "Line": 623,
             "Description": "Options for a database Connection. All integer related options are in milliseconds. ",
             "Typedef": "{Object} RawOptions",
             "Params": [
