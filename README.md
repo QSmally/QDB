@@ -26,6 +26,11 @@ const QDB = require("qdatabase");
 // ...
 ```
 
+## Dependencies (Top Level)
+* [Qulity](https://npmjs.org/package/qulity)
+* [better-sqlite3](https://npmjs.org/package/better-sqlite3)
+* [QSmally/Docgen](https://github.com/QSmally/Docgen) (Development)
+
 
 # Usage
 
