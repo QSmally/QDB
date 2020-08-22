@@ -7,6 +7,7 @@ const Guilds = new QDB.Connection("Test/Guilds.qdb", {
 });
 
 // START READ TIME
+// console.log("benchmark: fetch 1 million random queries");
 // const Indexes = Guilds.Indexes;
 
 // console.time("time-for-million-reads");
@@ -28,14 +29,23 @@ const Guilds = new QDB.Connection("Test/Guilds.qdb", {
 // Guilds.Disconnect();
 
 
+
 // START EACH BENCHMARK
-Guilds.Each((Entry, Idx) => {
-    console.log(Idx);
+console.log("benchmark: iterate through 50k queries");
+console.log(`memory usage: ${process.memoryUsage().heapUsed / 1024 / 1024} MB`);
+
+Guilds.Select((Entry, Idx) => {
+    return Math.random() > 0.8;
 });
 
+console.log([Guilds.Size, Guilds.CacheSize]);
 console.log(`memory usage: ${process.memoryUsage().heapUsed / 1024 / 1024} MB`);
 
 Guilds.Disconnect();
+
+setTimeout(() => {
+    console.log(`memory usage: ${process.memoryUsage().heapUsed / 1024 / 1024} MB`);
+}, 10 * 1000);
 
 
 
@@ -51,6 +61,7 @@ Guilds.Disconnect();
 
 
 // START THREAD
+// console.log("benchmark: use threads to fetch queries");
 // const {Worker, isMainThread, parentPort, workerData} = require("worker_threads");
 // const Indexes = Guilds.API.prepare("SELECT * FROM 'QDB';").all().map(v => v.Key);
 
