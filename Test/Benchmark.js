@@ -7,56 +7,32 @@ const Guilds = new QDB.Connection("Test/Guilds.qdb", {
 });
 
 // START READ TIME
-// console.log("benchmark: fetch 1 million random queries");
-// const Indexes = Guilds.Indexes;
+console.log("benchmark: fetch 1 million random queries");
+const Indexes = Guilds.Indexes;
 
-// console.time("time-for-million-reads");
+console.time("time-for-million-reads");
 
-// for (let i = 0; i < 1000 * 1000; i++) {
-//     const Id = Indexes[Math.round(Math.random() * Indexes.length)];
-//     if (!Id) continue;
+for (let i = 0; i < 1000 * 1000; i++) {
+    const Id = Indexes[Math.round(Math.random() * Indexes.length)];
+    if (!Id) continue;
 
-//     // console.time("per-fetch");
-//     const Ft = Guilds.Fetch(Id);
-//     // console.timeEnd("per-fetch");
-// }
-
-// // console.log(Guilds.Cache);
-// console.log(`cache size: ${Guilds.CacheSize}`);
-// console.timeEnd("time-for-million-reads");
-// console.log(`memory usage: ${process.memoryUsage().heapUsed / 1024 / 1024} MB`);
-
-// Guilds.Disconnect();
-
-
-
-// START EACH BENCHMARK
-// Garbage collector test
-console.log("benchmark: iterate through 50k queries");
-
-let i = 0;
-function log() {
-    const {heapUsed} = process.memoryUsage();
-    console.log(`${i++}: ${heapUsed / 1024 / 1024} MB`);
+    // console.time("per-fetch");
+    const Ft = Guilds.Fetch(Id);
+    // console.timeEnd("per-fetch");
 }
 
-log();
-
-(() => {
-    Guilds.Select((Entry, Idx) => {
-        return Math.random() > 0.8;
-    });
-    log();
-})();
-
-console.log([Guilds.Size, Guilds.CacheSize]);
-log();
+// console.log(Guilds.Cache);
+console.log(`cache size: ${Guilds.CacheSize}`);
+console.timeEnd("time-for-million-reads");
+console.log(`memory usage: ${process.memoryUsage().heapUsed / 1024 / 1024} MB`);
 
 Guilds.Disconnect();
 
+// Garbage collector
+let i = 0;
 setInterval(() => {
-    log();
-}, 5 * 1000);
+    console.log(`${i++}: ${process.memoryUsage().heapUsed / 1024 / 1024}`);
+}, 500);
 
 
 
