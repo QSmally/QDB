@@ -31,21 +31,32 @@ const Guilds = new QDB.Connection("Test/Guilds.qdb", {
 
 
 // START EACH BENCHMARK
+// Garbage collector test
 console.log("benchmark: iterate through 50k queries");
-console.log(`memory usage: ${process.memoryUsage().heapUsed / 1024 / 1024} MB`);
 
-Guilds.Select((Entry, Idx) => {
-    return Math.random() > 0.8;
-});
+let i = 0;
+function log() {
+    const {heapUsed} = process.memoryUsage();
+    console.log(`${i++}: ${heapUsed / 1024 / 1024} MB`);
+}
+
+log();
+
+(() => {
+    Guilds.Select((Entry, Idx) => {
+        return Math.random() > 0.8;
+    });
+    log();
+})();
 
 console.log([Guilds.Size, Guilds.CacheSize]);
-console.log(`memory usage: ${process.memoryUsage().heapUsed / 1024 / 1024} MB`);
+log();
 
 Guilds.Disconnect();
 
-setTimeout(() => {
-    console.log(`memory usage: ${process.memoryUsage().heapUsed / 1024 / 1024} MB`);
-}, 10 * 1000);
+setInterval(() => {
+    log();
+}, 5 * 1000);
 
 
 
