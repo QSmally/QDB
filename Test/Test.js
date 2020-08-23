@@ -82,7 +82,7 @@ module.exports = (QDB, Tap) => {
 
     Tap("Con#Push6", Con.Push("3456.Hobbies", "1", "2", "3").Fetch("3456.Hobbies.length"), 5);
 
-    Tap("Con#Shift1", Con.Shift("3456.Hobbies"), 4);
+    Tap("Con#Shift1", Con.Shift("3456.Hobbies"), "goo");
     Tap("Con#Shift2", Con.Shift("3456.Hobbies", "-5"), 5);
     Tap("Con#Shift3", Con.Shift("3456.Hobbies", "one", "two", "three"), 8);
 
@@ -105,6 +105,30 @@ module.exports = (QDB, Tap) => {
     Tap("Con#Invert2", Con.Invert("6789.Hobbies.0.Programming"), false);
     Tap("Con#Invert3", Con.Invert("6789.Hobbies.0.Programming"), true);
     Tap("Con#Invert4", Con.Invert("6789.Hobbies.0.Programming"), false);
+
+    let res = [];
+
+    Con.Each((_Row, Key) => {
+        res.push(Key);
+    }, true);
+
+    Tap("Con#Each", res, [...Con.Indexes]);
+
+    Tap("Con#Select", Con.Select((_Row, Key) => {
+        return Key === "3456";
+    }), {
+        "3456": {
+            Name: "roo",
+            Age: 29,
+            Hobbies: [
+                "one",   "two",
+                "three", "-5",
+                "loo",   "1",
+                "2",     "3"
+            ],
+            _DataStore: "3456"
+        }
+    });
 
     Con.Disconnect();
 
