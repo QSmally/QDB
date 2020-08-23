@@ -2,8 +2,9 @@
 # PartialConnection
 
 * [Start](https://github.com/QSmally/QDB/blob/v4/Documentation/Index.md)
-* [PartialConnection](https://github.com/QSmally/QDB/blob/v4/Documentation/PartialConnection.md)
 * [Connection](https://github.com/QSmally/QDB/blob/v4/Documentation/Connection.md)
+* [Transaction](https://github.com/QSmally/QDB/blob/v4/Documentation/Transaction.md)
+* [PartialConnection](https://github.com/QSmally/QDB/blob/v4/Documentation/PartialConnection.md)
 
 Class when a database failed to connect.
 
