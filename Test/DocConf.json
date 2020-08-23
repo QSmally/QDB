@@ -9,6 +9,6 @@
 
     "Repository": "https://github.com/QSmally/QDB/blob/v4/",
 
-    "Keys": "QDB.js",
+    "Keys": ["Connection", "Transaction", "PartialConnection"],
     "Typedefs": []
 }
