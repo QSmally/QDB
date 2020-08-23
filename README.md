@@ -2,7 +2,7 @@
 # QDB4
 ## An optimised SQL database
 
-**QDB4 is not in a usable state, only a few methods and very few features are implemented. Please use the [legacy repository](https://github.com/QSmally/QDB-Legacy)!** [[Contribute](#issues-contributing--license)] [[Documentation](https://github.com/QSmally/QDB/blob/v4/Documentation/Index.md)]
+**QDB4 is stable and usable, but there are some lacking features.** [[Contribute](#issues-contributing--license)] [[Documentation](https://github.com/QSmally/QDB/blob/v4/Documentation/Index.md)]
 
 > QDB is a high level database module which is based around JavaScript Objects. Connect to multiple files, apart or in an optimised pool.
 
@@ -34,7 +34,7 @@ const QDB = require("qdatabase");
 
 # Usage
 
-## [Connection](https://github.com/QSmally/QDB/blob/b4/Documentation/Connection.md)
+## [Connection](https://github.com/QSmally/QDB/blob/v4/Documentation/Connection.md)
 The main interface for interacting with QDB.
 ```js
 const MyDB = new QDB.Connection(Path, Options?);
