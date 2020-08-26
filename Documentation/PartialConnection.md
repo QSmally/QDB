@@ -5,6 +5,7 @@
 * [Connection](https://github.com/QSmally/QDB/blob/v4/Documentation/Connection.md)
 * [Transaction](https://github.com/QSmally/QDB/blob/v4/Documentation/Transaction.md)
 * [PartialConnection](https://github.com/QSmally/QDB/blob/v4/Documentation/PartialConnection.md)
+* [Schema](https://github.com/QSmally/QDB/blob/v4/Documentation/Schema.md)
 
 Class when a database failed to connect.
 

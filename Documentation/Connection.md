@@ -6,6 +6,7 @@
 * [Connection](https://github.com/QSmally/QDB/blob/v4/Documentation/Connection.md)
 * [Transaction](https://github.com/QSmally/QDB/blob/v4/Documentation/Transaction.md)
 * [PartialConnection](https://github.com/QSmally/QDB/blob/v4/Documentation/PartialConnection.md)
+* [Schema](https://github.com/QSmally/QDB/blob/v4/Documentation/Schema.md)
 
 The main interface for interacting with QDB.
 ```js
@@ -16,7 +17,7 @@ const Users = new QDB.Connection("lib/Databases/Users.qdb");
 | --- | --- | --- |
 | PathURL | Pathlike | Path to the database file. |
 | RawOptions? | RawOptions | Options for this Connection. |
-| Pool? | Pool | Pool reference when this database was initialised in a Pool. |
+| _Pool? | Pool | Pool reference when this database was initialised in a Pool. |
 
 
 

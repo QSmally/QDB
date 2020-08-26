@@ -388,7 +388,7 @@
                 "Variable",
                 "Private"
             ],
-            "Line": 11,
+            "Line": 12,
             "Description": "Transaction's Connection reference.",
             "Type": "{Connection}"
         },
@@ -398,7 +398,7 @@
                 "Variable",
                 "Private"
             ],
-            "Line": 21,
+            "Line": 22,
             "Description": "The original entries of this Connection's cache.",
             "Type": "{DataStore}"
         },
@@ -408,21 +408,21 @@
                 "Variable",
                 "ReadOnly"
             ],
-            "Line": 31,
+            "Line": 32,
             "Description": "Whether this Transaction is active.",
             "Type": "{Boolean}"
         },
         {
             "Value": "Commit",
             "Flags": [],
-            "Line": 47,
+            "Line": 48,
             "Description": "Commits the changes made during this transaction.",
             "Returns": "{Boolean} Whether the changed were committed."
         },
         {
             "Value": "Rollback",
             "Flags": [],
-            "Line": 58,
+            "Line": 59,
             "Description": "Rolls back the changes made before the start of this Transaction. This also changed the contents of the Connection's internal cache.",
             "Returns": "{Boolean} Whether the changed were reset."
         }
@@ -437,6 +437,28 @@
             "Line": 11,
             "Description": "Current state of this Connection.",
             "Type": "{String}"
+        }
+    ],
+    "Schema": [
+        {
+            "Value": "Model",
+            "Flags": [
+                "Variable",
+                "ReadOnly"
+            ],
+            "Line": 21,
+            "Description": "The default Model of this Schema.",
+            "Type": "{Object|Array}"
+        },
+        {
+            "Value": "Serialiser",
+            "Flags": [
+                "Variable",
+                "ReadOnly"
+            ],
+            "Line": 32,
+            "Description": "A Serialiser function that converts an entry to a rich DataModel scheme on request.",
+            "Type": "{Function|undefined}"
         }
     ]
 }
