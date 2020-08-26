@@ -8,5 +8,13 @@ const QDB = require("qdatabase");
 ```
 
 ### Current implemented classes
-* [PartialConnection](https://github.com/QSmally/QDB/blob/v4/Documentation/PartialConnection.md)
 * [Connection](https://github.com/QSmally/QDB/blob/v4/Documentation/Connection.md)
+* [Transaction](https://github.com/QSmally/QDB/blob/v4/Documentation/Transaction.md)
+* [PartialConnection](https://github.com/QSmally/QDB/blob/v4/Documentation/PartialConnection.md)
+* [Schema](https://github.com/QSmally/QDB/blob/v4/Documentation/Schema.md)
+
+### Methods
+Access created Schemas using the `Model(Id)` method.
+```js
+const UserModel = QDB.Model("Users");
+```
