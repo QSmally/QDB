@@ -388,7 +388,7 @@
                 "Variable",
                 "Private"
             ],
-            "Line": 12,
+            "Line": 13,
             "Description": "Transaction's Connection reference.",
             "Type": "{Connection}"
         },
@@ -398,7 +398,7 @@
                 "Variable",
                 "Private"
             ],
-            "Line": 22,
+            "Line": 23,
             "Description": "The original entries of this Connection's cache.",
             "Type": "{DataStore}"
         },
@@ -408,21 +408,21 @@
                 "Variable",
                 "ReadOnly"
             ],
-            "Line": 32,
+            "Line": 33,
             "Description": "Whether this Transaction is active.",
             "Type": "{Boolean}"
         },
         {
             "Value": "Commit",
             "Flags": [],
-            "Line": 48,
+            "Line": 49,
             "Description": "Commits the changes made during this transaction.",
             "Returns": "{Boolean} Whether the changed were committed."
         },
         {
             "Value": "Rollback",
             "Flags": [],
-            "Line": 59,
+            "Line": 60,
             "Description": "Rolls back the changes made before the start of this Transaction. This also changed the contents of the Connection's internal cache.",
             "Returns": "{Boolean} Whether the changed were reset."
         }
