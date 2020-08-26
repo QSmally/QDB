@@ -12,9 +12,18 @@
 */
 
 
+const DataSchema = require("./lib/Utility/Schema");
+
 module.exports = {
 
     PartialConnection: require("./lib/Connections/PartialConnection"),
-    Connection:        require("./lib/Connections/Connection")
+    Connection:        require("./lib/Connections/Connection"),
+
+    Schema: DataSchema.Schema,
+
+    Model: (Id) => {
+        if (typeof Id !== "string") return null;
+        return DataSchema.Models.resolve(Id);
+    }
 
 };
