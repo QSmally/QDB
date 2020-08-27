@@ -23,7 +23,7 @@ module.exports = {
 
     Model: (Id) => {
         if (typeof Id !== "string") return null;
-        return DataSchema.Models.resolve(Id);
+        return DataSchema.ModelStore.resolve(Id);
     }
 
 };
