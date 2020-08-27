@@ -6,8 +6,13 @@ const Guilds = new QDB.Connection("Test/Guilds.qdb", {
 
 const Disconnect  = true;
 const GarbageTest = false;
-const Benchmark   = Fetch;
+const Benchmark   = Test;
 
+
+// Active testing
+function Test () {
+
+}
 
 // Million queries benchmark
 function Fetch () {
@@ -28,7 +33,7 @@ function Fetch () {
 }
 
 
-Benchmark();
+if (typeof Benchmark === "function") Benchmark();
 if (Disconnect) Guilds.Disconnect();
 
 // Garbage collector
