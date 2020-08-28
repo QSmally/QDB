@@ -29,3 +29,12 @@ Schema Models are mainly used for automatic data migrated - For instance, adding
 > A Serialiser function that converts an entry to a rich DataModel scheme on request. [**Read Only**]
 >
 > Type **{Function|undefined}**
+
+# Methods
+## [.Migrate(Target)](https://github.com/QSmally/QDB/blob/v4/lib/Utility/Schema.js#L49)
+> Public method. Integrates multiple objects and merges them into one final object.
+> | Key | Type | Description |
+> | --- | --- | --- |
+> | Target | Object | A main target object to compare against, and to integrate changes to. |
+>
+> Returns **{Object}** An output object, based on the target.
