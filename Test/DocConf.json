@@ -10,6 +10,6 @@
 
     "Repository": "https://github.com/QSmally/QDB/blob/v4/",
 
-    "Keys": ["Connection", "Transaction", "PartialConnection", "Schema"],
+    "Keys": ["lib/Connections/Connection", "lib/Utility/Transaction", "lib/Connections/PartialConnection", "lib/Utility/Schema"],
     "Typedefs": []
 }
