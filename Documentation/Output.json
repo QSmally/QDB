@@ -46,7 +46,7 @@
                 "Variable",
                 "Private"
             ],
-            "Line": 84,
+            "Line": 85,
             "Description": "Raw SQL property.",
             "Type": "{SQL}"
         },
@@ -56,7 +56,7 @@
                 "Variable",
                 "Private"
             ],
-            "Line": 94,
+            "Line": 95,
             "Description": "In-memory cached rows.",
             "Type": "{DataStore}"
         },
@@ -66,7 +66,7 @@
                 "Variable",
                 "Private"
             ],
-            "Line": 117,
+            "Line": 118,
             "Description": "An object with all additional active operators. I.e. sweep intervals, backups, fetch all entries.",
             "Type": "{Object}"
         },
@@ -75,7 +75,7 @@
             "Flags": [
                 "Variable"
             ],
-            "Line": 132,
+            "Line": 133,
             "Description": "Retrieves all the rows of this database.",
             "Action": "Getter",
             "Refer": "Size",
@@ -86,7 +86,7 @@
             "Flags": [
                 "Variable"
             ],
-            "Line": 143,
+            "Line": 144,
             "Description": "Retrieves all the in-memory cached rows of this Connection. Extension of what would be `<Connection>.Cache.size`, but checks for the ready state.",
             "Action": "Getter",
             "Refer": "CacheSize",
@@ -97,7 +97,7 @@
             "Flags": [
                 "Variable"
             ],
-            "Line": 154,
+            "Line": 155,
             "Description": "Retrieves all the keys of this database table.",
             "Action": "Getter",
             "Refer": "Indexes",
@@ -106,7 +106,7 @@
         {
             "Value": "Disconnect",
             "Flags": [],
-            "Line": 165,
+            "Line": 166,
             "Description": "Disconnects from this Connection, clears in-memory rows. Only run this method when you are exiting the program, or want to fully disconnect from this database.",
             "Returns": "{Connection}"
         },
@@ -116,7 +116,7 @@
                 "Variable",
                 "Private"
             ],
-            "Line": 185,
+            "Line": 186,
             "Description": "Internal method. Checks whether this database is ready for execution.",
             "Action": "Getter",
             "Refer": "_Ready",
@@ -127,7 +127,7 @@
             "Flags": [
                 "Private"
             ],
-            "Line": 198,
+            "Line": 199,
             "Description": "Internal method. Resolves a dotaccess path or key and parses it.",
             "Params": [
                 "{Pathlike} Pathlike String input to be formed and parsed."
@@ -139,7 +139,7 @@
             "Flags": [
                 "Private"
             ],
-            "Line": 210,
+            "Line": 211,
             "Description": "Internal method. Sets or patches something in this Connection's internal cache.",
             "Params": [
                 "{String|Number} Key As address to memory map this value.",
@@ -152,11 +152,11 @@
             "Flags": [
                 "Private"
             ],
-            "Line": 225,
+            "Line": 226,
             "Description": "Internal method. Finds a relative dotaccess pathway of a frame.",
             "Params": [
                 "{Object|Array} Frame The object-like beginning to cast.",
-                "{Array} Pathlike A dotaccess notation path as an Array. Preferred `Path` from {@link _Resolve}.",
+                "{Array} Pathlike A dotaccess notation path as an Array. Preferred `Path` from `_Resolve`.",
                 "{Object} [Options] Additional queries for the caster to use."
             ],
             "Returns": "{*}"
@@ -164,14 +164,14 @@
         {
             "Value": "AsObject",
             "Flags": [],
-            "Line": 274,
-            "Description": "Converts this database's rows into an Object. To use dotaccess, use {@link Fetch} instead.",
+            "Line": 275,
+            "Description": "Converts this database's rows into an Object. To use dotaccess, use `Fetch` instead.",
             "Returns": "{Object} An object instance with the key/value pairs of this database."
         },
         {
             "Value": "ToIntegratedManager",
             "Flags": [],
-            "Line": 284,
+            "Line": 285,
             "Description": "Converts this database, or a part of it using dotaccess, to a Manager instance.",
             "Params": [
                 "{Pathlike} [Pathlike] Optional dotaccess path pointing towards what to serialise.",
@@ -182,14 +182,14 @@
         {
             "Value": "Transaction",
             "Flags": [],
-            "Line": 300,
+            "Line": 301,
             "Description": "Creates a SQL transaction, which allows you to commit or rollback changes.",
             "Returns": "{Transaction|undefined} A Transaction instance, or `undefined` when already in a transaction."
         },
         {
             "Value": "Set",
             "Flags": [],
-            "Line": 313,
+            "Line": 314,
             "Description": "Manages the elements of the database.",
             "Params": [
                 "{Pathlike} KeyOrPath Specifies at what row to insert or replace the element at. Use dotaccess notation to edit properties.",
@@ -200,7 +200,7 @@
         {
             "Value": "Fetch",
             "Flags": [],
-            "Line": 335,
+            "Line": 336,
             "Description": "Manages the retrieval of the database.",
             "Params": [
                 "{Pathlike} KeyOrPath Specifies which row to fetch or get from cache. Use dotaccess to retrieve properties.",
@@ -211,7 +211,7 @@
         {
             "Value": "Evict",
             "Flags": [],
-            "Line": 362,
+            "Line": 363,
             "Description": "Erases elements from this Connection's internal cache.",
             "Params": [
                 "{...Pathlike} [Keys] A key or multiple keys to remove from cache. If none, the cache will get cleared entirely."
@@ -221,7 +221,7 @@
         {
             "Value": "Erase",
             "Flags": [],
-            "Line": 378,
+            "Line": 379,
             "Description": "Manages the deletion of the database.",
             "Params": [
                 "{...Pathlike} Keys A key or multiple keys to remove from the database. These elements will also get removed from this Connection's internal cache."
@@ -231,7 +231,7 @@
         {
             "Value": "Exists",
             "Flags": [],
-            "Line": 402,
+            "Line": 403,
             "Description": "Returns whether or not a row in this database exists. This method also caches the row internally, so getting it would be much faster.",
             "Params": [
                 "{Pathlike} Key Specifies which row to see if it exists.",
@@ -242,7 +242,7 @@
         {
             "Value": "Find",
             "Flags": [],
-            "Line": 415,
+            "Line": 416,
             "Description": "Iterates through all the keys, returns the first element found.",
             "Params": [
                 "{Function} Fn Function used to test with.",
@@ -253,7 +253,7 @@
         {
             "Value": "Accumulate",
             "Flags": [],
-            "Line": 431,
+            "Line": 432,
             "Description": "Accumulates as function on a row, essentially a fetch wrapped in a method. Changes are not recorded on the database.",
             "Params": [
                 "{Pathlike} KeyOrPath Specifies which row to fetch. Use dotaccess to retrieve properties.",
@@ -265,7 +265,7 @@
         {
             "Value": "Each",
             "Flags": [],
-            "Line": 449,
+            "Line": 450,
             "Description": "Iterates through this database's entries.",
             "Params": [
                 "{Function} Fn A function which passes on the iterating entries.",
@@ -278,7 +278,7 @@
             "Flags": [
                 "Deprecated"
             ],
-            "Line": 474,
+            "Line": 475,
             "Description": "Locally filters out rows in memory. Please note that this method does increase memory usage in large databases, although the fetched entries will get evicted.",
             "Params": [
                 "{Function} Fn A filter function which returns a boolean, based on the value(s) of the rows."
@@ -288,7 +288,7 @@
         {
             "Value": "Push",
             "Flags": [],
-            "Line": 497,
+            "Line": 498,
             "Description": "Pushes something to an array at the path output.",
             "Params": [
                 "{Pathlike} KeyOrPath Specifies which row or nested array to push to.",
@@ -299,7 +299,7 @@
         {
             "Value": "Shift",
             "Flags": [],
-            "Line": 519,
+            "Line": 520,
             "Description": "Inserts (if defined) or removes a value to/from the front of the array.",
             "Params": [
                 "{Pathlike} KeyOrPath Specifies which row or nested array to insert to/remove from.",
@@ -310,7 +310,7 @@
         {
             "Value": "Pop",
             "Flags": [],
-            "Line": 545,
+            "Line": 546,
             "Description": "Pops something from an array at the path output.",
             "Params": [
                 "{Pathlike} KeyOrPath Specifies which row or nested array to pop from."
@@ -320,7 +320,7 @@
         {
             "Value": "Remove",
             "Flags": [],
-            "Line": 565,
+            "Line": 566,
             "Description": "Removes a specific element from this endpoint array.",
             "Params": [
                 "{Pathlike} KeyOrPath Specifies which row or nested array to remove from.",
@@ -331,8 +331,8 @@
         {
             "Value": "Ensure",
             "Flags": [],
-            "Line": 595,
-            "Description": "Inserts an input into a row or nested object if the key or path wasn't found at the endpoint. It can be used as a default schema of the database elements, that gets inserted if there's no entry already. This behaves like `if (!DB[Element]) DB[Element] = Input;`.",
+            "Line": 596,
+            "Description": "Inserts an input into a row or nested object if the key or path wasn't found at the endpoint. It can be used as a default schema of the database elements, that gets inserted if there's no entry already.",
             "Params": [
                 "{Pathlike} KeyOrPath Context key to see if it exists, either a row or nested property, and optionally insert the new value.",
                 "{*} Input A value to input if the row or nested property wasn't found in the database."
@@ -354,7 +354,7 @@
             "Value": "Invert",
             "Flags": [],
             "Line": 635,
-            "Description": "Inverts a boolean, i.e. from true to false and vice-versa, at the endpoint of the path.",
+            "Description": "Inverts a boolean, from true to false and vice-versa, at the endpoint of the path.",
             "Params": [
                 "{Pathlike} KeyOrPath Specifies which row or nested property to boolean-invert."
             ],
@@ -369,17 +369,17 @@
             "Description": "Options for a database Connection. All integer related options are in milliseconds. ",
             "Typedef": "{Object} RawOptions",
             "Params": [
-                "{String} Table A name for the table to use at this path.",
-                "{Schema} Schema Link to a database Schema class for automatic migration.",
+                "{String} Table A name for the table to use at this path for this Connection.",
+                "{Schema} Schema Link to a database Schema class for automatic data migration.",
                 "{Boolean} WAL Whether or not to enable Write Ahead Logging mode. ",
                 "{Boolean} Cache Whether to enable in-memory caching of entries in results that the next retrieval would be much faster.",
-                "{Boolean} FetchAll Whether or not to fetch all the database entries on start-up of this Connection.",
+                "{Boolean} FetchAll Whether or not to fetch all the database entries on start-up of this database Connection.",
                 "{Boolean} UtilCache Whether or not to cache entries while performing utility tasks, such as the Exists and Accumulate methods.",
                 "{Number} SweepInterval Integer to indicate at what interval to sweep the entries of this Connection's internal cache.",
                 "{Number} SweepLifetime The minimum age of an entry in the cache to consider being sweepable after an interval. ",
-                "{Number} BackupLifetime After how many intervals to merge the latest low-level into one.",
+                "{Number} BackupLifetime After how many intervals to merge the latest low-level backup into one.",
                 "{Number} BackupInterval Integer to indicate at what interval to create a low-level backup.",
-                "{Pathlike} BackupDirectory A path URL to the directory to place all the backups in."
+                "{Pathlike} BackupDirectory A path URL to the directory to insert all the database backups in."
             ]
         }
     ],
