@@ -5,7 +5,7 @@
 
     "Additional": {
         "Transaction": "Transactions should only be created in synchronous environments, as other data changed will also be included in the transaction - which can be rolled back, leading to unexpected results.",
-        "Schema": "Schema Models are mainly used for automatic data migrated - For instance, adding or removing data parts of each entry in the database."
+        "Schema": "Schema Models are mainly used for automatic data migration - For instance, adding or removing data parts of each entry in the database."
     },
 
     "Repository": "https://github.com/QSmally/QDB/blob/v4/",
