@@ -466,11 +466,11 @@
             "Value": "Migrate",
             "Flags": [],
             "Line": 49,
-            "Description": "Public method. Integrates multiple objects and merges them into one final object.",
+            "Description": "Public method. Integrates an entry object and merges them with this Schema's Model.",
             "Params": [
-                "{Object} Target A main target object to compare against, and to integrate changes to."
+                "{Object} Target A main entry object to compare against, and to integrate changes to."
             ],
-            "Returns": "{Object} An output object, based on the target."
+            "Returns": "{Object} A merged object, based on this Schema's Model."
         }
     ]
 }

@@ -13,9 +13,9 @@ A general scheme model that entries of a database should follow.
 | --- | --- | --- |
 | Id | String | An identifier for this scheme model. |
 | Model | Object, Array | An object or array, giving the layout and default values of entries. |
-| Serialiser | Function | A transformer object to implement, as a utility to fetch from some type of API or DataModel. |
+| Serialiser? | Function | A transformer object to implement, as a utility to fetch from some type of API or DataModel. |
 
-Schema Models are mainly used for automatic data migrated - For instance, adding or removing data parts of each entry in the database.
+Schema Models are mainly used for automatic data migration - For instance, adding or removing data parts of each entry in the database.
 
 
 
@@ -32,9 +32,9 @@ Schema Models are mainly used for automatic data migrated - For instance, adding
 
 # Methods
 ## [.Migrate(Target)](https://github.com/QSmally/QDB/blob/v4/lib/Utility/Schema.js#L49)
-> Public method. Integrates multiple objects and merges them into one final object.
+> Public method. Integrates an entry object and merges them with this Schema's Model.
 > | Key | Type | Description |
 > | --- | --- | --- |
-> | Target | Object | A main target object to compare against, and to integrate changes to. |
+> | Target | Object | A main entry object to compare against, and to integrate changes to. |
 >
-> Returns **{Object}** An output object, based on the target.
+> Returns **{Object}** A merged object, based on this Schema's Model.
