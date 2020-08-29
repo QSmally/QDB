@@ -5,8 +5,8 @@ const Guilds = new QDB.Connection("Test/Guilds.qdb", {
 });
 
 const Disconnect  = true;
-const GarbageTest = false;
-const Benchmark   = Test;
+const GarbageTest = true;
+const Benchmark   = Fetch;
 
 
 // Active testing
