@@ -14,7 +14,7 @@ const QDB = require("qdatabase");
 * [Schema](https://github.com/QSmally/QDB/blob/v4/Documentation/Schema.md)
 
 ### Methods
-Access created Schemas using the `Model(Id)` method.
+Access created Schemas using the `Model(Id: String) -> Schema` method.
 ```js
 const UserModel = QDB.Model("Users");
 ```
