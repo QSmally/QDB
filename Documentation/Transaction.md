@@ -21,18 +21,18 @@ Transactions should only be created in synchronous environments, as other data c
 
 
 # Values
-## [.Active](https://github.com/QSmally/QDB/blob/v4/lib/Utility/Transaction.js#L33)
+## [.Active](https://github.com/QSmally/QDB/blob/v4/lib/Utility/Transaction.js#L23)
 > Whether this Transaction is active. [**Read Only**]
 >
 > Type **{Boolean}**
 
 # Methods
-## [.Commit()](https://github.com/QSmally/QDB/blob/v4/lib/Utility/Transaction.js#L49)
+## [.Commit()](https://github.com/QSmally/QDB/blob/v4/lib/Utility/Transaction.js#L39)
 > Commits the changes made during this transaction.
 >
 > Returns **{Boolean}** Whether the changed were committed.
 
-## [.Rollback()](https://github.com/QSmally/QDB/blob/v4/lib/Utility/Transaction.js#L60)
-> Rolls back the changes made before the start of this Transaction. This also changed the contents of the Connection's internal cache.
+## [.Rollback()](https://github.com/QSmally/QDB/blob/v4/lib/Utility/Transaction.js#L50)
+> Rolls back the changes made before the start of this Transaction. This also clears the contents of the Connection's internal cache.
 >
 > Returns **{Boolean}** Whether the changed were reset.
