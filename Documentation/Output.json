@@ -242,7 +242,7 @@
         {
             "Value": "Find",
             "Flags": [],
-            "Line": 418,
+            "Line": 419,
             "Description": "Iterates through all the keys, returns the first element found.",
             "Params": [
                 "{Function} Fn Function used to test with.",
@@ -253,7 +253,7 @@
         {
             "Value": "Accumulate",
             "Flags": [],
-            "Line": 434,
+            "Line": 435,
             "Description": "Accumulates as function on a row, essentially a fetch wrapped in a method. Changes are not recorded on the database.",
             "Params": [
                 "{Pathlike} KeyOrPath Specifies which row to fetch. Use dotaccess to retrieve properties.",
@@ -265,7 +265,7 @@
         {
             "Value": "Each",
             "Flags": [],
-            "Line": 452,
+            "Line": 453,
             "Description": "Iterates through this database's entries.",
             "Params": [
                 "{Function} Fn A function which passes on the iterating entries.",
@@ -278,7 +278,7 @@
             "Flags": [
                 "Deprecated"
             ],
-            "Line": 477,
+            "Line": 478,
             "Description": "Locally filters out rows in memory. Please note that this method does increase memory usage in large databases, although the fetched entries will get evicted.",
             "Params": [
                 "{Function} Fn A filter function which returns a boolean, based on the value(s) of the rows."
@@ -288,7 +288,7 @@
         {
             "Value": "Push",
             "Flags": [],
-            "Line": 500,
+            "Line": 501,
             "Description": "Pushes something to an array at the path output.",
             "Params": [
                 "{Pathlike} KeyOrPath Specifies which row or nested array to push to.",
@@ -299,7 +299,7 @@
         {
             "Value": "Shift",
             "Flags": [],
-            "Line": 522,
+            "Line": 523,
             "Description": "Inserts (if defined) or removes a value to/from the front of the array.",
             "Params": [
                 "{Pathlike} KeyOrPath Specifies which row or nested array to insert to/remove from.",
@@ -310,7 +310,7 @@
         {
             "Value": "Pop",
             "Flags": [],
-            "Line": 548,
+            "Line": 549,
             "Description": "Pops something from an array at the path output.",
             "Params": [
                 "{Pathlike} KeyOrPath Specifies which row or nested array to pop from."
@@ -320,7 +320,7 @@
         {
             "Value": "Remove",
             "Flags": [],
-            "Line": 568,
+            "Line": 569,
             "Description": "Removes a specific element from this endpoint array.",
             "Params": [
                 "{Pathlike} KeyOrPath Specifies which row or nested array to remove from.",
@@ -331,7 +331,7 @@
         {
             "Value": "Ensure",
             "Flags": [],
-            "Line": 598,
+            "Line": 599,
             "Description": "Inserts an input into a row or nested object if the key or path wasn't found at the endpoint. It can be used as a default schema of the database elements, that gets inserted if there's no entry already.",
             "Params": [
                 "{Pathlike} KeyOrPath Context key to see if it exists, either a row or nested property, and optionally insert the new value.",
@@ -342,7 +342,7 @@
         {
             "Value": "Modify",
             "Flags": [],
-            "Line": 620,
+            "Line": 621,
             "Description": "Updates a value in the database by fetching it and passing it onto the callback function.",
             "Params": [
                 "{Pathlike} KeyOrPath Specifies which row or nested property to fetch.",
@@ -353,7 +353,7 @@
         {
             "Value": "Invert",
             "Flags": [],
-            "Line": 637,
+            "Line": 638,
             "Description": "Inverts a boolean, from true to false and vice-versa, at the endpoint of the path.",
             "Params": [
                 "{Pathlike} KeyOrPath Specifies which row or nested property to boolean-invert."
@@ -365,7 +365,7 @@
             "Flags": [
                 "Typedef"
             ],
-            "Line": 658,
+            "Line": 659,
             "Description": "Options for a database Connection. All integer related options are in milliseconds. ",
             "Typedef": "{Object} RawOptions",
             "Params": [
@@ -377,8 +377,8 @@
                 "{Boolean} UtilCache Whether or not to cache entries while performing utility tasks, such as the Exists and Accumulate methods.",
                 "{Number} SweepInterval Integer to indicate at what interval to sweep the entries of this Connection's internal cache.",
                 "{Number} SweepLifetime The minimum age of an entry in the cache to consider being sweepable after an interval. ",
-                "{Number} BackupLifetime After how many intervals to merge the latest low-level backup into one.",
-                "{Number} BackupInterval Integer to indicate at what interval to create a low-level backup.",
+                "{Number} SnapshotLifetime After how many intervals to merge the latest snapshot backups into one.",
+                "{Number} BackupInterval Integer to indicate at what interval to create a snapshot backup, or merge the snapshots.",
                 "{Pathlike} BackupDirectory A path URL to the directory to insert all the database backups in."
             ]
         }
