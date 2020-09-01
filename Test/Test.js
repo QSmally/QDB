@@ -116,6 +116,8 @@ module.exports = (QDB, Tap) => {
     Tap("Con#Ensure1", Con.Ensure("2345", {Name: "nope", Age: -1, Hobbies: []}), false);
     Tap("Con#Ensure2", Con.Ensure("6789", {Name: "Untitled", Age: -1, Hobbies: []}), true);
 
+    const Tr = Con.Transaction();
+
     Tap("Con#Modify1", Con.Modify("6789.Name", Name => {
         Name = "moo";
         return Name;
@@ -126,10 +128,30 @@ module.exports = (QDB, Tap) => {
         return Hob;
     }), {Name: "moo", Age: -1, Hobbies: [{Programming: false}], _DataStore: "6789"});
 
+    Tap("Con#CacheSize13", Con.CacheSize, 4);
+
+    Tr.Commit();
+    
+    Tap("Con#CacheSize14", Con.CacheSize, 4);
+    Tap("Con#Fetch7", Con.Fetch("6789"), {Name: "moo", Age: -1, Hobbies: [{Programming: false}], _DataStore: "6789"});
+
     Tap("Con#Invert1", Con.Invert("6789.Hobbies.0.Programming"), true);
     Tap("Con#Invert2", Con.Invert("6789.Hobbies.0.Programming"), false);
     Tap("Con#Invert3", Con.Invert("6789.Hobbies.0.Programming"), true);
     Tap("Con#Invert4", Con.Invert("6789.Hobbies.0.Programming"), false);
+
+    const Tr2 = Con.Transaction();
+
+    Tap("Con#Set11", Con.Set("foo", {bar: "roo!"}).Size, 5);
+    Tap("Con#Fetch8", Con.Fetch("foo"), {bar: "roo!"});
+
+    Tap("Con#Size15", Con.Size, 5);
+    Tap("Con#CacheSize16", Con.CacheSize, 5);
+
+    Tr2.Rollback();
+
+    Tap("Con#Size17", Con.Size, 4);
+    Tap("Con#CacheSize18", Con.CacheSize, 0);
 
     let res = [];
 
