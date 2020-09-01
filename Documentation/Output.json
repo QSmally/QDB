@@ -275,20 +275,18 @@
         },
         {
             "Value": "Select",
-            "Flags": [
-                "Deprecated"
-            ],
+            "Flags": [],
             "Line": 478,
-            "Description": "Locally filters out rows in memory. Please note that this method does increase memory usage in large databases, although the fetched entries will get evicted.",
+            "Description": "Locally filters out rows in memory to work with. Please note that this method does increase memory usage in large databases, although the fetched entries will get evicted.",
             "Params": [
                 "{Function} Fn A filter function which returns a boolean, based on the value(s) of the rows."
             ],
-            "Returns": "{Object} An object with the results which rows passed the tester function."
+            "Returns": "{Selection} A Selection class instance."
         },
         {
             "Value": "Push",
             "Flags": [],
-            "Line": 501,
+            "Line": 502,
             "Description": "Pushes something to an array at the path output.",
             "Params": [
                 "{Pathlike} KeyOrPath Specifies which row or nested array to push to.",
@@ -299,7 +297,7 @@
         {
             "Value": "Shift",
             "Flags": [],
-            "Line": 523,
+            "Line": 524,
             "Description": "Inserts (if defined) or removes a value to/from the front of the array.",
             "Params": [
                 "{Pathlike} KeyOrPath Specifies which row or nested array to insert to/remove from.",
@@ -310,7 +308,7 @@
         {
             "Value": "Pop",
             "Flags": [],
-            "Line": 549,
+            "Line": 550,
             "Description": "Pops something from an array at the path output.",
             "Params": [
                 "{Pathlike} KeyOrPath Specifies which row or nested array to pop from."
@@ -320,7 +318,7 @@
         {
             "Value": "Remove",
             "Flags": [],
-            "Line": 569,
+            "Line": 570,
             "Description": "Removes a specific element from this endpoint array.",
             "Params": [
                 "{Pathlike} KeyOrPath Specifies which row or nested array to remove from.",
@@ -331,7 +329,7 @@
         {
             "Value": "Ensure",
             "Flags": [],
-            "Line": 599,
+            "Line": 600,
             "Description": "Inserts an input into a row or nested object if the key or path wasn't found at the endpoint. It can be used as a default schema of the database elements, that gets inserted if there's no entry already.",
             "Params": [
                 "{Pathlike} KeyOrPath Context key to see if it exists, either a row or nested property, and optionally insert the new value.",
@@ -342,7 +340,7 @@
         {
             "Value": "Modify",
             "Flags": [],
-            "Line": 621,
+            "Line": 622,
             "Description": "Updates a value in the database by fetching it and passing it onto the callback function.",
             "Params": [
                 "{Pathlike} KeyOrPath Specifies which row or nested property to fetch.",
@@ -353,7 +351,7 @@
         {
             "Value": "Invert",
             "Flags": [],
-            "Line": 638,
+            "Line": 639,
             "Description": "Inverts a boolean, from true to false and vice-versa, at the endpoint of the path.",
             "Params": [
                 "{Pathlike} KeyOrPath Specifies which row or nested property to boolean-invert."
@@ -365,7 +363,7 @@
             "Flags": [
                 "Typedef"
             ],
-            "Line": 659,
+            "Line": 660,
             "Description": "Options for a database Connection. All integer related options are in milliseconds. ",
             "Typedef": "{Object} RawOptions",
             "Params": [
@@ -381,6 +379,38 @@
                 "{Number} BackupInterval Integer to indicate at what interval to create a snapshot backup, or merge the snapshots.",
                 "{Pathlike} BackupDirectory A path URL to the directory to insert all the database backups in."
             ]
+        }
+    ],
+    "Schema": [
+        {
+            "Value": "Model",
+            "Flags": [
+                "Variable",
+                "ReadOnly"
+            ],
+            "Line": 21,
+            "Description": "The default Model of this Schema.",
+            "Type": "{Object|Array}"
+        },
+        {
+            "Value": "Serialiser",
+            "Flags": [
+                "Variable",
+                "ReadOnly"
+            ],
+            "Line": 32,
+            "Description": "A Serialiser function that converts an entry to a rich DataModel scheme on request.",
+            "Type": "{Function|undefined}"
+        },
+        {
+            "Value": "Migrate",
+            "Flags": [],
+            "Line": 49,
+            "Description": "Public method. Integrates an entry object and merges them with this Schema's Model.",
+            "Params": [
+                "{Object} Target A main entry object to compare against, and to integrate changes to."
+            ],
+            "Returns": "{Object} A merged object, based on this Schema's Model."
         }
     ],
     "Transaction": [
@@ -419,6 +449,7 @@
             "Returns": "{Boolean} Whether the changed were reset."
         }
     ],
+    "Selection": [],
     "PartialConnection": [
         {
             "Value": "State",
@@ -429,38 +460,6 @@
             "Line": 11,
             "Description": "Current state of this Connection.",
             "Type": "{String}"
-        }
-    ],
-    "Schema": [
-        {
-            "Value": "Model",
-            "Flags": [
-                "Variable",
-                "ReadOnly"
-            ],
-            "Line": 21,
-            "Description": "The default Model of this Schema.",
-            "Type": "{Object|Array}"
-        },
-        {
-            "Value": "Serialiser",
-            "Flags": [
-                "Variable",
-                "ReadOnly"
-            ],
-            "Line": 32,
-            "Description": "A Serialiser function that converts an entry to a rich DataModel scheme on request.",
-            "Type": "{Function|undefined}"
-        },
-        {
-            "Value": "Migrate",
-            "Flags": [],
-            "Line": 49,
-            "Description": "Public method. Integrates an entry object and merges them with this Schema's Model.",
-            "Params": [
-                "{Object} Target A main entry object to compare against, and to integrate changes to."
-            ],
-            "Returns": "{Object} A merged object, based on this Schema's Model."
         }
     ]
 }
