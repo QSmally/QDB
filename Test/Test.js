@@ -139,21 +139,10 @@ module.exports = (QDB, Tap) => {
 
     Tap("Con#Each", res, [...Con.Indexes]);
 
+    const {Manager} = require("qulity");
     Tap("Con#Select", Con.Select((_Row, Key) => {
         return Key === "3456";
-    }), {
-        "3456": {
-            Name: "roo",
-            Age: 29,
-            Hobbies: [
-                "one",   "two",
-                "three", "-5",
-                "loo",   "1",
-                "2",     "3"
-            ],
-            _DataStore: "3456"
-        }
-    });
+    }) instanceof Manager, true);
 
     Con.Disconnect();
 
