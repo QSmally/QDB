@@ -1,6 +1,6 @@
 
 # Selection
-### Extends **{Manager}**
+### Extends **[{Manager}](https://github.com/QSmally/Qulity/blob/master/Documentation/Manager.md)**
 
 * [Start](https://github.com/QSmally/QDB/blob/v4/Documentation/Index.md)
 * [Connection](https://github.com/QSmally/QDB/blob/v4/Documentation/Connection.md)
@@ -16,7 +16,7 @@ const Selection = MyDB.Select(User => User.Age > 20);
 
 | Key | Type | Description |
 | --- | --- | --- |
-| _Entries | Object | Initial selection of entries for this Selection instance. |
+
 
 A Selection allows you to filter something from the database, and perform methods such as sorting, limiting and iterating to grab results and leave the database unchanged.
 

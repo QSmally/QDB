@@ -15,7 +15,7 @@ const Transaction = MyDB.Transaction();
 
 | Key | Type | Description |
 | --- | --- | --- |
-| _Connection | Connection | A Connection this Transaction is referring to. |
+
 
 Transactions should only be created in synchronous environments, as other data changed will also be included in the transaction - which can be rolled back, leading to unexpected results.
 
