@@ -14,10 +14,6 @@ An unchanged piece of the database in memory, to use as baseline of various endp
 const Selection = MyDB.Select(User => User.Age > 20);
 ```
 
-| Key | Type | Description |
-| --- | --- | --- |
-
-
 A Selection allows you to filter something from the database, and perform methods such as sorting, limiting and iterating to grab results and leave the database unchanged.
 
 

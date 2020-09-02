@@ -13,10 +13,6 @@ A SQL transaction manager.
 const Transaction = MyDB.Transaction();
 ```
 
-| Key | Type | Description |
-| --- | --- | --- |
-
-
 Transactions should only be created in synchronous environments, as other data changed will also be included in the transaction - which can be rolled back, leading to unexpected results.
 
 
