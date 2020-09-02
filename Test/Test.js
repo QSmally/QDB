@@ -13,7 +13,7 @@ module.exports = (QDB, Tap) => {
         if (Con.Find()) throw "Find";
         if (Con.Accumulate()) throw "Accumulate";
         if (Con.Each()) throw "Each";
-        if (Con.Select()) throw "Select";
+        // Select - Should select everything
         if (Con.Push()) throw "Push";
         if (Con.Shift()) throw "Shift";
         if (Con.Pop()) throw "Pop";
@@ -162,9 +162,29 @@ module.exports = (QDB, Tap) => {
     Tap("Con#Each", res, [...Con.Indexes]);
 
     const {Manager} = require("qulity");
-    Tap("Con#Select", Con.Select((_Row, Key) => {
+    Tap("Con#Select1", Con.Select((_Row, Key) => {
         return Key === "3456";
     }) instanceof Manager, true);
+
+    Tap("Con#Select2", Con.Select().Cache.size, 4);
+    
+    const Sel = Con.Select((_Row, Key) => Key.includes("4"));
+    Tap("Con#Select3", Sel.Cache.size, 3);
+
+    Tap("Sel#Keys", Sel.Keys, ["2345", "3456", "4567"]);
+    Tap("Sel#Values", Sel.Values.map(v => v._DataStore), ["2345", "3456", "4567"]);
+    Tap("Sel#AsObject", Sel.AsObject, {
+        "2345": {Name: "bar", Age: 30, Hobbies: ["one", "two", "three", "four"]},
+        "3456": {Name: "roo", Age: 29, Hobbies: ["one", "two", "three", "-5", "loo", "1", "2", "3"]},
+        "4567": {Name: "goo", Age: 27, Hobbies: []}
+    });
+
+    Tap("Sel#Sort", Sel.Sort((a, b) => a.Age - b.Age).Keys, ["4567", "3456", "2345"]);
+    Tap("Sel#Filter", Sel.Filter((_Row, Key) => Key !== "3456").Cache.size, 2);
+
+    Tap("Sel#Limit1", Sel.Limit(0, 3).Cache.size, 2);
+    Tap("Sel#Limit2", Sel.Limit(1, 5).Cache.size, 1);
+    Tap("Sel#Limit3", Sel.Limit(1).Cache.size, 0);
 
     Con.Disconnect();
 
