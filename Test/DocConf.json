@@ -4,8 +4,8 @@
     "Index":  true,
 
     "Additional": {
-        "Schema": "Schema Models are mainly used for automatic data migration - For instance, adding or removing data parts of each entry in the database.",
-        "Selection": "A Selection allows you to filter something from the database, and perform methods such as sorting, limiting and iterating to grab results and leave the database unchanged.",
+        "Schema":      "Schema Models are mainly used for automatic data migration - For instance, adding or removing data parts of each entry in the database.",
+        "Selection":   "A Selection allows you to filter something from the database, and perform methods such as sorting, limiting and iterating to grab results and leave the database unchanged.",
         "Transaction": "Transactions should only be created in synchronous environments, as other data changed will also be included in the transaction - which can be rolled back, leading to unexpected results."
     },
 
