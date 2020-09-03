@@ -41,6 +41,23 @@ The main interface for interacting with QDB.
 const MyDB = new QDB.Connection(Path, Options?);
 ```
 
+## [Transaction](https://github.com/QSmally/QDB/blob/v4/Documentation/Transaction.md)
+A SQL transaction manager.
+```js
+const Transaction = MyDB.Transaction();
+// Changes in the database...
+Transaction.Commit(); // or
+Transaction.Rollback();
+```
+
+## [Selection](https://github.com/QSmally/QDB/blob/v4/Documentation/Selection.md)
+An unchanged piece of the database in memory.
+```js
+const Leaderboard = MyDB.Select(Guild => Guild._Id === "1234")
+.Sort((a, b) => b.Experience - a.Experience)
+.Limit(0, 10);
+```
+
 # Issues, Contributing & License
 If you've found a bug or want to suggest a feature, please ensure that it hasn't already been reported/suggested - Then, feel free to create an [issue](https://github.com/QSmally/QDB/issues)! If you'd like to contribute to the project, feel free to fork [the repository](https://github.com/QSmally/QDB) and create a pull request.
 
