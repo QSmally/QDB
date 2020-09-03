@@ -9,24 +9,25 @@
 
 # Main Features
 * Connection states
-* Optimised caches
-* Simple class interface
+* A simple class interface
+* Optimised entry caches
+* Selection and transaction wrappers
 <!-- * Database Pool -->
 <!-- * JSONConnection -->
 
-### Links
+## Links
 * [Documentations](https://github.com/QSmally/QDB/blob/v4/Documentation/Index.mc)
 * [Github](https://github.com/QSmally/QDB)
 * [Discord Server](https://qdb.qbot.eu/discord)
 
-### Install/Import
+## Install/Import
 `npm install qdatabase`
 ```js
 const QDB = require("qdatabase");
 // ...
 ```
 
-### Dependencies (Top Level)
+## Dependencies (Top Level)
 * [Qulity](https://npmjs.org/package/qulity)
 * [better-sqlite3](https://npmjs.org/package/better-sqlite3)
 * [QSmally/Docgen](https://github.com/QSmally/Docgen) (Development)
