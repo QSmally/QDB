@@ -8,12 +8,12 @@
 * [Selection](https://github.com/QSmally/QDB/blob/v4/Documentation/Selection.md)
 * [PartialConnection](https://github.com/QSmally/QDB/blob/v4/Documentation/PartialConnection.md)
 
-Class when a database failed to connect.
+Base class of a Connection, and when a database failed to connect.
 
 
 
 # Values
-## [.State](https://github.com/QSmally/QDB/blob/v4/lib/Connections/PartialConnection.js#L11)
+## [.State](https://github.com/QSmally/QDB/blob/v4/lib/Connections/PartialConnection.js#L12)
 > Current state of this Connection. [**Read Only**]
 >
 > Type **{String}**

@@ -24,12 +24,12 @@ Transactions should only be created in synchronous environments, as other data c
 > Type **{Boolean}**
 
 # Methods
-## [.Commit()](https://github.com/QSmally/QDB/blob/v4/lib/Utility/Transaction.js#L39)
-> Commits the changes made during this transaction.
+## [.Commit()](https://github.com/QSmally/QDB/blob/v4/lib/Utility/Transaction.js#L40)
+> Commits the changes made during this Transaction.
 >
 > Returns **{Boolean}** Whether the changed were committed.
 
-## [.Rollback()](https://github.com/QSmally/QDB/blob/v4/lib/Utility/Transaction.js#L50)
+## [.Rollback()](https://github.com/QSmally/QDB/blob/v4/lib/Utility/Transaction.js#L53)
 > Rolls back the changes made before the start of this Transaction. This also clears the contents of the Connection's internal cache.
 >
 > Returns **{Boolean}** Whether the changed were reset.

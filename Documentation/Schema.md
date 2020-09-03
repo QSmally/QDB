@@ -8,11 +8,11 @@
 * [Selection](https://github.com/QSmally/QDB/blob/v4/Documentation/Selection.md)
 * [PartialConnection](https://github.com/QSmally/QDB/blob/v4/Documentation/PartialConnection.md)
 
-A general scheme model that entries of a database should follow.
+A general model that entries of a database should follow.
 
 | Key | Type | Description |
 | --- | --- | --- |
-| Id | String | An identifier for this scheme model. |
+| Id | String | An identifier for this Schema Model. |
 | Model | Object, Array | An object or array, giving the layout and default values of entries. |
 | Serialiser? | Function | A transformer object to implement, as a utility to fetch from some type of API or DataModel. |
 
@@ -22,12 +22,12 @@ Schema Models are mainly used for automatic data migration - For instance, addin
 
 # Values
 ## [.Model](https://github.com/QSmally/QDB/blob/v4/lib/Utility/Schema.js#L21)
-> The default Model of this Schema. [**Read Only**]
+> The default model of this Schema. [**Read Only**]
 >
 > Type **{Object|Array}**
 
 ## [.Serialiser](https://github.com/QSmally/QDB/blob/v4/lib/Utility/Schema.js#L32)
-> A Serialiser function that converts an entry to a rich DataModel scheme on request. [**Read Only**]
+> A Serialiser function that converts an entry to a rich DataModel on request. [**Read Only**]
 >
 > Type **{Function|undefined}**
 

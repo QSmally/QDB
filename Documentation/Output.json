@@ -6,7 +6,7 @@
                 "Variable",
                 "ReadOnly"
             ],
-            "Line": 28,
+            "Line": 29,
             "Description": "Path string to the database.",
             "Type": "{Pathlike}"
         },
@@ -16,7 +16,7 @@
                 "Variable",
                 "ReadOnly"
             ],
-            "Line": 39,
+            "Line": 40,
             "Description": "Options for this Connection.",
             "Type": "{RawOptions}"
         },
@@ -26,7 +26,7 @@
                 "Variable",
                 "ReadOnly"
             ],
-            "Line": 63,
+            "Line": 64,
             "Description": "Whether this Connection is used in a Pool.",
             "Type": "{Pool|null}"
         },
@@ -36,7 +36,7 @@
                 "Variable",
                 "ReadOnly"
             ],
-            "Line": 74,
+            "Line": 75,
             "Description": "Table name of this Connection.",
             "Type": "{String}"
         },
@@ -46,7 +46,7 @@
                 "Variable",
                 "Private"
             ],
-            "Line": 85,
+            "Line": 86,
             "Description": "Raw SQL property.",
             "Type": "{SQL}"
         },
@@ -56,7 +56,7 @@
                 "Variable",
                 "Private"
             ],
-            "Line": 95,
+            "Line": 96,
             "Description": "In-memory cached rows.",
             "Type": "{DataStore}"
         },
@@ -66,7 +66,7 @@
                 "Variable",
                 "Private"
             ],
-            "Line": 118,
+            "Line": 119,
             "Description": "An object with all additional active operators. I.e. sweep intervals, backups, fetch all entries.",
             "Type": "{Object}"
         },
@@ -75,7 +75,7 @@
             "Flags": [
                 "Variable"
             ],
-            "Line": 133,
+            "Line": 134,
             "Description": "Retrieves all the rows of this database.",
             "Action": "Getter",
             "Refer": "Size",
@@ -86,7 +86,7 @@
             "Flags": [
                 "Variable"
             ],
-            "Line": 144,
+            "Line": 145,
             "Description": "Retrieves all the in-memory cached rows of this Connection. Extension of what would be `<Connection>.Cache.size`, but checks for the ready state.",
             "Action": "Getter",
             "Refer": "CacheSize",
@@ -97,7 +97,7 @@
             "Flags": [
                 "Variable"
             ],
-            "Line": 155,
+            "Line": 156,
             "Description": "Retrieves all the keys of this database table.",
             "Action": "Getter",
             "Refer": "Indexes",
@@ -106,7 +106,7 @@
         {
             "Value": "Disconnect",
             "Flags": [],
-            "Line": 166,
+            "Line": 167,
             "Description": "Disconnects from this Connection, clears in-memory rows. Only run this method when you are exiting the program, or want to fully disconnect from this database.",
             "Returns": "{Connection}"
         },
@@ -116,7 +116,7 @@
                 "Variable",
                 "Private"
             ],
-            "Line": 186,
+            "Line": 187,
             "Description": "Internal method. Checks whether this database is ready for execution.",
             "Action": "Getter",
             "Refer": "_Ready",
@@ -127,7 +127,7 @@
             "Flags": [
                 "Private"
             ],
-            "Line": 199,
+            "Line": 200,
             "Description": "Internal method. Resolves a dotaccess path or key and parses it.",
             "Params": [
                 "{Pathlike} Pathlike String input to be formed and parsed."
@@ -139,7 +139,7 @@
             "Flags": [
                 "Private"
             ],
-            "Line": 211,
+            "Line": 212,
             "Description": "Internal method. Sets or patches something in this Connection's internal cache.",
             "Params": [
                 "{String|Number} Key As address to memory map this value.",
@@ -153,7 +153,7 @@
             "Flags": [
                 "Private"
             ],
-            "Line": 227,
+            "Line": 228,
             "Description": "Internal method. Finds a relative dotaccess pathway of a frame.",
             "Params": [
                 "{Object|Array} Frame The object-like beginning to cast.",
@@ -165,14 +165,14 @@
         {
             "Value": "AsObject",
             "Flags": [],
-            "Line": 276,
+            "Line": 277,
             "Description": "Converts this database's rows into an Object. To use dotaccess, use `Fetch` instead.",
             "Returns": "{Object} An object instance with the key/value pairs of this database."
         },
         {
             "Value": "ToIntegratedManager",
             "Flags": [],
-            "Line": 286,
+            "Line": 287,
             "Description": "Converts this database, or a part of it using dotaccess, to a Manager instance.",
             "Params": [
                 "{Pathlike} [Pathlike] Optional dotaccess path pointing towards what to serialise.",
@@ -184,14 +184,14 @@
         {
             "Value": "Transaction",
             "Flags": [],
-            "Line": 303,
+            "Line": 304,
             "Description": "Creates a SQL transaction, which allows you to commit or rollback changes.",
             "Returns": "{Transaction|undefined} A Transaction instance, or `undefined` when already in a transaction."
         },
         {
             "Value": "Set",
             "Flags": [],
-            "Line": 316,
+            "Line": 317,
             "Description": "Manages the elements of the database.",
             "Params": [
                 "{Pathlike} KeyOrPath Specifies at what row to insert or replace the element at. Use dotaccess notation to edit properties.",
@@ -202,7 +202,7 @@
         {
             "Value": "Fetch",
             "Flags": [],
-            "Line": 338,
+            "Line": 339,
             "Description": "Manages the retrieval of the database.",
             "Params": [
                 "{Pathlike} KeyOrPath Specifies which row to fetch or get from cache. Use dotaccess to retrieve properties.",
@@ -213,7 +213,7 @@
         {
             "Value": "Evict",
             "Flags": [],
-            "Line": 365,
+            "Line": 366,
             "Description": "Erases elements from this Connection's internal cache.",
             "Params": [
                 "{...Pathlike} [Keys] A key or multiple keys to remove from cache. If none, the cache will get cleared entirely."
@@ -223,7 +223,7 @@
         {
             "Value": "Erase",
             "Flags": [],
-            "Line": 382,
+            "Line": 383,
             "Description": "Manages the deletion of the database.",
             "Params": [
                 "{...Pathlike} Keys A key or multiple keys to remove from the database. These elements will also get removed from this Connection's internal cache."
@@ -233,7 +233,7 @@
         {
             "Value": "Exists",
             "Flags": [],
-            "Line": 407,
+            "Line": 408,
             "Description": "Returns whether or not a row in this database exists. This method also caches the row internally, so getting it would be much faster.",
             "Params": [
                 "{Pathlike} Key Specifies which row to see if it exists.",
@@ -244,7 +244,7 @@
         {
             "Value": "Find",
             "Flags": [],
-            "Line": 421,
+            "Line": 422,
             "Description": "Iterates through all the keys, returns the first element found.",
             "Params": [
                 "{Function} Fn Function used to test with.",
@@ -255,7 +255,7 @@
         {
             "Value": "Accumulate",
             "Flags": [],
-            "Line": 437,
+            "Line": 438,
             "Description": "Accumulates as function on a row, essentially a fetch wrapped in a method. Changes are not recorded on the database.",
             "Params": [
                 "{Pathlike} KeyOrPath Specifies which row to fetch. Use dotaccess to retrieve properties.",
@@ -267,7 +267,7 @@
         {
             "Value": "Each",
             "Flags": [],
-            "Line": 455,
+            "Line": 456,
             "Description": "Iterates through this database's entries.",
             "Params": [
                 "{Function} Fn A function which passes on the iterating entries.",
@@ -278,7 +278,7 @@
         {
             "Value": "Select",
             "Flags": [],
-            "Line": 480,
+            "Line": 481,
             "Description": "Locally filters out rows in memory to work with. Please note that this method does increase memory usage in large databases, although the fetched entries will get evicted.",
             "Params": [
                 "{Function} Fn A filter function which returns a boolean, based on the value(s) of the rows."
@@ -288,7 +288,7 @@
         {
             "Value": "Push",
             "Flags": [],
-            "Line": 504,
+            "Line": 505,
             "Description": "Pushes something to an array at the path output.",
             "Params": [
                 "{Pathlike} KeyOrPath Specifies which row or nested array to push to.",
@@ -299,7 +299,7 @@
         {
             "Value": "Shift",
             "Flags": [],
-            "Line": 526,
+            "Line": 527,
             "Description": "Inserts (if defined) or removes a value to/from the front of the array.",
             "Params": [
                 "{Pathlike} KeyOrPath Specifies which row or nested array to insert to/remove from.",
@@ -310,7 +310,7 @@
         {
             "Value": "Pop",
             "Flags": [],
-            "Line": 552,
+            "Line": 553,
             "Description": "Pops something from an array at the path output.",
             "Params": [
                 "{Pathlike} KeyOrPath Specifies which row or nested array to pop from."
@@ -320,7 +320,7 @@
         {
             "Value": "Remove",
             "Flags": [],
-            "Line": 572,
+            "Line": 573,
             "Description": "Removes a specific element from this endpoint array.",
             "Params": [
                 "{Pathlike} KeyOrPath Specifies which row or nested array to remove from.",
@@ -331,7 +331,7 @@
         {
             "Value": "Ensure",
             "Flags": [],
-            "Line": 602,
+            "Line": 603,
             "Description": "Inserts an input into a row or nested object if the key or path wasn't found at the endpoint. It can be used as a default schema of the database elements, that gets inserted if there's no entry already.",
             "Params": [
                 "{Pathlike} KeyOrPath Context key to see if it exists, either a row or nested property, and optionally insert the new value.",
@@ -342,7 +342,7 @@
         {
             "Value": "Modify",
             "Flags": [],
-            "Line": 624,
+            "Line": 626,
             "Description": "Updates a value in the database by fetching it and passing it onto the callback function.",
             "Params": [
                 "{Pathlike} KeyOrPath Specifies which row or nested property to fetch.",
@@ -353,7 +353,7 @@
         {
             "Value": "Invert",
             "Flags": [],
-            "Line": 641,
+            "Line": 643,
             "Description": "Inverts a boolean, from true to false and vice-versa, at the endpoint of the path.",
             "Params": [
                 "{Pathlike} KeyOrPath Specifies which row or nested property to boolean-invert."
@@ -365,7 +365,7 @@
             "Flags": [
                 "Typedef"
             ],
-            "Line": 662,
+            "Line": 664,
             "Description": "Options for a database Connection. All integer related options are in milliseconds. ",
             "Typedef": "{Object} RawOptions",
             "Params": [
@@ -391,7 +391,7 @@
                 "ReadOnly"
             ],
             "Line": 21,
-            "Description": "The default Model of this Schema.",
+            "Description": "The default model of this Schema.",
             "Type": "{Object|Array}"
         },
         {
@@ -401,7 +401,7 @@
                 "ReadOnly"
             ],
             "Line": 32,
-            "Description": "A Serialiser function that converts an entry to a rich DataModel scheme on request.",
+            "Description": "A Serialiser function that converts an entry to a rich DataModel on request.",
             "Type": "{Function|undefined}"
         },
         {
@@ -439,19 +439,84 @@
         {
             "Value": "Commit",
             "Flags": [],
-            "Line": 39,
-            "Description": "Commits the changes made during this transaction.",
+            "Line": 40,
+            "Description": "Commits the changes made during this Transaction.",
             "Returns": "{Boolean} Whether the changed were committed."
         },
         {
             "Value": "Rollback",
             "Flags": [],
-            "Line": 50,
+            "Line": 53,
             "Description": "Rolls back the changes made before the start of this Transaction. This also clears the contents of the Connection's internal cache.",
             "Returns": "{Boolean} Whether the changed were reset."
         }
     ],
-    "Selection": [],
+    "Selection": [
+        {
+            "Value": "Keys",
+            "Flags": [
+                "Variable"
+            ],
+            "Line": 22,
+            "Description": "Serialises this Selection's keys into an array.",
+            "Action": "Getter",
+            "Refer": "Keys",
+            "Type": "{Array}"
+        },
+        {
+            "Value": "Values",
+            "Flags": [
+                "Variable"
+            ],
+            "Line": 31,
+            "Description": "Serialises this Selection's values into an array.",
+            "Action": "Getter",
+            "Refer": "Values",
+            "Type": "{Array}"
+        },
+        {
+            "Value": "AsObject",
+            "Flags": [
+                "Variable"
+            ],
+            "Line": 40,
+            "Description": "Serialises this Selection into an object.",
+            "Action": "Getter",
+            "Refer": "AsObject",
+            "Type": "{Object}"
+        },
+        {
+            "Value": "Sort",
+            "Flags": [],
+            "Line": 50,
+            "Description": "Sorts this Selection's values. Identical to the `SORT BY` SQL statement.",
+            "Params": [
+                "{Function} Fn Function that determines the sort order."
+            ],
+            "Returns": "{Selection}"
+        },
+        {
+            "Value": "Filter",
+            "Flags": [],
+            "Line": 62,
+            "Description": "Filters values that satisfy the provided function. Identical to the `FILTER BY` SQL statement.",
+            "Params": [
+                "{Function} Fn Function that determines which entries to keep."
+            ],
+            "Returns": "{Selection}"
+        },
+        {
+            "Value": "Limit",
+            "Flags": [],
+            "Line": 78,
+            "Description": "Slices off values from this Selection. Identical to the `LIMIT begin, end` SQL statement.",
+            "Params": [
+                "{Number} Begin Integer to indicate the beginning to slice.",
+                "{Number} [End] Integer to indicate the end of the slice."
+            ],
+            "Returns": "{Selection}"
+        }
+    ],
     "PartialConnection": [
         {
             "Value": "State",
@@ -459,7 +524,7 @@
                 "Variable",
                 "ReadOnly"
             ],
-            "Line": 11,
+            "Line": 12,
             "Description": "Current state of this Connection.",
             "Type": "{String}"
         }
