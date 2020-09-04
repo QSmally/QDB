@@ -6,18 +6,12 @@ const Guilds = new QDB.Connection("Test/Guilds.qdb", {
 
 const Disconnect  = true;
 const GarbageTest = true;
-const Benchmark   = Test;
+const Benchmark   = Fetch;
 
 
 // Active testing
 function Test () {
-    const Sel = Guilds.Select((Entry, Idx) => Idx.length === 1)
-    .Filter(Entry => parseInt(Entry._DataStore))
-    .Sort((a, b) => a._DataStore - b._DataStore);
-
-    Sel.Limit(0, 5);
-
-    console.log(Sel);
+    
 }
 
 // Million queries benchmark
