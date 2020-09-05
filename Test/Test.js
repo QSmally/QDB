@@ -2,7 +2,7 @@
 module.exports = (QDB, Tap) => {
 
     const Con = new QDB.Connection("Test/Users.qdb");
-    Con.API.prepare("DELETE FROM 'QDB'").run();
+    Con.API.prepare("DELETE FROM 'QDB';").run();
 
     try {
         if (Con.Set()) throw "Set";
