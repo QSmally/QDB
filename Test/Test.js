@@ -90,12 +90,12 @@ module.exports = (QDB, Tap) => {
     Tap("Con#Push4", Con.Push("2345.Hobbies", "roo").Fetch("2345.Hobbies.length"), 1);
 
     Tap("Con#Pop1", Con.Pop("3456"), null);
-    Con.Pop("3456.Hobbies");
-    Tap("Con#Pop2", Con.Fetch("3456.Hobbies.length"), 1);
-    Con.Pop("3456.Hobbies");
-    Tap("Con#Pop3", Con.Fetch("3456.Hobbies.length"), 0);
-    Con.Pop("3456.Hobbies");
-    Tap("Con#Pop4", Con.Fetch("3456.Hobbies.length"), 0);
+    Tap("Con#Pop2", Con.Pop("3456.Hobbies"), "bar");
+    Tap("Con#Pop3", Con.Fetch("3456.Hobbies.length"), 1);
+    Tap("Con#Pop4", Con.Pop("3456.Hobbies"), "foo");
+    Tap("Con#Pop5", Con.Fetch("3456.Hobbies.length"), 0);
+    Tap("Con#Pop6", Con.Pop("3456.Hobbies"), undefined);
+    Tap("Con#Pop7", Con.Fetch("3456.Hobbies.length"), 0);
 
     Tap("Con#Evict4", Con.Evict("3456").CacheSize, 2);
 
