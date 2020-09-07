@@ -236,29 +236,18 @@
             "Value": "Exists",
             "Flags": [],
             "Line": 395,
-            "Description": "Returns whether or not a row in this database exists. This method also caches the row internally, so getting it would be much faster.",
+            "Description": "Returns whether or not a row in this database exists. This method also caches the row internally, so fetching it afterwards would be much faster.",
             "Params": [
                 "{Pathlike} Key Specifies which row to see if it exists.",
                 "{Boolean} [Cache] Whether or not to cache the fetched entry."
             ],
-            "Returns": "{Boolean} Whether a row exists in this database."
-        },
-        {
-            "Value": "Find",
-            "Flags": [],
-            "Line": 409,
-            "Description": "Iterates through all the keys, returns the first element found.",
-            "Params": [
-                "{Function} Fn Function used to test with.",
-                "{Boolean} [Cache] Whether or not to cache the fetched entry."
-            ],
-            "Returns": "{*} Returns the row found, or nil."
+            "Returns": "{Boolean} Whether or not a row exists in this database."
         },
         {
             "Value": "Accumulate",
             "Flags": [],
-            "Line": 425,
-            "Description": "Accumulates as function on a row, essentially a fetch wrapped in a method. Changes are not recorded on the database.",
+            "Line": 409,
+            "Description": "Accumulates a function on a row, essentially a fetch wrapped in a method. Changes are not recorded on the database.",
             "Params": [
                 "{Pathlike} KeyOrPath Specifies which row to fetch. Use dotaccess to retrieve properties.",
                 "{Function} Fn Callback function used to return the row or property.",
@@ -269,7 +258,7 @@
         {
             "Value": "Each",
             "Flags": [],
-            "Line": 443,
+            "Line": 426,
             "Description": "Iterates through this database's entries.",
             "Params": [
                 "{Function} Fn A function which passes on the iterating entries.",
@@ -278,10 +267,20 @@
             "Returns": "{Connection} Returns this database."
         },
         {
+            "Value": "Find",
+            "Flags": [],
+            "Line": 451,
+            "Description": "Iterates through all the entries of the database, returns the first element found.",
+            "Params": [
+                "{Function} Fn A tester function which returns a boolean, based on the value(s) of the rows."
+            ],
+            "Returns": "{*} Returns the row found, or a nil value."
+        },
+        {
             "Value": "Select",
             "Flags": [],
-            "Line": 468,
-            "Description": "Locally filters out rows in memory to work with. Please note that this method does increase memory usage in large databases, although the fetched entries will get evicted.",
+            "Line": 467,
+            "Description": "Locally filters out rows in memory to work with. Please note that this method does increase memory usage in large databases.",
             "Params": [
                 "{Function} Fn A filter function which returns a boolean, based on the value(s) of the rows."
             ],
@@ -290,7 +289,7 @@
         {
             "Value": "Push",
             "Flags": [],
-            "Line": 492,
+            "Line": 491,
             "Description": "Pushes something to an array at the path output.",
             "Params": [
                 "{Pathlike} KeyOrPath Specifies which row or nested array to push to.",
@@ -301,7 +300,7 @@
         {
             "Value": "Shift",
             "Flags": [],
-            "Line": 514,
+            "Line": 513,
             "Description": "Inserts (if defined) or removes a value to/from the front of the array.",
             "Params": [
                 "{Pathlike} KeyOrPath Specifies which row or nested array to insert to/remove from.",
@@ -312,7 +311,7 @@
         {
             "Value": "Pop",
             "Flags": [],
-            "Line": 540,
+            "Line": 539,
             "Description": "Pops something from an array at the path output.",
             "Params": [
                 "{Pathlike} KeyOrPath Specifies which row or nested array to pop from."
@@ -322,7 +321,7 @@
         {
             "Value": "Remove",
             "Flags": [],
-            "Line": 560,
+            "Line": 559,
             "Description": "Removes a specific element from this endpoint array.",
             "Params": [
                 "{Pathlike} KeyOrPath Specifies which row or nested array to remove from.",
@@ -333,7 +332,7 @@
         {
             "Value": "Ensure",
             "Flags": [],
-            "Line": 590,
+            "Line": 589,
             "Description": "Inserts an input into a row or nested object if the key or path wasn't found at the endpoint. It can be used as a default schema of the database elements, that gets inserted if there's no entry already.",
             "Params": [
                 "{Pathlike} KeyOrPath Context key to see if it exists, either a row or nested property, and optionally insert the new value.",
@@ -344,7 +343,7 @@
         {
             "Value": "Modify",
             "Flags": [],
-            "Line": 613,
+            "Line": 612,
             "Description": "Updates a value in the database by fetching it and passing it onto the callback function.",
             "Params": [
                 "{Pathlike} KeyOrPath Specifies which row or nested property to fetch.",
@@ -355,7 +354,7 @@
         {
             "Value": "Invert",
             "Flags": [],
-            "Line": 630,
+            "Line": 629,
             "Description": "Inverts a boolean, from true to false and vice-versa, at the endpoint of the path.",
             "Params": [
                 "{Pathlike} KeyOrPath Specifies which row or nested property to boolean-invert."
@@ -367,7 +366,7 @@
             "Flags": [
                 "Typedef"
             ],
-            "Line": 651,
+            "Line": 650,
             "Description": "Options for a database Connection. All integer related options are in milliseconds. ",
             "Typedef": "{Object} RawOptions",
             "Params": [
