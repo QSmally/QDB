@@ -26,13 +26,13 @@ Schema Models are mainly used for automatic data migration - For instance, addin
 >
 > Type **{Object|Array}**
 
-## [.Serialiser](https://github.com/QSmally/QDB/blob/v4/lib/Utility/Schema.js#L32)
-> A Serialiser function that converts an entry to a rich DataModel on request. [**Read Only**]
+## [.Serialise](https://github.com/QSmally/QDB/blob/v4/lib/Utility/Schema.js#L49)
+> Serialises a supposed database entry to this Schema's rich DataModel, if this Schema was instantiated with a Serialiser method.
 >
-> Type **{Function|undefined}**
+> Type **{Function}**
 
 # Methods
-## [.Migrate(Target)](https://github.com/QSmally/QDB/blob/v4/lib/Utility/Schema.js#L49)
+## [.Migrate(Target)](https://github.com/QSmally/QDB/blob/v4/lib/Utility/Schema.js#L60)
 > Public method. Integrates an entry object and merges them with this Schema's Model.
 > | Key | Type | Description |
 > | --- | --- | --- |
