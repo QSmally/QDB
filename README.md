@@ -16,7 +16,7 @@
 <!-- * JSONConnection -->
 
 ## Links
-* [Documentations](https://github.com/QSmally/QDB/blob/v4/Documentation/Index.mc)
+* [Documentations](https://github.com/QSmally/QDB/blob/v4/Documentation/Index.md)
 * [Github](https://github.com/QSmally/QDB)
 * [Discord Server](https://qdb.qbot.eu/discord)
 
