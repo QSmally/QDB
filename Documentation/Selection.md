@@ -7,6 +7,7 @@
 * [Schema](https://github.com/QSmally/QDB/blob/v4/Documentation/Schema.md)
 * [Transaction](https://github.com/QSmally/QDB/blob/v4/Documentation/Transaction.md)
 * [Selection](https://github.com/QSmally/QDB/blob/v4/Documentation/Selection.md)
+* [Pool](https://github.com/QSmally/QDB/blob/v4/Documentation/Pool.md)
 * [PartialConnection](https://github.com/QSmally/QDB/blob/v4/Documentation/PartialConnection.md)
 
 An unchanged piece of the database in memory, to use as baseline of various endpoints to execute functions with.

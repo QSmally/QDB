@@ -1,5 +1,5 @@
 
-# PartialConnection
+# Pool
 
 * [Start](https://github.com/QSmally/QDB/blob/v4/Documentation/Index.md)
 * [Connection](https://github.com/QSmally/QDB/blob/v4/Documentation/Connection.md)
@@ -9,12 +9,14 @@
 * [Pool](https://github.com/QSmally/QDB/blob/v4/Documentation/Pool.md)
 * [PartialConnection](https://github.com/QSmally/QDB/blob/v4/Documentation/PartialConnection.md)
 
-Base class of a Connection, and when a database failed to connect.
+A utility class for managing multiple database Connections.
+```js
+const MyDBs = new QDB.Pool("lib/Databases/");
+```
+
+| Key | Type | Description |
+| --- | --- | --- |
+| PathURL | Pathlike | Path to the database file or directory. |
+| RawOptions | RawOptions | Options to pass onto every database Connection. |
 
 
-
-# Values
-## [.State](https://github.com/QSmally/QDB/blob/v4/lib/Connections/PartialConnection.js#L12)
-> Current state of this Connection. [**Read Only**]
->
-> Type **{String}**
