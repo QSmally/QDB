@@ -66,13 +66,13 @@ module.exports = (QDB, Tap) => {
     Tap("Con#Exist3", Con.Exists("6789"), false);
     Tap("Con#CacheSize9", Con.CacheSize, 2);
 
-    Tap("Con#Find1", Con.Find(e => e.startsWith("34")), {Name: "roo", Age: 29});
+    Tap("Con#Find1", Con.Find((_e, i) => i.startsWith("34")), {Name: "roo", Age: 29});
     Tap("Con#CacheSize10", Con.CacheSize, 3);
 
-    Tap("Con#Find2", Con.Find(e => e === "1289"), undefined);
+    Tap("Con#Find2", Con.Find((_e, i) => i === "1289"), undefined);
     Tap("Con#CacheSize11", Con.CacheSize, 3);
 
-    Tap("Con#Find3", Con.Find(e => e.startsWith("34")), {Name: "roo", Age: 29, _DataStore: "3456"});
+    Tap("Con#Find3", Con.Find((_e, i) => i.startsWith("34")), {Name: "roo", Age: 29, _DataStore: "3456"});
     Tap("Con#CacheSize12", Con.CacheSize, 3);
 
     Tap("Con#Evict3", Con.Evict().CacheSize, 0);
