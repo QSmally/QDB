@@ -5,13 +5,13 @@ const Guilds = new QDB.Connection("Test/Guilds.qdb", {
 });
 
 const Disconnect  = true;
-const GarbageTest = true;
-const Benchmark   = Fetch;
+const GarbageTest = false;
+const Benchmark   = Test;
 
 
 // Active testing
 function Test () {
-    
+    new QDB.Pool("Test/Guilds.qdb");
 }
 
 // Million queries benchmark
