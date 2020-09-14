@@ -51,14 +51,14 @@ const MyDBs = new QDB.Pool("lib/Databases/");
 > Options for a database Pool. All integer related options are in milliseconds. 
 > | Key | Type | Description |
 > | --- | --- | --- |
-> | RawOptions>} | Object<Filename, | Exclusives Non-default options to use for certain Connections to a database. |
-> | Threads | Boolean, Number | Whether to create a thread for each Connection, or an integer to indicate the amount of threads.  |
+> | Exclusives | Object<Filename, RawOptions> | Non-default options to use for certain Connections to a database. |
+> | Threads | Boolean, Number | Whether to create a thread for each Connection, or an integer to indicate the amount of threads. |
 > | Table | String | A default table name for each Connection in this Pool. |
 > | WAL | Boolean | Default setting to enable Write Ahead Logging mode for Connections in this Pool. |
 > | Cache | Boolean | Whether to enable in-memory caching of entries in results that the next retrieval would be much faster. |
 > | UtilCache | Boolean | Whether or not to cache entries while performing utility tasks, such as the Exists and Accumulate methods. |
 > | SweepInterval | Number | Integer to indicate at what interval to sweep the entries of the Connection's internal cache. |
-> | SweepLifetime | Number | The minimum age of an entry in the cache to consider being sweepable after an interval.  |
+> | SweepLifetime | Number | The minimum age of an entry in the cache to consider being sweepable after an interval. |
 > | SnapshotLifetime | Number | After how many intervals to merge the latest snapshot backups into one. |
 > | BackupInterval | Number | Integer to indicate at what interval to create a snapshot backup, or merge the snapshots. |
 > | BackupDirectory | Pathlike | A path URL to the directory to insert all the database backups in. |

@@ -231,12 +231,12 @@ const Users = new QDB.Connection("lib/Databases/Users.qdb");
 > | --- | --- | --- |
 > | Table | String | A name for the table to use at this path for this Connection. |
 > | Schema | Schema | Link to a database Schema class for automatic data migration. |
-> | WAL | Boolean | Whether or not to enable Write Ahead Logging mode.  |
+> | WAL | Boolean | Whether or not to enable Write Ahead Logging mode. |
 > | Cache | Boolean | Whether to enable in-memory caching of entries in results that the next retrieval would be much faster. |
 > | FetchAll | Boolean | Whether or not to fetch all the database entries on start-up of this database Connection. |
 > | UtilCache | Boolean | Whether or not to cache entries while performing utility tasks, such as the Exists and Accumulate methods. |
 > | SweepInterval | Number | Integer to indicate at what interval to sweep the entries of this Connection's internal cache. |
-> | SweepLifetime | Number | The minimum age of an entry in the cache to consider being sweepable after an interval.  |
+> | SweepLifetime | Number | The minimum age of an entry in the cache to consider being sweepable after an interval. |
 > | SnapshotLifetime | Number | After how many intervals to merge the latest snapshot backups into one. |
 > | BackupInterval | Number | Integer to indicate at what interval to create a snapshot backup, or merge the snapshots. |
 > | BackupDirectory | Pathlike | A path URL to the directory to insert all the database backups in. |
