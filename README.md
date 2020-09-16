@@ -53,7 +53,7 @@ Transaction.Rollback();
 ## [Selection](https://github.com/QSmally/QDB/blob/v4/Documentation/Selection.md)
 An unchanged piece of the database in memory.
 ```js
-const Leaderboard = MyDB.Select(Guild => Guild._Id === "1234")
+const Leaderboard = MyDB.Select("1234567890")
 .Sort((a, b) => b.Experience - a.Experience)
 .Limit(0, 10);
 ```
