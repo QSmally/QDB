@@ -574,11 +574,18 @@
             "Returns": "{Connection|ThreadProvider}"
         },
         {
+            "Value": "Disconnect",
+            "Flags": [],
+            "Line": 82,
+            "Description": "Disconnects from all the Connections in this Pool.",
+            "Returns": "{Pool}"
+        },
+        {
             "Value": "",
             "Flags": [
                 "Typedef"
             ],
-            "Line": 87,
+            "Line": 102,
             "Description": "Options for a database Pool. All integer related options are in milliseconds. ",
             "Typedef": "{Object} PoolOptions",
             "Params": [

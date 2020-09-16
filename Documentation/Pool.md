@@ -46,8 +46,13 @@ const MyDBs = new QDB.Pool("lib/Databases/");
 >
 > Returns **{Connection|ThreadProvider}** 
 
+## [.Disconnect()](https://github.com/QSmally/QDB/blob/v4/lib/Connections/Pool.js#L82)
+> Disconnects from all the Connections in this Pool.
+>
+> Returns **{Pool}** 
+
 # Typedefs
-## [.PoolOptions](https://github.com/QSmally/QDB/blob/v4/lib/Connections/Pool.js#L87)
+## [.PoolOptions](https://github.com/QSmally/QDB/blob/v4/lib/Connections/Pool.js#L102)
 > Options for a database Pool. All integer related options are in milliseconds. 
 > | Key | Type | Description |
 > | --- | --- | --- |
