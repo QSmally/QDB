@@ -12,7 +12,7 @@
 * A simple class interface
 * Optimised entry caches
 * Selection and transaction wrappers
-<!-- * Database Pool -->
+* Database pools
 <!-- * JSONConnection -->
 
 ## Links
