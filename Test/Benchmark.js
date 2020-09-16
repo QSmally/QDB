@@ -11,7 +11,8 @@ const Benchmark   = Test;
 
 // Active testing
 function Test () {
-    new QDB.Pool("Test/Guilds.qdb");
+    const MyPool = new QDB.Pool("Test/");
+    console.log(MyPool);
 }
 
 // Million queries benchmark
