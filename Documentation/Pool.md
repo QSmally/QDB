@@ -38,7 +38,7 @@ const MyDBs = new QDB.Pool("lib/Databases/");
 > Type **{PoolOptions}**
 
 # Methods
-## [.$(Base)](https://github.com/QSmally/QDB/blob/v4/lib/Connections/Pool.js#L71)
+## [.$(Base)](https://github.com/QSmally/QDB/blob/v4/lib/Connections/Pool.js#L72)
 > Retrieves a database Connection (or a ThreadProvider if this Pool is multithreaded).
 > | Key | Type | Description |
 > | --- | --- | --- |
@@ -46,13 +46,13 @@ const MyDBs = new QDB.Pool("lib/Databases/");
 >
 > Returns **{Connection|ThreadProvider}** 
 
-## [.Disconnect()](https://github.com/QSmally/QDB/blob/v4/lib/Connections/Pool.js#L82)
+## [.Disconnect()](https://github.com/QSmally/QDB/blob/v4/lib/Connections/Pool.js#L83)
 > Disconnects from all the Connections in this Pool.
 >
 > Returns **{Pool}** 
 
 # Typedefs
-## [.PoolOptions](https://github.com/QSmally/QDB/blob/v4/lib/Connections/Pool.js#L102)
+## [.PoolOptions](https://github.com/QSmally/QDB/blob/v4/lib/Connections/Pool.js#L103)
 > Options for a database Pool. All integer related options are in milliseconds. 
 > | Key | Type | Description |
 > | --- | --- | --- |
@@ -62,6 +62,7 @@ const MyDBs = new QDB.Pool("lib/Databases/");
 > | WAL | Boolean | Default setting to enable Write Ahead Logging mode for Connections in this Pool. |
 > | Cache | Boolean | Whether to enable in-memory caching of entries in results that the next retrieval would be much faster. |
 > | UtilCache | Boolean | Whether or not to cache entries while performing utility tasks, such as the Exists and Accumulate methods. |
+> | IterCache | Boolean | Whether to cache iterating entries while performing utility tasks, like the Each and Select methods. |
 > | SweepInterval | Number | Integer to indicate at what interval to sweep the entries of the Connection's internal cache. |
 > | SweepLifetime | Number | The minimum age of an entry in the cache to consider being sweepable after an interval. |
 > | SnapshotLifetime | Number | After how many intervals to merge the latest snapshot backups into one. |
