@@ -582,14 +582,14 @@
                 "Variable",
                 "Private"
             ],
-            "Line": 69,
+            "Line": 68,
             "Description": "The manager that handles backups of this Pool.",
             "Type": "{Function?}"
         },
         {
             "Value": "$",
             "Flags": [],
-            "Line": 83,
+            "Line": 82,
             "Description": "Retrieves a database Connection (or a ThreadProvider if this Pool is multithreaded).",
             "Params": [
                 "{String} Base Reference link to the Connection to resolve."
@@ -599,7 +599,7 @@
         {
             "Value": "Disconnect",
             "Flags": [],
-            "Line": 94,
+            "Line": 93,
             "Description": "Disconnects from all the Connections in this Pool.",
             "Returns": "{Pool}"
         },
@@ -608,12 +608,12 @@
             "Flags": [
                 "Typedef"
             ],
-            "Line": 114,
+            "Line": 113,
             "Description": "Options for a database Pool. All integer related options are in milliseconds. ",
             "Typedef": "{Object} PoolOptions",
             "Params": [
                 "{Object<Filename, RawOptions>} Exclusives Non-default options to use for certain Connections to a database.",
-                "{Boolean|Number} Threads Whether to create a thread for each Connection, or an integer to indicate the amount of threads. ",
+                "{Boolean} Threads A boolean value to indicate whether to create a thread for each Connection in this Pool. ",
                 "{String} Table A default table name for each Connection in this Pool.",
                 "{Boolean} WAL Default setting to enable Write Ahead Logging mode for Connections in this Pool.",
                 "{Boolean} Cache Whether to enable in-memory caching of entries in results that the next retrieval would be much faster.",
@@ -621,8 +621,7 @@
                 "{Boolean} IterCache Whether to cache iterating entries while performing utility tasks, like the Each and Select methods.",
                 "{Number} SweepInterval Integer to indicate at what interval to sweep the entries of the Connection's internal cache.",
                 "{Number} SweepLifetime The minimum age of an entry in the cache to consider being sweepable after an interval. ",
-                "{Number} SnapshotLifetime After how many intervals to merge the latest snapshot backups into one.",
-                "{Number} BackupInterval Integer to indicate at what interval to create a snapshot backup, or merge the snapshots.",
+                "{Number} BackupInterval Integer to indicate at what interval to create a backup at.",
                 "{Pathlike} BackupDirectory A path URL to the directory to insert all the database backups in."
             ]
         }

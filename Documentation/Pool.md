@@ -38,7 +38,7 @@ const MyDBs = new QDB.Pool("lib/Databases/");
 > Type **{PoolOptions}**
 
 # Methods
-## [.$(Base)](https://github.com/QSmally/QDB/blob/v4/lib/Connections/Pool.js#L83)
+## [.$(Base)](https://github.com/QSmally/QDB/blob/v4/lib/Connections/Pool.js#L82)
 > Retrieves a database Connection (or a ThreadProvider if this Pool is multithreaded).
 > | Key | Type | Description |
 > | --- | --- | --- |
@@ -46,18 +46,18 @@ const MyDBs = new QDB.Pool("lib/Databases/");
 >
 > Returns **{Connection|ThreadProvider}** 
 
-## [.Disconnect()](https://github.com/QSmally/QDB/blob/v4/lib/Connections/Pool.js#L94)
+## [.Disconnect()](https://github.com/QSmally/QDB/blob/v4/lib/Connections/Pool.js#L93)
 > Disconnects from all the Connections in this Pool.
 >
 > Returns **{Pool}** 
 
 # Typedefs
-## [.PoolOptions](https://github.com/QSmally/QDB/blob/v4/lib/Connections/Pool.js#L114)
+## [.PoolOptions](https://github.com/QSmally/QDB/blob/v4/lib/Connections/Pool.js#L113)
 > Options for a database Pool. All integer related options are in milliseconds. 
 > | Key | Type | Description |
 > | --- | --- | --- |
 > | Exclusives | Object<Filename, RawOptions> | Non-default options to use for certain Connections to a database. |
-> | Threads | Boolean, Number | Whether to create a thread for each Connection, or an integer to indicate the amount of threads. |
+> | Threads | Boolean | A boolean value to indicate whether to create a thread for each Connection in this Pool. |
 > | Table | String | A default table name for each Connection in this Pool. |
 > | WAL | Boolean | Default setting to enable Write Ahead Logging mode for Connections in this Pool. |
 > | Cache | Boolean | Whether to enable in-memory caching of entries in results that the next retrieval would be much faster. |
@@ -65,8 +65,7 @@ const MyDBs = new QDB.Pool("lib/Databases/");
 > | IterCache | Boolean | Whether to cache iterating entries while performing utility tasks, like the Each and Select methods. |
 > | SweepInterval | Number | Integer to indicate at what interval to sweep the entries of the Connection's internal cache. |
 > | SweepLifetime | Number | The minimum age of an entry in the cache to consider being sweepable after an interval. |
-> | SnapshotLifetime | Number | After how many intervals to merge the latest snapshot backups into one. |
-> | BackupInterval | Number | Integer to indicate at what interval to create a snapshot backup, or merge the snapshots. |
+> | BackupInterval | Number | Integer to indicate at what interval to create a backup at. |
 > | BackupDirectory | Pathlike | A path URL to the directory to insert all the database backups in. |
 >
 > Type **{Object}**
