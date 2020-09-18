@@ -395,7 +395,7 @@
             "Description": "An entry which has been resolved from the Connection's internal cache.",
             "Typedef": "{Object|Array} DataModel",
             "Params": [
-                "{String|Number} _DataStore Identifier of this model."
+                "{String|Number|Function} _DataStore Identifier of this model."
             ]
         }
     ],
@@ -577,9 +577,19 @@
             "Type": "{PoolOptions}"
         },
         {
+            "Value": "_BackupManager",
+            "Flags": [
+                "Variable",
+                "Private"
+            ],
+            "Line": 69,
+            "Description": "The manager that handles backups of this Pool.",
+            "Type": "{Function?}"
+        },
+        {
             "Value": "$",
             "Flags": [],
-            "Line": 72,
+            "Line": 83,
             "Description": "Retrieves a database Connection (or a ThreadProvider if this Pool is multithreaded).",
             "Params": [
                 "{String} Base Reference link to the Connection to resolve."
@@ -589,7 +599,7 @@
         {
             "Value": "Disconnect",
             "Flags": [],
-            "Line": 83,
+            "Line": 94,
             "Description": "Disconnects from all the Connections in this Pool.",
             "Returns": "{Pool}"
         },
@@ -598,7 +608,7 @@
             "Flags": [
                 "Typedef"
             ],
-            "Line": 103,
+            "Line": 114,
             "Description": "Options for a database Pool. All integer related options are in milliseconds. ",
             "Typedef": "{Object} PoolOptions",
             "Params": [
