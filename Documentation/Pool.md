@@ -27,7 +27,7 @@ const MyDBs = new QDB.Pool("lib/Databases/");
 >
 > Type **{Pathlike}**
 
-## [.Databases](https://github.com/QSmally/QDB/blob/v4/lib/Connections/Pool.js#L28)
+## [.Store](https://github.com/QSmally/QDB/blob/v4/lib/Connections/Pool.js#L28)
 > A collection of databases this Pool holds. [**Read Only**]
 >
 > Type **[{DataStore}](https://github.com/QSmally/Qulity/blob/master/Documentation/DataStore.md)**

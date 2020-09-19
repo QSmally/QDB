@@ -556,7 +556,7 @@
             "Type": "{Pathlike}"
         },
         {
-            "Value": "Databases",
+            "Value": "Store",
             "Flags": [
                 "Variable",
                 "ReadOnly"
