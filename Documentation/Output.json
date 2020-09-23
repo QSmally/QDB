@@ -587,19 +587,29 @@
             "Type": "{Function?}"
         },
         {
+            "Value": "_ThreadProvider",
+            "Flags": [
+                "Variable",
+                "Private"
+            ],
+            "Line": 79,
+            "Description": "When this Pool is threaded, a reference to the manager which holds all the worker threads.",
+            "Type": "{ThreadProvider?}"
+        },
+        {
             "Value": "$",
             "Flags": [],
-            "Line": 82,
-            "Description": "Retrieves a database Connection (or a ThreadProvider if this Pool is multithreaded).",
+            "Line": 95,
+            "Description": "Retrieves a database Connection (or a Thread class if this Pool is multithreaded).",
             "Params": [
                 "{String} Base Reference link to the Connection to resolve."
             ],
-            "Returns": "{Connection|ThreadProvider}"
+            "Returns": "{Connection|Thread}"
         },
         {
             "Value": "Disconnect",
             "Flags": [],
-            "Line": 93,
+            "Line": 106,
             "Description": "Disconnects from all the Connections in this Pool.",
             "Returns": "{Pool}"
         },
@@ -608,7 +618,7 @@
             "Flags": [
                 "Typedef"
             ],
-            "Line": 113,
+            "Line": 126,
             "Description": "Options for a database Pool. All integer related options are in milliseconds. ",
             "Typedef": "{Object} PoolOptions",
             "Params": [
