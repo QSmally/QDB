@@ -38,7 +38,7 @@ const MyDBs = new QDB.Pool("lib/Databases/");
 > Type **{PoolOptions}**
 
 # Methods
-## [.$(Base)](https://github.com/QSmally/QDB/blob/v4/lib/Connections/Pool.js#L95)
+## [.$(Base)](https://github.com/QSmally/QDB/blob/v4/lib/Connections/Pool.js#L94)
 > Retrieves a database Connection (or a Thread class if this Pool is multithreaded).
 > | Key | Type | Description |
 > | --- | --- | --- |
@@ -46,19 +46,18 @@ const MyDBs = new QDB.Pool("lib/Databases/");
 >
 > Returns **{Connection|Thread}** 
 
-## [.Disconnect()](https://github.com/QSmally/QDB/blob/v4/lib/Connections/Pool.js#L106)
+## [.Disconnect()](https://github.com/QSmally/QDB/blob/v4/lib/Connections/Pool.js#L105)
 > Disconnects from all the Connections in this Pool.
 >
 > Returns **{Pool}** 
 
 # Typedefs
-## [.PoolOptions](https://github.com/QSmally/QDB/blob/v4/lib/Connections/Pool.js#L126)
+## [.PoolOptions](https://github.com/QSmally/QDB/blob/v4/lib/Connections/Pool.js#L125)
 > Options for a database Pool. All integer related options are in milliseconds. 
 > | Key | Type | Description |
 > | --- | --- | --- |
 > | Exclusives | Object<Filename, RawOptions> | Non-default options to use for certain Connections to a database. |
 > | Threads | Boolean | A boolean value to indicate whether to create a thread for each Connection in this Pool. |
-> | Table | String | A default table name for each Connection in this Pool. |
 > | WAL | Boolean | Default setting to enable Write Ahead Logging mode for Connections in this Pool. |
 > | Cache | Boolean | Whether to enable in-memory caching of entries in results that the next retrieval would be much faster. |
 > | UtilCache | Boolean | Whether or not to cache entries while performing utility tasks, such as the Exists and Accumulate methods. |
