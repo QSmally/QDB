@@ -6,11 +6,12 @@
     "Additional": {
         "Schema":      "Schema Models are mainly used for automatic data migration - For instance, adding or removing data parts of each entry in the database.",
         "Selection":   "A Selection allows you to filter something from the database, and perform methods such as sorting, limiting and iterating to grab results and leave the database unchanged.",
-        "Transaction": "Transactions should only be created in synchronous environments, as other data changed will also be included in the transaction - which can be rolled back, leading to unexpected results."
+        "Transaction": "Transactions should only be created in synchronous environments, as other data changed will also be included in the transaction - which can be rolled back, leading to unexpected results.",
+        "Gateway":     "This class is rather used than a Connection when initialised in a multithreaded Pool. Gateways will connect with the database thread, and asynchronously exchange data."
     },
 
     "Repository": "https://github.com/QSmally/QDB/blob/v4/",
 
-    "Keys": ["lib/Connections/Connection", "lib/Utility/Schema", "lib/Utility/Transaction", "lib/Utility/Selection", "lib/Connections/Pool", "lib/Connections/PartialConnection"],
+    "Keys": ["lib/Connections/Connection", "lib/Utility/Schema", "lib/Utility/Transaction", "lib/Utility/Selection", "lib/Connections/Pool", "lib/Pool/ThreadProvider/Gateway", "lib/Connections/PartialConnection"],
     "Typedefs": []
 }
