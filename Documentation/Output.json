@@ -635,6 +635,38 @@
             ]
         }
     ],
+    "Gateway": [
+        {
+            "Value": "Identifiers",
+            "Flags": [
+                "Variable",
+                "ReadOnly"
+            ],
+            "Line": 14,
+            "Description": "Path string and database identifier.",
+            "Type": "{Array<Pathlike, String>}"
+        },
+        {
+            "Value": "Pool",
+            "Flags": [
+                "Variable",
+                "ReadOnly"
+            ],
+            "Line": 25,
+            "Description": "The Pool reference of this Gateway.",
+            "Type": "{Pool}"
+        },
+        {
+            "Value": "_ThreadProvider",
+            "Flags": [
+                "Variable",
+                "Private"
+            ],
+            "Line": 36,
+            "Description": "A manager which holds the worker thread.",
+            "Type": "{ThreadProvider}"
+        }
+    ],
     "PartialConnection": [
         {
             "Value": "State",
