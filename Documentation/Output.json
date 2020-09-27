@@ -599,18 +599,18 @@
         {
             "Value": "$",
             "Flags": [],
-            "Line": 94,
-            "Description": "Retrieves a database Connection (or a Thread class if this Pool is multithreaded).",
+            "Line": 95,
+            "Description": "Retrieves a database Connection (or a Gateway class if this Pool is threaded).",
             "Params": [
                 "{String} Base Reference link to the Connection to resolve."
             ],
-            "Returns": "{Connection|Thread}"
+            "Returns": "{Connection|Gateway}"
         },
         {
             "Value": "Disconnect",
             "Flags": [],
-            "Line": 105,
-            "Description": "Disconnects from all the Connections in this Pool.",
+            "Line": 106,
+            "Description": "Disconnects from all the Connections in this Pool. When threaded, this Pool exits the thread asynchronously.",
             "Returns": "{Pool}"
         },
         {
@@ -618,12 +618,12 @@
             "Flags": [
                 "Typedef"
             ],
-            "Line": 125,
+            "Line": 132,
             "Description": "Options for a database Pool. All integer related options are in milliseconds. ",
             "Typedef": "{Object} PoolOptions",
             "Params": [
                 "{Object<Filename, RawOptions>} Exclusives Non-default options to use for certain Connections to a database.",
-                "{Boolean} Threads A boolean value to indicate whether to create a thread for each Connection in this Pool. ",
+                "{Boolean} Threaded A boolean value to indicate whether to create a thread for for this Pool's databases. ",
                 "{Boolean} WAL Default setting to enable Write Ahead Logging mode for Connections in this Pool.",
                 "{Boolean} Cache Whether to enable in-memory caching of entries in results that the next retrieval would be much faster.",
                 "{Boolean} UtilCache Whether or not to cache entries while performing utility tasks, such as the Exists and Accumulate methods.",
@@ -665,6 +665,19 @@
             "Line": 36,
             "Description": "A manager which holds the worker thread.",
             "Type": "{ThreadProvider}"
+        },
+        {
+            "Value": "Query",
+            "Flags": [
+                "Async"
+            ],
+            "Line": 49,
+            "Description": "Asynchronously creates a query for this database.",
+            "Params": [
+                "{String} Method Method or property of the Connection to select.",
+                "{...Any} Parameters Additional parameters to give to the function."
+            ],
+            "Returns": "{Promise<Any>} Result of the thread."
         }
     ],
     "PartialConnection": [

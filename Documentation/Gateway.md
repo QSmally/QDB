@@ -31,3 +31,13 @@ This class is rather used than a Connection when initialised in a multithreaded 
 > The Pool reference of this Gateway. [**Read Only**]
 >
 > Type **{Pool}**
+
+# Methods
+## [.Query(Method, Parameters)](https://github.com/QSmally/QDB/blob/v4/lib/Executors/Pool/ThreadProvider/Gateway.js#L49) [**Async**]
+> Asynchronously creates a query for this database.
+> | Key | Type | Description |
+> | --- | --- | --- |
+> | Method | String | Method or property of the Connection to select. |
+> | Parameters | ...Any | Additional parameters to give to the function. |
+>
+> Returns **{Promise<Any>}** Result of the thread.
