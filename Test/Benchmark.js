@@ -5,13 +5,30 @@ const Guilds = new QDB.Connection("Test/Guilds.qdb", {
 });
 
 const Disconnect  = true;
-const GarbageTest = true;
-const Benchmark   = Fetch;
+const GarbageTest = false;
+const Benchmark   = Test;
 
 
 // Active testing
 function Test () {
+    const foo = new QDB.Pool("Test/", {
+        Threaded: true
+    });
+    
+    const GuildsDB = foo.$("Guilds");
 
+    GuildsDB.Query("Fetch", "4")
+    .then(Res => {console.log(["guilds fetch result", Res])});
+
+    GuildsDB.Query("Size")
+    .then(Res => {console.log(["guilds size", Res])});
+
+    GuildsDB.Query("NotAThing")
+    .then(Res => {console.log(["should be undefined", Res])});
+
+    setTimeout(() => {
+        foo.Disconnect();
+    }, 60);
 }
 
 // Million queries benchmark
