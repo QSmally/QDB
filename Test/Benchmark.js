@@ -17,13 +17,16 @@ function Test () {
     
     const GuildsDB = foo.$("Guilds");
 
-    GuildsDB.Query("Fetch", "4")
+    GuildsDB.Fetch("4")
     .then(Res => {console.log(["guilds fetch result", Res])});
 
     GuildsDB.Query("Size")
     .then(Res => {console.log(["guilds size", Res])});
 
-    GuildsDB.Query("NotAThing")
+    foo.$("Users").Fetch("4567")
+    .then(Res => {console.log(["should be some user", Res])});
+
+    foo.$("Users").Fetch("NotAThing")
     .then(Res => {console.log(["should be undefined", Res])});
 
     setTimeout(() => {
