@@ -2,7 +2,7 @@
 # QDB4
 ## An optimised SQL database
 
-**QDB4 is stable and usable, but there a few features lacking.** [[Contribute](#issues-contributing--license)] [[Documentation](https://github.com/QSmally/QDB/blob/v4/Documentation/Index.md)]
+**QDB4 is stable and usable.** [[Contribute](#issues-contributing--license)] [[Documentation](https://github.com/QSmally/QDB/blob/v4/Documentation/Index.md)]
 
 > QDB is a high level database module which is based around JavaScript Objects. Connect to multiple files, apart or in an optimised pool.
 
@@ -12,8 +12,7 @@
 * A simple class interface
 * Optimised entry caches
 * Selection and transaction wrappers
-* Database pools
-<!-- * JSONConnection -->
+* Database pools with threads
 
 ## Links
 * [Documentations](https://github.com/QSmally/QDB/blob/v4/Documentation/Index.md)
