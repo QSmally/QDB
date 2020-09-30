@@ -473,7 +473,7 @@
         {
             "Value": "Rollback",
             "Flags": [],
-            "Line": 53,
+            "Line": 54,
             "Description": "Rolls back the changes made before the start of this Transaction. This also clears the contents of the Connection's internal cache.",
             "Returns": "{Boolean} Whether the changed were reset."
         }
@@ -536,7 +536,7 @@
             "Value": "Limit",
             "Flags": [],
             "Line": 78,
-            "Description": "Slices off values from this Selection. Identical to the `LIMIT begin, end` SQL statement.",
+            "Description": "Slices off values from this Selection. Identical to the `LIMIT` SQL statement.",
             "Params": [
                 "{Number} Begin Integer to indicate the beginning to slice.",
                 "{Number} [End] Integer to indicate the end of the slice."

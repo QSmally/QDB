@@ -31,7 +31,7 @@ Transactions should only be created in synchronous environments, as other data c
 >
 > Returns **{Boolean}** Whether the changed were committed.
 
-## [.Rollback()](https://github.com/QSmally/QDB/blob/v4/lib/Utility/Transaction.js#L53)
+## [.Rollback()](https://github.com/QSmally/QDB/blob/v4/lib/Utility/Transaction.js#L54)
 > Rolls back the changes made before the start of this Transaction. This also clears the contents of the Connection's internal cache.
 >
 > Returns **{Boolean}** Whether the changed were reset.

@@ -54,7 +54,7 @@ A Selection allows you to filter something from the database, and perform method
 > Returns **{Selection}** 
 
 ## [.Limit(Begin, End?)](https://github.com/QSmally/QDB/blob/v4/lib/Utility/Selection.js#L78)
-> Slices off values from this Selection. Identical to the `LIMIT begin, end` SQL statement.
+> Slices off values from this Selection. Identical to the `LIMIT` SQL statement.
 > | Key | Type | Description |
 > | --- | --- | --- |
 > | Begin | Number | Integer to indicate the beginning to slice. |
