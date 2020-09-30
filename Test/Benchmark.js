@@ -1,8 +1,14 @@
 
 const QDB = require("../QDB");
+
 const Guilds = new QDB.Connection("Test/Guilds.qdb", {
     Cache: true
 });
+
+// const Pool = new QDB.Pool("Test/Guilds.qdb", {
+//     Threaded: true
+// });
+
 
 const Disconnect  = true;
 const GarbageTest = true;
@@ -11,27 +17,28 @@ const Benchmark   = Fetch;
 
 // Active testing
 function Test () {
-    const foo = new QDB.Pool("Test/", {
-        Threaded: true
-    });
-    
-    const GuildsDB = foo.$("Guilds");
 
-    GuildsDB.Fetch("4")
-    .then(Res => {console.log(["guilds fetch result", Res])});
+}
 
-    GuildsDB.Query("Size")
-    .then(Res => {console.log(["guilds size", Res])});
+// Million threaded queries benchmark
+async function Thread () {
+    const GuildsThread = Pool.$("Guilds");
+    console.log("benchmark: fetch 1 million random queries in thread");
+    const Indexes = await GuildsThread.Query("Indexes");
 
-    foo.$("Users").Fetch("4567")
-    .then(Res => {console.log(["should be some user", Res])});
+    console.time("time-for-million-reads");
 
-    foo.$("Users").Fetch("NotAThing")
-    .then(Res => {console.log(["should be undefined", Res])});
+    for (let i = 0; i < 1000 * 1000; i++) {
+        const Id = Indexes[Math.round(Math.random() * Indexes.length)];
+        if (!Id) continue;
+        GuildsThread.Fetch(Id);
+    }
 
-    setTimeout(() => {
-        foo.Disconnect();
-    }, 60);
+    console.log(`cache size: ${await GuildsThread.Query("CacheSize")}`);
+    console.timeEnd("time-for-million-reads");
+    console.log(`memory usage: ${process.memoryUsage().heapUsed / 1024 / 1024} MB`);
+
+    Pool.Disconnect();
 }
 
 // Million queries benchmark
