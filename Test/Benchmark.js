@@ -1,15 +1,7 @@
 
 const QDB = require("../QDB");
 
-const Guilds = new QDB.Connection("Test/Guilds.qdb", {
-    Cache: true
-});
-
-// const Pool = new QDB.Pool("Test/Guilds.qdb", {
-//     Threaded: true
-// });
-
-
+// Benchmark configuration
 const Disconnect  = true;
 const GarbageTest = true;
 const Benchmark   = Fetch;
@@ -22,6 +14,10 @@ function Test () {
 
 // Million threaded queries benchmark
 async function Thread () {
+    const Pool = new QDB.Pool("Test/Guilds.qdb", {
+        Threaded: true
+    });
+
     const GuildsThread = Pool.$("Guilds");
     console.log("benchmark: fetch 1 million random queries in thread");
     const Indexes = await GuildsThread.Query("Indexes");
@@ -39,10 +35,15 @@ async function Thread () {
     console.log(`memory usage: ${process.memoryUsage().heapUsed / 1024 / 1024} MB`);
 
     Pool.Disconnect();
+    if (Disconnect) Pool.Disconnect();
 }
 
 // Million queries benchmark
 function Fetch () {
+    const Guilds = new QDB.Connection("Test/Guilds.qdb", {
+        Cache: true
+    });
+
     console.log("benchmark: fetch 1 million random queries");
     const Indexes = Guilds.Indexes;
 
@@ -57,11 +58,12 @@ function Fetch () {
     console.log(`cache size: ${Guilds.CacheSize}`);
     console.timeEnd("time-for-million-reads");
     console.log(`memory usage: ${process.memoryUsage().heapUsed / 1024 / 1024} MB`);
+
+    if (Disconnect) Guilds.Disconnect();
 }
 
 
 if (typeof Benchmark === "function") Benchmark();
-if (Disconnect) Guilds.Disconnect();
 
 // Garbage collector
 if (GarbageTest) {
