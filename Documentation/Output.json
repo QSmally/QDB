@@ -119,7 +119,7 @@
                 "Private"
             ],
             "Line": 190,
-            "Description": "Internal method. Checks whether this database is ready for execution.",
+            "Description": "Internal getter. Checks whether this database is ready for execution.",
             "Action": "Getter",
             "Refer": "_Ready",
             "Type": "{Boolean}"
@@ -156,13 +156,13 @@
                 "Private"
             ],
             "Line": 231,
-            "Description": "Internal method. Finds a relative dotaccess pathway of a frame.",
+            "Description": "Internal method. Finds a relative dotaccess pathway of an object.",
             "Params": [
                 "{Object|Array} Frame The object-like beginning to cast.",
                 "{Array} Pathlike A dotaccess notation path as an Array. Preferred `Path` value from `_Resolve()`.",
                 "{Object} [Options] Additional queries for the caster to use."
             ],
-            "Returns": "{*}"
+            "Returns": "{*} Returns the output of the caster."
         },
         {
             "Value": "AsObject",
@@ -197,7 +197,7 @@
             "Description": "Manages the elements of the database.",
             "Params": [
                 "{Pathlike} KeyOrPath Specifies at what row to insert or replace the element at. Use dotaccess notation to edit properties.",
-                "{Object|Array|*} Value Data to set at the row address, at the location of the key or path."
+                "{Object|Array|DataModel|*} Value Data to set at the row address, at the location of the key or path."
             ],
             "Returns": "{Connection} Returns the updated database."
         },
@@ -326,7 +326,7 @@
             "Line": 553,
             "Description": "Removes a specific element from this endpoint array.",
             "Params": [
-                "{Pathlike} KeyOrPath Specifies which row or nested array to remove from.",
+                "{Pathlike} KeyOrPath Specifies which row or nested array to remove a value from.",
                 "{Function} Fn A function that returns a boolean to which value to remove."
             ],
             "Returns": "{Connection} Returns the updated database."
@@ -338,7 +338,7 @@
             "Description": "Inserts an input into a row or nested object if the key or path wasn't found at the endpoint. It can be used as a default schema of the database elements, that gets inserted if there's no entry already.",
             "Params": [
                 "{Pathlike} KeyOrPath Context key to see if it exists, either a row or nested property, and optionally insert the new value.",
-                "{*} Input A value to input if the row or nested property wasn't found in the database."
+                "{Object|Array|Schema|*} Input A value to input if the row or nested property wasn't found in the database."
             ],
             "Returns": "{Boolean} Whether or not the new value was inserted."
         },

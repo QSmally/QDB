@@ -89,7 +89,7 @@ const Users = new QDB.Connection("lib/Databases/Users.qdb");
 > | Key | Type | Description |
 > | --- | --- | --- |
 > | KeyOrPath | Pathlike | Specifies at what row to insert or replace the element at. Use dotaccess notation to edit properties. |
-> | Value | Object, Array, Any | Data to set at the row address, at the location of the key or path. |
+> | Value | Object, Array, DataModel, Any | Data to set at the row address, at the location of the key or path. |
 >
 > Returns **{Connection}** Returns the updated database.
 
@@ -194,7 +194,7 @@ const Users = new QDB.Connection("lib/Databases/Users.qdb");
 > Removes a specific element from this endpoint array.
 > | Key | Type | Description |
 > | --- | --- | --- |
-> | KeyOrPath | Pathlike | Specifies which row or nested array to remove from. |
+> | KeyOrPath | Pathlike | Specifies which row or nested array to remove a value from. |
 > | Fn | Function | A function that returns a boolean to which value to remove. |
 >
 > Returns **{Connection}** Returns the updated database.
@@ -204,7 +204,7 @@ const Users = new QDB.Connection("lib/Databases/Users.qdb");
 > | Key | Type | Description |
 > | --- | --- | --- |
 > | KeyOrPath | Pathlike | Context key to see if it exists, either a row or nested property, and optionally insert the new value. |
-> | Input | Any | A value to input if the row or nested property wasn't found in the database. |
+> | Input | Object, Array, Schema, Any | A value to input if the row or nested property wasn't found in the database. |
 >
 > Returns **{Boolean}** Whether or not the new value was inserted.
 
