@@ -10,7 +10,7 @@
 * [Gateway](https://github.com/QSmally/QDB/blob/v4/Documentation/Gateway.md)
 * [PartialConnection](https://github.com/QSmally/QDB/blob/v4/Documentation/PartialConnection.md)
 
-Base class of a Connection, and when a database failed to connect.
+Base of the Connection class, and fallback class when a database failed to connect.
 
 
 

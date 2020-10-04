@@ -142,12 +142,12 @@
                 "Private"
             ],
             "Line": 215,
-            "Description": "Internal method. Sets or patches something in this Connection's internal cache.",
+            "Description": "Internal method. Inserts or patches something in this Connection's internal cache.",
             "Params": [
-                "{String|Number} Key As address to memory map this value.",
-                "{Object|Array} Value The value to cache in the memory."
+                "{String|Number} Key As address to memory map this value to.",
+                "{Object|Array} Value The value to set in memory."
             ],
-            "Returns": "{DataStore} Returns the updated cache.",
+            "Returns": "{DataStore} Returns the updated cache instance of this Connection.",
             "Reference": "https://github.com/QSmally/Qulity/blob/master/Documentation/DataStore.md"
         },
         {
@@ -593,16 +593,16 @@
                 "Private"
             ],
             "Line": 75,
-            "Description": "When this Pool is threaded, a reference to the manager which holds the worker thread.",
+            "Description": "When this Pool is threaded, a reference to the manager which holds the worker thread of this Pool.",
             "Type": "{ThreadProvider?}"
         },
         {
             "Value": "$",
             "Flags": [],
             "Line": 95,
-            "Description": "Retrieves a database Connection (or a Gateway class if this Pool is threaded).",
+            "Description": "Retrieves a database Connection from this Pool instance (or a Gateway class if this Pool is threaded).",
             "Params": [
-                "{String} Base Reference link to the Connection to resolve."
+                "{String} Base Reference link to the Connection or Gateway to resolve."
             ],
             "Returns": "{Connection|Gateway}"
         },
@@ -610,7 +610,7 @@
             "Value": "Disconnect",
             "Flags": [],
             "Line": 106,
-            "Description": "Disconnects from all the Connections in this Pool. When threaded, this Pool exits the thread asynchronously.",
+            "Description": "Disconnects from all the Connections or Gateways in this Pool. When threaded, this Pool exits the thread asynchronously.",
             "Returns": "{Pool}"
         },
         {

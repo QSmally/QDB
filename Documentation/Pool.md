@@ -40,15 +40,15 @@ const MyDBs = new QDB.Pool("lib/Databases/");
 
 # Methods
 ## [.$(Base)](https://github.com/QSmally/QDB/blob/v4/lib/Connections/Pool.js#L95)
-> Retrieves a database Connection (or a Gateway class if this Pool is threaded).
+> Retrieves a database Connection from this Pool instance (or a Gateway class if this Pool is threaded).
 > | Key | Type | Description |
 > | --- | --- | --- |
-> | Base | String | Reference link to the Connection to resolve. |
+> | Base | String | Reference link to the Connection or Gateway to resolve. |
 >
 > Returns **{Connection|Gateway}** 
 
 ## [.Disconnect()](https://github.com/QSmally/QDB/blob/v4/lib/Connections/Pool.js#L106)
-> Disconnects from all the Connections in this Pool. When threaded, this Pool exits the thread asynchronously.
+> Disconnects from all the Connections or Gateways in this Pool. When threaded, this Pool exits the thread asynchronously.
 >
 > Returns **{Pool}** 
 
