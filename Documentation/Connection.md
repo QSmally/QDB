@@ -249,6 +249,7 @@ const Users = new QDB.Connection("lib/Databases/Users.qdb");
 > An entry which has been resolved from the Connection's internal cache.
 > | Key | Type | Description |
 > | --- | --- | --- |
-> | _DataStore | String, Number, Function | Identifier of this model. |
+> | _DataStore | String, Number | Identifier of this model. |
+> | _Timestamp | Number | Date when this entry was last patched, used for sweeping of the cache. |
 >
-> Type **{Object|Array}**
+> Type **{Object|Array|Function}**

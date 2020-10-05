@@ -393,9 +393,10 @@
             ],
             "Line": 662,
             "Description": "An entry which has been resolved from the Connection's internal cache.",
-            "Typedef": "{Object|Array} DataModel",
+            "Typedef": "{Object|Array|Function} DataModel",
             "Params": [
-                "{String|Number|Function} _DataStore Identifier of this model."
+                "{String|Number} _DataStore Identifier of this model.",
+                "{Number} _Timestamp Date when this entry was last patched, used for sweeping of the cache."
             ]
         }
     ],
