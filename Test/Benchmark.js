@@ -53,7 +53,6 @@ function Fetch () {
         const Id = Indexes[Math.round(Math.random() * Indexes.length)];
         if (!Id) continue;
         Guilds.Fetch(Id);
-        if (i % 1000 == 0) console.log({i, CacheSize: Guilds.CacheSize});
     }
 
     console.log(`cache size: ${Guilds.CacheSize}`);
