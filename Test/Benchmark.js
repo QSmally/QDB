@@ -41,8 +41,7 @@ async function Thread () {
 // Million queries benchmark
 function Fetch () {
     const Guilds = new QDB.Connection("Test/Guilds.qdb", {
-        Cache: true,
-        CacheMaxSize: 20000
+        Cache: true
     });
 
     console.log("benchmark: fetch 1 million random queries");
