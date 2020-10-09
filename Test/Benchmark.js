@@ -42,7 +42,7 @@ async function Thread () {
 function Fetch () {
     const Guilds = new QDB.Connection("Test/Guilds.qdb", {
         Cache: true,
-        CacheMaxSize: 20000
+        CacheMaxSize: 12000
     });
 
     console.log("benchmark: fetch 1 million random queries");
@@ -54,12 +54,18 @@ function Fetch () {
         const Id = Indexes[Math.round(Math.random() * Indexes.length)];
         if (!Id) continue;
         Guilds.Fetch(Id);
-        // if (i % 1000 == 0) console.log({i, CacheSize: Guilds.CacheSize});
+        
+        if (i % 10000 == 0) {
+            console.log({i, CacheSize: Guilds.CacheSize, op: Guilds.local});
+            Guilds.local = {hits: 0, misses: 0};
+        }
     }
 
     console.log(`cache size: ${Guilds.CacheSize}`);
     console.timeEnd("time-for-million-reads");
     console.log(`memory usage: ${process.memoryUsage().heapUsed / 1024 / 1024} MB`);
+
+    console.log(Guilds.global);
 
     if (Disconnect) Guilds.Disconnect();
 }
