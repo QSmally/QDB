@@ -39,7 +39,7 @@ const MyDBs = new QDB.Pool("lib/Databases/");
 > Type **{PoolOptions}**
 
 # Methods
-## [.$(Base)](https://github.com/QSmally/QDB/blob/v4/lib/Connections/Pool.js#L95)
+## [.$(Base)](https://github.com/QSmally/QDB/blob/v4/lib/Connections/Pool.js#L97)
 > Retrieves a database Connection from this Pool instance (or a Gateway class if this Pool is threaded).
 > | Key | Type | Description |
 > | --- | --- | --- |
@@ -47,13 +47,13 @@ const MyDBs = new QDB.Pool("lib/Databases/");
 >
 > Returns **{Connection|Gateway}** 
 
-## [.Disconnect()](https://github.com/QSmally/QDB/blob/v4/lib/Connections/Pool.js#L106)
+## [.Disconnect()](https://github.com/QSmally/QDB/blob/v4/lib/Connections/Pool.js#L108)
 > Disconnects from all the Connections or Gateways in this Pool. When threaded, this Pool exits the thread asynchronously.
 >
 > Returns **{Pool}** 
 
 # Typedefs
-## [.PoolOptions](https://github.com/QSmally/QDB/blob/v4/lib/Connections/Pool.js#L132)
+## [.PoolOptions](https://github.com/QSmally/QDB/blob/v4/lib/Connections/Pool.js#L134)
 > Options for a database Pool. All integer related options are in milliseconds. 
 > | Key | Type | Description |
 > | --- | --- | --- |
