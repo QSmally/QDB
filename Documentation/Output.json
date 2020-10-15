@@ -681,43 +681,6 @@
                 "{...Any} Parameters Additional parameters to give to the function."
             ],
             "Returns": "{Promise<Any>} Result from the thread."
-        },
-        {
-            "Value": "Set",
-            "Flags": [
-                "Async"
-            ],
-            "Line": 66,
-            "Description": "Manages the elements of the database. Asynchronously performs this query.",
-            "Params": [
-                "{Pathlike} KeyOrPath Specifies at what row to insert or replace the element at.",
-                "{Object|Array|*} Value Data to set at the row address, at the location of the key or path."
-            ],
-            "Returns": "{Promise<Any>} Result from the thread."
-        },
-        {
-            "Value": "Fetch",
-            "Flags": [
-                "Async"
-            ],
-            "Line": 78,
-            "Description": "Manages the retrieval of the database. Asynchronously performs this query.",
-            "Params": [
-                "{Pathlike} KeyOrPath Specifies which row to fetch from the database."
-            ],
-            "Returns": "{Promise<Any>} Result from the thread."
-        },
-        {
-            "Value": "Erase",
-            "Flags": [
-                "Async"
-            ],
-            "Line": 89,
-            "Description": "Manages the deletion of the database. Asynchronously performs this query.",
-            "Params": [
-                "{...Pathlike} Keys A key or multiple keys to remove from the database."
-            ],
-            "Returns": "{Promise<Any>} Result from the thread."
         }
     ],
     "PartialConnection": [

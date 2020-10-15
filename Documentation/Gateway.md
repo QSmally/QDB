@@ -41,28 +41,3 @@ This class is rather used than a Connection when initialised in a multithreaded 
 > | Parameters | ...Any | Additional parameters to give to the function. |
 >
 > Returns **{Promise<Any>}** Result from the thread.
-
-## [.Set(KeyOrPath, Value)](https://github.com/QSmally/QDB/blob/v4/lib/Executors/Pool/ThreadProvider/Gateway.js#L66) [**Async**]
-> Manages the elements of the database. Asynchronously performs this query.
-> | Key | Type | Description |
-> | --- | --- | --- |
-> | KeyOrPath | Pathlike | Specifies at what row to insert or replace the element at. |
-> | Value | Object, Array, Any | Data to set at the row address, at the location of the key or path. |
->
-> Returns **{Promise<Any>}** Result from the thread.
-
-## [.Fetch(KeyOrPath)](https://github.com/QSmally/QDB/blob/v4/lib/Executors/Pool/ThreadProvider/Gateway.js#L78) [**Async**]
-> Manages the retrieval of the database. Asynchronously performs this query.
-> | Key | Type | Description |
-> | --- | --- | --- |
-> | KeyOrPath | Pathlike | Specifies which row to fetch from the database. |
->
-> Returns **{Promise<Any>}** Result from the thread.
-
-## [.Erase(Keys)](https://github.com/QSmally/QDB/blob/v4/lib/Executors/Pool/ThreadProvider/Gateway.js#L89) [**Async**]
-> Manages the deletion of the database. Asynchronously performs this query.
-> | Key | Type | Description |
-> | --- | --- | --- |
-> | Keys | ...Pathlike | A key or multiple keys to remove from the database. |
->
-> Returns **{Promise<Any>}** Result from the thread.
