@@ -9,23 +9,7 @@ const Benchmark   = Fetch;
 
 // Active testing
 function Test () {
-    const Instances = new QDB.Pool("Test/", {
-        Threaded: true
-    });
-
-    const Guilds = Instances.$("Guilds");
-
-    console.log(Guilds);
-
-    Guilds.Size().then(console.log);
-    Guilds.Fetch("o").then(console.log);
-    Guilds.Exists("e").then(console.log);
-    Guilds.CacheSize().then(console.log);
     
-    Guilds.Fetch("j").then(res => {
-        console.log(res);
-        Instances.Disconnect();
-    });
 }
 
 // Million threaded queries benchmark
