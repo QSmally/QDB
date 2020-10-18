@@ -3,13 +3,13 @@ const QDB = require("../QDB");
 
 // Benchmark configuration
 const Disconnect  = true;
-const GarbageTest = false;
+const GarbageTest = true;
 const Benchmark   = Fetch;
 
 
 // Active testing
 function Test () {
-    
+
 }
 
 // Million threaded queries benchmark
