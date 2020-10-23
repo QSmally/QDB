@@ -22,23 +22,23 @@ A Selection allows you to filter something from the database, and perform method
 
 
 # Values
-## [.Keys](https://github.com/QSmally/QDB/blob/v4/lib/Utility/Selection.js#L22)
+## [.Keys](https://github.com/QSmally/QDB/blob/v4/lib/Utility/Selection.js#L21)
 > Serialises this Selection's keys into an array.
 >
 > Type **{Array}**
 
-## [.Values](https://github.com/QSmally/QDB/blob/v4/lib/Utility/Selection.js#L31)
+## [.Values](https://github.com/QSmally/QDB/blob/v4/lib/Utility/Selection.js#L30)
 > Serialises this Selection's values into an array.
 >
 > Type **{Array}**
 
-## [.AsObject](https://github.com/QSmally/QDB/blob/v4/lib/Utility/Selection.js#L40)
+## [.AsObject](https://github.com/QSmally/QDB/blob/v4/lib/Utility/Selection.js#L39)
 > Serialises this Selection into an object.
 >
 > Type **{Object}**
 
 # Methods
-## [.Sort(Fn)](https://github.com/QSmally/QDB/blob/v4/lib/Utility/Selection.js#L50)
+## [.Sort(Fn)](https://github.com/QSmally/QDB/blob/v4/lib/Utility/Selection.js#L49)
 > Sorts this Selection's values. Identical to the `SORT BY` SQL statement.
 > | Key | Type | Description |
 > | --- | --- | --- |
@@ -46,7 +46,7 @@ A Selection allows you to filter something from the database, and perform method
 >
 > Returns **{Selection}** 
 
-## [.Filter(Fn)](https://github.com/QSmally/QDB/blob/v4/lib/Utility/Selection.js#L62)
+## [.Filter(Fn)](https://github.com/QSmally/QDB/blob/v4/lib/Utility/Selection.js#L61)
 > Filters values that satisfy the provided function. Identical to the `FILTER BY` SQL statement.
 > | Key | Type | Description |
 > | --- | --- | --- |
@@ -54,7 +54,7 @@ A Selection allows you to filter something from the database, and perform method
 >
 > Returns **{Selection}** 
 
-## [.Limit(Begin, End?)](https://github.com/QSmally/QDB/blob/v4/lib/Utility/Selection.js#L78)
+## [.Limit(Begin, End?)](https://github.com/QSmally/QDB/blob/v4/lib/Utility/Selection.js#L77)
 > Slices off values from this Selection. Identical to the `LIMIT` SQL statement.
 > | Key | Type | Description |
 > | --- | --- | --- |

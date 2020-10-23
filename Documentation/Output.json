@@ -486,7 +486,7 @@
             "Flags": [
                 "Variable"
             ],
-            "Line": 22,
+            "Line": 21,
             "Description": "Serialises this Selection's keys into an array.",
             "Action": "Getter",
             "Refer": "Keys",
@@ -497,7 +497,7 @@
             "Flags": [
                 "Variable"
             ],
-            "Line": 31,
+            "Line": 30,
             "Description": "Serialises this Selection's values into an array.",
             "Action": "Getter",
             "Refer": "Values",
@@ -508,7 +508,7 @@
             "Flags": [
                 "Variable"
             ],
-            "Line": 40,
+            "Line": 39,
             "Description": "Serialises this Selection into an object.",
             "Action": "Getter",
             "Refer": "AsObject",
@@ -517,7 +517,7 @@
         {
             "Value": "Sort",
             "Flags": [],
-            "Line": 50,
+            "Line": 49,
             "Description": "Sorts this Selection's values. Identical to the `SORT BY` SQL statement.",
             "Params": [
                 "{Function} Fn Function that determines the sort order."
@@ -527,7 +527,7 @@
         {
             "Value": "Filter",
             "Flags": [],
-            "Line": 62,
+            "Line": 61,
             "Description": "Filters values that satisfy the provided function. Identical to the `FILTER BY` SQL statement.",
             "Params": [
                 "{Function} Fn Function that determines which entries to keep."
@@ -537,7 +537,7 @@
         {
             "Value": "Limit",
             "Flags": [],
-            "Line": 78,
+            "Line": 77,
             "Description": "Slices off values from this Selection. Identical to the `LIMIT` SQL statement.",
             "Params": [
                 "{Number} Begin Integer to indicate the beginning to slice.",
