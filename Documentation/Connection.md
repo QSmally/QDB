@@ -35,43 +35,43 @@ const Users = new QDB.Connection("lib/Databases/Users.qdb");
 >
 > Type **{RawOptions}**
 
-## [.Pool](https://github.com/QSmally/QDB/blob/v4/lib/Connections/Connection.js#L67)
+## [.Pool](https://github.com/QSmally/QDB/blob/v4/lib/Connections/Connection.js#L69)
 > Whether this Connection is used in a Pool. [**Read Only**]
 >
 > Type **{Pool?}**
 
-## [.Table](https://github.com/QSmally/QDB/blob/v4/lib/Connections/Connection.js#L78)
+## [.Table](https://github.com/QSmally/QDB/blob/v4/lib/Connections/Connection.js#L80)
 > Table name of this Connection. [**Read Only**]
 >
 > Type **{String}**
 
-## [.Size](https://github.com/QSmally/QDB/blob/v4/lib/Connections/Connection.js#L139)
+## [.Size](https://github.com/QSmally/QDB/blob/v4/lib/Connections/Connection.js#L141)
 > Retrieves all the rows of this database.
 >
 > Type **{Number}**
 
-## [.CacheSize](https://github.com/QSmally/QDB/blob/v4/lib/Connections/Connection.js#L150)
+## [.CacheSize](https://github.com/QSmally/QDB/blob/v4/lib/Connections/Connection.js#L152)
 > Retrieves all the in-memory cached rows of this Connection. Extension of what would be `<Connection>.Cache.size`, but checks for the ready state.
 >
 > Type **{Number}**
 
-## [.Indexes](https://github.com/QSmally/QDB/blob/v4/lib/Connections/Connection.js#L161)
+## [.Indexes](https://github.com/QSmally/QDB/blob/v4/lib/Connections/Connection.js#L163)
 > Retrieves all the keys of this database table.
 >
 > Type **{Array}**
 
 # Methods
-## [.Disconnect()](https://github.com/QSmally/QDB/blob/v4/lib/Connections/Connection.js#L172)
+## [.Disconnect()](https://github.com/QSmally/QDB/blob/v4/lib/Connections/Connection.js#L174)
 > Disconnects from this Connection, clears in-memory rows. Only run this method when you are exiting the program, or want to fully disconnect from this database.
 >
 > Returns **{Connection}** 
 
-## [.AsObject()](https://github.com/QSmally/QDB/blob/v4/lib/Connections/Connection.js#L271)
+## [.AsObject()](https://github.com/QSmally/QDB/blob/v4/lib/Connections/Connection.js#L273)
 > Converts this database's rows into an Object. To use dotaccess, use `Fetch` instead.
 >
 > Returns **{Object}** An object instance with the key/value pairs of this database.
 
-## [.ToIntegratedManager(Pathlike?, Holds?)](https://github.com/QSmally/QDB/blob/v4/lib/Connections/Connection.js#L281)
+## [.ToIntegratedManager(Pathlike?, Holds?)](https://github.com/QSmally/QDB/blob/v4/lib/Connections/Connection.js#L283)
 > Converts this database, or a part of it using dotaccess, to a Manager instance.
 > | Key | Type | Description |
 > | --- | --- | --- |
@@ -80,12 +80,12 @@ const Users = new QDB.Connection("lib/Databases/Users.qdb");
 >
 > Returns **[{Manager}](https://github.com/QSmally/Qulity/blob/master/Documentation/Manager.md)** A Manager instance with the key/model pairs.
 
-## [.Transaction()](https://github.com/QSmally/QDB/blob/v4/lib/Connections/Connection.js#L298)
+## [.Transaction()](https://github.com/QSmally/QDB/blob/v4/lib/Connections/Connection.js#L300)
 > Creates a SQL transaction, which allows you to commit or rollback changes.
 >
 > Returns **{Transaction?}** A Transaction instance, or a nil value when already in a transaction.
 
-## [.Set(KeyOrPath, Value)](https://github.com/QSmally/QDB/blob/v4/lib/Connections/Connection.js#L311)
+## [.Set(KeyOrPath, Value)](https://github.com/QSmally/QDB/blob/v4/lib/Connections/Connection.js#L313)
 > Manages the elements of the database.
 > | Key | Type | Description |
 > | --- | --- | --- |
@@ -94,7 +94,7 @@ const Users = new QDB.Connection("lib/Databases/Users.qdb");
 >
 > Returns **{Connection}** Returns the updated database.
 
-## [.Fetch(KeyOrPath, Cache?)](https://github.com/QSmally/QDB/blob/v4/lib/Connections/Connection.js#L334)
+## [.Fetch(KeyOrPath, Cache?)](https://github.com/QSmally/QDB/blob/v4/lib/Connections/Connection.js#L336)
 > Manages the retrieval of the database.
 > | Key | Type | Description |
 > | --- | --- | --- |
@@ -103,7 +103,7 @@ const Users = new QDB.Connection("lib/Databases/Users.qdb");
 >
 > Returns **{Object|Array|DataModel|Any}** Value of the row, or the property when using dotaccess.
 
-## [.Evict(Keys?)](https://github.com/QSmally/QDB/blob/v4/lib/Connections/Connection.js#L361)
+## [.Evict(Keys?)](https://github.com/QSmally/QDB/blob/v4/lib/Connections/Connection.js#L363)
 > Erases elements from this Connection's internal cache.
 > | Key | Type | Description |
 > | --- | --- | --- |
@@ -111,7 +111,7 @@ const Users = new QDB.Connection("lib/Databases/Users.qdb");
 >
 > Returns **{Connection}** Returns the updated database.
 
-## [.Erase(Keys)](https://github.com/QSmally/QDB/blob/v4/lib/Connections/Connection.js#L378)
+## [.Erase(Keys)](https://github.com/QSmally/QDB/blob/v4/lib/Connections/Connection.js#L380)
 > Manages the deletion of the database.
 > | Key | Type | Description |
 > | --- | --- | --- |
@@ -119,7 +119,7 @@ const Users = new QDB.Connection("lib/Databases/Users.qdb");
 >
 > Returns **{Connection}** Returns the updated database.
 
-## [.Exists(Key, Cache?)](https://github.com/QSmally/QDB/blob/v4/lib/Connections/Connection.js#L404)
+## [.Exists(Key, Cache?)](https://github.com/QSmally/QDB/blob/v4/lib/Connections/Connection.js#L406)
 > Returns whether or not a row in this database exists. This method also caches the row internally, so fetching it afterwards would be much faster.
 > | Key | Type | Description |
 > | --- | --- | --- |
@@ -128,7 +128,7 @@ const Users = new QDB.Connection("lib/Databases/Users.qdb");
 >
 > Returns **{Boolean}** Whether or not a row exists in this database.
 
-## [.Accumulate(KeyOrPath, Fn, Cache?)](https://github.com/QSmally/QDB/blob/v4/lib/Connections/Connection.js#L418)
+## [.Accumulate(KeyOrPath, Fn, Cache?)](https://github.com/QSmally/QDB/blob/v4/lib/Connections/Connection.js#L420)
 > Accumulates a function on a row, essentially a fetch wrapped in a method. Changes are not recorded on the database.
 > | Key | Type | Description |
 > | --- | --- | --- |
@@ -138,7 +138,7 @@ const Users = new QDB.Connection("lib/Databases/Users.qdb");
 >
 > Returns **{Connection}** Returns the current Connection.
 
-## [.Each(Fn, Cache?)](https://github.com/QSmally/QDB/blob/v4/lib/Connections/Connection.js#L436)
+## [.Each(Fn, Cache?)](https://github.com/QSmally/QDB/blob/v4/lib/Connections/Connection.js#L438)
 > Iterates through this database's entries.
 > | Key | Type | Description |
 > | --- | --- | --- |
@@ -147,7 +147,7 @@ const Users = new QDB.Connection("lib/Databases/Users.qdb");
 >
 > Returns **{Connection}** Returns this database.
 
-## [.Find(Fn, Cache?)](https://github.com/QSmally/QDB/blob/v4/lib/Connections/Connection.js#L454)
+## [.Find(Fn, Cache?)](https://github.com/QSmally/QDB/blob/v4/lib/Connections/Connection.js#L456)
 > Iterates through all the entries of the database, returns the first element found.
 > | Key | Type | Description |
 > | --- | --- | --- |
@@ -156,7 +156,7 @@ const Users = new QDB.Connection("lib/Databases/Users.qdb");
 >
 > Returns **{Any}** Returns the row found, or a nil value.
 
-## [.Select(FnOrPath, Cache?)](https://github.com/QSmally/QDB/blob/v4/lib/Connections/Connection.js#L472)
+## [.Select(FnOrPath, Cache?)](https://github.com/QSmally/QDB/blob/v4/lib/Connections/Connection.js#L474)
 > Locally filters out rows in memory to work with. Please note that this method does increase memory usage in large databases.
 > | Key | Type | Description |
 > | --- | --- | --- |
@@ -165,7 +165,7 @@ const Users = new QDB.Connection("lib/Databases/Users.qdb");
 >
 > Returns **{Selection}** A Selection class instance.
 
-## [.Push(KeyOrPath, Values)](https://github.com/QSmally/QDB/blob/v4/lib/Connections/Connection.js#L501)
+## [.Push(KeyOrPath, Values)](https://github.com/QSmally/QDB/blob/v4/lib/Connections/Connection.js#L503)
 > Pushes something to an array at the path output.
 > | Key | Type | Description |
 > | --- | --- | --- |
@@ -174,7 +174,7 @@ const Users = new QDB.Connection("lib/Databases/Users.qdb");
 >
 > Returns **{Connection}** Returns the updated database.
 
-## [.Shift(KeyOrPath, Values?)](https://github.com/QSmally/QDB/blob/v4/lib/Connections/Connection.js#L520)
+## [.Shift(KeyOrPath, Values?)](https://github.com/QSmally/QDB/blob/v4/lib/Connections/Connection.js#L522)
 > Inserts (if defined) or removes a value to/from the front of the array.
 > | Key | Type | Description |
 > | --- | --- | --- |
@@ -183,7 +183,7 @@ const Users = new QDB.Connection("lib/Databases/Users.qdb");
 >
 > Returns **{Number|Any}** New length of the array if a value was inserted, or the shifted value.
 
-## [.Pop(KeyOrPath)](https://github.com/QSmally/QDB/blob/v4/lib/Connections/Connection.js#L543)
+## [.Pop(KeyOrPath)](https://github.com/QSmally/QDB/blob/v4/lib/Connections/Connection.js#L545)
 > Pops something from an array at the path output.
 > | Key | Type | Description |
 > | --- | --- | --- |
@@ -191,7 +191,7 @@ const Users = new QDB.Connection("lib/Databases/Users.qdb");
 >
 > Returns **{Any}** Returns the popped value.
 
-## [.Remove(KeyOrPath, Fn)](https://github.com/QSmally/QDB/blob/v4/lib/Connections/Connection.js#L560)
+## [.Remove(KeyOrPath, Fn)](https://github.com/QSmally/QDB/blob/v4/lib/Connections/Connection.js#L562)
 > Removes a specific element from this endpoint array.
 > | Key | Type | Description |
 > | --- | --- | --- |
@@ -200,7 +200,7 @@ const Users = new QDB.Connection("lib/Databases/Users.qdb");
 >
 > Returns **{Connection}** Returns the updated database.
 
-## [.Ensure(KeyOrPath, Input)](https://github.com/QSmally/QDB/blob/v4/lib/Connections/Connection.js#L587)
+## [.Ensure(KeyOrPath, Input)](https://github.com/QSmally/QDB/blob/v4/lib/Connections/Connection.js#L589)
 > Inserts an input into a row or nested object if the key or path wasn't found at the endpoint. It can be used as a default schema of the database elements, that gets inserted if there's no entry already.
 > | Key | Type | Description |
 > | --- | --- | --- |
@@ -209,7 +209,7 @@ const Users = new QDB.Connection("lib/Databases/Users.qdb");
 >
 > Returns **{Boolean}** Whether or not the new value was inserted.
 
-## [.Modify(KeyOrPath, Fn)](https://github.com/QSmally/QDB/blob/v4/lib/Connections/Connection.js#L610)
+## [.Modify(KeyOrPath, Fn)](https://github.com/QSmally/QDB/blob/v4/lib/Connections/Connection.js#L612)
 > Updates a value in the database by fetching it and passing it onto the callback function.
 > | Key | Type | Description |
 > | --- | --- | --- |
@@ -218,7 +218,7 @@ const Users = new QDB.Connection("lib/Databases/Users.qdb");
 >
 > Returns **{Any}** Returns the new row of the updated property.
 
-## [.Invert(KeyOrPath)](https://github.com/QSmally/QDB/blob/v4/lib/Connections/Connection.js#L627)
+## [.Invert(KeyOrPath)](https://github.com/QSmally/QDB/blob/v4/lib/Connections/Connection.js#L629)
 > Inverts a boolean, from true to false and vice-versa, at the endpoint of the path.
 > | Key | Type | Description |
 > | --- | --- | --- |
@@ -227,7 +227,7 @@ const Users = new QDB.Connection("lib/Databases/Users.qdb");
 > Returns **{Boolean}** Updated boolean value of the property.
 
 # Typedefs
-## [RawOptions](https://github.com/QSmally/QDB/blob/v4/lib/Connections/Connection.js#L648)
+## [RawOptions](https://github.com/QSmally/QDB/blob/v4/lib/Connections/Connection.js#L650)
 > Options for a database Connection. All integer related options are in milliseconds. 
 > | Key | Type | Description |
 > | --- | --- | --- |
@@ -247,7 +247,7 @@ const Users = new QDB.Connection("lib/Databases/Users.qdb");
 >
 > Type **{Object}**
 
-## [DataModel](https://github.com/QSmally/QDB/blob/v4/lib/Connections/Connection.js#L671)
+## [DataModel](https://github.com/QSmally/QDB/blob/v4/lib/Connections/Connection.js#L673)
 > An entry which has been resolved from the Connection's internal cache.
 > | Key | Type | Description |
 > | --- | --- | --- |
