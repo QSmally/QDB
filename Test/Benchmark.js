@@ -18,7 +18,7 @@ async function Thread () {
         Threaded: true
     });
 
-    const GuildsThread = Pool.$("Guilds");
+    const GuildsThread = Pool.Select("Guilds");
     console.log("benchmark: fetch 1 million random queries in thread");
     const Indexes = await GuildsThread.Query("Indexes");
 
