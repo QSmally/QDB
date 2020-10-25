@@ -172,7 +172,7 @@ const Users = new QDB.Connection("lib/Databases/Users.qdb");
 > | KeyOrPath | Pathlike | Specifies which row or nested array to push to. |
 > | Values | ...Any | Values to insert and push to this array. |
 >
-> Returns **{Connection}** Returns the updated database.
+> Returns **{Number}** New length of the array.
 
 ## [.Shift(KeyOrPath, Values?)](https://github.com/QSmally/QDB/blob/v4/lib/Connections/Connection.js#L522)
 > Inserts (if defined) or removes a value to/from the front of the array.
@@ -198,7 +198,7 @@ const Users = new QDB.Connection("lib/Databases/Users.qdb");
 > | KeyOrPath | Pathlike | Specifies which row or nested array to remove a value from. |
 > | Fn | Function | A function that returns a boolean to which value to remove. |
 >
-> Returns **{Connection}** Returns the updated database.
+> Returns **{Number}** New length of the array.
 
 ## [.Ensure(KeyOrPath, Input)](https://github.com/QSmally/QDB/blob/v4/lib/Connections/Connection.js#L589)
 > Inserts an input into a row or nested object if the key or path wasn't found at the endpoint. It can be used as a default schema of the database elements, that gets inserted if there's no entry already.
