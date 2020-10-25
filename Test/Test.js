@@ -85,9 +85,9 @@ module.exports = (QDB, Tap) => {
     Tap(`Con#Set${parseInt(Idx) + 6}`, Con.Set(`${IdxList[Idx]}.Hobbies`, []).Size, 3);
     
     Tap("Con#Push1", Con.Push("3456", "wontWork"), null);
-    Tap("Con#Push2", Con.Push("3456.Hobbies", "foo").Fetch("3456.Hobbies.length"), 1);
-    Tap("Con#Push3", Con.Push("3456.Hobbies", "bar").Fetch("3456.Hobbies.length"), 2);
-    Tap("Con#Push4", Con.Push("2345.Hobbies", "roo").Fetch("2345.Hobbies.length"), 1);
+    Tap("Con#Push2", Con.Push("3456.Hobbies", "foo"), 1);
+    Tap("Con#Push3", Con.Push("3456.Hobbies", "bar"), 2);
+    Tap("Con#Push4", Con.Push("2345.Hobbies", "roo"), 1);
 
     Tap("Con#Pop1", Con.Pop("3456"), null);
     Tap("Con#Pop2", Con.Pop("3456.Hobbies"), "bar");
@@ -99,13 +99,13 @@ module.exports = (QDB, Tap) => {
 
     Tap("Con#Evict4", Con.Evict("3456").CacheSize, 2);
 
-    Tap("Con#Push5", Con.Push("3456.Hobbies", "goo").Fetch("3456.Hobbies.length"), 1);
-    Tap("Con#Push6", Con.Push("3456.Hobbies", "loo").Fetch("3456.Hobbies.length"), 2);
+    Tap("Con#Push5", Con.Push("3456.Hobbies", "goo"), 1);
+    Tap("Con#Push6", Con.Push("3456.Hobbies", "loo"), 2);
 
     Tap("Con#Remove1", Con.Remove("3456", F => F === "goo"), null);
-    Tap("Con#Remove2", Con.Remove("3456.Hobbies", F => F === "foo").Fetch("3456.Hobbies.length"), 2);
+    Tap("Con#Remove2", Con.Remove("3456.Hobbies", F => F === "foo"), 2);
 
-    Tap("Con#Push6", Con.Push("3456.Hobbies", "1", "2", "3").Fetch("3456.Hobbies.length"), 5);
+    Tap("Con#Push6", Con.Push("3456.Hobbies", "1", "2", "3"), 5);
 
     Tap("Con#Shift1", Con.Shift("3456.Hobbies"), "goo");
     Tap("Con#Shift2", Con.Shift("3456.Hobbies", "-5"), 5);
