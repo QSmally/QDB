@@ -23,18 +23,18 @@ This class is rather used than a Connection when initialised in a multithreaded 
 
 
 # Values
-## [.Identifiers](https://github.com/QSmally/QDB/blob/v4/lib/Executors/Pool/ThreadProvider/Gateway.js#L14)
+## [.Identifiers](https://github.com/QSmally/QDB/blob/v4/lib/Connections/Pool/ThreadProvider/Gateway.js#L14)
 > Path string and database identifier. [**Read Only**]
 >
 > Type **{Array<Pathlike, String>}**
 
-## [.Pool](https://github.com/QSmally/QDB/blob/v4/lib/Executors/Pool/ThreadProvider/Gateway.js#L25)
+## [.Pool](https://github.com/QSmally/QDB/blob/v4/lib/Connections/Pool/ThreadProvider/Gateway.js#L25)
 > The Pool reference of this Gateway. [**Read Only**]
 >
 > Type **{Pool}**
 
 # Methods
-## [.Query(Method, Parameters)](https://github.com/QSmally/QDB/blob/v4/lib/Executors/Pool/ThreadProvider/Gateway.js#L49) [**Async**]
+## [.Query(Method, Parameters)](https://github.com/QSmally/QDB/blob/v4/lib/Connections/Pool/ThreadProvider/Gateway.js#L49) [**Async**]
 > Asynchronously creates a query for this database.
 > | Key | Type | Description |
 > | --- | --- | --- |
