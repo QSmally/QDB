@@ -12,7 +12,7 @@
 
     "Repository": "https://github.com/QSmally/QDB/blob/v4/",
 
-    "Keys": ["lib/Connections/Connection", "lib/Utility/Schema", "lib/Utility/Transaction", "lib/Utility/Selection", "lib/Connections/Pool", "lib/Executors/Pool/ThreadProvider/Gateway", "lib/Connections/PartialConnection"],
+    "Keys": ["lib/Connections/Connection", "lib/Utility/Schema", "lib/Utility/Transaction", "lib/Utility/Selection", "lib/Connections/Pool", "lib/Connections/Pool/ThreadProvider/Gateway", "lib/Connections/PartialConnection"],
     "Typedefs": [],
 
     "Overview": ["Connection", "Pool", "Gateway", "PartialConnection", "#Utilities", "Transaction", "Selection", "Schema"]
