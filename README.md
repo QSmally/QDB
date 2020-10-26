@@ -52,7 +52,7 @@ Transaction.Rollback();
 An unchanged piece of the database in memory.
 ```js
 const Leaderboard = MyDB.Select("1234567890")
-.Sort((a, b) => b.Experience - a.Experience)
+.Sort(User => User.Experience)
 .Limit(0, 10);
 ```
 
