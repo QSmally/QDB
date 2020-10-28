@@ -40,26 +40,25 @@ const MyDBs = new QDB.Pool("lib/Databases/");
 > Type **{PoolOptions}**
 
 # Methods
-## [.Select(Base)](https://github.com/QSmally/QDB/blob/v4/lib/Connections/Pool.js#L99)
-> Retrieves a database Connection from this Pool instance (or a Gateway class if this Pool is threaded).
+## [.Select(Base)](https://github.com/QSmally/QDB/blob/v4/lib/Connections/Pool.js#L84)
+> Retrieves a database Connection from this Pool instance.
 > | Key | Type | Description |
 > | --- | --- | --- |
-> | Base | String | Reference link to the Connection or Gateway to resolve. |
+> | Base | String | Reference link to the Connection to resolve. |
 >
-> Returns **{Connection|Gateway}** 
+> Returns **{Connection}** 
 
-## [.Disconnect()](https://github.com/QSmally/QDB/blob/v4/lib/Connections/Pool.js#L110)
+## [.Disconnect()](https://github.com/QSmally/QDB/blob/v4/lib/Connections/Pool.js#L94)
 > Disconnects from all the Connections or Gateways in this Pool. When threaded, this Pool exits the thread asynchronously.
 >
 > Returns **{Pool}** 
 
 # Typedefs
-## [PoolOptions](https://github.com/QSmally/QDB/blob/v4/lib/Connections/Pool.js#L136)
+## [PoolOptions](https://github.com/QSmally/QDB/blob/v4/lib/Connections/Pool.js#L115)
 > Options for a database Pool. All integer related options are in milliseconds. 
 > | Key | Type | Description |
 > | --- | --- | --- |
 > | Exclusives | Object<Filename, RawOptions> | Non-default options to use for certain Connections to a database. |
-> | Threaded | Boolean | A boolean value to indicate whether to create a thread for for this Pool's databases. |
 > | WAL | Boolean | Default setting to enable Write Ahead Logging mode for Connections in this Pool. |
 > | Cache | Boolean | Whether to enable in-memory caching of entries in results that the next retrieval would be much faster. |
 > | UtilCache | Boolean | Whether or not to cache entries while performing utility tasks, such as the Exists and Accumulate methods. |
