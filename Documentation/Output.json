@@ -584,34 +584,24 @@
                 "Variable",
                 "Private"
             ],
-            "Line": 68,
+            "Line": 67,
             "Description": "The manager that handles backups of this Pool.",
             "Type": "{Function?}"
         },
         {
-            "Value": "_ThreadProvider",
-            "Flags": [
-                "Variable",
-                "Private"
-            ],
-            "Line": 79,
-            "Description": "When this Pool is threaded, a reference to the manager which holds the worker thread of this Pool.",
-            "Type": "{ThreadProvider?}"
-        },
-        {
             "Value": "Select",
             "Flags": [],
-            "Line": 99,
-            "Description": "Retrieves a database Connection from this Pool instance (or a Gateway class if this Pool is threaded).",
+            "Line": 84,
+            "Description": "Retrieves a database Connection from this Pool instance.",
             "Params": [
-                "{String} Base Reference link to the Connection or Gateway to resolve."
+                "{String} Base Reference link to the Connection to resolve."
             ],
-            "Returns": "{Connection|Gateway}"
+            "Returns": "{Connection}"
         },
         {
             "Value": "Disconnect",
             "Flags": [],
-            "Line": 110,
+            "Line": 94,
             "Description": "Disconnects from all the Connections or Gateways in this Pool. When threaded, this Pool exits the thread asynchronously.",
             "Returns": "{Pool}"
         },
@@ -620,12 +610,11 @@
             "Flags": [
                 "Typedef"
             ],
-            "Line": 136,
+            "Line": 115,
             "Description": "Options for a database Pool. All integer related options are in milliseconds. ",
             "Typedef": "{Object} PoolOptions",
             "Params": [
-                "{Object<Filename, RawOptions>} Exclusives Non-default options to use for certain Connections to a database.",
-                "{Boolean} Threaded A boolean value to indicate whether to create a thread for for this Pool's databases. ",
+                "{Object<Filename, RawOptions>} Exclusives Non-default options to use for certain Connections to a database. ",
                 "{Boolean} WAL Default setting to enable Write Ahead Logging mode for Connections in this Pool.",
                 "{Boolean} Cache Whether to enable in-memory caching of entries in results that the next retrieval would be much faster.",
                 "{Boolean} UtilCache Whether or not to cache entries while performing utility tasks, such as the Exists and Accumulate methods.",
@@ -636,63 +625,6 @@
                 "{Number} BackupInterval Integer to indicate at what interval to create a backup at.",
                 "{Pathlike} BackupDirectory A path URL to the directory to insert all the database backups in."
             ]
-        }
-    ],
-    "Gateway": [
-        {
-            "Value": "Identifiers",
-            "Flags": [
-                "Variable",
-                "ReadOnly"
-            ],
-            "Line": 14,
-            "Description": "Path string and database identifier.",
-            "Type": "{Array<Pathlike, String>}"
-        },
-        {
-            "Value": "Pool",
-            "Flags": [
-                "Variable",
-                "ReadOnly"
-            ],
-            "Line": 25,
-            "Description": "The Pool reference of this Gateway.",
-            "Type": "{Pool}"
-        },
-        {
-            "Value": "_ThreadProvider",
-            "Flags": [
-                "Variable",
-                "Private"
-            ],
-            "Line": 36,
-            "Description": "A manager which holds the worker thread.",
-            "Type": "{ThreadProvider}"
-        },
-        {
-            "Value": "Query",
-            "Flags": [
-                "Async"
-            ],
-            "Line": 49,
-            "Description": "Asynchronously creates a query for this database.",
-            "Params": [
-                "{String} Method Method or property of the Connection to select.",
-                "{...Any} Parameters Additional parameters to give to the function."
-            ],
-            "Returns": "{Promise<Any>} Result from the thread."
-        }
-    ],
-    "PartialConnection": [
-        {
-            "Value": "State",
-            "Flags": [
-                "Variable",
-                "ReadOnly"
-            ],
-            "Line": 12,
-            "Description": "Current state of this Connection.",
-            "Type": "{String}"
         }
     ]
 }
