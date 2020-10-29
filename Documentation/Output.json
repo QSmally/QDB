@@ -394,7 +394,7 @@
             ],
             "Line": 673,
             "Description": "An entry which has been resolved from the Connection's internal cache.",
-            "Typedef": "{Object|Array|Function} DataModel",
+            "Typedef": "{Object|Array} DataModel",
             "Params": [
                 "{String|Number} _DataStore Identifier of this model.",
                 "{Number} _Timestamp Date when this entry was last patched, used for sweeping of the cache."
@@ -542,6 +542,16 @@
             "Params": [
                 "{Number} Begin Integer to indicate the beginning to slice.",
                 "{Number} [End] Integer to indicate the end of the slice."
+            ],
+            "Returns": "{Selection}"
+        },
+        {
+            "Value": "Group",
+            "Flags": [],
+            "Line": 100,
+            "Description": "Groups this Selection based on an identifier. Identical to the `GROUP BY` SQL statement.",
+            "Params": [
+                "{Pathlike} Key Indicates by which element to group this Selection."
             ],
             "Returns": "{Selection}"
         }

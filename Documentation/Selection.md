@@ -62,3 +62,11 @@ A Selection allows you to filter something from the database, and perform method
 > | End? | Number | Integer to indicate the end of the slice. |
 >
 > Returns **{Selection}** 
+
+## [.Group(Key)](https://github.com/QSmally/QDB/blob/v4/lib/Utility/Selection.js#L100)
+> Groups this Selection based on an identifier. Identical to the `GROUP BY` SQL statement.
+> | Key | Type | Description |
+> | --- | --- | --- |
+> | Key | Pathlike | Indicates by which element to group this Selection. |
+>
+> Returns **{Selection}** 

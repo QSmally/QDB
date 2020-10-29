@@ -254,4 +254,4 @@ const Users = new QDB.Connection("lib/Databases/Users.qdb");
 > | _DataStore | String, Number | Identifier of this model. |
 > | _Timestamp | Number | Date when this entry was last patched, used for sweeping of the cache. |
 >
-> Type **{Object|Array|Function}**
+> Type **{Object|Array}**
