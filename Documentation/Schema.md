@@ -35,10 +35,10 @@ Schema Models are mainly used for automatic data migration - For instance, addin
 > Type **{Function}**
 
 # Methods
-## [.Migrate(Target)](https://github.com/QSmally/QDB/blob/v4/lib/Utility/Schema.js#L60)
-> Public method. Integrates an entry object and merges them with this Schema's Model.
+## [.Instance(Target)](https://github.com/QSmally/QDB/blob/v4/lib/Utility/Schema.js#L60)
+> Public method. Integrates an entry object and integrates them with this Schema's Model.
 > | Key | Type | Description |
 > | --- | --- | --- |
-> | Target | Object | A main entry object to compare against, and to integrate changes to. |
+> | Target | Object | The main entry to compare against and to merge changes into. |
 >
-> Returns **{Object}** A merged object, based on this Schema's Model.
+> Returns **{Object}** A merged data object, based on this Schema's Model.

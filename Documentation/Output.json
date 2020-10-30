@@ -434,14 +434,14 @@
             "Type": "{Function}"
         },
         {
-            "Value": "Migrate",
+            "Value": "Instance",
             "Flags": [],
             "Line": 60,
-            "Description": "Public method. Integrates an entry object and merges them with this Schema's Model.",
+            "Description": "Public method. Integrates an entry object and integrates them with this Schema's Model.",
             "Params": [
-                "{Object} Target A main entry object to compare against, and to integrate changes to."
+                "{Object} Target The main entry to compare against and to merge changes into."
             ],
-            "Returns": "{Object} A merged object, based on this Schema's Model."
+            "Returns": "{Object} A merged data object, based on this Schema's Model."
         }
     ],
     "Transaction": [
