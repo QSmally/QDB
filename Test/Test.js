@@ -186,6 +186,25 @@ module.exports = (QDB, Tap) => {
     Tap("Sel#Limit2", Sel.Limit(1, 5).Cache.size, 1);
     Tap("Sel#Limit3", Sel.Limit(1).Cache.size, 0);
 
+    const Sel2 = Con.Select();
+    Tap("Sel#Select4", Sel2.Cache.size, 4);
+    
+    Sel2.Map((Val, Key) => {
+        Val = {...Val};
+        Val.foo = Key === "3456" ? "bar" : "roo";
+        return Val;
+    });
+
+    Tap("Sel#Map1", Sel2.Cache.resolve("2345").foo, "roo");
+    Tap("Sel#Map2", Sel2.Cache.resolve("3456").foo, "bar");
+    Tap("Sel#Map3", Sel2.Cache.resolve("4567").foo, "roo");
+    Tap("Sel#Map4", Sel2.Cache.resolve("6789").foo, "roo");
+
+    Sel2.Group("foo");
+
+    Tap("Sel#Group1", Object.keys(Sel2.Cache.resolve("bar")).length, 1 + 1); // +1 for DataStore property
+    Tap("Sel#Group2", Object.keys(Sel2.Cache.resolve("roo")).length, 3 + 1);
+
     Con.Disconnect();
 
 }
