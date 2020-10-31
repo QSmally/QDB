@@ -38,7 +38,7 @@ A Selection allows you to filter something from the database, and perform method
 > Type **{Object}**
 
 # Methods
-## [.Sort(Fn)](https://github.com/QSmally/QDB/blob/v4/lib/Utility/Selection.js#L49)
+## [.Sort(Fn)](https://github.com/QSmally/QDB/blob/v4/lib/Utility/Selection.js#L51)
 > Sorts this Selection's values. Identical to the `SORT BY` SQL statement.
 > | Key | Type | Description |
 > | --- | --- | --- |
@@ -46,7 +46,7 @@ A Selection allows you to filter something from the database, and perform method
 >
 > Returns **{Selection}** 
 
-## [.Filter(Fn)](https://github.com/QSmally/QDB/blob/v4/lib/Utility/Selection.js#L61)
+## [.Filter(Fn)](https://github.com/QSmally/QDB/blob/v4/lib/Utility/Selection.js#L63)
 > Filters values that satisfy the provided function. Identical to the `FILTER BY` SQL statement.
 > | Key | Type | Description |
 > | --- | --- | --- |
@@ -54,7 +54,7 @@ A Selection allows you to filter something from the database, and perform method
 >
 > Returns **{Selection}** 
 
-## [.Limit(Begin, End?)](https://github.com/QSmally/QDB/blob/v4/lib/Utility/Selection.js#L77)
+## [.Limit(Begin, End?)](https://github.com/QSmally/QDB/blob/v4/lib/Utility/Selection.js#L79)
 > Slices off values from this Selection. Identical to the `LIMIT` SQL statement.
 > | Key | Type | Description |
 > | --- | --- | --- |
@@ -63,10 +63,18 @@ A Selection allows you to filter something from the database, and perform method
 >
 > Returns **{Selection}** 
 
-## [.Group(Key)](https://github.com/QSmally/QDB/blob/v4/lib/Utility/Selection.js#L100)
+## [.Group(Key)](https://github.com/QSmally/QDB/blob/v4/lib/Utility/Selection.js#L102)
 > Groups this Selection based on an identifier. Identical to the `GROUP BY` SQL statement.
 > | Key | Type | Description |
 > | --- | --- | --- |
 > | Key | Pathlike | Indicates by which element to group this Selection. |
+>
+> Returns **{Selection}** 
+
+## [.Map(Fn)](https://github.com/QSmally/QDB/blob/v4/lib/Utility/Selection.js#L131)
+> Iterates over this Selection's values and keys, and implements the new values returned from the callback.
+> | Key | Type | Description |
+> | --- | --- | --- |
+> | Fn | Function | Callback function which determines the new values of the Selection. |
 >
 > Returns **{Selection}** 

@@ -351,7 +351,7 @@
                 "{Pathlike} KeyOrPath Specifies which row or nested property to fetch.",
                 "{Function} Fn Callback which includes the original value of the fetched row or property."
             ],
-            "Returns": "{*} Returns the new row of the updated property."
+            "Returns": "{Object|Array|DataModel} Returns the new row of the updated property."
         },
         {
             "Value": "Invert",
@@ -517,7 +517,7 @@
         {
             "Value": "Sort",
             "Flags": [],
-            "Line": 49,
+            "Line": 51,
             "Description": "Sorts this Selection's values. Identical to the `SORT BY` SQL statement.",
             "Params": [
                 "{Function} Fn Function that determines the sort order."
@@ -527,7 +527,7 @@
         {
             "Value": "Filter",
             "Flags": [],
-            "Line": 61,
+            "Line": 63,
             "Description": "Filters values that satisfy the provided function. Identical to the `FILTER BY` SQL statement.",
             "Params": [
                 "{Function} Fn Function that determines which entries to keep."
@@ -537,7 +537,7 @@
         {
             "Value": "Limit",
             "Flags": [],
-            "Line": 77,
+            "Line": 79,
             "Description": "Slices off values from this Selection. Identical to the `LIMIT` SQL statement.",
             "Params": [
                 "{Number} Begin Integer to indicate the beginning to slice.",
@@ -548,10 +548,20 @@
         {
             "Value": "Group",
             "Flags": [],
-            "Line": 100,
+            "Line": 102,
             "Description": "Groups this Selection based on an identifier. Identical to the `GROUP BY` SQL statement.",
             "Params": [
                 "{Pathlike} Key Indicates by which element to group this Selection."
+            ],
+            "Returns": "{Selection}"
+        },
+        {
+            "Value": "Map",
+            "Flags": [],
+            "Line": 131,
+            "Description": "Iterates over this Selection's values and keys, and implements the new values returned from the callback.",
+            "Params": [
+                "{Function} Fn Callback function which determines the new values of the Selection."
             ],
             "Returns": "{Selection}"
         }

@@ -216,7 +216,7 @@ const Users = new QDB.Connection("lib/Databases/Users.qdb");
 > | KeyOrPath | Pathlike | Specifies which row or nested property to fetch. |
 > | Fn | Function | Callback which includes the original value of the fetched row or property. |
 >
-> Returns **{Any}** Returns the new row of the updated property.
+> Returns **{Object|Array|DataModel}** Returns the new row of the updated property.
 
 ## [.Invert(KeyOrPath)](https://github.com/QSmally/QDB/blob/v4/lib/Connections/Connection.js#L629)
 > Inverts a boolean, from true to false and vice-versa, at the endpoint of the path.
