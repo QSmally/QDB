@@ -41,4 +41,4 @@ Schema Models are mainly used for automatic data migration - For instance, addin
 > | --- | --- | --- |
 > | Target | Object | The main entry to compare against and to merge changes into. |
 >
-> Returns **{Object}** A merged data object, based on this Schema's Model.
+> Returns **{Object}** A merged data object based on this Schema's Model.
