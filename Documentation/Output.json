@@ -338,14 +338,15 @@
             "Description": "Inserts an input into a row or nested object if the key or path wasn't found at the endpoint. It can be used as a default schema of the database elements, that gets inserted if there's no entry already.",
             "Params": [
                 "{Pathlike} KeyOrPath Context key to see if it exists, either a row or nested property, and optionally insert the new value.",
-                "{Object|Array|Schema|*} Input A value to input if the row or nested property wasn't found in the database."
+                "{Object|Array|Schema|*} Input A value to input if the row or nested property wasn't found in the database.",
+                "{Boolean} [Merge] Whether or not to merge `Input` with this Connection's Schema model as initial values."
             ],
             "Returns": "{Boolean} Whether or not the new value was inserted."
         },
         {
             "Value": "Modify",
             "Flags": [],
-            "Line": 612,
+            "Line": 614,
             "Description": "Updates a value in the database by fetching it and passing it onto the callback function.",
             "Params": [
                 "{Pathlike} KeyOrPath Specifies which row or nested property to fetch.",
@@ -356,7 +357,7 @@
         {
             "Value": "Invert",
             "Flags": [],
-            "Line": 629,
+            "Line": 631,
             "Description": "Inverts a boolean, from true to false and vice-versa, at the endpoint of the path.",
             "Params": [
                 "{Pathlike} KeyOrPath Specifies which row or nested property to boolean-invert."
@@ -368,7 +369,7 @@
             "Flags": [
                 "Typedef"
             ],
-            "Line": 650,
+            "Line": 652,
             "Description": "Options for a database Connection. All integer related options are in milliseconds. ",
             "Typedef": "{Object} RawOptions",
             "Params": [
@@ -392,7 +393,7 @@
             "Flags": [
                 "Typedef"
             ],
-            "Line": 673,
+            "Line": 675,
             "Description": "An entry which has been resolved from the Connection's internal cache.",
             "Typedef": "{Object|Array} DataModel",
             "Params": [
