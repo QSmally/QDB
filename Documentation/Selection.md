@@ -78,3 +78,8 @@ A Selection allows you to filter something from the database, and perform method
 > | Fn | Function | Callback function which determines the new values of the Selection. |
 >
 > Returns **{Selection}** 
+
+## [.Clone()](https://github.com/QSmally/QDB/blob/v4/lib/Utility/Selection.js#L146)
+> Creates a new memory allocation for the copy of this Selection.
+>
+> Returns **{Selection}** 

@@ -145,7 +145,7 @@ const Users = new QDB.Connection("lib/Databases/Users.qdb");
 > | Fn | Function | A function which passes on the iterating entries. |
 > | Cache? | Boolean | Whether or not to cache the iterating entries. |
 >
-> Returns **{Connection}** Returns this database.
+> Returns **{Connection}** Returns the current Connection.
 
 ## [.Find(Fn, Cache?)](https://github.com/QSmally/QDB/blob/v4/lib/Connections/Connection.js#L458)
 > Iterates through all the entries of the database, returns the first element found.
@@ -225,7 +225,7 @@ const Users = new QDB.Connection("lib/Databases/Users.qdb");
 > | --- | --- | --- |
 > | KeyOrPath | Pathlike | Specifies which row or nested property to boolean-invert. |
 >
-> Returns **{Boolean}** Updated boolean value of the property.
+> Returns **{Boolean}** Returns the updated boolean value of the property.
 
 # Typedefs
 ## [RawOptions](https://github.com/QSmally/QDB/blob/v4/lib/Connections/Connection.js#L655)

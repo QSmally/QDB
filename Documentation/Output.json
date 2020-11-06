@@ -264,7 +264,7 @@
                 "{Function} Fn A function which passes on the iterating entries.",
                 "{Boolean} [Cache] Whether or not to cache the iterating entries."
             ],
-            "Returns": "{Connection} Returns this database."
+            "Returns": "{Connection} Returns the current Connection."
         },
         {
             "Value": "Find",
@@ -362,7 +362,7 @@
             "Params": [
                 "{Pathlike} KeyOrPath Specifies which row or nested property to boolean-invert."
             ],
-            "Returns": "{Boolean} Updated boolean value of the property."
+            "Returns": "{Boolean} Returns the updated boolean value of the property."
         },
         {
             "Value": "",
@@ -565,6 +565,13 @@
                 "{Function} Fn Callback function which determines the new values of the Selection."
             ],
             "Returns": "{Selection}"
+        },
+        {
+            "Value": "Clone",
+            "Flags": [],
+            "Line": 146,
+            "Description": "Creates a new memory allocation for the copy of this Selection.",
+            "Returns": "{Selection}"
         }
     ],
     "Pool": [
@@ -635,7 +642,7 @@
             "Description": "Options for a database Pool. All integer related options are in milliseconds. ",
             "Typedef": "{Object} PoolOptions",
             "Params": [
-                "{Object<Filename, RawOptions>} Exclusives Non-default options to use for certain Connections to a database. ",
+                "{Object<Identifier, RawOptions>} Exclusives Non-default options to use for certain Connections to a database. ",
                 "{Boolean} WAL Default setting to enable Write Ahead Logging mode for Connections in this Pool.",
                 "{Boolean} Cache Whether to enable in-memory caching of entries in results that the next retrieval would be much faster.",
                 "{Boolean} UtilCache Whether or not to cache entries while performing utility tasks, such as the Exists and Accumulate methods.",

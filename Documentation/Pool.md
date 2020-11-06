@@ -58,7 +58,7 @@ const MyDBs = new QDB.Pool("lib/Databases/");
 > Options for a database Pool. All integer related options are in milliseconds. 
 > | Key | Type | Description |
 > | --- | --- | --- |
-> | Exclusives | Object<Filename, RawOptions> | Non-default options to use for certain Connections to a database. |
+> | Exclusives | Object<Identifier, RawOptions> | Non-default options to use for certain Connections to a database. |
 > | WAL | Boolean | Default setting to enable Write Ahead Logging mode for Connections in this Pool. |
 > | Cache | Boolean | Whether to enable in-memory caching of entries in results that the next retrieval would be much faster. |
 > | UtilCache | Boolean | Whether or not to cache entries while performing utility tasks, such as the Exists and Accumulate methods. |
