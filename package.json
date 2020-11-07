@@ -28,7 +28,7 @@
   },
   "dependencies": {
     "better-sqlite3": "^7.1.0",
-    "qulity": "^1.4.0"
+    "qulity": "^1.4.1"
   },
   "devDependencies": {
     "docgen": "github:QSmally/Docgen"
