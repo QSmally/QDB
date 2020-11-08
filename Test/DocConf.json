@@ -14,5 +14,5 @@
     "Keys": ["lib/Connections/Connection", "lib/Utility/Schema", "lib/Utility/Transaction", "lib/Utility/Selection", "lib/Connections/Pool"],
     "Typedefs": [],
 
-    "Overview": ["Connection", "Pool", "Gateway", "PartialConnection", "#Utilities", "Transaction", "Selection", "Schema"]
+    "Overview": ["Connection", "Pool", "#Utilities", "Transaction", "Selection", "Schema"]
 }
