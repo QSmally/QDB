@@ -483,11 +483,21 @@
     ],
     "Selection": [
         {
+            "Value": "Cache",
+            "Flags": [
+                "Variable",
+                "ReadOnly"
+            ],
+            "Line": 14,
+            "Description": "Cached dataset instances of this Selection.",
+            "Type": "{Map}"
+        },
+        {
             "Value": "Keys",
             "Flags": [
                 "Variable"
             ],
-            "Line": 21,
+            "Line": 31,
             "Description": "Serialises this Selection's keys into an array.",
             "Action": "Getter",
             "Refer": "Keys",
@@ -498,7 +508,7 @@
             "Flags": [
                 "Variable"
             ],
-            "Line": 30,
+            "Line": 40,
             "Description": "Serialises this Selection's values into an array.",
             "Action": "Getter",
             "Refer": "Values",
@@ -509,7 +519,7 @@
             "Flags": [
                 "Variable"
             ],
-            "Line": 39,
+            "Line": 49,
             "Description": "Serialises this Selection into an object.",
             "Action": "Getter",
             "Refer": "AsObject",
@@ -518,7 +528,7 @@
         {
             "Value": "Sort",
             "Flags": [],
-            "Line": 51,
+            "Line": 61,
             "Description": "Sorts this Selection's values. Identical to the `SORT BY` SQL statement.",
             "Params": [
                 "{Function} Fn Function that determines the sort order."
@@ -528,7 +538,7 @@
         {
             "Value": "Filter",
             "Flags": [],
-            "Line": 63,
+            "Line": 73,
             "Description": "Filters values that satisfy the provided function. Identical to the `FILTER BY` SQL statement.",
             "Params": [
                 "{Function} Fn Function that determines which entries to keep."
@@ -538,7 +548,7 @@
         {
             "Value": "Limit",
             "Flags": [],
-            "Line": 79,
+            "Line": 89,
             "Description": "Slices off values from this Selection. Identical to the `LIMIT` SQL statement.",
             "Params": [
                 "{Number} Begin Integer to indicate the beginning to slice.",
@@ -549,7 +559,7 @@
         {
             "Value": "Group",
             "Flags": [],
-            "Line": 102,
+            "Line": 112,
             "Description": "Groups this Selection based on an identifier. Identical to the `GROUP BY` SQL statement.",
             "Params": [
                 "{Pathlike} Key Indicates by which element to group this Selection."
@@ -559,7 +569,7 @@
         {
             "Value": "Map",
             "Flags": [],
-            "Line": 131,
+            "Line": 141,
             "Description": "Iterates over this Selection's values and keys, and implements the new values returned from the callback.",
             "Params": [
                 "{Function} Fn Callback function which determines the new values of the Selection."
@@ -569,7 +579,7 @@
         {
             "Value": "Clone",
             "Flags": [],
-            "Line": 146,
+            "Line": 156,
             "Description": "Creates a new memory allocation for the copy of this Selection.",
             "Returns": "{Selection}"
         }
