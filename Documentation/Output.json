@@ -488,17 +488,27 @@
                 "Variable",
                 "ReadOnly"
             ],
-            "Line": 16,
+            "Line": 17,
             "Description": "Cached dataset instances of this Selection.",
             "Type": "{Collection}",
             "Reference": "https://github.com/QSmally/Qulity/blob/master/Documentation/Collection.md"
+        },
+        {
+            "Value": "Holds",
+            "Flags": [
+                "Variable",
+                "ReadOnly"
+            ],
+            "Line": 32,
+            "Description": "Reference to the table this Selection holds.",
+            "Type": "{String}"
         },
         {
             "Value": "Keys",
             "Flags": [
                 "Variable"
             ],
-            "Line": 34,
+            "Line": 46,
             "Description": "Serialises this Selection's keys into an array.",
             "Action": "Getter",
             "Refer": "Keys",
@@ -509,7 +519,7 @@
             "Flags": [
                 "Variable"
             ],
-            "Line": 43,
+            "Line": 55,
             "Description": "Serialises this Selection's values into an array.",
             "Action": "Getter",
             "Refer": "Values",
@@ -520,7 +530,7 @@
             "Flags": [
                 "Variable"
             ],
-            "Line": 52,
+            "Line": 64,
             "Description": "Serialises this Selection into an object.",
             "Action": "Getter",
             "Refer": "AsObject",
@@ -529,7 +539,7 @@
         {
             "Value": "Sort",
             "Flags": [],
-            "Line": 64,
+            "Line": 76,
             "Description": "Sorts this Selection's values. Identical to the `SORT BY` SQL statement.",
             "Params": [
                 "{Function} Fn Function that determines the sort order."
@@ -539,7 +549,7 @@
         {
             "Value": "Filter",
             "Flags": [],
-            "Line": 76,
+            "Line": 88,
             "Description": "Filters values that satisfy the provided function. Identical to the `FILTER BY` SQL statement.",
             "Params": [
                 "{Function} Fn Function that determines which entries to keep."
@@ -549,7 +559,7 @@
         {
             "Value": "Limit",
             "Flags": [],
-            "Line": 92,
+            "Line": 104,
             "Description": "Slices off values from this Selection. Identical to the `LIMIT` SQL statement.",
             "Params": [
                 "{Number} Begin Integer to indicate the beginning to slice.",
@@ -560,7 +570,7 @@
         {
             "Value": "Group",
             "Flags": [],
-            "Line": 115,
+            "Line": 127,
             "Description": "Groups this Selection based on an identifier. Identical to the `GROUP BY` SQL statement.",
             "Params": [
                 "{Pathlike} Key Indicates by which element to group this Selection."
@@ -568,9 +578,21 @@
             "Returns": "{Selection}"
         },
         {
+            "Value": "Join",
+            "Flags": [],
+            "Line": 153,
+            "Description": "Joins another Selection into this instance based on a referrer field. Identical to the `FULL JOIN` SQL statement.",
+            "Params": [
+                "{Selection} Secondary Another Selection instance to join into this one.",
+                "{String} Field Which field to check for a reference to this Selection's rows.",
+                "{Boolean|String} [Property] Boolean false to flatten the entries into this Selection's rows, a string value that implicitly indicates the property to add the merging entries, or a boolean true to use the Selection's table name as property."
+            ],
+            "Returns": "{Selection}"
+        },
+        {
             "Value": "Map",
             "Flags": [],
-            "Line": 144,
+            "Line": 186,
             "Description": "Iterates over this Selection's values and keys, and implements the new values returned from the callback.",
             "Params": [
                 "{Function} Fn Callback function which determines the new values of the Selection."
@@ -580,7 +602,7 @@
         {
             "Value": "Clone",
             "Flags": [],
-            "Line": 159,
+            "Line": 201,
             "Description": "Creates a new memory allocation for the copy of this Selection.",
             "Returns": "{Selection}"
         }

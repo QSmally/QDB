@@ -161,10 +161,9 @@ module.exports = (QDB, Tap) => {
 
     Tap("Con#Each", res, [...Con.Indexes]);
 
-    const {Manager} = require("qulity");
     Tap("Con#Select1", Con.Select((_Row, Key) => {
         return Key === "3456";
-    }) instanceof Manager, true);
+    }).Holds, "QDB");
 
     Tap("Con#Select2", Con.Select().Cache.size, 4);
     
@@ -174,10 +173,12 @@ module.exports = (QDB, Tap) => {
     Tap("Sel#Keys", Sel.Keys, ["2345", "3456", "4567"]);
     Tap("Sel#Values", Sel.Values.map(v => v._DataStore), ["2345", "3456", "4567"]);
     Tap("Sel#AsObject", Sel.AsObject, {
-        "2345": {Name: "bar", Age: 30, Hobbies: ["one", "two", "three", "four"]},
-        "3456": {Name: "roo", Age: 29, Hobbies: ["one", "two", "three", "-5", "loo", "1", "2", "3"]},
-        "4567": {Name: "goo", Age: 27, Hobbies: []}
+        "2345": {Name: "bar", Age: 30, Hobbies: ["one", "two", "three", "four"], _DataStore: "2345"},
+        "3456": {Name: "roo", Age: 29, Hobbies: ["one", "two", "three", "-5", "loo", "1", "2", "3"], _DataStore: "3456"},
+        "4567": {Name: "goo", Age: 27, Hobbies: [], _DataStore: "4567"}
     });
+
+    const Sel4 = Sel.Clone();
 
     Tap("Sel#Sort", Sel.Sort((a, b) => a.Age - b.Age).Keys, ["4567", "3456", "2345"]);
     Tap("Sel#Filter", Sel.Filter((_Row, Key) => Key !== "3456").Cache.size, 2);
@@ -195,15 +196,48 @@ module.exports = (QDB, Tap) => {
         return Val;
     });
 
-    Tap("Sel#Map1", Sel2.Cache.resolve("2345").foo, "roo");
-    Tap("Sel#Map2", Sel2.Cache.resolve("3456").foo, "bar");
-    Tap("Sel#Map3", Sel2.Cache.resolve("4567").foo, "roo");
-    Tap("Sel#Map4", Sel2.Cache.resolve("6789").foo, "roo");
+    Tap("Sel#Map1", Sel2.Cache.get("2345").foo, "roo");
+    Tap("Sel#Map2", Sel2.Cache.get("3456").foo, "bar");
+    Tap("Sel#Map3", Sel2.Cache.get("4567").foo, "roo");
+    Tap("Sel#Map4", Sel2.Cache.get("6789").foo, "roo");
 
     Sel2.Group("foo");
 
-    Tap("Sel#Group1", Object.keys(Sel2.Cache.resolve("bar")).length, 1 + 1); // +1 for DataStore property
-    Tap("Sel#Group2", Object.keys(Sel2.Cache.resolve("roo")).length, 3 + 1);
+    Tap("Sel#Group1", Object.keys(Sel2.Cache.get("bar")).length, 1);
+    Tap("Sel#Group2", Object.keys(Sel2.Cache.get("roo")).length, 3);
+
+    const Sel3 = Sel2.Clone();
+    Sel3.Cache.set("boo", {Name: "boo", Age: 23, Hobbies: ["slep"]});
+
+    Tap("Sel#Clone1", Sel3.Cache.size, 3);
+    Tap("Sel#Clone2", Sel2.Cache.size, 2);
+
+    const Selection = require("../lib/Utility/Selection");
+    const Projects = new Selection({
+        fooProj: {UserId: "4567", Does: ["nothing", "foo"]},
+        barProj: {UserId: "2345", Does: ["sleep"]},
+        rooProj: {UserId: "4567", Does: ["mind read"]},
+    }, "Projects");
+
+    const CopySel4 = Sel4.Clone();
+    Sel4.Join(Projects.Clone(), "UserId");
+
+    Tap("Sel#Join1", Sel4.Cache.get("4567").Projects.fooProj.Does, ["nothing", "foo"]);
+    Tap("Sel#Join2", Sel4.Cache.get("2345").Projects.barProj.Does, ["sleep"]);
+    Tap("Sel#Join3", Sel4.Cache.get("4567").Projects.rooProj.Does, ["mind read"]);
+
+    const CopyCloneSel4 = CopySel4.Clone();
+    CopySel4.Join(Projects.Clone(), "UserId", "Customs");
+
+    Tap("Sel#Join4", CopySel4.Cache.get("4567").Customs.fooProj.Does, ["nothing", "foo"]);
+    Tap("Sel#Join5", CopySel4.Cache.get("2345").Customs.barProj.Does, ["sleep"]);
+    Tap("Sel#Join6", CopySel4.Cache.get("4567").Customs.rooProj.Does, ["mind read"]);
+
+    CopyCloneSel4.Join(Projects.Clone(), "UserId", false);
+
+    Tap("Sel#Join7", CopyCloneSel4.Cache.get("4567").fooProj.Does, ["nothing", "foo"]);
+    Tap("Sel#Join8", CopyCloneSel4.Cache.get("2345").barProj.Does, ["sleep"]);
+    Tap("Sel#Join9", CopyCloneSel4.Cache.get("4567").rooProj.Does, ["mind read"]);
 
     Con.Disconnect();
 
