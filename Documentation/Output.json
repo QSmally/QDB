@@ -604,6 +604,9 @@
             "Flags": [],
             "Line": 201,
             "Description": "Creates a new memory allocation for the copy of this Selection.",
+            "Params": [
+                "{String} [Holds] Optional new identifier value for the cloned Selection."
+            ],
             "Returns": "{Selection}"
         }
     ],

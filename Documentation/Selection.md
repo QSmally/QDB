@@ -96,7 +96,10 @@ A Selection allows you to filter something from the database, and perform method
 >
 > Returns **{Selection}** 
 
-## [.Clone()](https://github.com/QSmally/QDB/blob/v4/lib/Utility/Selection.js#L201)
+## [.Clone(Holds?)](https://github.com/QSmally/QDB/blob/v4/lib/Utility/Selection.js#L201)
 > Creates a new memory allocation for the copy of this Selection.
+> | Key | Type | Description |
+> | --- | --- | --- |
+> | Holds? | String | Optional new identifier value for the cloned Selection. |
 >
 > Returns **{Selection}** 
