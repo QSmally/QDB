@@ -96,7 +96,15 @@ A Selection allows you to filter something from the database, and perform method
 >
 > Returns **{Selection}** 
 
-## [.Clone(Holds?)](https://github.com/QSmally/QDB/blob/v4/lib/Utility/Selection.js#L201)
+## [.Merge(Selections)](https://github.com/QSmally/QDB/blob/v4/lib/Utility/Selection.js#L201)
+> Automatically clones the merging Selections and adds them into this instance.
+> | Key | Type | Description |
+> | --- | --- | --- |
+> | Selections | ...Selection | Instances to clone and merge into this one. |
+>
+> Returns **{Selection}** 
+
+## [.Clone(Holds?)](https://github.com/QSmally/QDB/blob/v4/lib/Utility/Selection.js#L216)
 > Creates a new memory allocation for the copy of this Selection.
 > | Key | Type | Description |
 > | --- | --- | --- |

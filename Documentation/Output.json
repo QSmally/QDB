@@ -600,9 +600,19 @@
             "Returns": "{Selection}"
         },
         {
-            "Value": "Clone",
+            "Value": "Merge",
             "Flags": [],
             "Line": 201,
+            "Description": "Automatically clones the merging Selections and adds them into this instance.",
+            "Params": [
+                "{...Selection} Selections Instances to clone and merge into this one."
+            ],
+            "Returns": "{Selection}"
+        },
+        {
+            "Value": "Clone",
+            "Flags": [],
+            "Line": 216,
             "Description": "Creates a new memory allocation for the copy of this Selection.",
             "Params": [
                 "{String} [Holds] Optional new identifier value for the cloned Selection."
