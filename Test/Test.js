@@ -239,6 +239,17 @@ module.exports = (QDB, Tap) => {
     Tap("Sel#Join8", CopyCloneSel4.Cache.get("2345").barProj.Does, ["sleep"]);
     Tap("Sel#Join9", CopyCloneSel4.Cache.get("4567").rooProj.Does, ["mind read"]);
 
+    Sel.Merge(Sel3, Sel4);
+
+    Tap("Sel#Merge1", Sel.Cache.size, 6);
+    Tap("Sel#Merge2", Sel3.Cache.size, 3);
+    Tap("Sel#Merge3", Sel4.Cache.size, 3);
+
+    Tap("Sel#Merge4", Sel.Keys, [
+        "roo", "bar", "boo",
+        "2345", "3456", "4567"
+    ]);
+
     Con.Disconnect();
 
 }
