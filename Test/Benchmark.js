@@ -3,8 +3,8 @@ const QDB = require("../QDB");
 
 // Benchmark configuration
 const Disconnect  = true;
-const GarbageTest = true;
-const Benchmark   = Fetch;
+const GarbageTest = false;
+const Benchmark   = SampleBenchmark;
 
 
 // Active testing
@@ -36,8 +36,54 @@ function Fetch () {
     if (Disconnect) Guilds.Disconnect();
 }
 
+// Benchmark samples
+function SampleBenchmark (Samples, Amount) {
+    const Guilds = new QDB.Connection("Test/Guilds.qdb");
 
-if (typeof Benchmark === "function") Benchmark();
+    const Indexes = Guilds.Indexes;
+    const Length  = Indexes.length
+    const Times   = {};
+
+    console.log("Sampling fetch benchmark...");
+
+    function Sample (Iter) {
+        const Current = process.hrtime();
+
+        for (let i = 0; i < Amount; i++) {
+            const Id = Indexes[Math.floor(Math.random() * Length)];
+            const FetchedEntry = Guilds.Fetch(Id);
+        }
+
+        const hrtime = process.hrtime(Current);
+        const Seconds = hrtime[0] + (hrtime[1] / 1000000000);
+
+        Times[Iter] = {
+            hrtime,
+            s: Seconds,
+            reqs: Amount / Seconds
+        };
+    }
+
+    for (let i = 0; i < Samples + 1; i++) Sample(i);
+    delete Times[0];
+
+    const FetchesPerSecond = Object.keys(Times).map(k => Math.round(Times[k].reqs));
+    const FormattedTable = Object.fromEntries(Object.keys(Times).map(Iter => [Iter, {
+        TotalSeconds: Times[Iter].s,
+        ReqPerSecond: Math.round(Times[Iter].reqs)
+    }]));
+
+    console.table(FormattedTable);
+
+    console.log({
+        max: Math.max(...FetchesPerSecond) + " req/s",
+        min: Math.min(...FetchesPerSecond) + " req/s",
+        avg: FetchesPerSecond.reduce((a, b) => a + b) / Samples + " req/s",
+    })
+}
+
+
+if (typeof Benchmark === "function") Benchmark(15, 1000 * 1000);
 
 // Garbage collector
 if (GarbageTest) {
