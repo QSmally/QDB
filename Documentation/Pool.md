@@ -61,7 +61,7 @@ const MyDBs = new QDB.Pool("lib/Databases/");
 > | Cache | Boolean | Whether to enable in-memory caching of entries in results that the next retrieval would be much faster. |
 > | UtilCache | Boolean | Whether or not to cache entries while performing utility tasks, such as the Exists and Accumulate methods. |
 > | IterCache | Boolean | Whether to cache iterating entries while performing utility tasks, like the Each and Select methods. |
-> | CacheMaxSize | Number | Amount to be considered the maximum size. If this threshold is hit, it will remove old entries from the cache. |
+> | CacheMaxSize | Number | Amount to be considered the maximum size. If this threshold is hit, the cache will temporarily stop adding new entries. |
 > | SweepInterval | Number | Integer to indicate at what interval to sweep the entries of the Connection's internal cache. |
 > | SweepLifetime | Number | The minimum age of an entry in the cache to consider being sweepable after an interval. |
 > | BackupInterval | Number | Integer to indicate at what interval to create a backup at. |

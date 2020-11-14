@@ -291,7 +291,7 @@
         {
             "Value": "Push",
             "Flags": [],
-            "Line": 505,
+            "Line": 501,
             "Description": "Pushes something to an array at the path output.",
             "Params": [
                 "{Pathlike} KeyOrPath Specifies which row or nested array to push to.",
@@ -302,7 +302,7 @@
         {
             "Value": "Shift",
             "Flags": [],
-            "Line": 524,
+            "Line": 520,
             "Description": "Inserts (if defined) or removes a value to/from the front of the array.",
             "Params": [
                 "{Pathlike} KeyOrPath Specifies which row or nested array to insert to/remove from.",
@@ -313,7 +313,7 @@
         {
             "Value": "Pop",
             "Flags": [],
-            "Line": 547,
+            "Line": 543,
             "Description": "Pops something from an array at the path output.",
             "Params": [
                 "{Pathlike} KeyOrPath Specifies which row or nested array to pop from."
@@ -323,7 +323,7 @@
         {
             "Value": "Remove",
             "Flags": [],
-            "Line": 564,
+            "Line": 560,
             "Description": "Removes a specific element from this endpoint array.",
             "Params": [
                 "{Pathlike} KeyOrPath Specifies which row or nested array to remove a value from.",
@@ -334,7 +334,7 @@
         {
             "Value": "Ensure",
             "Flags": [],
-            "Line": 591,
+            "Line": 587,
             "Description": "Inserts an input into a row or nested object if the key or path wasn't found at the endpoint. It can be used as a default schema of the database elements, that gets inserted if there's no entry already.",
             "Params": [
                 "{Pathlike} KeyOrPath Context key to see if it exists, either a row or nested property, and optionally insert the new value.",
@@ -346,7 +346,7 @@
         {
             "Value": "Modify",
             "Flags": [],
-            "Line": 617,
+            "Line": 613,
             "Description": "Updates a value in the database by fetching it and passing it onto the callback function.",
             "Params": [
                 "{Pathlike} KeyOrPath Specifies which row or nested property to fetch.",
@@ -357,7 +357,7 @@
         {
             "Value": "Invert",
             "Flags": [],
-            "Line": 634,
+            "Line": 630,
             "Description": "Inverts a boolean, from true to false and vice-versa, at the endpoint of the path.",
             "Params": [
                 "{Pathlike} KeyOrPath Specifies which row or nested property to boolean-invert."
@@ -369,7 +369,7 @@
             "Flags": [
                 "Typedef"
             ],
-            "Line": 655,
+            "Line": 651,
             "Description": "Options for a database Connection. All integer related options are in milliseconds. ",
             "Typedef": "{Object} RawOptions",
             "Params": [
@@ -380,7 +380,7 @@
                 "{Boolean} FetchAll Whether or not to fetch all the database entries on start-up of this database Connection.",
                 "{Boolean} UtilCache Whether or not to cache entries while performing utility tasks, such as the Exists and Accumulate methods.",
                 "{Boolean} IterCache Whether to cache iterating entries while performing utility tasks, like the Each and Select methods. ",
-                "{Number} CacheMaxSize Amount to be considered the maximum size. If this threshold is hit, it will remove old entries from the cache.",
+                "{Number} CacheMaxSize Amount to be considered the maximum size. If this threshold is hit, the cache will temporarily stop adding new entries.",
                 "{Number} SweepInterval Integer to indicate at what interval to sweep the entries of this Connection's internal cache.",
                 "{Number} SweepLifetime The minimum age of an entry in the cache to consider being sweepable after an interval. ",
                 "{Number} SnapshotLifetime After how many intervals to merge the latest snapshot backups into one.",
@@ -393,7 +393,7 @@
             "Flags": [
                 "Typedef"
             ],
-            "Line": 678,
+            "Line": 674,
             "Description": "An entry which has been resolved from the Connection's internal cache.",
             "Typedef": "{Object|Array} DataModel",
             "Params": [
@@ -693,7 +693,7 @@
                 "{Boolean} Cache Whether to enable in-memory caching of entries in results that the next retrieval would be much faster.",
                 "{Boolean} UtilCache Whether or not to cache entries while performing utility tasks, such as the Exists and Accumulate methods.",
                 "{Boolean} IterCache Whether to cache iterating entries while performing utility tasks, like the Each and Select methods. ",
-                "{Number} CacheMaxSize Amount to be considered the maximum size. If this threshold is hit, it will remove old entries from the cache.",
+                "{Number} CacheMaxSize Amount to be considered the maximum size. If this threshold is hit, the cache will temporarily stop adding new entries.",
                 "{Number} SweepInterval Integer to indicate at what interval to sweep the entries of the Connection's internal cache.",
                 "{Number} SweepLifetime The minimum age of an entry in the cache to consider being sweepable after an interval. ",
                 "{Number} BackupInterval Integer to indicate at what interval to create a backup at.",
