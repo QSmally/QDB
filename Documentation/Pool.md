@@ -16,7 +16,7 @@ const MyDBs = new QDB.Pool("lib/Databases/");
 
 | Key | Type | Description |
 | --- | --- | --- |
-| PathURL | Pathlike | Path to the database file or directory. |
+| PathURL | Pathlike | Path to the database file or directory for this Pool to operate. |
 | PoolOptions? | PoolOptions | Options for this Pool to manage, including separate Connection options. |
 
 
