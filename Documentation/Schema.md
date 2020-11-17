@@ -33,7 +33,7 @@ Schema Models are mainly used for automatic data migration - For instance, addin
 > Type **{Function}**
 
 # Methods
-## [.Instance(Target)](https://github.com/QSmally/QDB/blob/v4/lib/Utility/Schema.js#L60)
+## [.Instance(Target)](https://github.com/QSmally/QDB/blob/v4/lib/Utility/Schema.js#L61)
 > Public method. Integrates an entry object and integrates them with this Schema's Model.
 > | Key | Type | Description |
 > | --- | --- | --- |

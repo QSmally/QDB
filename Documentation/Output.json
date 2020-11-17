@@ -78,7 +78,7 @@
                 "Variable"
             ],
             "Line": 141,
-            "Description": "Retrieves all the rows of this database.",
+            "Description": "Retrieves all the rows of this Connection.",
             "Action": "Getter",
             "Refer": "Size",
             "Type": "{Number}"
@@ -291,7 +291,7 @@
         {
             "Value": "Push",
             "Flags": [],
-            "Line": 501,
+            "Line": 505,
             "Description": "Pushes something to an array at the path output.",
             "Params": [
                 "{Pathlike} KeyOrPath Specifies which row or nested array to push to.",
@@ -302,7 +302,7 @@
         {
             "Value": "Shift",
             "Flags": [],
-            "Line": 520,
+            "Line": 524,
             "Description": "Inserts (if defined) or removes a value to/from the front of the array.",
             "Params": [
                 "{Pathlike} KeyOrPath Specifies which row or nested array to insert to/remove from.",
@@ -313,7 +313,7 @@
         {
             "Value": "Pop",
             "Flags": [],
-            "Line": 543,
+            "Line": 547,
             "Description": "Pops something from an array at the path output.",
             "Params": [
                 "{Pathlike} KeyOrPath Specifies which row or nested array to pop from."
@@ -323,7 +323,7 @@
         {
             "Value": "Remove",
             "Flags": [],
-            "Line": 560,
+            "Line": 564,
             "Description": "Removes a specific element from this endpoint array.",
             "Params": [
                 "{Pathlike} KeyOrPath Specifies which row or nested array to remove a value from.",
@@ -334,7 +334,7 @@
         {
             "Value": "Ensure",
             "Flags": [],
-            "Line": 587,
+            "Line": 591,
             "Description": "Inserts an input into a row or nested object if the key or path wasn't found at the endpoint. It can be used as a default schema of the database elements, that gets inserted if there's no entry already.",
             "Params": [
                 "{Pathlike} KeyOrPath Context key to see if it exists, either a row or nested property, and optionally insert the new value.",
@@ -346,7 +346,7 @@
         {
             "Value": "Modify",
             "Flags": [],
-            "Line": 613,
+            "Line": 617,
             "Description": "Updates a value in the database by fetching it and passing it onto the callback function.",
             "Params": [
                 "{Pathlike} KeyOrPath Specifies which row or nested property to fetch.",
@@ -357,7 +357,7 @@
         {
             "Value": "Invert",
             "Flags": [],
-            "Line": 630,
+            "Line": 635,
             "Description": "Inverts a boolean, from true to false and vice-versa, at the endpoint of the path.",
             "Params": [
                 "{Pathlike} KeyOrPath Specifies which row or nested property to boolean-invert."
@@ -369,7 +369,7 @@
             "Flags": [
                 "Typedef"
             ],
-            "Line": 651,
+            "Line": 656,
             "Description": "Options for a database Connection. All integer related options are in milliseconds. ",
             "Typedef": "{Object} RawOptions",
             "Params": [
@@ -393,7 +393,7 @@
             "Flags": [
                 "Typedef"
             ],
-            "Line": 674,
+            "Line": 679,
             "Description": "An entry which has been resolved from the Connection's internal cache.",
             "Typedef": "{Object|Array} DataModel",
             "Params": [
@@ -414,7 +414,7 @@
             "Type": "{Object|Array}"
         },
         {
-            "Value": "Serialiser",
+            "Value": "_Serialiser",
             "Flags": [
                 "Variable",
                 "Private"
@@ -437,7 +437,7 @@
         {
             "Value": "Instance",
             "Flags": [],
-            "Line": 60,
+            "Line": 61,
             "Description": "Public method. Integrates an entry object and integrates them with this Schema's Model.",
             "Params": [
                 "{Object} Target The main entry to compare against and to merge changes into."
