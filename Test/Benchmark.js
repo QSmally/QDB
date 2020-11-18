@@ -4,7 +4,7 @@ const QDB = require("../QDB");
 // Benchmark configuration
 const Disconnect  = true;
 const GarbageTest = false;
-const Benchmark   = SampleBenchmark;
+const Benchmark   = CacheOptimiser;
 
 
 // Active testing
@@ -34,6 +34,31 @@ function Fetch () {
     console.log(`memory usage: ${process.memoryUsage().heapUsed / 1024 / 1024} MB`);
 
     if (Disconnect) Guilds.Disconnect();
+}
+
+// Optimise Cache Iteration
+function CacheOptimiser () {
+    const Guilds = new QDB.Connection("Test/Guilds.qdb");
+
+    const Indexes     = Guilds.Indexes;
+    const CachedIndex = Indexes[40000];
+    const RawIndex    = Indexes[40001];
+
+    for (let i = 0; i < 30 * 1000; i++)
+    Guilds.Fetch(Indexes[i * 2]);
+    
+    console.log("internal cache size", Guilds.CacheSize);
+    console.log("whether entry is cached", Guilds.Cache.has(RawIndex));
+    
+    console.time("uncached");
+    Guilds.Find((v, k) => k === RawIndex);
+    console.timeEnd("uncached");
+
+    console.log("whether entry is cached", Guilds.Cache.has(CachedIndex));
+
+    console.time("cached");
+    Guilds.Find((v, k) => k === CachedIndex);
+    console.timeEnd("cached");
 }
 
 // Benchmark samples
