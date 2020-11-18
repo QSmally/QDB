@@ -4,7 +4,7 @@ const QDB = require("../QDB");
 // Benchmark configuration
 const Disconnect  = true;
 const GarbageTest = false;
-const Benchmark   = CacheOptimiser;
+const Benchmark   = SampleBenchmark;
 
 
 // Active testing
