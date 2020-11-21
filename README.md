@@ -1,10 +1,10 @@
 
 # QDB4
-## An optimised SQL database
+## An optimised, document-based SQL database
 
 [[Contribute](#issues-contributing--license)] [[Documentation](https://github.com/QSmally/QDB/blob/v4/Documentation/Index.md)]
 
-> QDB is a high level database module which is based around JavaScript Objects. Connect to multiple files, apart or in an optimised pool.
+> QDB is a synchronous database module reliant on JavaScript object-documents with multiple levels of optimisation built into it.
 
 
 # Main Features
