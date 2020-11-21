@@ -159,7 +159,7 @@ module.exports = (QDB, Tap) => {
         res.push(Key);
     }, true);
 
-    Tap("Con#Each", res, [...Con.Indexes]);
+    Tap("Con#Each", res, ["4567", "3456", "2345", "6789"]);
 
     Tap("Con#Select1", Con.Select((_Row, Key) => {
         return Key === "3456";
@@ -171,11 +171,17 @@ module.exports = (QDB, Tap) => {
     Tap("Con#Select3", Sel.Cache.size, 3);
 
     Tap("Sel#Keys", Sel.Keys, ["2345", "3456", "4567"]);
-    Tap("Sel#Values", Sel.Values.map(v => v._DataStore), ["2345", "3456", "4567"]);
+
+    Tap("Sel#Values", Sel.Values, [
+        {Name: "bar", Age: 30, Hobbies: ["one", "two", "three", "four"]},
+        {Name: "roo", Age: 29, Hobbies: ["one", "two", "three", "-5", "loo", "1", "2", "3"]},
+        {Name: "goo", Age: 27, Hobbies: []}
+    ]);
+
     Tap("Sel#AsObject", Sel.AsObject, {
-        "2345": {Name: "bar", Age: 30, Hobbies: ["one", "two", "three", "four"], _DataStore: "2345"},
-        "3456": {Name: "roo", Age: 29, Hobbies: ["one", "two", "three", "-5", "loo", "1", "2", "3"], _DataStore: "3456"},
-        "4567": {Name: "goo", Age: 27, Hobbies: [], _DataStore: "4567"}
+        "2345": {Name: "bar", Age: 30, Hobbies: ["one", "two", "three", "four"]},
+        "3456": {Name: "roo", Age: 29, Hobbies: ["one", "two", "three", "-5", "loo", "1", "2", "3"]},
+        "4567": {Name: "goo", Age: 27, Hobbies: []}
     });
 
     const Sel4 = Sel.Clone();
