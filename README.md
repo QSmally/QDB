@@ -51,7 +51,7 @@ Transaction.Rollback();
 ## [Selection](https://github.com/QSmally/QDB/blob/v4/Documentation/Selection.md)
 An unchanged piece of the database in memory.
 ```js
-MyDB.Select(Uesr => User.IsProgrammer)
+const Users = Programmers.Select()
 .Join(Projects, "UserId", "Projects")
 .Sort(User => User.Age)
 .Group("Rank");
