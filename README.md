@@ -57,6 +57,6 @@ const Leaderboard = MyDB.Select("1234567890")
 ```
 
 # Issues, Contributing & License
-If you've found a bug or want to suggest a feature, please ensure that it hasn't already been reported/suggested - Then, feel free to create an [issue](https://github.com/QSmally/QDB/issues)! If you'd like to contribute to the project, feel free to fork [the repository](https://github.com/QSmally/QDB) and create a pull request.
+Before making an issue for a bug or feature submittion, please ensure that it hasn't already been created [on the repository](https://github.com/QSmally/QDB/issues).
 
 This module is licensed under [Apache 2.0](http://www.apache.org/licenses/LICENSE-2.0).
