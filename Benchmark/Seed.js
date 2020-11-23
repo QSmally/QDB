@@ -8,6 +8,7 @@ const Tables = new Map([
 
 module.exports = () => {
 
+    const FS  = require("fs");
     const CLI = require("cli-color");
 
     const Crypto = require("crypto");
@@ -52,6 +53,8 @@ module.exports = () => {
         );
     }
 
-    return [...Tables.keys()];
+    return FS.readdirSync("Benchmark/Trials/", {
+        encoding: "utf-8"
+    });
 
 }
