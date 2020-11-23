@@ -8,6 +8,8 @@ const Tables = new Map([
 
 module.exports = () => {
 
+    const CLI = require("cli-color");
+
     const Crypto = require("crypto");
     const QDB    = require("../QDB");
     const SQL    = require("better-sqlite3");
@@ -23,6 +25,8 @@ module.exports = () => {
         const Connection = new QDB.Connection("Benchmark/Guilds.qdb", {
             Cache: false, Table
         });
+
+        process.stdout.write(CLI.white(`· Creating '${CLI.white.bold(Table)}' table... `));
 
         for (let i = 0; i < Size; i++) {
             Connection.Set(Crypto.randomBytes(8).toString("hex"), {
@@ -41,6 +45,8 @@ module.exports = () => {
 
             Connection.Disconnect();
         }
+
+        process.stdout.write(CLI.green("Done!\n"));
     }
 
     return [...Tables.keys()];
