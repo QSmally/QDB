@@ -7,7 +7,7 @@ module.exports = () => {
 
     // Completely remove tables
     Master.prepare("SELECT * FROM 'sqlite_master' WHERE type = 'table';")
-    .all().forEach(Table => Master.exec(`DROP TABLE '${Table}';`));
+    .all().forEach(Entry => Master.exec(`DROP TABLE '${Entry.name}';`));
     Master.close();
 
     // Create new Connections
