@@ -46,7 +46,10 @@ module.exports = () => {
             Connection.Disconnect();
         }
 
-        process.stdout.write(CLI.green("Done!\n"));
+        process.stdout.write(
+            Table.padEnd(10, " ").slice(Table.length) +
+            CLI.green("Done!\n")
+        );
     }
 
     return [...Tables.keys()];
