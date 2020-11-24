@@ -43,14 +43,14 @@ module.exports = () => {
                     ["Skating"]
                 ][Math.round(Math.random() * 2)]
             });
-
-            Connection.Disconnect();
         }
 
         process.stdout.write(
             Table.padEnd(10, " ").slice(Table.length) +
-            CLI.green("Done!\n")
+            CLI.green(`Created ${CLI.bold(Connection.Size)} entries\n`)
         );
+
+        Connection.Disconnect();
     }
 
     return FS.readdirSync("Benchmark/Trials/", {
