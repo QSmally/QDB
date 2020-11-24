@@ -25,12 +25,12 @@ for (const Trial of Trials) {
         });
 
         const StartTime = process.hrtime();
-        const Amount = Benchmark(Connection);
+        const Amount    = Benchmark(Connection);
+        const EndTime   = process.hrtime(StartTime);
 
         Times.get(Test).push({
-            Time: process.hrtime(StartTime),
-            Amount,
-            Size
+            Time: EndTime[0] + (EndTime[1] / 1000000000),
+            Amount, Size
         });
     }
 }
