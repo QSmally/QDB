@@ -4,7 +4,7 @@ const CLI = require("cli-color");
 
 process.stdout.write(CLI.reset);
 process.stdout.write(CLI.cyan("Generating tables for benchmark...\n"));
-const Trials = require("./Seed")();
+const {Trials, Tables} = require("./Seed")();
 
 process.stdout.write(CLI.reset);
 process.stdout.write(CLI.cyan.bold("Running benchmarks...\n"));
@@ -15,18 +15,24 @@ for (const Trial of Trials) {
     const Test = Trial.split(".")[0];
 
     const Benchmark = require(`./Trials/${Trial}`);
-    const Connection = new QDB.Connection("Benchmark/Guilds.qdb", {...Benchmark.Options});
     process.stdout.write(CLI.white(`· Sampling '${CLI.white.bold(Test)}' benchmark...`));
 
     Times.set(Test, []);
 
-    for (let i = 0; i < 10; i++) {
-        const StartTime = process.hrtime();
-        Benchmark.Execute(Connection);
-        Times.get(Test).push(process.hrtime(StartTime));
-    }
+    for (const [Table, Size] of Tables) {
+        const Connection = new QDB.Connection("Benchmark/Guilds.qdb", {
+            Table
+        });
 
-    Connection.Disconnect();
+        const StartTime = process.hrtime();
+        const Amount = Benchmark(Connection);
+
+        Times.get(Test).push({
+            Time: process.hrtime(StartTime),
+            Amount,
+            Size
+        });
+    }
 }
 
 console.log(Times);
