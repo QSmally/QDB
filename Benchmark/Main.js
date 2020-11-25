@@ -13,7 +13,6 @@ const Times = new Map();
 
 for (const Trial of Trials) {
     const Test = Trial.split(".")[0];
-
     const Benchmark = require(`./Trials/${Trial}`);
     process.stdout.write(CLI.white(`· Sampling '${CLI.bold(Test)}' benchmark...`));
 
@@ -27,12 +26,28 @@ for (const Trial of Trials) {
         const StartTime = process.hrtime();
         const Amount    = Benchmark(Connection);
         const EndTime   = process.hrtime(StartTime);
+        const Time      = EndTime[0] + (EndTime[1] / 1000000000);
 
         Times.get(Test)[Table] = {
-            Time: EndTime[0] + (EndTime[1] / 1000000000),
-            Amount, Size
+            ReqPerSec: Amount / Time,
+            Time, Amount, Size
         };
     }
+
+
+    const TrialTimes = Times.get(Test);
+
+    process.stdout.write(CLI.erase.line);
+    process.stdout.write(CLI.move(-31));
+    process.stdout.write(CLI.magenta(`${CLI.bold(Test)} (${Math.round(TrialTimes["Small"].ReqPerSec)} req/s)`));
+
+    for (const Table in TrialTimes)
+    process.stdout.write(CLI.white(
+        `\n· ${CLI.bold(Table.padEnd(15))}` +
+        CLI.green.bold(`${TrialTimes[Table].Time.toFixed(2)}s`)
+    ));
+
+    process.stdout.write("\n\n");
 }
 
-console.log(Times);
+process.stdout.write(CLI.green("Completed running benchmarks!\n"));
