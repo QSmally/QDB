@@ -10,13 +10,14 @@
     "docs": "gendocs Test/DocConf.json"
   },
   "keywords": [
-    "data",
-    "db",
     "database",
-    "management",
     "utility",
     "backend",
     "sql",
+    "transaction",
+    "pools",
+    "optimised",
+    "management",
     "qulity"
   ],
   "homepage": "https://github.com/QSmally/QDB#readme",
