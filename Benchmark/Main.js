@@ -17,7 +17,7 @@ for (const Trial of Trials) {
     const Benchmark = require(`./Trials/${Trial}`);
     process.stdout.write(CLI.white(`· Sampling '${CLI.white.bold(Test)}' benchmark...`));
 
-    Times.set(Test, []);
+    Times.set(Test, {});
 
     for (const [Table, Size] of Tables) {
         const Connection = new QDB.Connection("Benchmark/Guilds.qdb", {
@@ -28,10 +28,10 @@ for (const Trial of Trials) {
         const Amount    = Benchmark(Connection);
         const EndTime   = process.hrtime(StartTime);
 
-        Times.get(Test).push({
+        Times.get(Test)[Table] = {
             Time: EndTime[0] + (EndTime[1] / 1000000000),
             Amount, Size
-        });
+        };
     }
 }
 
