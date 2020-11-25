@@ -3,6 +3,11 @@
 node_modules/
 package-lock.json
 
+# Benchmarking
+Benchmark/*.qdb
+Benchmark/*.qdb-shm
+Benchmark/*.qdb-wal
+
 # Miscellaneous
 .DS_Store
 *.zip
