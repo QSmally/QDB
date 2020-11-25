@@ -15,7 +15,7 @@ for (const Trial of Trials) {
     const Test = Trial.split(".")[0];
 
     const Benchmark = require(`./Trials/${Trial}`);
-    process.stdout.write(CLI.white(`· Sampling '${CLI.white.bold(Test)}' benchmark...`));
+    process.stdout.write(CLI.white(`· Sampling '${CLI.bold(Test)}' benchmark...`));
 
     Times.set(Test, {});
 

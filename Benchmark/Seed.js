@@ -28,7 +28,7 @@ module.exports = () => {
                 Cache: false, Table
             });
 
-            process.stdout.write(CLI.white(`· Creating '${CLI.white.bold(Table)}' table... `));
+            process.stdout.write(CLI.white(`· Creating '${CLI.bold(Table)}' table... `));
 
             for (let i = 0; i < Size; i++) {
                 Connection.Set(Crypto.randomBytes(8).toString("hex"), {
