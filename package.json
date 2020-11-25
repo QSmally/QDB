@@ -6,7 +6,7 @@
   "scripts": {
     "test": "node Test/Main.js",
     "debug": "node Test/Main.js -d",
-    "benchmark": "node Test/Benchmark.js",
+    "benchmark": "node Benchmark/Main.js",
     "docs": "gendocs Test/DocConf.json"
   },
   "keywords": [
