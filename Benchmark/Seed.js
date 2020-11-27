@@ -56,9 +56,7 @@ module.exports = () => {
     }
 
     return {
-        Trials: FS.readdirSync("Benchmark/Trials/", {
-            encoding: "utf-8"
-        }),
+        Trials: FS.readdirSync("Benchmark/Trials/"),
         Tables
     }
 
