@@ -36,10 +36,13 @@ for (const Trial of Trials) {
 
 
     const TrialTimes = Times.get(Test);
-
     process.stdout.write(CLI.erase.line);
     process.stdout.write(CLI.move(-31));
-    process.stdout.write(CLI.magenta(`${CLI.bold(Test)} (${Math.round(TrialTimes["Small"].ReqPerSec)} req/s)`));
+
+    process.stdout.write(CLI.magenta(CLI.bold(Test) +
+        `\n\t(${Math.round(TrialTimes["Small"].ReqPerSec)} req/s)` +
+        `\n\t(Amount: ${TrialTimes["Small"].Amount})`
+    ));
 
     for (const Table in TrialTimes)
     process.stdout.write(CLI.white(
