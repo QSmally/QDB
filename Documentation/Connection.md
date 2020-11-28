@@ -248,7 +248,12 @@ const Users = new QDB.Connection("lib/Databases/Users.qdb");
 > An entry which has been resolved from the Connection's internal cache.
 > | Key | Type | Description |
 > | --- | --- | --- |
-> | _DataStore | String, Number | Identifier of this model. |
+> | _DataStore | String | Identifier of this model. |
 > | _Timestamp | Number | Date when this entry was last patched, used for sweeping of the cache. |
 >
 > Type **{Object|Array}**
+
+## [Pathlike](https://github.com/QSmally/QDB/blob/v4/lib/Connections/Connection.js#L686)
+> Path string to navigate entries of the database.
+>
+> Type **{String}**

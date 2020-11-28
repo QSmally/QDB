@@ -395,9 +395,18 @@
             "Description": "An entry which has been resolved from the Connection's internal cache.",
             "Typedef": "{Object|Array} DataModel",
             "Params": [
-                "{String|Number} _DataStore Identifier of this model.",
+                "{String} _DataStore Identifier of this model.",
                 "{Number} _Timestamp Date when this entry was last patched, used for sweeping of the cache."
             ]
+        },
+        {
+            "Value": "",
+            "Flags": [
+                "Typedef"
+            ],
+            "Line": 686,
+            "Description": "Path string to navigate entries of the database.",
+            "Typedef": "{String} Pathlike"
         }
     ],
     "Schema": [
