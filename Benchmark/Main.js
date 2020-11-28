@@ -26,7 +26,7 @@ for (const Trial of Trials) {
         const Time      = EndTime[0] + (EndTime[1] / 1000000000);
 
         Times.get(Test)[Table] = {
-            ReqPerSec: Amount / Time,
+            OpsPerSec: Amount / Time,
             Time, Amount, Size
         };
     }
@@ -37,7 +37,7 @@ for (const Trial of Trials) {
     process.stdout.write(CLI.move(-31));
 
     process.stdout.write(CLI.magenta(CLI.bold(Test) +
-        `\n\t(${Math.round(TrialTimes["Small"].ReqPerSec)} ops/s)` +
+        `\n\t(${Math.round(TrialTimes["Small"].OpsPerSec)} ops/s)` +
         `\n\t(Amount: ${TrialTimes["Small"].Amount})`
     ));
 
