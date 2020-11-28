@@ -11,6 +11,10 @@ module.exports = () => {
     const FS  = require("fs");
     const CLI = require("cli-color");
 
+    if (process.argv.includes("--no-enterprise")) {
+        Tables.delete("Enterprise");
+    }
+
     if (!process.argv.includes("--skip")) {
         process.stdout.write(CLI.cyan.bold("Generating tables for benchmark...\n"));
 
