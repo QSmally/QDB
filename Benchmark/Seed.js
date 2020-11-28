@@ -12,6 +12,8 @@ module.exports = () => {
     const CLI = require("cli-color");
 
     if (!process.argv.includes("--skip")) {
+        process.stdout.write(CLI.cyan.bold("Generating tables for benchmark...\n"));
+
         const Crypto = require("crypto");
         const QDB    = require("../QDB");
         const SQL    = require("better-sqlite3");
