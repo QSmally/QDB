@@ -37,8 +37,8 @@ for (const Trial of Trials) {
     process.stdout.write(CLI.move(-31 - Test.length));
 
     process.stdout.write(CLI.magenta(CLI.bold(Test) +
-        `\n\t(${Math.round(TrialTimes["Small"].OpsPerSec)} ops/s)` +
-        `\n\t(Amount: ${TrialTimes["Small"].Amount})`
+        `\n  (${Math.round(TrialTimes["Small"].OpsPerSec)} ops/s)` +
+        `\n  (Amount: ${TrialTimes["Small"].Amount})`
     ));
 
     for (const Table in TrialTimes)
