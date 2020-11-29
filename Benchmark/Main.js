@@ -34,7 +34,7 @@ for (const Trial of Trials) {
 
     const TrialTimes = Times.get(Test);
     process.stdout.write(CLI.erase.line);
-    process.stdout.write(CLI.move(-31));
+    process.stdout.write(CLI.move(-31 - Test.length));
 
     process.stdout.write(CLI.magenta(CLI.bold(Test) +
         `\n\t(${Math.round(TrialTimes["Small"].OpsPerSec)} ops/s)` +
