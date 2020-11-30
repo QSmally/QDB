@@ -554,10 +554,10 @@
             "Returns": "{Object|Array|DataModel}"
         },
         {
-            "Value": "Sort",
+            "Value": "Order",
             "Flags": [],
             "Line": 87,
-            "Description": "Sorts this Selection's values. Identical to the `SORT BY` SQL statement.",
+            "Description": "Sorts this Selection's values. Identical to the `ORDER BY` SQL statement.",
             "Params": [
                 "{Function} Fn Function that determines the sort order."
             ],

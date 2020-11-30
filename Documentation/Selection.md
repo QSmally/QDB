@@ -53,8 +53,8 @@ A Selection allows you to filter something from the database, and perform method
 >
 > Returns **{Object|Array|DataModel}** 
 
-## [.Sort(Fn)](https://github.com/QSmally/QDB/blob/v4/lib/Utility/Selection.js#L87)
-> Sorts this Selection's values. Identical to the `SORT BY` SQL statement.
+## [.Order(Fn)](https://github.com/QSmally/QDB/blob/v4/lib/Utility/Selection.js#L87)
+> Sorts this Selection's values. Identical to the `ORDER BY` SQL statement.
 > | Key | Type | Description |
 > | --- | --- | --- |
 > | Fn | Function | Function that determines the sort order. |
