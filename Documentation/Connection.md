@@ -151,7 +151,7 @@ const Users = new QDB.Connection("lib/Databases/Users.qdb");
 > | Fn | Function | A tester function which returns a boolean, based on the value(s) of the rows. |
 > | Cache? | Boolean | Whether or not to cache the iterating entries. |
 >
-> Returns **{Any}** Returns the row found, or a nil value.
+> Returns **{Object|Array|DataModel}** Returns the row which was found, or a nil value.
 
 ## [.Select(FnOrPath)](https://github.com/QSmally/QDB/blob/v4/lib/Connections/Connection.js#L477)
 > Locally filters out rows in memory to work with. Please note that this method does increase memory usage in large databases.
