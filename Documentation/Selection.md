@@ -45,7 +45,15 @@ A Selection allows you to filter something from the database, and perform method
 > Type **{Object}**
 
 # Methods
-## [.Sort(Fn)](https://github.com/QSmally/QDB/blob/v4/lib/Utility/Selection.js#L76)
+## [.Retrieve(Key)](https://github.com/QSmally/QDB/blob/v4/lib/Utility/Selection.js#L74)
+> Returns the given document by its key from this Selection.
+> | Key | Type | Description |
+> | --- | --- | --- |
+> | Key | Pathlike | Indicates which element to fetch. |
+>
+> Returns **{Object|Array|DataModel}** 
+
+## [.Sort(Fn)](https://github.com/QSmally/QDB/blob/v4/lib/Utility/Selection.js#L87)
 > Sorts this Selection's values. Identical to the `SORT BY` SQL statement.
 > | Key | Type | Description |
 > | --- | --- | --- |
@@ -53,7 +61,7 @@ A Selection allows you to filter something from the database, and perform method
 >
 > Returns **{Selection}** 
 
-## [.Filter(Fn)](https://github.com/QSmally/QDB/blob/v4/lib/Utility/Selection.js#L88)
+## [.Filter(Fn)](https://github.com/QSmally/QDB/blob/v4/lib/Utility/Selection.js#L99)
 > Filters values that satisfy the provided function. Identical to the `FILTER BY` SQL statement.
 > | Key | Type | Description |
 > | --- | --- | --- |
@@ -61,7 +69,7 @@ A Selection allows you to filter something from the database, and perform method
 >
 > Returns **{Selection}** 
 
-## [.Limit(Begin, End?)](https://github.com/QSmally/QDB/blob/v4/lib/Utility/Selection.js#L104)
+## [.Limit(Begin, End?)](https://github.com/QSmally/QDB/blob/v4/lib/Utility/Selection.js#L115)
 > Slices off values from this Selection. Identical to the `LIMIT` SQL statement.
 > | Key | Type | Description |
 > | --- | --- | --- |
@@ -70,7 +78,7 @@ A Selection allows you to filter something from the database, and perform method
 >
 > Returns **{Selection}** 
 
-## [.Group(Key)](https://github.com/QSmally/QDB/blob/v4/lib/Utility/Selection.js#L127)
+## [.Group(Key)](https://github.com/QSmally/QDB/blob/v4/lib/Utility/Selection.js#L138)
 > Groups this Selection based on an identifier. Identical to the `GROUP BY` SQL statement.
 > | Key | Type | Description |
 > | --- | --- | --- |
@@ -78,7 +86,7 @@ A Selection allows you to filter something from the database, and perform method
 >
 > Returns **{Selection}** 
 
-## [.Join(Secondary, Field, Property?)](https://github.com/QSmally/QDB/blob/v4/lib/Utility/Selection.js#L153)
+## [.Join(Secondary, Field, Property?)](https://github.com/QSmally/QDB/blob/v4/lib/Utility/Selection.js#L164)
 > Joins another Selection into this instance based on a referrer field. Identical to the `FULL JOIN` SQL statement.
 > | Key | Type | Description |
 > | --- | --- | --- |
@@ -88,7 +96,7 @@ A Selection allows you to filter something from the database, and perform method
 >
 > Returns **{Selection}** 
 
-## [.Map(Fn)](https://github.com/QSmally/QDB/blob/v4/lib/Utility/Selection.js#L186)
+## [.Map(Fn)](https://github.com/QSmally/QDB/blob/v4/lib/Utility/Selection.js#L197)
 > Iterates over this Selection's values and keys, and implements the new values returned from the callback.
 > | Key | Type | Description |
 > | --- | --- | --- |
@@ -96,7 +104,7 @@ A Selection allows you to filter something from the database, and perform method
 >
 > Returns **{Selection}** 
 
-## [.Merge(Selections)](https://github.com/QSmally/QDB/blob/v4/lib/Utility/Selection.js#L201)
+## [.Merge(Selections)](https://github.com/QSmally/QDB/blob/v4/lib/Utility/Selection.js#L212)
 > Automatically clones the merging Selections and adds them into this instance.
 > | Key | Type | Description |
 > | --- | --- | --- |
@@ -104,7 +112,7 @@ A Selection allows you to filter something from the database, and perform method
 >
 > Returns **{Selection}** 
 
-## [.Clone(Holds?)](https://github.com/QSmally/QDB/blob/v4/lib/Utility/Selection.js#L216)
+## [.Clone(Holds?)](https://github.com/QSmally/QDB/blob/v4/lib/Utility/Selection.js#L227)
 > Creates a new memory allocation for the copy of this Selection.
 > | Key | Type | Description |
 > | --- | --- | --- |

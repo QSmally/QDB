@@ -544,9 +544,19 @@
             "Type": "{Object}"
         },
         {
+            "Value": "Retrieve",
+            "Flags": [],
+            "Line": 74,
+            "Description": "Returns the given document by its key from this Selection.",
+            "Params": [
+                "{Pathlike} Key Indicates which element to fetch."
+            ],
+            "Returns": "{Object|Array|DataModel}"
+        },
+        {
             "Value": "Sort",
             "Flags": [],
-            "Line": 76,
+            "Line": 87,
             "Description": "Sorts this Selection's values. Identical to the `SORT BY` SQL statement.",
             "Params": [
                 "{Function} Fn Function that determines the sort order."
@@ -556,7 +566,7 @@
         {
             "Value": "Filter",
             "Flags": [],
-            "Line": 88,
+            "Line": 99,
             "Description": "Filters values that satisfy the provided function. Identical to the `FILTER BY` SQL statement.",
             "Params": [
                 "{Function} Fn Function that determines which entries to keep."
@@ -566,7 +576,7 @@
         {
             "Value": "Limit",
             "Flags": [],
-            "Line": 104,
+            "Line": 115,
             "Description": "Slices off values from this Selection. Identical to the `LIMIT` SQL statement.",
             "Params": [
                 "{Number} Begin Integer to indicate the beginning to slice.",
@@ -577,7 +587,7 @@
         {
             "Value": "Group",
             "Flags": [],
-            "Line": 127,
+            "Line": 138,
             "Description": "Groups this Selection based on an identifier. Identical to the `GROUP BY` SQL statement.",
             "Params": [
                 "{Pathlike} Key Indicates by which element to group this Selection."
@@ -587,7 +597,7 @@
         {
             "Value": "Join",
             "Flags": [],
-            "Line": 153,
+            "Line": 164,
             "Description": "Joins another Selection into this instance based on a referrer field. Identical to the `FULL JOIN` SQL statement.",
             "Params": [
                 "{Selection} Secondary Another Selection instance to join into this one.",
@@ -599,7 +609,7 @@
         {
             "Value": "Map",
             "Flags": [],
-            "Line": 186,
+            "Line": 197,
             "Description": "Iterates over this Selection's values and keys, and implements the new values returned from the callback.",
             "Params": [
                 "{Function} Fn Callback function which determines the new values of the Selection."
@@ -609,7 +619,7 @@
         {
             "Value": "Merge",
             "Flags": [],
-            "Line": 201,
+            "Line": 212,
             "Description": "Automatically clones the merging Selections and adds them into this instance.",
             "Params": [
                 "{...Selection} Selections Instances to clone and merge into this one."
@@ -619,7 +629,7 @@
         {
             "Value": "Clone",
             "Flags": [],
-            "Line": 216,
+            "Line": 227,
             "Description": "Creates a new memory allocation for the copy of this Selection.",
             "Params": [
                 "{String} [Holds] Optional new identifier value for the cloned Selection."
