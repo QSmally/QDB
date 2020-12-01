@@ -40,7 +40,7 @@ module.exports = () => {
                 Connection.Set(Crypto.randomBytes(8).toString("hex"), {
                     Username: [
                         "Jake", "Smally", "Amy", "Foo", "Bar", "Apolly"
-                    ][Math.round(Math.random() * 5)],
+                    ][i % 6],
 
                     Password: Crypto.randomBytes(32).toString("hex"),
 
