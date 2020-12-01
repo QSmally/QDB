@@ -38,7 +38,7 @@ for (const Trial of Trials) {
 
     process.stdout.write(CLI.magenta(CLI.bold(Test) +
         `\n  (${Math.round(TrialTimes["Small"].OpsPerSec)} ops/s)` +
-        `\n  (Amount: ${TrialTimes["Small"].Amount})`
+        `\n  (Amount: ${TrialTimes[Object.keys(TrialTimes).pop()].Amount})`
     ));
 
     for (const Table in TrialTimes)
