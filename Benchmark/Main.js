@@ -32,19 +32,19 @@ for (const Trial of Trials) {
     }
 
 
-    const TrialTimes = Times.get(Test);
+    const Current = Times.get(Test);
     process.stdout.write(CLI.erase.line);
     process.stdout.write(CLI.move(-31 - Test.length));
 
     process.stdout.write(CLI.magenta(CLI.bold(Test) +
-        `\n  (${Math.round(TrialTimes["Small"].OpsPerSec)} ops/s)` +
-        `\n  (Amount: ${TrialTimes[Object.keys(TrialTimes).pop()].Amount})`
+        `\n  (${Math.round(Current["Small"].OpsPerSec)} ops/s)` +
+        `\n  (Amount: ${Current[Object.keys(Current).pop()].Amount})`
     ));
 
-    for (const Table in TrialTimes)
+    for (const Table in Current)
     process.stdout.write(CLI.white(
         `\n· ${CLI.bold(Table.padEnd(15))}` +
-        CLI.green.bold(`${TrialTimes[Table].Time.toFixed(2)}s`)
+        CLI.green.bold(`${Current[Table].Time.toFixed(2)}s`)
     ));
 
     process.stdout.write("\n\n");
