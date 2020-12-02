@@ -4,6 +4,7 @@ module.exports = (QDB, Tap) => {
     const Con = new QDB.Connection("Test/Users.qdb");
     Con.API.prepare("DELETE FROM 'QDB';").run();
 
+    // Base Connection functions
     Tap("Con#Set1", Con.Set("1234", {Name: "foo", Age: 26}).Size, 1);
     Tap("Con#CacheSize1", Con.CacheSize, 0);
     Tap("Con#Set2", Con.Set("2345", {Name: "bar", Age: 21}).Size, 2);
@@ -39,6 +40,7 @@ module.exports = (QDB, Tap) => {
     Tap("Con#Erase1", Con.Erase("1234").Size, 3);
     Tap("Con#CacheSize8", Con.CacheSize, 1);
 
+    // Lookup methods
     Tap("Con#Exist1", Con.Exists("1234"), false);
     Tap("Con#Exist2", Con.Exists("2345"), true);
     Tap("Con#Exist3", Con.Exists("6789"), false);
@@ -58,6 +60,7 @@ module.exports = (QDB, Tap) => {
     Tap("Con#Set5", Con.Set("2345.Age", 30).Size, 3);
     Tap("Con#Fetch6", Con.Fetch("2345"), {Name: "bar", Age: 30, _DataStore: "2345"});
 
+    // Array methods
     const IdxList = Con.Indexes;
     for (const Idx in IdxList)
     Tap(`Con#Set${parseInt(Idx) + 6}`, Con.Set(`${IdxList[Idx]}.Hobbies`, []).Size, 3);
@@ -91,6 +94,7 @@ module.exports = (QDB, Tap) => {
 
     Tap("Con#Set10", Con.Set("2345.Hobbies", ["one", "two", "three", "four"]).Fetch("2345.Hobbies.length"), 4);
 
+    // Utility methods
     Tap("Con#Ensure1", Con.Ensure("2345", {Name: "nope", Age: -1, Hobbies: []}), false);
     Tap("Con#Ensure2", Con.Ensure("6789", {Name: "Untitled", Age: -1, Hobbies: []}), true);
 
@@ -118,6 +122,7 @@ module.exports = (QDB, Tap) => {
     Tap("Con#Invert3", Con.Invert("6789.Hobbies.0.Programming"), true);
     Tap("Con#Invert4", Con.Invert("6789.Hobbies.0.Programming"), false);
 
+    // Transaction tests
     const Tr2 = Con.Transaction();
 
     Tap("Con#Set11", Con.Set("foo", {bar: "roo!"}).Size, 5);
@@ -131,6 +136,7 @@ module.exports = (QDB, Tap) => {
     Tap("Con#Size17", Con.Size, 4);
     Tap("Con#CacheSize18", Con.CacheSize, 0);
 
+    // Iterator methods
     let res = [];
 
     Con.Each((_Row, Key) => {
@@ -139,6 +145,7 @@ module.exports = (QDB, Tap) => {
 
     Tap("Con#Each", res, ["4567", "3456", "2345", "6789"]);
 
+    // Selection class
     Tap("Con#Select1", Con.Select((_Row, Key) => {
         return Key === "3456";
     }).Holds, "QDB");
@@ -196,6 +203,7 @@ module.exports = (QDB, Tap) => {
     Tap("Sel#Clone1", Sel3.Cache.size, 3);
     Tap("Sel#Clone2", Sel2.Cache.size, 2);
 
+    // Object reference tests
     const Selection = require("../lib/Utility/Selection");
     const Projects = new Selection({
         fooProj: {UserId: "4567", Does: ["nothing", "foo"]},
