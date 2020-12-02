@@ -171,7 +171,7 @@ module.exports = (QDB, Tap) => {
 
     const Sel4 = Sel.Clone();
 
-    Tap("Sel#Sort", Sel.Sort((a, b) => a.Age - b.Age).Keys, ["4567", "3456", "2345"]);
+    Tap("Sel#Order", Sel.Order((a, b) => a.Age - b.Age).Keys, ["4567", "3456", "2345"]);
     Tap("Sel#Filter", Sel.Filter((_Row, Key) => Key !== "3456").Cache.size, 2);
 
     Tap("Sel#Limit1", Sel.Limit(0, 3).Cache.size, 2);
