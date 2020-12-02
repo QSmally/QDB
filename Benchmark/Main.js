@@ -37,7 +37,7 @@ for (const Trial of Trials) {
     process.stdout.write(CLI.move(-31 - Test.length));
 
     process.stdout.write(CLI.magenta(CLI.bold(Test) +
-        `\n  (${Math.round(Current["Small"].OpsPerSec)} ops/s)` +
+        `\n  (${Math.round(Math.max(...Object.values(Current).map(M => M.OpsPerSec)))} ops/s)` +
         `\n  (Amount: ${Current[Object.keys(Current).pop()].Amount})`
     ));
 
