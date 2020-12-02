@@ -9,6 +9,9 @@
     "benchmark": "node Benchmark/Main.js",
     "docs": "gendocs Test/DocConf.json"
   },
+  "bin": {
+    "qdb": "Shell/Main.js"
+  },
   "keywords": [
     "database",
     "utility",
