@@ -18,6 +18,8 @@ if (!Arguments.length) {
         `${Format.BOLD("REPOSITORY")}\n  https://github.com/QSmally/QDB`
     ].join("\n"));
 
+    process.exit(0);
+
 } else {
 
     let Make = Arguments.map(A => A.toLowerCase()).findIndex(V => V === "make");
@@ -30,6 +32,7 @@ if (!Arguments.length) {
             console.log([`${Format.BOLD("Error")}: ${Path} does not exist.`,
                 "If you wish to create the database, include `make` in the command."
             ].join("\n"));
+
             process.exit(0);
         }
 
