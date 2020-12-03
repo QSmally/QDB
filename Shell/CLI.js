@@ -1,12 +1,12 @@
 #!/usr/bin/env node
 "use strict";
 
+const FS        = require("fs");
 const Format    = require("./Format");
 const Arguments = process.argv.slice(2);
 
 if (!Arguments.length) {
-    
-    const FS = require("fs");
+
     const Commands = FS.readdirSync("Shell/Store/")
     .map(C => C.split(".")[0].toLowerCase());
 
@@ -23,7 +23,6 @@ if (!Arguments.length) {
     let Make = Arguments.map(A => A.toLowerCase()).findIndex(V => V === "make");
     if (Make !== -1) Arguments.splice(Make, 1), Make = true;
 
-    const FS   = require("fs");
     const Path = Arguments[0];
 
     if (!FS.existsSync(Path)) {
