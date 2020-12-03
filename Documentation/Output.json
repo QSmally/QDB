@@ -477,7 +477,7 @@
             "Value": "Commit",
             "Flags": [],
             "Line": 40,
-            "Description": "Commits the changes made during this Transaction.",
+            "Description": "Publishes the changes made during this Transaction.",
             "Returns": "{Boolean} Whether the changed were committed."
         },
         {

@@ -26,7 +26,7 @@ Transactions should only be created in synchronous environments, as other data c
 
 # Methods
 ## [.Commit()](https://github.com/QSmally/QDB/blob/v4/lib/Utility/Transaction.js#L40)
-> Commits the changes made during this Transaction.
+> Publishes the changes made during this Transaction.
 >
 > Returns **{Boolean}** Whether the changed were committed.
 
