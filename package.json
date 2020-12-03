@@ -10,7 +10,7 @@
     "docs": "gendocs Test/DocConf.json"
   },
   "bin": {
-    "qdb": "Shell/Main.js"
+    "qdb": "Shell/CLI.js"
   },
   "keywords": [
     "database",
