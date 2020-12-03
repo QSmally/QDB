@@ -18,4 +18,23 @@ if (!Arguments.length) {
         `${Format.BOLD("REPOSITORY")}\n  https://github.com/QSmally/QDB`
     ].join("\n"));
 
-} else {}
+} else {
+
+    let Make = Arguments.map(A => A.toLowerCase()).findIndex(V => V === "make");
+    if (Make !== -1) Arguments.splice(Make, 1), Make = true;
+
+    const FS   = require("fs");
+    const Path = Arguments[0];
+
+    if (!FS.existsSync(Path)) {
+        if (Make !== true) {
+            console.log([`${Format.BOLD("Error")}: ${Path} does not exist.`,
+                "If you wish to create the database, include `make` in the command."
+            ].join("\n"));
+            process.exit(0);
+        }
+
+        FS.appendFileSync(Path, "");
+    }
+
+}
