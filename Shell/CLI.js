@@ -8,7 +8,7 @@ const Arguments = process.argv.slice(2);
 if (!Arguments.length) {
 
     const Commands = FS.readdirSync(__dirname + "/Store/")
-    .map(C => C.split(".")[0].toLowerCase());
+    .map(C => C.split(".")[0]);
 
     console.log(["QDB Shell\n",
         `${Format.BOLD("USAGE")}\n  qdb <database> [\"make\" | flags]\n`,
