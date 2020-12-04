@@ -12,7 +12,7 @@ if (!Arguments.length) {
 
     console.log(["QDB Shell\n",
         `${Format.BOLD("USAGE")}\n  qdb <database> [\"make\" | flags]\n`,
-        `${Format.BOLD("MENU")}\n  ${Format.LIST(Object.fromEntries(
+        `${Format.BOLD("MENU")}\n${Format.LIST(Object.fromEntries(
             Commands.map(Cmd => [Cmd, require(`./Store/${Cmd}`).Description])
         ))}\n`,
         `${Format.BOLD("REPOSITORY")}\n  https://github.com/QSmally/QDB`
