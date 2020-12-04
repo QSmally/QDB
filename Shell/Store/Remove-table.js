@@ -16,6 +16,7 @@ module.exports = {
 
         Connection.exec(`DROP TABLE '${Table}';`);
         console.log(`Successfully erased table '${Format.BOLD(Table)}'.`);
+        Connection.close();
 
         return true;
 

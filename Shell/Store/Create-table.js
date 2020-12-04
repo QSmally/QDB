@@ -16,6 +16,7 @@ module.exports = {
 
         Connection.exec(`CREATE TABLE '${Table}' ('Key' VARCHAR PRIMARY KEY, 'Val' TEXT);`);
         console.log(`Successfully created table '${Format.BOLD(Table)}'.`);
+        Connection.close();
 
         return true;
 
