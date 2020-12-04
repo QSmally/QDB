@@ -7,5 +7,5 @@ module.exports = Action => {
         message: `What is the name of the table you would like to ${Action}?`
     });
 
-    return Prompt;
+    return Prompt.run();
 }
