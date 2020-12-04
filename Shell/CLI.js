@@ -7,7 +7,7 @@ const Arguments = process.argv.slice(2);
 
 if (!Arguments.length) {
 
-    const Commands = FS.readdirSync("Shell/Store/")
+    const Commands = FS.readdirSync(__dirname + "/Store/")
     .map(C => C.split(".")[0].toLowerCase());
 
     console.log(["QDB Shell\n",
