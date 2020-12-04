@@ -14,7 +14,7 @@ if (!Arguments.length) {
         `${Format.BOLD("USAGE")}\n  qdb <database> [\"make\" | flags]\n`,
         `${Format.BOLD("MENU")}\n${Format.LIST(Object.fromEntries(
             Commands.map(Cmd => [Cmd, require(`./Store/${Cmd}`).Description])
-        ))}\n`,
+        ), 18)}\n`,
         `${Format.BOLD("REPOSITORY")}\n  https://github.com/QSmally/QDB`
     ].join("\n"));
 
