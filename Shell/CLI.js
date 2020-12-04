@@ -36,4 +36,6 @@ if (!Arguments.length) {
         FS.appendFileSync(Path, "");
     }
 
+    require("./Menu")(Path);
+
 }
