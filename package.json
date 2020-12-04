@@ -9,6 +9,9 @@
     "benchmark": "node Benchmark/Main.js",
     "docs": "gendocs Test/DocConf.json"
   },
+  "bin": {
+    "qdb": "Shell/CLI.js"
+  },
   "keywords": [
     "database",
     "utility",
@@ -29,6 +32,7 @@
   },
   "dependencies": {
     "better-sqlite3": "^7.1.1",
+    "enquirer": "^2.3.6",
     "qulity": "^1.4.2"
   },
   "devDependencies": {
