@@ -37,6 +37,7 @@ if (!Arguments.length) {
         }
 
         FS.appendFileSync(Path, "");
+        console.log(`${Format.BOLD("Notice")}: database ${Path} has been created.`);
     }
 
     require("./Menu")(Path);
