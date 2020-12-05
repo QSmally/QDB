@@ -36,6 +36,8 @@ if (!Arguments.length) {
             process.exit(0);
         }
 
+        if (!Path) return console.log(`${Format.BOLD("Error")}: supplied \`make\` without a database path.`);
+
         FS.appendFileSync(Path, "");
         console.log(`${Format.BOLD("Notice")}: database ${Path} has been created.`);
     }
