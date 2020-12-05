@@ -12,7 +12,7 @@ module.exports = {
         const Connection = new SQL(Path);
         
         const ExistingTable = Connection.prepare("SELECT name FROM 'sqlite_master' WHERE type = 'table' AND name = ?;").get(Table);
-        if (ExistingTable) return console.log(`${Format.BOLD("Error")}: another table exists with the name '${Table}'.`);
+        if (ExistingTable) return console.log(`${Format.DIM("Error")}: another table exists with the name '${Table}'.`);
 
         Connection.exec(`CREATE TABLE '${Table}' ('Key' VARCHAR PRIMARY KEY, 'Val' TEXT);`);
         console.log(`Successfully created table '${Format.BOLD(Table)}'.`);

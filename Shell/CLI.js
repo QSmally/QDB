@@ -29,17 +29,17 @@ if (!Arguments.length) {
 
     if (!FS.existsSync(Path)) {
         if (Make !== true) {
-            console.log([`${Format.BOLD("Error")}: ${Path} does not exist.`,
+            console.log([`${Format.DIM("Error")}: ${Path} does not exist.`,
                 "If you wish to create the database, include `make` in the command."
             ].join("\n"));
 
             process.exit(0);
         }
 
-        if (!Path) return console.log(`${Format.BOLD("Error")}: supplied \`make\` without a database path.`);
+        if (!Path) return console.log(`${Format.DIM("Error")}: supplied \`make\` without a database path.`);
 
         FS.appendFileSync(Path, "");
-        console.log(`${Format.BOLD("Notice")}: database ${Path} has been created.`);
+        console.log(`${Format.DIM("Notice")}: database ${Path} has been created.`);
     }
 
     require("./Menu")(Path);

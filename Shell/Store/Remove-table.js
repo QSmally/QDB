@@ -12,7 +12,7 @@ module.exports = {
         const Connection = new SQL(Path);
         
         const ExistingTable = Connection.prepare("SELECT name FROM 'sqlite_master' WHERE type = 'table' AND name = ?;").get(Table);
-        if (!ExistingTable) return console.log(`${Format.BOLD("Error")}: there's no table with the name '${Table}'.`);
+        if (!ExistingTable) return console.log(`${Format.DIM("Error")}: there's no table with the name '${Table}'.`);
 
         Connection.exec(`DROP TABLE '${Table}';`);
         console.log(`Successfully erased table '${Format.BOLD(Table)}'.`);
