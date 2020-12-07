@@ -5,7 +5,7 @@ const SQL    = require("better-sqlite3");
 module.exports = {
     Input:       true,
     Action:      "delete",
-    Description: "Erases a table in the given database file.",
+    Description: "Discards the given the table in the database.",
 
     Execute: (Path, Table) => {
 
