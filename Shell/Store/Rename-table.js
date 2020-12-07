@@ -15,7 +15,7 @@ module.exports = {
         const ExistingTable = Connection.prepare("SELECT name FROM 'sqlite_master' WHERE type = 'table' AND name = ?;").get(Table);
         if (!ExistingTable) return console.log(`${Format.DIM("Error")}: there's no table with the name '${Table}'.`);
 
-        const Name = await Prompt("New name");
+        const Name = await Prompt("New name").catch(_ => process.exit(0));
 
         Connection.exec(`ALTER TABLE '${Table}' RENAME TO '${Name}';`);
         console.log(`Successfully renamed table '${Table}' to '${Format.BOLD(Name)}'.`);
