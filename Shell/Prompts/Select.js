@@ -4,7 +4,7 @@ const {Select} = require("enquirer");
 
 const Prompt = new Select({
     name:    "Action",
-    message: "Select which action you would like to perform",
+    message: "Select an action",
     choices: [...FS.readdirSync(__dirname + "/../Store/").map(C => C.split(".")[0])]
 });
 
