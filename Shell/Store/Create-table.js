@@ -14,7 +14,7 @@ module.exports = {
         const ExistingTable = Connection.prepare("SELECT name FROM 'sqlite_master' WHERE type = 'table' AND name = ?;").get(Table);
         if (ExistingTable) return console.log(`${Format.DIM("Error")}: another table exists with the name '${Table}'.`);
 
-        Connection.exec(`CREATE TABLE '${Table}' ('Key' VARCHAR PRIMARY KEY, 'Val' TEXT);`);
+        Connection.prepare(`CREATE TABLE '${Table}' ('Key' VARCHAR PRIMARY KEY, 'Val' TEXT);`).run();
         console.log(`Successfully created table '${Format.BOLD(Table)}'.`);
         Connection.close();
 

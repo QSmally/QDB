@@ -17,7 +17,7 @@ module.exports = {
 
         const Name = await Prompt("New name").catch(_ => process.exit(0));
 
-        Connection.exec(`ALTER TABLE '${Table}' RENAME TO '${Name}';`);
+        Connection.prepare(`ALTER TABLE '${Table}' RENAME TO '${Name}';`).run();
         console.log(`Successfully renamed table '${Table}' to '${Format.BOLD(Name)}'.`);
         Connection.close();
 
