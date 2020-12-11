@@ -22,7 +22,7 @@ for (const Trial of Trials) {
 
         const TStart = process.hrtime();
         const Amount = Benchmark(Connection);
-        const TEnd   = process.hrtime(StartTime);
+        const TEnd   = process.hrtime(TStart);
 
         const Time = TStart[0] + (TEnd[1] / 1000000000);
 
