@@ -24,7 +24,7 @@ for (const Trial of Trials) {
         const Amount = Benchmark(Connection);
         const TEnd   = process.hrtime(TStart);
 
-        const Time = TStart[0] + (TEnd[1] / 1000000000);
+        const Time = TEnd[0] + (TEnd[1] / 1000000000);
 
         Times.get(Test)[Table] = {
             OpsPerSec: Amount / Time,
