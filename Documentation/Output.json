@@ -134,7 +134,7 @@
             "Params": [
                 "{Pathlike} Pathlike String input to be formed and parsed."
             ],
-            "Returns": "{Array<String, Array?>} Array containnig a 'Key', and optionally a 'Path'."
+            "Returns": "{Array<String, Array?>} Array containnig a 'Key' and an optional 'Path'."
         },
         {
             "Value": "_Patch",
@@ -160,7 +160,7 @@
             "Params": [
                 "{Object|Array} Frame The object-like beginning to cast.",
                 "{Array} Pathlike A dotaccess notation path as an Array. Preferred `Path` value from `_Resolve()`.",
-                "{Object} [Options] Additional queries for the caster to use."
+                "{*} [Item] A value to cast into the inputted frame object."
             ],
             "Returns": "{*} Returns the output of the caster."
         },
@@ -552,9 +552,22 @@
             "Returns": "{Object|Array|DataModel}"
         },
         {
+            "Value": "_CastPath",
+            "Flags": [
+                "Private"
+            ],
+            "Line": 87,
+            "Description": "Internal method. Finds a relative dotaccess pathway of an object.",
+            "Params": [
+                "{Object|Array} Frame The object-like beginning to cast.",
+                "{Array} Pathlike A dotaccess notation path, as an Array split by dots."
+            ],
+            "Returns": "{*} Returns the output of the caster."
+        },
+        {
             "Value": "Order",
             "Flags": [],
-            "Line": 87,
+            "Line": 109,
             "Description": "Sorts this Selection's values. Identical to the `ORDER BY` SQL statement.",
             "Params": [
                 "{Function} Fn Function that determines the sort order."
@@ -564,7 +577,7 @@
         {
             "Value": "Filter",
             "Flags": [],
-            "Line": 99,
+            "Line": 121,
             "Description": "Filters values that satisfy the provided function. Identical to the `FILTER BY` SQL statement.",
             "Params": [
                 "{Function} Fn Function that determines which entries to keep."
@@ -574,7 +587,7 @@
         {
             "Value": "Limit",
             "Flags": [],
-            "Line": 115,
+            "Line": 137,
             "Description": "Slices off values from this Selection. Identical to the `LIMIT` SQL statement.",
             "Params": [
                 "{Number} Begin Integer to indicate the beginning to slice.",
@@ -585,7 +598,7 @@
         {
             "Value": "Group",
             "Flags": [],
-            "Line": 138,
+            "Line": 160,
             "Description": "Groups this Selection based on an identifier. Identical to the `GROUP BY` SQL statement.",
             "Params": [
                 "{Pathlike} Key Indicates by which element to group this Selection."
@@ -595,7 +608,7 @@
         {
             "Value": "Join",
             "Flags": [],
-            "Line": 164,
+            "Line": 187,
             "Description": "Joins another Selection into this instance based on a referrer field. Identical to the `FULL JOIN` SQL statement.",
             "Params": [
                 "{Selection} Secondary Another Selection instance to join into this one.",
@@ -607,7 +620,7 @@
         {
             "Value": "Map",
             "Flags": [],
-            "Line": 197,
+            "Line": 220,
             "Description": "Iterates over this Selection's values and keys, and implements the new values returned from the callback.",
             "Params": [
                 "{Function} Fn Callback function which determines the new values of the Selection."
@@ -617,7 +630,7 @@
         {
             "Value": "Merge",
             "Flags": [],
-            "Line": 212,
+            "Line": 235,
             "Description": "Automatically clones the merging Selections and adds them into this instance.",
             "Params": [
                 "{...Selection} Selections Instances to clone and merge into this one."
@@ -627,7 +640,7 @@
         {
             "Value": "Clone",
             "Flags": [],
-            "Line": 227,
+            "Line": 250,
             "Description": "Creates a new memory allocation for the copy of this Selection.",
             "Params": [
                 "{String} [Holds] Optional new identifier value for the cloned Selection."
