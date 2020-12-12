@@ -329,9 +329,21 @@
             "Returns": "{Number} New length of the array."
         },
         {
+            "Value": "Slice",
+            "Flags": [],
+            "Line": 586,
+            "Description": "Removes elements from this endpoint array based on indexes.",
+            "Params": [
+                "{Pathlike} KeyOrPath Specifies which row or nested array to slice values from.",
+                "{Number} [Start] Beginning of the specified portion of the array.",
+                "{Number} [End] End of the specified portion of the array."
+            ],
+            "Returns": "{Number} New length of the array."
+        },
+        {
             "Value": "Ensure",
             "Flags": [],
-            "Line": 589,
+            "Line": 608,
             "Description": "Inserts an input into a row or nested object if the key or path wasn't found at the endpoint. It can be used as a default schema of the database elements, that gets inserted if there's no entry already.",
             "Params": [
                 "{Pathlike} KeyOrPath Context key to see if it exists, either a row or nested property, and optionally insert the new value.",
@@ -343,7 +355,7 @@
         {
             "Value": "Modify",
             "Flags": [],
-            "Line": 615,
+            "Line": 634,
             "Description": "Updates a value in the database by fetching it and passing it onto the callback function.",
             "Params": [
                 "{Pathlike} KeyOrPath Specifies which row or nested property to fetch.",
@@ -354,7 +366,7 @@
         {
             "Value": "Invert",
             "Flags": [],
-            "Line": 633,
+            "Line": 652,
             "Description": "Inverts a boolean, from true to false and vice-versa, at the endpoint of the path.",
             "Params": [
                 "{Pathlike} KeyOrPath Specifies which row or nested property to boolean-invert."
@@ -366,7 +378,7 @@
             "Flags": [
                 "Typedef"
             ],
-            "Line": 654,
+            "Line": 673,
             "Description": "Options for a database Connection. All integer related options are in milliseconds. ",
             "Typedef": "{Object} RawOptions",
             "Params": [
@@ -389,7 +401,7 @@
             "Flags": [
                 "Typedef"
             ],
-            "Line": 676,
+            "Line": 695,
             "Description": "An entry which has been resolved from the Connection's internal cache.",
             "Typedef": "{Object|Array} DataModel",
             "Params": [
@@ -402,7 +414,7 @@
             "Flags": [
                 "Typedef"
             ],
-            "Line": 683,
+            "Line": 702,
             "Description": "Path string to navigate entries of the database.",
             "Typedef": "{String} Pathlike"
         }

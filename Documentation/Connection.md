@@ -195,7 +195,17 @@ const Users = new QDB.Connection("lib/Databases/Users.qdb");
 >
 > Returns **{Number}** New length of the array.
 
-## [.Ensure(KeyOrPath, Input, Merge?)](https://github.com/QSmally/QDB/blob/v4/lib/Connections/Connection.js#L589)
+## [.Slice(KeyOrPath, Start?, End?)](https://github.com/QSmally/QDB/blob/v4/lib/Connections/Connection.js#L586)
+> Removes elements from this endpoint array based on indexes.
+> | Key | Type | Description |
+> | --- | --- | --- |
+> | KeyOrPath | Pathlike | Specifies which row or nested array to slice values from. |
+> | Start? | Number | Beginning of the specified portion of the array. |
+> | End? | Number | End of the specified portion of the array. |
+>
+> Returns **{Number}** New length of the array.
+
+## [.Ensure(KeyOrPath, Input, Merge?)](https://github.com/QSmally/QDB/blob/v4/lib/Connections/Connection.js#L608)
 > Inserts an input into a row or nested object if the key or path wasn't found at the endpoint. It can be used as a default schema of the database elements, that gets inserted if there's no entry already.
 > | Key | Type | Description |
 > | --- | --- | --- |
@@ -205,7 +215,7 @@ const Users = new QDB.Connection("lib/Databases/Users.qdb");
 >
 > Returns **{Boolean}** Whether or not the new value was inserted.
 
-## [.Modify(KeyOrPath, Fn)](https://github.com/QSmally/QDB/blob/v4/lib/Connections/Connection.js#L615)
+## [.Modify(KeyOrPath, Fn)](https://github.com/QSmally/QDB/blob/v4/lib/Connections/Connection.js#L634)
 > Updates a value in the database by fetching it and passing it onto the callback function.
 > | Key | Type | Description |
 > | --- | --- | --- |
@@ -214,7 +224,7 @@ const Users = new QDB.Connection("lib/Databases/Users.qdb");
 >
 > Returns **{Object|Array|DataModel}** Returns the new row of the updated property.
 
-## [.Invert(KeyOrPath)](https://github.com/QSmally/QDB/blob/v4/lib/Connections/Connection.js#L633)
+## [.Invert(KeyOrPath)](https://github.com/QSmally/QDB/blob/v4/lib/Connections/Connection.js#L652)
 > Inverts a boolean, from true to false and vice-versa, at the endpoint of the path.
 > | Key | Type | Description |
 > | --- | --- | --- |
@@ -223,7 +233,7 @@ const Users = new QDB.Connection("lib/Databases/Users.qdb");
 > Returns **{Boolean}** Returns the updated boolean value of the property.
 
 # Typedefs
-## [RawOptions](https://github.com/QSmally/QDB/blob/v4/lib/Connections/Connection.js#L654)
+## [RawOptions](https://github.com/QSmally/QDB/blob/v4/lib/Connections/Connection.js#L673)
 > Options for a database Connection. All integer related options are in milliseconds. 
 > | Key | Type | Description |
 > | --- | --- | --- |
@@ -242,7 +252,7 @@ const Users = new QDB.Connection("lib/Databases/Users.qdb");
 >
 > Type **{Object}**
 
-## [DataModel](https://github.com/QSmally/QDB/blob/v4/lib/Connections/Connection.js#L676)
+## [DataModel](https://github.com/QSmally/QDB/blob/v4/lib/Connections/Connection.js#L695)
 > An entry which has been resolved from the Connection's internal cache.
 > | Key | Type | Description |
 > | --- | --- | --- |
@@ -251,7 +261,7 @@ const Users = new QDB.Connection("lib/Databases/Users.qdb");
 >
 > Type **{Object|Array}**
 
-## [Pathlike](https://github.com/QSmally/QDB/blob/v4/lib/Connections/Connection.js#L683)
+## [Pathlike](https://github.com/QSmally/QDB/blob/v4/lib/Connections/Connection.js#L702)
 > Path string to navigate entries of the database.
 >
 > Type **{String}**
