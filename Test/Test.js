@@ -94,6 +94,10 @@ module.exports = (QDB, Tap) => {
 
     Tap("Con#Set10", Con.Set("2345.Hobbies", ["one", "two", "three", "four"]).Fetch("2345.Hobbies.length"), 4);
 
+    Tap("Con#Slice1", Con.Slice("3456.Hobbies"), 8);
+    Tap("Con#Slice1", Con.Slice("3456.Hobbies", 1), 7);
+    Tap("Con#Slice1", Con.Slice("3456.Hobbies", 0, 5), 5);
+
     // Utility methods
     Tap("Con#Ensure1", Con.Ensure("2345", {Name: "nope", Age: -1, Hobbies: []}), false);
     Tap("Con#Ensure2", Con.Ensure("6789", {Name: "Untitled", Age: -1, Hobbies: []}), true);
@@ -137,13 +141,13 @@ module.exports = (QDB, Tap) => {
     Tap("Con#CacheSize18", Con.CacheSize, 0);
 
     // Iterator methods
-    let res = [];
+    let Results = [];
 
     Con.Each((_Row, Key) => {
-        res.push(Key);
+        Results.push(Key);
     }, true);
 
-    Tap("Con#Each", res, ["4567", "3456", "2345", "6789"]);
+    Tap("Con#Each", Results, ["4567", "3456", "2345", "6789"]);
 
     // Selection class
     Tap("Con#Select1", Con.Select((_Row, Key) => {
