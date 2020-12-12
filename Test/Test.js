@@ -147,7 +147,7 @@ module.exports = (QDB, Tap) => {
         Results.push(Key);
     }, true);
 
-    Tap("Con#Each", Results, ["4567", "3456", "2345", "6789"]);
+    Tap("Con#Each", Results, ["4567", "2345", "3456", "6789"]);
 
     // Selection class
     Tap("Con#Select1", Con.Select((_Row, Key) => {
@@ -163,13 +163,13 @@ module.exports = (QDB, Tap) => {
 
     Tap("Sel#Values", Sel.Values, [
         {Name: "bar", Age: 30, Hobbies: ["one", "two", "three", "four"]},
-        {Name: "roo", Age: 29, Hobbies: ["one", "two", "three", "-5", "loo", "1", "2", "3"]},
+        {Name: "roo", Age: 29, Hobbies: ["two", "three", "-5", "loo", "1"]},
         {Name: "goo", Age: 27, Hobbies: []}
     ]);
 
     Tap("Sel#AsObject", Sel.AsObject, {
         "2345": {Name: "bar", Age: 30, Hobbies: ["one", "two", "three", "four"]},
-        "3456": {Name: "roo", Age: 29, Hobbies: ["one", "two", "three", "-5", "loo", "1", "2", "3"]},
+        "3456": {Name: "roo", Age: 29, Hobbies: ["two", "three", "-5", "loo", "1"]},
         "4567": {Name: "goo", Age: 27, Hobbies: []}
     });
 
