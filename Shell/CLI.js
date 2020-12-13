@@ -11,7 +11,7 @@ if (!Arguments.length) {
     .map(C => C.split(".")[0]);
 
     console.log(["QDB Shell\n",
-        `${Format.BOLD("USAGE")}\n  qdb <database> [\"make\" | flags]\n`,
+        `${Format.BOLD("USAGE")}\n  qdb <database | make | help> [sub] [params...]\n`,
         `${Format.BOLD("MENU")}\n${Format.LIST(Object.fromEntries(
             Commands.map(Cmd => [Cmd, require(`./Store/${Cmd}`).Description])
         ), 18)}\n`,
