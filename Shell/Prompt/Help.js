@@ -16,12 +16,12 @@ module.exports = Command => {
     ].join("\n"));
 
     const Sub = Commands.get(Command.toLowerCase());
-    if (!Sub) return console.log(`${Format.DIM("Error")}: comamnd '${Command}' does not exist.`);
+    if (!Sub) return console.log(`${Format.DIM("Error")}: command '${Command}' does not exist.`);
 
     console.log([
         `QDB Shell - ${Format.BOLD(Command)}`,
-        `${Sub.Description}\n`,
-        `${Format.BOLD("EXAMPLES")}`,
-        ...Sub.Examples
+        `\n${Sub.Description}\n`,
+        Format.BOLD("EXAMPLES"),
+        ...Sub.Examples.map(E => `  ${E}`)
     ].join("\n"));
 }
