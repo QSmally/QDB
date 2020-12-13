@@ -5,6 +5,8 @@ const FS        = require("fs");
 const Format    = require("./Format");
 const Arguments = process.argv.slice(2);
 
+const Menu = require("./Menu");
+
 if (!Arguments.length) {
 
     const Commands = FS.readdirSync(`${__dirname}/Store/`)
@@ -22,29 +24,22 @@ if (!Arguments.length) {
 
 } else {
 
-    let Make = Arguments.map(A => A.toLowerCase()).findIndex(V => V === "make");
-    if (Make !== -1) Arguments.splice(Make, 1), Make = true;
+    const Commands = new Map(FS.readdirSync(`${__dirname}/Prompt/`)
+        .map(C => [C.split(".")[0].toLowerCase(), require(`./Prompt/${C}`)])
+    );
+    
+    console.log(Arguments);
 
-    const Path = Arguments[0];
+    const Action = Arguments.shift();
+    const Executable = Commands.get(Action.toLowerCase());
+    if (Executable) return Executable(Arguments.shift());
+    
 
-    if (!FS.existsSync(Path)) {
-        if (Make !== true) {
-            console.log([`${Format.DIM("Error")}: ${Path} does not exist.`,
-                "If you wish to create the database, include `make` in the command."
-            ].join("\n"));
+    if (!FS.existsSync(Action)) return console.log([
+        `${Format.DIM("Error")}: '${Action}' does not exist.`,
+        "Use 'qdb make <database>' to create a new QDB instance."
+    ].join("\n"));
 
-            process.exit(0);
-        }
-
-        if (!Path) {
-            console.log(`${Format.DIM("Error")}: supplied \`make\` without a database path.`);
-            process.exit(0);
-        }
-
-        FS.appendFileSync(Path, "");
-        console.log(`${Format.DIM("Notice")}: database ${Path} has been created.`);
-    }
-
-    require("./Menu")(Path);
+    Menu(Action, Arguments);
 
 }
