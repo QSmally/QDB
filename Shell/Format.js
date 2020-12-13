@@ -11,4 +11,4 @@ module.exports = {
     LIST: (Items, Padding) => Object.keys(Items)
         .map(Item => `  ${Item}:`.padEnd(Padding) + Items[Item])
         .join("\n")
-}
+};
