@@ -7,9 +7,10 @@ module.exports = {
     Action:      "delete",
     Description: "Discards the given the table in the database.",
 
-    Execute: (Path, Table) => {
+    Execute: (Path, Arguments) => {
 
         const Connection = new SQL(Path);
+        const Table = Arguments.shift();
         
         const ExistingTable = Connection.prepare("SELECT name FROM 'sqlite_master' WHERE type = 'table' AND name = ?;").get(Table);
         if (!ExistingTable) return console.log(`${Format.DIM("Error")}: there's no table with the name '${Table}'.`);
