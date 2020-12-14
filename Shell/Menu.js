@@ -8,7 +8,7 @@ const Commands = new Map(FS.readdirSync(`${__dirname}/Store/`)
 
 module.exports = (Path, Arguments) => {
 
-    const Command = Arguments.shift() || "list-tables";
+    const Command = Arguments.shift() || "list";
 
     const Executable = Commands.get(Command.toLowerCase());
     if (Executable) return Executable.Execute(Path, Arguments);
