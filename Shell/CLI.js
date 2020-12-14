@@ -15,8 +15,6 @@ if (!Arguments.length) {
     const Commands = new Map(FS.readdirSync(`${__dirname}/Prompt/`)
         .map(C => [C.split(".")[0].toLowerCase(), require(`./Prompt/${C}`)])
     );
-    
-    console.log(Arguments);
 
     const Action = Arguments.shift();
     const Executable = Commands.get(Action.toLowerCase());
