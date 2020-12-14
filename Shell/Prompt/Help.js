@@ -20,6 +20,7 @@ module.exports = Command => {
 
     console.log([
         `QDB Shell - ${Format.BOLD(Command)}`,
+        Format.DIM(Sub.Usage),
         `\n${Sub.Description}\n`,
         Format.BOLD("EXAMPLES"),
         ...Sub.Examples.map(E => `  ${E}`)
