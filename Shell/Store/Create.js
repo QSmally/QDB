@@ -10,6 +10,8 @@ module.exports = {
         "qdb ./Internal/Guilds.qdb create Profiles"
     ],
 
+    Arguments: 1,
+
     Execute: (Path, Arguments) => {
 
         const Connection = new SQL(Path);

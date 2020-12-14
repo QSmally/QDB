@@ -10,6 +10,8 @@ module.exports = {
         "qdb ./Internal/Guilds.qdb list"
     ],
 
+    Arguments: 0,
+
     Execute: Path => {
 
         const Connection = new SQL(Path);

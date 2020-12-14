@@ -8,10 +8,14 @@ const Commands = new Map(FS.readdirSync(`${__dirname}/Store/`)
 
 module.exports = (Path, Arguments) => {
 
-    const Command = Arguments.shift() || "list";
-
+    const Command    = Arguments.shift() || "list";
     const Executable = Commands.get(Command.toLowerCase());
-    if (Executable) return Executable.Execute(Path, Arguments);
+
+    if (Executable) {
+        if (Arguments.length !== Executable.Arguments)
+        return console.log(`${Format.DIM("Error")}: expected ${Executable.Arguments} arguments, but received ${Arguments.length}.`);
+        return Executable.Execute(Path, Arguments);
+    }
 
     console.log([
         `${Format.DIM("Error")}: command '${Command}' does not exist.`,

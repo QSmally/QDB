@@ -10,6 +10,8 @@ module.exports = {
         "qdb ./Internal/Guilds.qdb rename Profiles Instances"
     ],
 
+    Arguments: 2,
+
     Execute: async (Path, Arguments) => {
 
         const Connection = new SQL(Path);
