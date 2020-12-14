@@ -1,10 +1,25 @@
 
-module.exports = async Path => {
+const FS     = require("fs");
+const Format = require("./Format");
 
-    const Selected = await require("./Prompts/Select").run().catch(_ => process.exit(0));
-    const Command  = require(`./Store/${Selected}`);
-    const Table    = Command.Input ? await require("./Prompts/Table")(`Table to ${Command.Action}`).catch(_ => process.exit(0)) : null;
+const Commands = new Map(FS.readdirSync(`${__dirname}/Store/`)
+    .map(C => [C.split(".")[0].toLowerCase(), require(`./Store/${C}`)])
+);
 
-    return Command.Execute(Path, Table);
+module.exports = (Path, Arguments) => {
+
+    const Command    = Arguments.shift() || "list";
+    const Executable = Commands.get(Command.toLowerCase());
+
+    if (Executable) {
+        if (Arguments.length !== Executable.Arguments)
+        return console.log(`${Format.DIM("Error")}: expected ${Executable.Arguments} arguments, but received ${Arguments.length}.`);
+        return Executable.Execute(Path, Arguments);
+    }
+
+    console.log([
+        `${Format.DIM("Error")}: command '${Command}' does not exist.`,
+        "See a list of commands with running 'qdb help [command]'."
+    ].join("\n"));
 
 }

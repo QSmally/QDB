@@ -5,46 +5,27 @@ const FS        = require("fs");
 const Format    = require("./Format");
 const Arguments = process.argv.slice(2);
 
+const Menu = require("./Menu");
+const Help = require("./Prompt/Help");
+
 if (!Arguments.length) {
-
-    const Commands = FS.readdirSync(__dirname + "/Store/")
-    .map(C => C.split(".")[0]);
-
-    console.log(["QDB Shell\n",
-        `${Format.BOLD("USAGE")}\n  qdb <database> [\"make\" | flags]\n`,
-        `${Format.BOLD("MENU")}\n${Format.LIST(Object.fromEntries(
-            Commands.map(Cmd => [Cmd, require(`./Store/${Cmd}`).Description])
-        ), 18)}\n`,
-        `${Format.BOLD("REPOSITORY")}\n  https://github.com/QSmally/QDB`
-    ].join("\n"));
-
-    process.exit(0);
-
+    Help();
 } else {
 
-    let Make = Arguments.map(A => A.toLowerCase()).findIndex(V => V === "make");
-    if (Make !== -1) Arguments.splice(Make, 1), Make = true;
+    const Commands = new Map(FS.readdirSync(`${__dirname}/Prompt/`)
+        .map(C => [C.split(".")[0].toLowerCase(), require(`./Prompt/${C}`)])
+    );
 
-    const Path = Arguments[0];
+    const Action = Arguments.shift();
+    const Executable = Commands.get(Action.toLowerCase());
+    if (Executable) return Executable(Arguments.shift());
+    
 
-    if (!FS.existsSync(Path)) {
-        if (Make !== true) {
-            console.log([`${Format.DIM("Error")}: ${Path} does not exist.`,
-                "If you wish to create the database, include `make` in the command."
-            ].join("\n"));
+    if (!FS.existsSync(Action)) return console.log([
+        `${Format.DIM("Error")}: '${Action}' does not exist.`,
+        "Use 'qdb make <database>' to create a new QDB instance."
+    ].join("\n"));
 
-            process.exit(0);
-        }
-
-        if (!Path) {
-            console.log(`${Format.DIM("Error")}: supplied \`make\` without a database path.`);
-            process.exit(0);
-        }
-
-        FS.appendFileSync(Path, "");
-        console.log(`${Format.DIM("Notice")}: database ${Path} has been created.`);
-    }
-
-    require("./Menu")(Path);
+    Menu(Action, Arguments);
 
 }

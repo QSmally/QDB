@@ -3,13 +3,19 @@ const Format = require("../Format");
 const SQL    = require("better-sqlite3");
 
 module.exports = {
-    Input:       true,
-    Action:      "create",
-    Description: "Creates a table in the given database file.",
+    Usage: "qdb <database> create <name>",
+    Description: "Adds an additional table in the given database file.",
+    Examples: [
+        "qdb Users.qdb create Users",
+        "qdb ./Internal/Guilds.qdb create Profiles"
+    ],
 
-    Execute: (Path, Table) => {
+    Arguments: 1,
+
+    Execute: (Path, Arguments) => {
 
         const Connection = new SQL(Path);
+        const Table = Arguments.shift();
         
         const ExistingTable = Connection.prepare("SELECT name FROM 'sqlite_master' WHERE type = 'table' AND name = ?;").get(Table);
         if (ExistingTable) return console.log(`${Format.DIM("Error")}: another table exists with the name '${Table}'.`);
