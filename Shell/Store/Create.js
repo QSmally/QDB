@@ -3,9 +3,12 @@ const Format = require("../Format");
 const SQL    = require("better-sqlite3");
 
 module.exports = {
-    Input:       true,
-    Action:      "create",
-    Description: "Creates a table in the given database file.",
+    Usage: "qdb <database> create <name>",
+    Description: "Adds an additional table in the given database file.",
+    Examples: [
+        "qdb Users.qdb create Users",
+        "qdb ./Internal/Guilds.qdb create Profiles"
+    ],
 
     Execute: (Path, Arguments) => {
 

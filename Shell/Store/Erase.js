@@ -3,9 +3,12 @@ const Format = require("../Format");
 const SQL    = require("better-sqlite3");
 
 module.exports = {
-    Input:       true,
-    Action:      "delete",
-    Description: "Discards the given the table in the database.",
+    Usage: "qdb <database> erase <name>",
+    Description: "Drops the table given by the name attribute.",
+    Examples: [
+        "qdb Users.qdb erase Users",
+        "qdb ./Internal/Guilds.qdb erase Profiles"
+    ],
 
     Execute: (Path, Arguments) => {
 

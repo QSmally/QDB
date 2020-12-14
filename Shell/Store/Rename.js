@@ -3,9 +3,12 @@ const Format = require("../Format");
 const SQL    = require("better-sqlite3");
 
 module.exports = {
-    Input:       true,
-    Action:      "rename",
+    Usage: "qdb <database> rename <name> <new-name>",
     Description: "Alters the selected table and renames it to a given string.",
+    Examples: [
+        "qdb Users.qdb rename Users People",
+        "qdb ./Internal/Guilds.qdb rename Profiles Instances"
+    ],
 
     Execute: async (Path, Arguments) => {
 

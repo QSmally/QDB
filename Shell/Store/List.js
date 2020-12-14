@@ -3,9 +3,12 @@ const Format = require("../Format");
 const SQL    = require("better-sqlite3");
 
 module.exports = {
-    Input:       false,
-    Action:      "list",
-    Description: "Lists all the tables in this database file.",
+    Usage: "qdb <database> list",
+    Description: "Lists this database's tables with the amount of rows for each table.",
+    Examples: [
+        "qdb Users.qdb list",
+        "qdb ./Internal/Guilds.qdb list"
+    ],
 
     Execute: Path => {
 
