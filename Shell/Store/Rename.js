@@ -6,7 +6,7 @@ module.exports = {
     Usage: "qdb <database> rename <name> <new-name>",
     Description: "Alters the selected table and renames it to a given string.",
     Examples: [
-        "qdb Users.qdb rename Users People",
+        "qdb Users.qdb rename Users Customers",
         "qdb ./Internal/Guilds.qdb rename Profiles Instances"
     ],
 
