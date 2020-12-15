@@ -8,7 +8,8 @@ module.exports = Database => {
         "\nMakes a new, QDB-formatted database file at the given path.\n",
         Format.BOLD("EXAMPLES"),
         "  qdb make Users.qdb",
-        "  qdb make ./Content/Guilds.qdb"
+        "  qdb make ./Content/Guilds.qdb",
+        "  qdb make /usr/xy/Client.qdb"
     ].join("\n"));
     
     if (FS.existsSync(Database)) return console.log(
