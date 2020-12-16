@@ -15,6 +15,7 @@ for (const Trial of Trials) {
 
     Times.set(Test, {});
 
+    // Test each table's performance
     for (const [Table, Size] of Tables) {
         const Connection = new QDB.Connection("Benchmark/Guilds.qdb", {
             Table
@@ -33,6 +34,7 @@ for (const Trial of Trials) {
     }
 
 
+    // Publish trial time
     const Current = Times.get(Test);
     process.stdout.write(CLI.erase.line);
     process.stdout.write(CLI.move(-31 - Test.length));
