@@ -244,21 +244,9 @@
             "Returns": "{Boolean} Whether or not a row exists in this database."
         },
         {
-            "Value": "Accumulate",
-            "Flags": [],
-            "Line": 421,
-            "Description": "Accumulates a function on a row, essentially a fetch wrapped in a method. Changes are not recorded on the database.",
-            "Params": [
-                "{Pathlike} KeyOrPath Specifies which row to fetch. Use dotaccess to retrieve properties.",
-                "{Function} Fn Callback function used to return the row or property.",
-                "{Boolean} [Cache] Whether or not to cache the fetched entry."
-            ],
-            "Returns": "{Connection} Returns the current Connection."
-        },
-        {
             "Value": "Each",
             "Flags": [],
-            "Line": 439,
+            "Line": 421,
             "Description": "Iterates through this database's entries.",
             "Params": [
                 "{Function} Fn A function which passes on the iterating entries."
@@ -268,7 +256,7 @@
         {
             "Value": "Find",
             "Flags": [],
-            "Line": 454,
+            "Line": 436,
             "Description": "Iterates through all the entries of the database, returns the first element found.",
             "Params": [
                 "{Function} Fn A tester function which returns a boolean, based on the value(s) of the rows."
@@ -278,7 +266,7 @@
         {
             "Value": "Select",
             "Flags": [],
-            "Line": 475,
+            "Line": 457,
             "Description": "Locally filters out rows in memory to work with. Please note that this method does increase memory usage in large databases.",
             "Params": [
                 "{Function|Pathlike} FnOrPath A filter function which returns a boolean, or a row in the database."
@@ -288,7 +276,7 @@
         {
             "Value": "Push",
             "Flags": [],
-            "Line": 503,
+            "Line": 485,
             "Description": "Pushes something to an array at the path output.",
             "Params": [
                 "{Pathlike} KeyOrPath Specifies which row or nested array to push to.",
@@ -299,7 +287,7 @@
         {
             "Value": "Shift",
             "Flags": [],
-            "Line": 522,
+            "Line": 504,
             "Description": "Inserts (if defined) or removes a value to/from the front of the array.",
             "Params": [
                 "{Pathlike} KeyOrPath Specifies which row or nested array to insert to/remove from.",
@@ -310,7 +298,7 @@
         {
             "Value": "Pop",
             "Flags": [],
-            "Line": 545,
+            "Line": 527,
             "Description": "Pops something from an array at the path output.",
             "Params": [
                 "{Pathlike} KeyOrPath Specifies which row or nested array to pop from."
@@ -320,7 +308,7 @@
         {
             "Value": "Remove",
             "Flags": [],
-            "Line": 562,
+            "Line": 544,
             "Description": "Removes a specific element from this endpoint array.",
             "Params": [
                 "{Pathlike} KeyOrPath Specifies which row or nested array to remove a value from.",
@@ -331,7 +319,7 @@
         {
             "Value": "Slice",
             "Flags": [],
-            "Line": 586,
+            "Line": 568,
             "Description": "Removes elements from this endpoint array based on indexes.",
             "Params": [
                 "{Pathlike} KeyOrPath Specifies which row or nested array to slice values from.",
@@ -343,7 +331,7 @@
         {
             "Value": "Ensure",
             "Flags": [],
-            "Line": 608,
+            "Line": 590,
             "Description": "Inserts an input into a row or nested object if the key or path wasn't found at the endpoint. It can be used as a default schema of the database elements, that gets inserted if there's no entry already.",
             "Params": [
                 "{Pathlike} KeyOrPath Context key to see if it exists, either a row or nested property, and optionally insert the new value.",
@@ -355,7 +343,7 @@
         {
             "Value": "Modify",
             "Flags": [],
-            "Line": 634,
+            "Line": 616,
             "Description": "Updates a value in the database by fetching it and passing it onto the callback function.",
             "Params": [
                 "{Pathlike} KeyOrPath Specifies which row or nested property to fetch.",
@@ -366,7 +354,7 @@
         {
             "Value": "Invert",
             "Flags": [],
-            "Line": 652,
+            "Line": 634,
             "Description": "Inverts a boolean, from true to false and vice-versa, at the endpoint of the path.",
             "Params": [
                 "{Pathlike} KeyOrPath Specifies which row or nested property to boolean-invert."
@@ -378,7 +366,7 @@
             "Flags": [
                 "Typedef"
             ],
-            "Line": 673,
+            "Line": 655,
             "Description": "Options for a database Connection. All integer related options are in milliseconds. ",
             "Typedef": "{Object} RawOptions",
             "Params": [
@@ -387,7 +375,7 @@
                 "{Boolean} WAL Whether or not to enable Write Ahead Logging mode. ",
                 "{Boolean} Cache Whether to enable in-memory caching of entries in results that the next retrieval would be much faster.",
                 "{Boolean} FetchAll Whether or not to fetch all the database entries on start-up of this database Connection.",
-                "{Boolean} UtilCache Whether or not to cache entries while performing utility tasks, such as the Exists and Accumulate methods. ",
+                "{Boolean} UtilCache Whether or not to cache entries while performing utility tasks, such as the Exists method. ",
                 "{Number} CacheMaxSize Amount to be considered the maximum size. If this threshold is hit, the cache will temporarily stop adding new entries.",
                 "{Number} SweepInterval Integer to indicate at what interval to sweep the entries of this Connection's internal cache.",
                 "{Number} SweepLifetime The minimum age of an entry in the cache to consider being sweepable after an interval. ",
@@ -401,7 +389,7 @@
             "Flags": [
                 "Typedef"
             ],
-            "Line": 695,
+            "Line": 677,
             "Description": "An entry which has been resolved from the Connection's internal cache.",
             "Typedef": "{Object|Array} DataModel",
             "Params": [
@@ -414,7 +402,7 @@
             "Flags": [
                 "Typedef"
             ],
-            "Line": 702,
+            "Line": 684,
             "Description": "Path string to navigate entries of the database.",
             "Typedef": "{String} Pathlike"
         }
