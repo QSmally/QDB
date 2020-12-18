@@ -20,7 +20,7 @@ module.exports = {
         .map(Row => Row.name).map(Table => [Table, Connection.prepare(`SELECT count(*) FROM '${Table}';`).get()["count(*)"]])
         .map(Entry => [Format.BOLD(Entry[0]), `${Entry[1]} rows`]);
 
-        console.log(`'${Path}' has ${Format.BOLD(Tables.length)} tables.`);
+        console.log(`'${Path}' has ${Format.BOLD(Tables.length)} table${Tables.length !== 1 ? "s" : ""}.`);
         console.log(Format.LIST(Object.fromEntries(Tables), 26));
         Connection.close();
 
