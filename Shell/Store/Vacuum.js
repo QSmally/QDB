@@ -1,5 +1,7 @@
 
-const SQL = require("better-sqlite3");
+const FS     = require("fs");
+const Format = require("../Format");
+const SQL    = require("better-sqlite3");
 
 module.exports = {
     Usage: "qdb <database> vacuum",
@@ -13,12 +15,14 @@ module.exports = {
     Execute: Path => {
 
         const Connection = new SQL(Path);
+        const Size = FS.lstatSync(Path).size;
 
         process.stdout.write("Repacking database file... ");
         Connection.prepare("VACUUM;").run();
         Connection.close();
 
-        console.log("Successfully vacuumed the database.");
+        const RepackedSize = Math.round((Size - FS.lstatSync(Path).size) / 1024 / 1024);
+        console.log(`Successfully reclaimed ${Format.BOLD(RepackedSize)} MB of disk space.`);
         return true;
 
     }
