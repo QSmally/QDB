@@ -11,7 +11,7 @@ module.exports = Command => {
         `${Format.BOLD("USAGE")}\n  qdb <database | make | help> [command] [parameters...]\n`,
         `${Format.BOLD("COMMANDS")}\n${Format.LIST(Object.fromEntries(
             [...Commands.entries()].map(Entry => [Entry[0], Entry[1].Description])
-        ), 18)}\n`,
+        ), 12)}\n`,
         `${Format.BOLD("REPOSITORY")}\n  https://github.com/QSmally/QDB`
     ].join("\n"));
 
