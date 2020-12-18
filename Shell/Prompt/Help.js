@@ -8,8 +8,8 @@ const Commands = new Map(FS.readdirSync(`${__dirname}/../Store/`)
 
 module.exports = Command => {
     if (!Command) return console.log(["QDB Shell\n",
-        `${Format.BOLD("USAGE")}\n  qdb <database | make | help> [menu] [params...]\n`,
-        `${Format.BOLD("MENU")}\n${Format.LIST(Object.fromEntries(
+        `${Format.BOLD("USAGE")}\n  qdb <database | make | help> [command] [parameters...]\n`,
+        `${Format.BOLD("COMMANDS")}\n${Format.LIST(Object.fromEntries(
             [...Commands.entries()].map(Entry => [Entry[0], Entry[1].Description])
         ), 18)}\n`,
         `${Format.BOLD("REPOSITORY")}\n  https://github.com/QSmally/QDB`
