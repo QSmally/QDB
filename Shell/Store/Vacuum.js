@@ -21,8 +21,11 @@ module.exports = {
         Connection.prepare("VACUUM;").run();
         Connection.close();
 
-        const RepackedSize = Math.round((Size - FS.lstatSync(Path).size) / 1024 / 1024);
-        console.log(`Successfully reclaimed ${Format.BOLD(RepackedSize)} MB of disk space.`);
+        const RepackedSize = Size - FS.lstatSync(Path).size;
+        const Units        = ["bytes", "KiB", "MiB", "GiB", "TiB", "PiB"];
+        const Idx          = RepackedSize !== 0 ? Math.floor(Math.log(RepackedSize) / Math.log(1024)) : 0;
+
+        console.log(`Successfully reclaimed ${Format.BOLD(`${Math.round(RepackedSize / Math.pow(1024, Idx))} ${Units[Idx]}`)} of disk space.`);
         return true;
 
     }
