@@ -38,7 +38,7 @@ const MyDBs = new QDB.Pool("lib/Databases/");
 > Type **{PoolOptions}**
 
 # Methods
-## [.Select(Base)](https://github.com/QSmally/QDB/blob/v4/lib/Connections/Pool.js#L84)
+## [.Select(Base)](https://github.com/QSmally/QDB/blob/v4/lib/Connections/Pool.js#L83)
 > Retrieves a database Connection from this Pool instance.
 > | Key | Type | Description |
 > | --- | --- | --- |
@@ -46,21 +46,20 @@ const MyDBs = new QDB.Pool("lib/Databases/");
 >
 > Returns **{Connection}** 
 
-## [.Disconnect()](https://github.com/QSmally/QDB/blob/v4/lib/Connections/Pool.js#L94)
-> Disconnects from all the Connections or Gateways in this Pool. When threaded, this Pool exits the thread asynchronously.
+## [.Disconnect()](https://github.com/QSmally/QDB/blob/v4/lib/Connections/Pool.js#L93)
+> Disconnects from all the Connections or Gateways in this Pool.
 >
 > Returns **{Pool}** 
 
 # Typedefs
-## [PoolOptions](https://github.com/QSmally/QDB/blob/v4/lib/Connections/Pool.js#L115)
+## [PoolOptions](https://github.com/QSmally/QDB/blob/v4/lib/Connections/Pool.js#L113)
 > Options for a database Pool. All integer related options are in milliseconds. 
 > | Key | Type | Description |
 > | --- | --- | --- |
 > | Exclusives | Object<Identifier, RawOptions> | Non-default options to use for certain Connections to a database. |
 > | WAL | Boolean | Default setting to enable Write Ahead Logging mode for Connections in this Pool. |
 > | Cache | Boolean | Whether to enable in-memory caching of entries in results that the next retrieval would be much faster. |
-> | UtilCache | Boolean | Whether or not to cache entries while performing utility tasks, such as the Exists and Accumulate methods. |
-> | IterCache | Boolean | Whether to cache iterating entries while performing utility tasks, like the Each and Select methods. |
+> | UtilCache | Boolean | Whether or not to cache entries while performing utility tasks, such as the Exists method. |
 > | CacheMaxSize | Number | Amount to be considered the maximum size. If this threshold is hit, the cache will temporarily stop adding new entries. |
 > | SweepInterval | Number | Integer to indicate at what interval to sweep the entries of the Connection's internal cache. |
 > | SweepLifetime | Number | The minimum age of an entry in the cache to consider being sweepable after an interval. |

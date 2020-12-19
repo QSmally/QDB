@@ -686,14 +686,14 @@
                 "Variable",
                 "Private"
             ],
-            "Line": 67,
+            "Line": 66,
             "Description": "The manager that handles backups of this Pool.",
             "Type": "{Function?}"
         },
         {
             "Value": "Select",
             "Flags": [],
-            "Line": 84,
+            "Line": 83,
             "Description": "Retrieves a database Connection from this Pool instance.",
             "Params": [
                 "{String} Base Reference link to the Connection to resolve."
@@ -703,8 +703,8 @@
         {
             "Value": "Disconnect",
             "Flags": [],
-            "Line": 94,
-            "Description": "Disconnects from all the Connections or Gateways in this Pool. When threaded, this Pool exits the thread asynchronously.",
+            "Line": 93,
+            "Description": "Disconnects from all the Connections or Gateways in this Pool.",
             "Returns": "{Pool}"
         },
         {
@@ -712,15 +712,14 @@
             "Flags": [
                 "Typedef"
             ],
-            "Line": 115,
+            "Line": 113,
             "Description": "Options for a database Pool. All integer related options are in milliseconds. ",
             "Typedef": "{Object} PoolOptions",
             "Params": [
                 "{Object<Identifier, RawOptions>} Exclusives Non-default options to use for certain Connections to a database. ",
                 "{Boolean} WAL Default setting to enable Write Ahead Logging mode for Connections in this Pool.",
                 "{Boolean} Cache Whether to enable in-memory caching of entries in results that the next retrieval would be much faster.",
-                "{Boolean} UtilCache Whether or not to cache entries while performing utility tasks, such as the Exists and Accumulate methods.",
-                "{Boolean} IterCache Whether to cache iterating entries while performing utility tasks, like the Each and Select methods. ",
+                "{Boolean} UtilCache Whether or not to cache entries while performing utility tasks, such as the Exists method. ",
                 "{Number} CacheMaxSize Amount to be considered the maximum size. If this threshold is hit, the cache will temporarily stop adding new entries.",
                 "{Number} SweepInterval Integer to indicate at what interval to sweep the entries of the Connection's internal cache.",
                 "{Number} SweepLifetime The minimum age of an entry in the cache to consider being sweepable after an interval. ",
