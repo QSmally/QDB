@@ -7,6 +7,7 @@ module.exports = {
     Description: "Lists this database's tables with the amount of rows for each table.",
     Examples: [
         "qdb Users.qdb list",
+        "qdb /etc/databases/Service.qdb list",
         "qdb ./Internal/Guilds.qdb list"
     ],
 
