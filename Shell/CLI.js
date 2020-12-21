@@ -23,7 +23,7 @@ if (!Arguments.length) {
 
     if (!FS.existsSync(Action)) return console.log([
         `${Format.DIM("Error")}: '${Action}' does not exist.`,
-        "Use 'qdb make <database>' to create a new QDB instance."
+        "Use 'qdb make <database>' to create a new database file."
     ].join("\n"));
 
     Menu(Action, Arguments);
