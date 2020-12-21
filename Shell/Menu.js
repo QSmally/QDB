@@ -19,7 +19,7 @@ module.exports = (Path, Arguments) => {
 
     console.log([
         `${Format.DIM("Error")}: command '${Command}' does not exist.`,
-        "See a list of commands with running 'qdb help [command]'."
+        "See a list of commands by invoking 'qdb help [command]'."
     ].join("\n"));
 
 }
