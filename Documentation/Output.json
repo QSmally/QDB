@@ -686,14 +686,14 @@
                 "Variable",
                 "Private"
             ],
-            "Line": 66,
+            "Line": 67,
             "Description": "The manager that handles backups of this Pool.",
             "Type": "{Function?}"
         },
         {
             "Value": "Select",
             "Flags": [],
-            "Line": 83,
+            "Line": 84,
             "Description": "Retrieves a database Connection from this Pool instance.",
             "Params": [
                 "{String} Base Reference link to the Connection to resolve."
@@ -703,8 +703,8 @@
         {
             "Value": "Disconnect",
             "Flags": [],
-            "Line": 93,
-            "Description": "Disconnects from all the Connections or Gateways in this Pool.",
+            "Line": 94,
+            "Description": "Disconnects from all the Connections in this Pool.",
             "Returns": "{Pool}"
         },
         {
@@ -712,11 +712,12 @@
             "Flags": [
                 "Typedef"
             ],
-            "Line": 113,
+            "Line": 114,
             "Description": "Options for a database Pool. All integer related options are in milliseconds. ",
             "Typedef": "{Object} PoolOptions",
             "Params": [
-                "{Object<Identifier, RawOptions>} Exclusives Non-default options to use for certain Connections to a database. ",
+                "{Object<Identifier, RawOptions>} Exclusives Non-default options to use for certain Connections to a database.",
+                "{Boolean} Binding Whether or not to automatically bind Schemas with the table names in the Pool. ",
                 "{Boolean} WAL Default setting to enable Write Ahead Logging mode for Connections in this Pool.",
                 "{Boolean} Cache Whether to enable in-memory caching of entries in results that the next retrieval would be much faster.",
                 "{Boolean} UtilCache Whether or not to cache entries while performing utility tasks, such as the Exists method. ",
