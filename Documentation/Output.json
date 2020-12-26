@@ -4,7 +4,7 @@
             "Value": "State",
             "Flags": [
                 "Variable",
-                "Private"
+                "ReadOnly"
             ],
             "Line": 24,
             "Description": "Current state of this Connection.",

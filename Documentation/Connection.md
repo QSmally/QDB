@@ -23,6 +23,11 @@ const Users = new QDB.Connection("lib/Databases/Users.qdb");
 
 
 # Values
+## [.State](https://github.com/QSmally/QDB/blob/v4/lib/Connections/Connection.js#L24)
+> Current state of this Connection. [**Read Only**]
+>
+> Type **{String}**
+
 ## [.Path](https://github.com/QSmally/QDB/blob/v4/lib/Connections/Connection.js#L35)
 > Path string to the database. [**Read Only**]
 >
