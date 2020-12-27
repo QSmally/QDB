@@ -354,7 +354,7 @@
             "Value": "Modify",
             "Flags": [],
             "Line": 619,
-            "Description": "Updates a value in the database by fetching it and passing it onto the callback function.",
+            "Description": "Updates a value if the entry exists by fetching it and passing it onto the callback function.",
             "Params": [
                 "{Pathlike} KeyOrPath Specifies which row or nested property to fetch.",
                 "{Function} Fn Callback which includes the original value of the fetched row or property."
@@ -364,7 +364,7 @@
         {
             "Value": "Invert",
             "Flags": [],
-            "Line": 637,
+            "Line": 641,
             "Description": "Inverts a boolean, from true to false and vice-versa, at the endpoint of the path.",
             "Params": [
                 "{Pathlike} KeyOrPath Specifies which row or nested property to boolean-invert."
@@ -376,7 +376,7 @@
             "Flags": [
                 "Typedef"
             ],
-            "Line": 658,
+            "Line": 662,
             "Description": "Options for a database Connection. All integer related options are in milliseconds. ",
             "Typedef": "{Object} RawOptions",
             "Params": [
@@ -399,7 +399,7 @@
             "Flags": [
                 "Typedef"
             ],
-            "Line": 680,
+            "Line": 684,
             "Description": "An entry which has been resolved from the Connection's internal cache.",
             "Typedef": "{Object|Array} DataModel",
             "Params": [
@@ -412,7 +412,7 @@
             "Flags": [
                 "Typedef"
             ],
-            "Line": 687,
+            "Line": 691,
             "Description": "Path string to navigate entries of the database.",
             "Typedef": "{String} Pathlike"
         }

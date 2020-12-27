@@ -211,7 +211,7 @@ const Users = new QDB.Connection("lib/Databases/Users.qdb");
 > Returns **{Boolean}** Whether or not the new value was inserted.
 
 ## [.Modify(KeyOrPath, Fn)](https://github.com/QSmally/QDB/blob/v4/lib/Connections/Connection.js#L619)
-> Updates a value in the database by fetching it and passing it onto the callback function.
+> Updates a value if the entry exists by fetching it and passing it onto the callback function.
 > | Key | Type | Description |
 > | --- | --- | --- |
 > | KeyOrPath | Pathlike | Specifies which row or nested property to fetch. |
@@ -219,7 +219,7 @@ const Users = new QDB.Connection("lib/Databases/Users.qdb");
 >
 > Returns **{Object|Array|DataModel}** Returns the new row of the updated property.
 
-## [.Invert(KeyOrPath)](https://github.com/QSmally/QDB/blob/v4/lib/Connections/Connection.js#L637)
+## [.Invert(KeyOrPath)](https://github.com/QSmally/QDB/blob/v4/lib/Connections/Connection.js#L641)
 > Inverts a boolean, from true to false and vice-versa, at the endpoint of the path.
 > | Key | Type | Description |
 > | --- | --- | --- |
@@ -228,7 +228,7 @@ const Users = new QDB.Connection("lib/Databases/Users.qdb");
 > Returns **{Boolean}** Returns the updated boolean value of the property.
 
 # Typedefs
-## [RawOptions](https://github.com/QSmally/QDB/blob/v4/lib/Connections/Connection.js#L658)
+## [RawOptions](https://github.com/QSmally/QDB/blob/v4/lib/Connections/Connection.js#L662)
 > Options for a database Connection. All integer related options are in milliseconds. 
 > | Key | Type | Description |
 > | --- | --- | --- |
@@ -247,7 +247,7 @@ const Users = new QDB.Connection("lib/Databases/Users.qdb");
 >
 > Type **{Object}**
 
-## [DataModel](https://github.com/QSmally/QDB/blob/v4/lib/Connections/Connection.js#L680)
+## [DataModel](https://github.com/QSmally/QDB/blob/v4/lib/Connections/Connection.js#L684)
 > An entry which has been resolved from the Connection's internal cache.
 > | Key | Type | Description |
 > | --- | --- | --- |
@@ -256,7 +256,7 @@ const Users = new QDB.Connection("lib/Databases/Users.qdb");
 >
 > Type **{Object|Array}**
 
-## [Pathlike](https://github.com/QSmally/QDB/blob/v4/lib/Connections/Connection.js#L687)
+## [Pathlike](https://github.com/QSmally/QDB/blob/v4/lib/Connections/Connection.js#L691)
 > Path string to navigate entries of the database.
 >
 > Type **{String}**
