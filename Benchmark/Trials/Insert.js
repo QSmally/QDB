@@ -2,7 +2,7 @@
 const Crypto = require("crypto");
 
 module.exports = Connection => {
-    const Amount  = 1000;
+    const Amount = 1000;
 
     const TStart = process.hrtime();
 
