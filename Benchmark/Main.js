@@ -21,10 +21,7 @@ for (const Trial of Trials) {
             Table
         });
 
-        const TStart = process.hrtime();
-        const Amount = Benchmark(Connection);
-        const TEnd   = process.hrtime(TStart);
-
+        const {Amount, TEnd} = Benchmark(Connection);
         const Time = TEnd[0] + (TEnd[1] / 1000000000);
 
         Times.get(Test)[Table] = {
