@@ -18,7 +18,7 @@ for (const Trial of Trials) {
     // Test each table's performance
     for (const [Table, Size] of Tables) {
         const Connection = new QDB.Connection("Benchmark/Guilds.qdb", {
-            Table
+            Table, SweepInterval: false
         });
 
         const {Amount, TEnd} = Benchmark(Connection);
@@ -28,6 +28,8 @@ for (const Trial of Trials) {
             OpsPerSec: Amount / Time,
             Time, Amount, Size
         };
+
+        Connection.Disconnect();
     }
 
 
