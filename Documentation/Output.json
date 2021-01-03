@@ -37,7 +37,7 @@
                 "ReadOnly"
             ],
             "Line": 71,
-            "Description": "Whether this Connection is used in a Pool.",
+            "Description": "Reference to the Pool this Connection was created in.",
             "Type": "{Pool?}"
         },
         {
@@ -209,7 +209,7 @@
                 "{Pathlike} KeyOrPath Specifies at what row to insert or replace the element at. Use dotaccess notation to edit properties.",
                 "{Object|Array|DataModel|*} Value Data to set at the row address, at the location of the key or path."
             ],
-            "Returns": "{Connection} Returns the updated database."
+            "Returns": "{Connection} Returns the current Connection."
         },
         {
             "Value": "Fetch",
@@ -230,7 +230,7 @@
             "Params": [
                 "{...Pathlike} [Keys] A key or multiple keys to remove from cache. If none, the cache will get cleared entirely."
             ],
-            "Returns": "{Connection} Returns the updated database."
+            "Returns": "{Connection} Returns the current Connection."
         },
         {
             "Value": "Erase",
@@ -240,7 +240,7 @@
             "Params": [
                 "{...Pathlike} Keys A key or multiple keys to remove from the database. These elements will also get removed from this Connection's internal cache."
             ],
-            "Returns": "{Connection} Returns the updated database."
+            "Returns": "{Connection} Returns the current Connection."
         },
         {
             "Value": "Exists",
@@ -415,6 +415,119 @@
             "Line": 688,
             "Description": "Path string to navigate entries and files of the database.",
             "Typedef": "{String} Pathlike"
+        }
+    ],
+    "Pool": [
+        {
+            "Value": "Path",
+            "Flags": [
+                "Variable",
+                "ReadOnly"
+            ],
+            "Line": 17,
+            "Description": "Path string to the Pool directory.",
+            "Type": "{Pathlike}"
+        },
+        {
+            "Value": "Store",
+            "Flags": [
+                "Variable",
+                "ReadOnly"
+            ],
+            "Line": 28,
+            "Description": "A collection of databases this Pool holds.",
+            "Type": "{DataStore}",
+            "Reference": "https://github.com/QSmally/Qulity/blob/master/Documentation/DataStore.md"
+        },
+        {
+            "Value": "ValOptions",
+            "Flags": [
+                "Variable",
+                "ReadOnly"
+            ],
+            "Line": 40,
+            "Description": "Options for this Pool.",
+            "Type": "{PoolOptions}"
+        },
+        {
+            "Value": "_BackupManager",
+            "Flags": [
+                "Variable",
+                "Private"
+            ],
+            "Line": 67,
+            "Description": "The manager that handles backups of this Pool.",
+            "Type": "{Function?}"
+        },
+        {
+            "Value": "Select",
+            "Flags": [],
+            "Line": 84,
+            "Description": "Retrieves a database Connection from this Pool instance.",
+            "Params": [
+                "{String} Base Reference link to the Connection to resolve."
+            ],
+            "Returns": "{Connection}"
+        },
+        {
+            "Value": "Disconnect",
+            "Flags": [],
+            "Line": 94,
+            "Description": "Disconnects from all the Connections in this Pool.",
+            "Returns": "{Pool}"
+        },
+        {
+            "Value": "",
+            "Flags": [
+                "Typedef"
+            ],
+            "Line": 114,
+            "Description": "Options for a database Pool. All integer related options are in milliseconds. ",
+            "Typedef": "{Object} PoolOptions",
+            "Params": [
+                "{Object<Identifier, RawOptions>} Exclusives Non-default options to use for certain Connections to a database.",
+                "{Boolean} Binding Whether or not to automatically bind Schemas with the table names in the Pool. ",
+                "{Boolean} WAL Default setting to enable Write Ahead Logging mode for Connections in this Pool.",
+                "{Boolean} Cache Whether to enable in-memory caching of entries in results that the next retrieval would be much faster.",
+                "{Boolean} UtilCache Whether or not to cache entries while performing utility tasks, such as the Exists method. ",
+                "{Number} CacheMaxSize Amount to be considered the maximum size. If this threshold is hit, the cache will temporarily stop adding new entries.",
+                "{Number} SweepInterval Integer to indicate at what interval to sweep the entries of the Connection's internal cache.",
+                "{Number} SweepLifetime The minimum age of an entry in the cache to consider being sweepable after an interval. ",
+                "{Number} BackupInterval Integer to indicate at what interval to create a backup at.",
+                "{Pathlike} BackupDirectory A path URL to the directory to insert all the database backups in."
+            ]
+        }
+    ],
+    "Manager": [
+        {
+            "Value": "Path",
+            "Flags": [
+                "Variable",
+                "ReadOnly"
+            ],
+            "Line": 20,
+            "Description": "Path string to a directory or database file.",
+            "Type": "{Pathlike}"
+        },
+        {
+            "Value": "ValOptions",
+            "Flags": [
+                "Variable",
+                "Private"
+            ],
+            "Line": 31,
+            "Description": "Options for this Manager.",
+            "Type": "{RawOptions}"
+        },
+        {
+            "Value": "Destination",
+            "Flags": [
+                "Variable",
+                "ReadOnly"
+            ],
+            "Line": 49,
+            "Description": "Path string to the destination of the backups.",
+            "Type": "{Pathlike}"
         }
     ],
     "Schema": [
@@ -656,87 +769,6 @@
                 "{String} [Holds] Optional new identifier value for the cloned Selection."
             ],
             "Returns": "{Selection}"
-        }
-    ],
-    "Pool": [
-        {
-            "Value": "Path",
-            "Flags": [
-                "Variable",
-                "ReadOnly"
-            ],
-            "Line": 17,
-            "Description": "Path string to the Pool directory.",
-            "Type": "{Pathlike}"
-        },
-        {
-            "Value": "Store",
-            "Flags": [
-                "Variable",
-                "ReadOnly"
-            ],
-            "Line": 28,
-            "Description": "A collection of databases this Pool holds.",
-            "Type": "{DataStore}",
-            "Reference": "https://github.com/QSmally/Qulity/blob/master/Documentation/DataStore.md"
-        },
-        {
-            "Value": "ValOptions",
-            "Flags": [
-                "Variable",
-                "ReadOnly"
-            ],
-            "Line": 40,
-            "Description": "Options for this Pool.",
-            "Type": "{PoolOptions}"
-        },
-        {
-            "Value": "_BackupManager",
-            "Flags": [
-                "Variable",
-                "Private"
-            ],
-            "Line": 67,
-            "Description": "The manager that handles backups of this Pool.",
-            "Type": "{Function?}"
-        },
-        {
-            "Value": "Select",
-            "Flags": [],
-            "Line": 84,
-            "Description": "Retrieves a database Connection from this Pool instance.",
-            "Params": [
-                "{String} Base Reference link to the Connection to resolve."
-            ],
-            "Returns": "{Connection}"
-        },
-        {
-            "Value": "Disconnect",
-            "Flags": [],
-            "Line": 94,
-            "Description": "Disconnects from all the Connections in this Pool.",
-            "Returns": "{Pool}"
-        },
-        {
-            "Value": "",
-            "Flags": [
-                "Typedef"
-            ],
-            "Line": 114,
-            "Description": "Options for a database Pool. All integer related options are in milliseconds. ",
-            "Typedef": "{Object} PoolOptions",
-            "Params": [
-                "{Object<Identifier, RawOptions>} Exclusives Non-default options to use for certain Connections to a database.",
-                "{Boolean} Binding Whether or not to automatically bind Schemas with the table names in the Pool. ",
-                "{Boolean} WAL Default setting to enable Write Ahead Logging mode for Connections in this Pool.",
-                "{Boolean} Cache Whether to enable in-memory caching of entries in results that the next retrieval would be much faster.",
-                "{Boolean} UtilCache Whether or not to cache entries while performing utility tasks, such as the Exists method. ",
-                "{Number} CacheMaxSize Amount to be considered the maximum size. If this threshold is hit, the cache will temporarily stop adding new entries.",
-                "{Number} SweepInterval Integer to indicate at what interval to sweep the entries of the Connection's internal cache.",
-                "{Number} SweepLifetime The minimum age of an entry in the cache to consider being sweepable after an interval. ",
-                "{Number} BackupInterval Integer to indicate at what interval to create a backup at.",
-                "{Pathlike} BackupDirectory A path URL to the directory to insert all the database backups in."
-            ]
         }
     ]
 }
