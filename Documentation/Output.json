@@ -505,7 +505,7 @@
                 "Variable",
                 "ReadOnly"
             ],
-            "Line": 18,
+            "Line": 20,
             "Description": "Path string to a directory or database file.",
             "Type": "{Pathlike}"
         },
@@ -515,7 +515,7 @@
                 "Variable",
                 "Private"
             ],
-            "Line": 29,
+            "Line": 31,
             "Description": "Options for this Manager.",
             "Type": "{BackupOptions}"
         },
@@ -525,22 +525,32 @@
                 "Variable",
                 "ReadOnly"
             ],
-            "Line": 45,
+            "Line": 47,
             "Description": "Path string to the destination of the backups.",
             "Type": "{Pathlike}"
+        },
+        {
+            "Value": "Process",
+            "Flags": [
+                "Variable",
+                "Private"
+            ],
+            "Line": 67,
+            "Description": "The child process that manages the backups.",
+            "Type": "{Process}"
         },
         {
             "Value": "",
             "Flags": [
                 "Typedef"
             ],
-            "Line": 67,
+            "Line": 84,
             "Description": "Options for a Backup Manager. All integer related options are in milliseconds. ",
             "Typedef": "{Object} BackupOptions",
             "Params": [
                 "{String} Destination Path to the directory where backups will be placed in.",
                 "{Number} Interval A time interval for when copies of the database(s) will be created.",
-                "{Number} SnapshotLtm: Maximum amount of snapshots to create until making a full backup."
+                "{Number} Snapshots Maximum amount of snapshots to create until making a full backup."
             ]
         }
     ],
