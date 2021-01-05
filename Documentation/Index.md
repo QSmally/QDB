@@ -11,6 +11,9 @@ const QDB = require("qdatabase");
 * [Connection](https://github.com/QSmally/QDB/blob/v4/Documentation/Connection.md)
 * [Pool](https://github.com/QSmally/QDB/blob/v4/Documentation/Pool.md)
 
+**Managers**
+* [Backup Manager](https://github.com/QSmally/QDB/blob/v4/Documentation/Manager.md)
+
 **Utilities**
 * [Transaction](https://github.com/QSmally/QDB/blob/v4/Documentation/Transaction.md)
 * [Selection](https://github.com/QSmally/QDB/blob/v4/Documentation/Selection.md)

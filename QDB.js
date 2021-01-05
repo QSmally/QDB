@@ -16,8 +16,9 @@ const DataSchema = require("./lib/Utility/Schema");
 
 module.exports = {
 
-    Connection: require("./lib/Connections/Connection"),
-    Pool:       require("./lib/Connections/Pool"),
+    Connection:    require("./lib/Connections/Connection"),
+    Pool:          require("./lib/Connections/Pool"),
+    BackupManager: require("./lib/Connections/Backups/Manager"),
 
     Schema: DataSchema.Schema,
 

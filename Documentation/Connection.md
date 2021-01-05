@@ -4,6 +4,9 @@
 * [Connection](https://github.com/QSmally/QDB/blob/v4/Documentation/Connection.md)
 * [Pool](https://github.com/QSmally/QDB/blob/v4/Documentation/Pool.md)
 
+**Managers**
+* [Backup Manager](https://github.com/QSmally/QDB/blob/v4/Documentation/Manager.md)
+
 **Utilities**
 * [Transaction](https://github.com/QSmally/QDB/blob/v4/Documentation/Transaction.md)
 * [Selection](https://github.com/QSmally/QDB/blob/v4/Documentation/Selection.md)
@@ -38,7 +41,7 @@ const Users = new QDB.Connection("lib/Databases/Users.qdb");
 > Type **{RawOptions}**
 
 ## [.Pool](https://github.com/QSmally/QDB/blob/v4/lib/Connections/Connection.js#L71)
-> Whether this Connection is used in a Pool. [**Read Only**]
+> Reference to the Pool this Connection was created in. [**Read Only**]
 >
 > Type **{Pool?}**
 
@@ -94,7 +97,7 @@ const Users = new QDB.Connection("lib/Databases/Users.qdb");
 > | KeyOrPath | Pathlike | Specifies at what row to insert or replace the element at. Use dotaccess notation to edit properties. |
 > | Value | Object, Array, DataModel, Any | Data to set at the row address, at the location of the key or path. |
 >
-> Returns **{Connection}** Returns the updated database.
+> Returns **{Connection}** Returns the current Connection.
 
 ## [.Fetch(KeyOrPath, Cache?)](https://github.com/QSmally/QDB/blob/v4/lib/Connections/Connection.js#L337)
 > Manages the retrieval of the database.
@@ -111,7 +114,7 @@ const Users = new QDB.Connection("lib/Databases/Users.qdb");
 > | --- | --- | --- |
 > | Keys? | ...Pathlike | A key or multiple keys to remove from cache. If none, the cache will get cleared entirely. |
 >
-> Returns **{Connection}** Returns the updated database.
+> Returns **{Connection}** Returns the current Connection.
 
 ## [.Erase(Keys)](https://github.com/QSmally/QDB/blob/v4/lib/Connections/Connection.js#L381)
 > Manages the deletion of the database.
@@ -119,7 +122,7 @@ const Users = new QDB.Connection("lib/Databases/Users.qdb");
 > | --- | --- | --- |
 > | Keys | ...Pathlike | A key or multiple keys to remove from the database. These elements will also get removed from this Connection's internal cache. |
 >
-> Returns **{Connection}** Returns the updated database.
+> Returns **{Connection}** Returns the current Connection.
 
 ## [.Exists(Key, Cache?)](https://github.com/QSmally/QDB/blob/v4/lib/Connections/Connection.js#L407)
 > Returns whether or not a row in this database exists. This method also caches the row internally, so fetching it afterwards would be much faster.
