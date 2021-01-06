@@ -492,7 +492,7 @@
                 "Variable",
                 "ReadOnly"
             ],
-            "Line": 20,
+            "Line": 23,
             "Description": "Path string to a directory or database file.",
             "Type": "{Pathlike}"
         },
@@ -502,7 +502,7 @@
                 "Variable",
                 "Private"
             ],
-            "Line": 31,
+            "Line": 34,
             "Description": "Options for this Manager.",
             "Type": "{BackupOptions}"
         },
@@ -512,26 +512,47 @@
                 "Variable",
                 "ReadOnly"
             ],
-            "Line": 47,
+            "Line": 50,
             "Description": "Path string to the destination of the backups.",
             "Type": "{Pathlike}"
         },
         {
-            "Value": "Process",
+            "Value": "_Process",
             "Flags": [
                 "Variable",
                 "Private"
             ],
-            "Line": 67,
+            "Line": 70,
             "Description": "The child process that manages the backups.",
             "Type": "{Process}"
+        },
+        {
+            "Value": "_EventEmitter",
+            "Flags": [
+                "Variable",
+                "Private"
+            ],
+            "Line": 80,
+            "Description": "This manager's event manager to control the flow of the backup child process.",
+            "Type": "{EventEmitter}"
+        },
+        {
+            "Value": "On",
+            "Flags": [],
+            "Line": 94,
+            "Description": "Registers an event listener on one of this Manager's events.",
+            "Params": [
+                "{String} Event Which action to register for the listener.",
+                "{Function} Listener Function to execute upon this event."
+            ],
+            "Returns": "{BackupManager}"
         },
         {
             "Value": "",
             "Flags": [
                 "Typedef"
             ],
-            "Line": 84,
+            "Line": 110,
             "Description": "Options for a Backup Manager. All integer related options are in milliseconds. ",
             "Typedef": "{Object} BackupOptions",
             "Params": [
