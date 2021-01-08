@@ -56,7 +56,7 @@ new QDB.BackupManager("lib/Databases/", { Destination: "/usr/local/backups/" });
 > Options for a Backup Manager. All integer related options are in milliseconds. 
 > | Key | Type | Description |
 > | --- | --- | --- |
-> | Respawn | Boolean | Whether or not to retry spawning this Manager's child process if it exits with a non-zero code. |
+> | Retry | Boolean | Whether or not to retry spawning this Manager's child process if it exits with a non-zero code. |
 > | Destination | String | Path to the directory where backups will be placed in. |
 > | Interval | Number | A time interval for when copies of the database(s) will be created. |
 > | Snapshots | Number | Maximum amount of snapshots to create until making a full backup. |
