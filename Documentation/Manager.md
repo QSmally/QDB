@@ -37,7 +37,7 @@ new QDB.BackupManager("lib/Databases/", { Destination: "/usr/local/backups/" });
 > Type **{Pathlike}**
 
 # Methods
-## [.On(Event, Listener)](https://github.com/QSmally/QDB/blob/v4/lib/Connections/Backups/Manager.js#L94)
+## [.On(Event, Listener)](https://github.com/QSmally/QDB/blob/v4/lib/Connections/Backups/Manager.js#L95)
 > Registers an event listener on one of this Manager's events.
 > | Key | Type | Description |
 > | --- | --- | --- |
@@ -46,13 +46,18 @@ new QDB.BackupManager("lib/Databases/", { Destination: "/usr/local/backups/" });
 >
 > Returns **{BackupManager}** 
 
-## [.Spawn()](https://github.com/QSmally/QDB/blob/v4/lib/Connections/Backups/Manager.js#L105)
+## [.Spawn()](https://github.com/QSmally/QDB/blob/v4/lib/Connections/Backups/Manager.js#L106)
 > Spawns the child processor for this Manager.
 >
 > Returns **{BackupManager}** 
 
+## [.Exit()](https://github.com/QSmally/QDB/blob/v4/lib/Connections/Backups/Manager.js#L133)
+> Ends the backup process and emits the `Exit` event.
+>
+> Returns **{BackupManager}** 
+
 # Typedefs
-## [BackupOptions](https://github.com/QSmally/QDB/blob/v4/lib/Connections/Backups/Manager.js#L137)
+## [BackupOptions](https://github.com/QSmally/QDB/blob/v4/lib/Connections/Backups/Manager.js#L148)
 > Options for a Backup Manager. All integer related options are in milliseconds. 
 > | Key | Type | Description |
 > | --- | --- | --- |
@@ -63,7 +68,7 @@ new QDB.BackupManager("lib/Databases/", { Destination: "/usr/local/backups/" });
 >
 > Type **{Object}**
 
-## [BackupEvents](https://github.com/QSmally/QDB/blob/v4/lib/Connections/Backups/Manager.js#L149)
+## [BackupEvents](https://github.com/QSmally/QDB/blob/v4/lib/Connections/Backups/Manager.js#L160)
 > Events related to the BackupManager, registered by `Manager.On(...);`. 
 > | Key | Type | Description |
 > | --- | --- | --- |

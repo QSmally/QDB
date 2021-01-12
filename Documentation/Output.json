@@ -532,14 +532,14 @@
                 "Variable",
                 "Private"
             ],
-            "Line": 78,
+            "Line": 79,
             "Description": "This manager's event manager to control the flow of the backup child process.",
             "Type": "{EventEmitter}"
         },
         {
             "Value": "On",
             "Flags": [],
-            "Line": 94,
+            "Line": 95,
             "Description": "Registers an event listener on one of this Manager's events.",
             "Params": [
                 "{String} Event Which action to register for the listener.",
@@ -550,8 +550,15 @@
         {
             "Value": "Spawn",
             "Flags": [],
-            "Line": 105,
+            "Line": 106,
             "Description": "Spawns the child processor for this Manager.",
+            "Returns": "{BackupManager}"
+        },
+        {
+            "Value": "Exit",
+            "Flags": [],
+            "Line": 133,
+            "Description": "Ends the backup process and emits the `Exit` event.",
             "Returns": "{BackupManager}"
         },
         {
@@ -559,7 +566,7 @@
             "Flags": [
                 "Typedef"
             ],
-            "Line": 137,
+            "Line": 148,
             "Description": "Options for a Backup Manager. All integer related options are in milliseconds. ",
             "Typedef": "{Object} BackupOptions",
             "Params": [
@@ -574,7 +581,7 @@
             "Flags": [
                 "Typedef"
             ],
-            "Line": 149,
+            "Line": 160,
             "Description": "Events related to the BackupManager, registered by `Manager.On(...);`. ",
             "Typedef": "{Events} BackupEvents",
             "Params": [
@@ -779,7 +786,7 @@
             "Line": 160,
             "Description": "Groups this Selection based on an identifier. Identical to the `GROUP BY` SQL statement.",
             "Params": [
-                "{Pathlike} Key Indicates by which element to group this Selection."
+                "{Pathlike} KeyOrPath Indicates by which element to group this Selection."
             ],
             "Returns": "{Selection}"
         },

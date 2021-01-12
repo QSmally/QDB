@@ -81,11 +81,11 @@ A Selection allows you to filter something from the database, and perform method
 >
 > Returns **{Selection}** 
 
-## [.Group(Key)](https://github.com/QSmally/QDB/blob/v4/lib/Utility/Selection.js#L160)
+## [.Group(KeyOrPath)](https://github.com/QSmally/QDB/blob/v4/lib/Utility/Selection.js#L160)
 > Groups this Selection based on an identifier. Identical to the `GROUP BY` SQL statement.
 > | Key | Type | Description |
 > | --- | --- | --- |
-> | Key | Pathlike | Indicates by which element to group this Selection. |
+> | KeyOrPath | Pathlike | Indicates by which element to group this Selection. |
 >
 > Returns **{Selection}** 
 
