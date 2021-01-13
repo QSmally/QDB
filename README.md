@@ -48,7 +48,7 @@ An unchanged piece of the database in memory.
 ```js
 const Users = Programmers.Select()
 .Join(Projects, "UserId", "Projects")
-.Sort(User => User.Age)
+.Order(User => User.Age)
 .Group("Rank");
 ```
 
