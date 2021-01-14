@@ -6,7 +6,7 @@ module.exports = Connection => {
     const TStart = process.hrtime();
 
     for (let i = 0; i < Amount; i++) {
-        const Id = Indexes[Math.round(Math.random() * Indexes.length - 1)];
+        const Id = Indexes[Math.round(Math.random() * (Indexes.length - 1))];
         Connection.Fetch(Id);
     }
 
