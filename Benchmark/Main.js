@@ -46,7 +46,7 @@ for (const Trial of Trials) {
     for (const Table in Current)
     process.stdout.write(CLI.white(
         `\n· ${CLI.bold(Table.padEnd(15))}` +
-        CLI.green.bold(`${Current[Table].Time.toFixed(2)}s`)
+        CLI.green.bold(`${Current[Table].Time.toFixed(3)}s`)
     ));
 
     process.stdout.write("\n\n");
