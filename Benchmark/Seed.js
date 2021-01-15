@@ -35,6 +35,7 @@ module.exports = () => {
             });
 
             process.stdout.write(CLI.white(`· Creating '${CLI.bold(Table)}' table... `));
+            const TStart = process.hrtime();
 
             for (let i = 0; i < Size; i++) {
                 Connection.Set(Crypto.randomBytes(8).toString("hex"), {
@@ -52,9 +53,13 @@ module.exports = () => {
                 });
             }
 
+            const TEnd = process.hrtime(TStart);
+            const Time = TEnd[0] + (TEnd[1] / 1000000000);
+
             process.stdout.write(
                 Table.padEnd(10, " ").slice(Table.length) +
-                CLI.green(`Created ${CLI.bold(Connection.Size)} entries\n`)
+                CLI.green(`Created ${CLI.bold(Connection.Size)} entries `) +
+                CLI.white(`(${Time.toFixed(3)}s)\n`)
             );
 
             Connection.Disconnect();
