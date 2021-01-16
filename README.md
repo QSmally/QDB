@@ -8,18 +8,17 @@
 
 
 # Main Features
-* Connection states
-* Database schema and automatic migration
 * Optimised entry caches
+* Database schema and automatic migration
 * Selection and transaction wrappers
-* Pools with thread support
+* Pools with external thread support
 
 ## Links
 * [Documentations](https://github.com/QSmally/QDB/blob/v4/Documentation/Index.md)
 * [Github](https://github.com/QSmally/QDB)
 
 ## Install/Import
-`npm install qdatabase`
+`npm install QSmally/QDB`
 ```js
 const QDB = require("qdatabase");
 // ...
@@ -48,7 +47,7 @@ An unchanged piece of the database in memory.
 ```js
 const Users = Programmers.Select()
 .Join(Projects, "UserId", "Projects")
-.Order(User => User.Age)
+.Order(User => Object.keys(User.Projects).length)
 .Group("Rank");
 ```
 
