@@ -40,7 +40,7 @@ for (const Trial of Trials) {
 
     process.stdout.write(CLI.magenta(CLI.bold(Test) +
         `\n  (${Math.round(Math.max(...Object.values(Current).map(M => M.OpsPerSec)))} ops/s)` +
-        `\n  (Amount: ${Current[Object.keys(Current).pop()].Amount})`
+        `\n  (${Current[Object.keys(Current).pop()].Amount} entries)`
     ));
 
     for (const Table in Current)
