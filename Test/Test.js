@@ -19,7 +19,7 @@ module.exports = (QDB, Tap) => {
     Tap("Con#CacheSize4", Con.CacheSize, 2);
     Tap("Con#Size3", Con.Size, 2);
 
-    Tap("Con#Fetch3", Con.Fetch("2345"), {Name: "bar", Age: 21, _DataStore: "2345"});
+    Tap("Con#Fetch3", Con.Fetch("2345"), {Name: "bar", Age: 21});
     Tap("Con#CacheSize5", Con.CacheSize, 2);
     Tap("Con#Size4", Con.Size, 2);
 
@@ -33,7 +33,7 @@ module.exports = (QDB, Tap) => {
 
     Tap("Con#Fetch4", Con.Fetch("3456"), {Name: "roo", Age: 29});
     Tap("Con#Fetch5", Con.Fetch("2345"), {Name: "bar", Age: 21});
-    Tap("Con#Fetch6", Con.Fetch("1234"), {Name: "foo", Age: 26, _DataStore: "1234"});
+    Tap("Con#Fetch6", Con.Fetch("1234"), {Name: "foo", Age: 26});
     Tap("Con#Fetch5", Con.Fetch("4567"), {Name: "goo", Age: 27});
     Tap("Con#Evict2", Con.Evict("2345", "3456").CacheSize, 2);
 
@@ -58,7 +58,7 @@ module.exports = (QDB, Tap) => {
     Tap("Con#Evict3", Con.Evict().CacheSize, 0);
 
     Tap("Con#Set5", Con.Set("2345.Age", 30).Size, 3);
-    Tap("Con#Fetch6", Con.Fetch("2345"), {Name: "bar", Age: 30, _DataStore: "2345"});
+    Tap("Con#Fetch6", Con.Fetch("2345"), {Name: "bar", Age: 30});
 
     // Array methods
     const IdxList = Con.Indexes;
@@ -107,19 +107,19 @@ module.exports = (QDB, Tap) => {
     Tap("Con#Modify1", Con.Modify("6789.Name", Name => {
         Name = "moo";
         return Name;
-    }), {Name: "moo", Age: -1, Hobbies: [], _DataStore: "6789"});
+    }), {Name: "moo", Age: -1, Hobbies: []});
 
     Tap("Con#Modify2", Con.Modify("6789.Hobbies", Hob => {
         Hob.push({Programming: false});
         return Hob;
-    }), {Name: "moo", Age: -1, Hobbies: [{Programming: false}], _DataStore: "6789"});
+    }), {Name: "moo", Age: -1, Hobbies: [{Programming: false}]});
 
     Tap("Con#CacheSize13", Con.CacheSize, 4);
 
     Tr.Commit();
     
     Tap("Con#CacheSize14", Con.CacheSize, 4);
-    Tap("Con#Fetch7", Con.Fetch("6789"), {Name: "moo", Age: -1, Hobbies: [{Programming: false}], _DataStore: "6789"});
+    Tap("Con#Fetch7", Con.Fetch("6789"), {Name: "moo", Age: -1, Hobbies: [{Programming: false}]});
 
     Tap("Con#Invert1", Con.Invert("6789.Hobbies.0.Programming"), true);
     Tap("Con#Invert2", Con.Invert("6789.Hobbies.0.Programming"), false);
