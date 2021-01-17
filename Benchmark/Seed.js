@@ -35,6 +35,7 @@ module.exports = () => {
             });
 
             process.stdout.write(CLI.white(`· Creating '${CLI.bold(Table)}' table... `));
+            const Transaction = Connection.Transaction();
             const TStart = process.hrtime();
 
             for (let i = 0; i < Size; i++) {
@@ -52,6 +53,8 @@ module.exports = () => {
                     ][Math.round(Math.random() * 2)]
                 });
             }
+
+            Transaction.Commit();
 
             const TEnd = process.hrtime(TStart);
             const Time = TEnd[0] + (TEnd[1] / 1000000000);
