@@ -246,6 +246,14 @@ module.exports = (QDB, Tap) => {
         "2345", "3456", "4567"
     ]);
 
+    Tap("Sel#Retrieve", Sel.Retrieve("bar"), {
+        "3456": {Name: "roo", Age: 29, Hobbies: ["two", "three", "-5", "loo", "1"], foo: "bar"}
+    });
+
+    Tap("Sel#Retrieve2", Sel.Retrieve("bar.Age"), undefined);
+    Tap("Sel#Retrieve2", Sel.Retrieve("bar.3456.Age"), 29);
+    Tap("Sel#Retrieve2", Sel.Retrieve("bar.3456.Hobbies.length"), 5);
+
     Con.Disconnect();
 
 }
