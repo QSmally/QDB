@@ -20,7 +20,7 @@ A general model that entries of a database should follow.
 | Model | Object, Array | An object or array, giving the layout and default values of entries. |
 | Serialiser? | Function | A transformer object to implement, as a utility to fetch from some type of API or DataModel. |
 
-Schema Models are mainly used for automatic data migration - For instance, adding or removing data parts of each entry in the database.
+Schema Models are mainly used for automatic data migrations - For instance, adding or removing default data parts of each entry in the database. Include the `-m` command line option when starting the program to instantiate a migration.
 
 
 
