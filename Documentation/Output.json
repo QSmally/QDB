@@ -353,7 +353,7 @@
         {
             "Value": "Modify",
             "Flags": [],
-            "Line": 612,
+            "Line": 613,
             "Description": "Updates a value if the entry exists by fetching it and passing it onto the callback function.",
             "Params": [
                 "{Pathlike} KeyOrPath Specifies which row or nested property to fetch.",
@@ -364,7 +364,7 @@
         {
             "Value": "Invert",
             "Flags": [],
-            "Line": 634,
+            "Line": 635,
             "Description": "Inverts a boolean, from true to false and vice-versa, at the endpoint of the path.",
             "Params": [
                 "{Pathlike} KeyOrPath Specifies which row or nested property to boolean-invert."
@@ -376,7 +376,7 @@
             "Flags": [
                 "Typedef"
             ],
-            "Line": 655,
+            "Line": 656,
             "Description": "Options for a database Connection. All integer related options are in milliseconds. ",
             "Typedef": "{Object} RawOptions",
             "Params": [
@@ -396,7 +396,7 @@
             "Flags": [
                 "Typedef"
             ],
-            "Line": 673,
+            "Line": 674,
             "Description": "An entry which has been resolved from the Connection's internal cache.",
             "Typedef": "{Object|Array} DataModel",
             "Params": [
@@ -408,7 +408,7 @@
             "Flags": [
                 "Typedef"
             ],
-            "Line": 679,
+            "Line": 680,
             "Description": "Path string to navigate entries and files of the database.",
             "Typedef": "{String} Pathlike"
         }
