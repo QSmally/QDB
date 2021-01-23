@@ -2,6 +2,9 @@
 # Dependencies
 node_modules/
 
+# Testing
+Test/Users.qdb
+
 # Benchmarking
 Benchmark/*.qdb
 Benchmark/*.qdb-shm
