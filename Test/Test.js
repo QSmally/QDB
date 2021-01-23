@@ -256,8 +256,8 @@ module.exports = (QDB, Tap) => {
     });
 
     Tap("Selection Retrieve 2", Sel.Retrieve("bar.Age"), undefined);
-    Tap("Selection Retrieve 2", Sel.Retrieve("bar.3456.Age"), 29);
-    Tap("Selection Retrieve 2", Sel.Retrieve("bar.3456.Hobbies.length"), 5);
+    Tap("Selection Retrieve 3", Sel.Retrieve("bar.3456.Age"), 29);
+    Tap("Selection Retrieve 4", Sel.Retrieve("bar.3456.Hobbies.length"), 5);
 
     console.log(Con.AsObject());
     Con.Disconnect();
