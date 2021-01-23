@@ -2,7 +2,6 @@
 module.exports = (QDB, Tap) => {
 
     const Con = new QDB.Connection("Test/Users.qdb");
-    console.log(Con.AsObject());
     Con.API.prepare("DELETE FROM 'QDB';").run();
 
     // Base Connection functions
@@ -259,7 +258,6 @@ module.exports = (QDB, Tap) => {
     Tap("Selection Retrieve 3", Sel.Retrieve("bar.3456.Age"), 29);
     Tap("Selection Retrieve 4", Sel.Retrieve("bar.3456.Hobbies.length"), 5);
 
-    console.log(Con.AsObject());
     Con.Disconnect();
 
 }
