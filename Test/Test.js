@@ -2,6 +2,7 @@
 module.exports = (QDB, Tap) => {
 
     const Con = new QDB.Connection("Test/Users.qdb");
+    console.log(Con.AsObject());
     Con.API.prepare("DELETE FROM 'QDB';").run();
 
     // Base Connection functions
@@ -85,8 +86,11 @@ module.exports = (QDB, Tap) => {
 
     Tap("Connection Remove 1", Con.Remove("3456", F => F === "goo"), null);
     Tap("Connection Remove 2", Con.Remove("3456.Hobbies", F => F === "foo"), 2);
+    Tap("Connection Remove 3", Con.Remove("3456.Hobbies", 5), 2);
+    Tap("Connection Remove 4", Con.Remove("3456.Hobbies", 1), 1);
 
-    Tap("Connection Push 6", Con.Push("3456.Hobbies", "1", "2", "3"), 5);
+    Tap("Connection Push 6", Con.Push("3456.Hobbies", "loo"), 2);
+    Tap("Connection Push 7", Con.Push("3456.Hobbies", "1", "2", "3"), 5);
 
     Tap("Connection Shift 1", Con.Shift("3456.Hobbies"), "goo");
     Tap("Connection Shift 2", Con.Shift("3456.Hobbies", "-5"), 5);
@@ -255,6 +259,7 @@ module.exports = (QDB, Tap) => {
     Tap("Selection Retrieve 2", Sel.Retrieve("bar.3456.Age"), 29);
     Tap("Selection Retrieve 2", Sel.Retrieve("bar.3456.Hobbies.length"), 5);
 
+    console.log(Con.AsObject());
     Con.Disconnect();
 
 }
