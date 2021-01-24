@@ -76,8 +76,8 @@ A Selection allows you to filter something from the database, and perform method
 > Slices off values from this Selection. Identical to the `LIMIT` SQL statement.
 > | Key | Type | Description |
 > | --- | --- | --- |
-> | Begin | Number | Integer to indicate the beginning to slice. |
-> | End? | Number | Integer to indicate the end of the slice. |
+> | Begin | Number | Index that indicates the beginning to slice. |
+> | End? | Number | An index for the end of the slice. |
 >
 > Returns **{Selection}** 
 
@@ -85,7 +85,7 @@ A Selection allows you to filter something from the database, and perform method
 > Groups this Selection based on an identifier. Identical to the `GROUP BY` SQL statement.
 > | Key | Type | Description |
 > | --- | --- | --- |
-> | KeyOrPath | Pathlike | Indicates by which element to group this Selection. |
+> | KeyOrPath | Pathlike | Determines by which property to group this Selection. |
 >
 > Returns **{Selection}** 
 

@@ -774,8 +774,8 @@
             "Line": 141,
             "Description": "Slices off values from this Selection. Identical to the `LIMIT` SQL statement.",
             "Params": [
-                "{Number} Begin Integer to indicate the beginning to slice.",
-                "{Number} [End] Integer to indicate the end of the slice."
+                "{Number} Begin Index that indicates the beginning to slice.",
+                "{Number} [End] An index for the end of the slice."
             ],
             "Returns": "{Selection}"
         },
@@ -785,7 +785,7 @@
             "Line": 164,
             "Description": "Groups this Selection based on an identifier. Identical to the `GROUP BY` SQL statement.",
             "Params": [
-                "{Pathlike} KeyOrPath Indicates by which element to group this Selection."
+                "{Pathlike} KeyOrPath Determines by which property to group this Selection."
             ],
             "Returns": "{Selection}"
         },
