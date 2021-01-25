@@ -23,14 +23,14 @@ module.exports = Command => {
         `${Format.BOLD("REPOSITORY")}\n  https://github.com/QSmally/QDB`
     ].join("\n"));
 
-    const Sub = Commands.get(Command.toLowerCase());
-    if (!Sub) return console.log(`${Format.DIM("Error")}: command '${Command}' does not exist.`);
+    const Fetched = Commands.get(Command.toLowerCase());
+    if (!Fetched) return console.log(`${Format.DIM("Error")}: command '${Command}' does not exist.`);
 
     console.log([
         `QDB Shell - ${Format.BOLD(Command)}`,
-        Format.DIM(Sub.Usage),
-        `\n${Sub.Description}\n`,
+        Format.DIM(Fetched.Usage),
+        `\n${Fetched.Description}\n`,
         Format.BOLD("EXAMPLES"),
-        ...Sub.Examples.map(E => `  $ ${E}`)
+        ...Fetched.Examples.map(E => `  $ ${E}`)
     ].join("\n"));
 }
