@@ -8,7 +8,7 @@ const C = {
 module.exports = {
     DIM: Text => `${C.DIM}${Text}${C.RESET}`,
     BOLD: Text => `${C.BOLD}${Text}${C.RESET}`,
-    LIST: (Items, Padding) => Object.keys(Items)
-        .map(Item => `  ${Item}:`.padEnd(Padding) + Items[Item])
+    LIST: (Items, Padding, Dashes) => Object.keys(Items)
+        .map(Item => `${Dashes ? " -" : " "} ${Item}:`.padEnd(Padding) + Items[Item])
         .join("\n")
 };
