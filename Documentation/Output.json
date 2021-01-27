@@ -157,8 +157,8 @@
                 "{String|Number} Key As address to memory map this value to.",
                 "{Object|Array} Val The value to set in the memory cache."
             ],
-            "Returns": "{DataStore} Returns the updated cache instance of this Connection.",
-            "Reference": "https://github.com/QSmally/Qulity/blob/master/Documentation/DataStore.md"
+            "Returns": "{Collection} Returns the updated cache instance of this Connection.",
+            "Reference": "https://github.com/QSmally/Qulity/blob/master/Documentation/Collection.md"
         },
         {
             "Value": "_CastPath",
@@ -478,9 +478,7 @@
                 "{Boolean} UtilCache Whether or not to cache entries while performing utility tasks, such as the Exists method. ",
                 "{Number} CacheMaxSize Amount to be considered the maximum size. If this threshold is hit, the cache will temporarily stop adding new entries.",
                 "{Number} SweepInterval Integer to indicate at what interval to sweep the entries of the Connection's internal cache.",
-                "{Number} SweepLifetime The minimum age of an entry in the cache to consider being sweepable after an interval. ",
-                "{Number} BackupInterval Integer to indicate at what interval to create a backup at.",
-                "{Pathlike} BackupDirectory A path URL to the directory to insert all the database backups in."
+                "{Number} SweepLifetime The minimum age of an entry in the cache to consider being sweepable after an interval."
             ]
         }
     ],
