@@ -243,11 +243,11 @@ module.exports = (QDB, Tap) => {
     CopyCloneSel5.Join(Projects.Clone().Map(Item => {
         Item.Example = {UserId: Item.UserId};
         return Item;
-    }), "Example.UserId", false);
+    }), "Example.UserId");
 
-    Tap("Selection Join 10", CopyCloneSel5.Cache.get("4567").fooProj.Does, ["nothing", "foo"]);
-    Tap("Selection Join 11", CopyCloneSel5.Cache.get("2345").barProj.Does, ["sleep"]);
-    Tap("Selection Join 12", CopyCloneSel5.Cache.get("4567").rooProj.Does, ["mind read"]);
+    Tap("Selection Join 10", CopyCloneSel5.Cache.get("4567").Projects.fooProj.Does, ["nothing", "foo"]);
+    Tap("Selection Join 11", CopyCloneSel5.Cache.get("2345").Projects.barProj.Does, ["sleep"]);
+    Tap("Selection Join 12", CopyCloneSel5.Cache.get("4567").Projects.rooProj.Does, ["mind read"]);
 
     Sel.Merge(Sel3, Sel4);
 
