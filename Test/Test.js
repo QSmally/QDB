@@ -227,6 +227,7 @@ module.exports = (QDB, Tap) => {
     Tap("Selection Join 3", Sel4.Cache.get("4567").Projects.rooProj.Does, ["mind read"]);
 
     const CopyCloneSel4 = CopySel4.Clone();
+    const CopyCloneSel5 = CopySel4.Clone();
     CopySel4.Join(Projects.Clone(), "UserId", "Customs");
 
     Tap("Selection Join 4", CopySel4.Cache.get("4567").Customs.fooProj.Does, ["nothing", "foo"]);
@@ -238,6 +239,15 @@ module.exports = (QDB, Tap) => {
     Tap("Selection Join 7", CopyCloneSel4.Cache.get("4567").fooProj.Does, ["nothing", "foo"]);
     Tap("Selection Join 8", CopyCloneSel4.Cache.get("2345").barProj.Does, ["sleep"]);
     Tap("Selection Join 9", CopyCloneSel4.Cache.get("4567").rooProj.Does, ["mind read"]);
+
+    CopyCloneSel5.Join(Projects.Clone().Map(Item => {
+        Item.Example = {UserId: Item.UserId};
+        return Item;
+    }), "Example.UserId", false);
+
+    Tap("Selection Join 10", CopyCloneSel5.Cache.get("4567").fooProj.Does, ["nothing", "foo"]);
+    Tap("Selection Join 11", CopyCloneSel5.Cache.get("2345").barProj.Does, ["sleep"]);
+    Tap("Selection Join 12", CopyCloneSel5.Cache.get("4567").rooProj.Does, ["mind read"]);
 
     Sel.Merge(Sel3, Sel4);
 
