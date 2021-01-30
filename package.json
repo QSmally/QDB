@@ -1,7 +1,7 @@
 {
   "name": "qdatabase",
   "version": "4.0.0",
-  "description": "An optimised SQL database",
+  "description": "An optimised, document-based SQL database",
   "main": "QDB.js",
   "scripts": {
     "test": "node Test/Main.js",
@@ -13,15 +13,15 @@
     "qdb": "Shell/CLI.js"
   },
   "keywords": [
-    "database",
-    "utility",
-    "backend",
     "sql",
-    "transaction",
+    "utility",
+    "database",
     "pools",
-    "optimised",
+    "backend",
     "management",
-    "qulity"
+    "optimisation",
+    "transaction",
+    "schema"
   ],
   "homepage": "https://github.com/QSmally/QDB#readme",
   "repository": "github:QSmally/QDB",
