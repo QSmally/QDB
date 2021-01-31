@@ -24,7 +24,7 @@ module.exports = () => {
         const Master = new SQL("Benchmark/Guilds.qdb");
 
         // Completely remove tables
-        Master.prepare("SELECT * FROM 'sqlite_master' WHERE type = 'table';")
+        Master.prepare("SELECT name FROM 'sqlite_master' WHERE type = 'table';")
         .all().forEach(Entry => Master.prepare(`DROP TABLE '${Entry.name}';`).run());
         Master.close();
 
