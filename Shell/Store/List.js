@@ -19,7 +19,7 @@ module.exports = {
         const Connection = new SQL(Path);
         
         const Tables = Connection.prepare("SELECT name FROM 'sqlite_master' WHERE type = 'table';").all()
-        .map(Row => Row.name).map(Table => [Table, Connection.prepare(`SELECT count(*) FROM '${Table}';`).get()["count(*)"]])
+        .map(Row => Row.name).map(Table => [Table, Connection.prepare(`SELECT COUNT(*) FROM '${Table}';`).get()["COUNT(*)"]])
         .map(Entry => [Format.BOLD(Entry[0]), `${Entry[1]} rows`]);
 
         const Size  = FS.lstatSync(Path).size;
