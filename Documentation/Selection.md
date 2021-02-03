@@ -56,7 +56,7 @@ A Selection allows you to filter something from the database, and perform method
 >
 > Returns **{Object|Array|DataModel}** 
 
-## [.Order(Fn)](https://github.com/QSmally/QDB/blob/v4/lib/Utility/Selection.js#L113)
+## [.Order(Fn)](https://github.com/QSmally/QDB/blob/v4/lib/Utility/Selection.js#L114)
 > Sorts this Selection's values. Identical to the `ORDER BY` SQL statement.
 > | Key | Type | Description |
 > | --- | --- | --- |
@@ -64,7 +64,7 @@ A Selection allows you to filter something from the database, and perform method
 >
 > Returns **{Selection}** 
 
-## [.Filter(Fn)](https://github.com/QSmally/QDB/blob/v4/lib/Utility/Selection.js#L125)
+## [.Filter(Fn)](https://github.com/QSmally/QDB/blob/v4/lib/Utility/Selection.js#L126)
 > Filters values that satisfy the provided function. Identical to the `FILTER BY` SQL statement.
 > | Key | Type | Description |
 > | --- | --- | --- |
@@ -72,7 +72,7 @@ A Selection allows you to filter something from the database, and perform method
 >
 > Returns **{Selection}** 
 
-## [.Limit(Begin, End?)](https://github.com/QSmally/QDB/blob/v4/lib/Utility/Selection.js#L141)
+## [.Limit(Begin, End?)](https://github.com/QSmally/QDB/blob/v4/lib/Utility/Selection.js#L142)
 > Slices off values from this Selection. Identical to the `LIMIT` SQL statement.
 > | Key | Type | Description |
 > | --- | --- | --- |
@@ -81,7 +81,7 @@ A Selection allows you to filter something from the database, and perform method
 >
 > Returns **{Selection}** 
 
-## [.Group(KeyOrPath)](https://github.com/QSmally/QDB/blob/v4/lib/Utility/Selection.js#L164)
+## [.Group(KeyOrPath)](https://github.com/QSmally/QDB/blob/v4/lib/Utility/Selection.js#L165)
 > Groups this Selection based on an identifier. Identical to the `GROUP BY` SQL statement.
 > | Key | Type | Description |
 > | --- | --- | --- |
@@ -89,17 +89,17 @@ A Selection allows you to filter something from the database, and perform method
 >
 > Returns **{Selection}** 
 
-## [.Join(Secondary, Field, Property?)](https://github.com/QSmally/QDB/blob/v4/lib/Utility/Selection.js#L191)
+## [.Join(Secondary, Field, Property?)](https://github.com/QSmally/QDB/blob/v4/lib/Utility/Selection.js#L192)
 > Joins another Selection into this instance based on a referrer field. Identical to the `FULL JOIN` SQL statement.
 > | Key | Type | Description |
 > | --- | --- | --- |
 > | Secondary | Selection | Another Selection instance to join into this one. |
-> | Field | String | Which field to check for a reference to this Selection's rows. |
+> | Field | String | Which field to check for a reference to this Selection's rows, or `null` to join with keys. |
 > | Property? | Boolean, String | Boolean false to flatten the entries into this Selection's rows, a string value that implicitly indicates the property to add the merging entries, or a boolean true to use the Selection's table name as property. |
 >
 > Returns **{Selection}** 
 
-## [.Map(Fn)](https://github.com/QSmally/QDB/blob/v4/lib/Utility/Selection.js#L224)
+## [.Map(Fn)](https://github.com/QSmally/QDB/blob/v4/lib/Utility/Selection.js#L225)
 > Iterates over this Selection's values and keys, and implements the new values returned from the callback.
 > | Key | Type | Description |
 > | --- | --- | --- |
@@ -107,7 +107,7 @@ A Selection allows you to filter something from the database, and perform method
 >
 > Returns **{Selection}** 
 
-## [.Merge(Selections)](https://github.com/QSmally/QDB/blob/v4/lib/Utility/Selection.js#L239)
+## [.Merge(Selections)](https://github.com/QSmally/QDB/blob/v4/lib/Utility/Selection.js#L240)
 > Automatically clones the merging Selections and adds them into this instance.
 > | Key | Type | Description |
 > | --- | --- | --- |
@@ -115,7 +115,7 @@ A Selection allows you to filter something from the database, and perform method
 >
 > Returns **{Selection}** 
 
-## [.Clone(Holds?)](https://github.com/QSmally/QDB/blob/v4/lib/Utility/Selection.js#L254)
+## [.Clone(Holds?)](https://github.com/QSmally/QDB/blob/v4/lib/Utility/Selection.js#L255)
 > Creates a new memory allocation for the copy of this Selection.
 > | Key | Type | Description |
 > | --- | --- | --- |

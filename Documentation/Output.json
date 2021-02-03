@@ -177,14 +177,14 @@
         {
             "Value": "AsObject",
             "Flags": [],
-            "Line": 269,
+            "Line": 267,
             "Description": "Converts this database's rows into an Object. To use dotaccess, use `Fetch` instead.",
             "Returns": "{Object} An object instance with the key/value pairs of this database."
         },
         {
             "Value": "ToIntegratedManager",
             "Flags": [],
-            "Line": 279,
+            "Line": 277,
             "Description": "Converts this database, or a part of it using dotaccess, to a Manager instance.",
             "Params": [
                 "{Pathlike} [Pathlike] Optional dotaccess path pointing towards what to serialise.",
@@ -196,14 +196,14 @@
         {
             "Value": "Transaction",
             "Flags": [],
-            "Line": 296,
+            "Line": 294,
             "Description": "Creates a SQL transaction, which allows you to commit or rollback changes.",
             "Returns": "{Transaction?} A Transaction instance, or a nil value when already in a transaction."
         },
         {
             "Value": "Set",
             "Flags": [],
-            "Line": 309,
+            "Line": 307,
             "Description": "Manages the elements of the database.",
             "Params": [
                 "{Pathlike} KeyOrPath Specifies at what row to insert or replace the element at. Use dotaccess notation to edit properties.",
@@ -214,7 +214,7 @@
         {
             "Value": "Fetch",
             "Flags": [],
-            "Line": 332,
+            "Line": 330,
             "Description": "Manages the retrieval of the database.",
             "Params": [
                 "{Pathlike} KeyOrPath Specifies which row to fetch or get from cache. Use dotaccess to retrieve properties.",
@@ -225,7 +225,7 @@
         {
             "Value": "Evict",
             "Flags": [],
-            "Line": 360,
+            "Line": 358,
             "Description": "Erases elements from this Connection's internal cache.",
             "Params": [
                 "{...Pathlike} [Keys] A key or multiple keys to remove from cache. If none, the cache will get cleared entirely."
@@ -235,7 +235,7 @@
         {
             "Value": "Erase",
             "Flags": [],
-            "Line": 377,
+            "Line": 375,
             "Description": "Manages the deletion of the database.",
             "Params": [
                 "{...Pathlike} Keys A key or multiple keys to remove from the database. These elements will also get removed from this Connection's internal cache."
@@ -245,7 +245,7 @@
         {
             "Value": "Exists",
             "Flags": [],
-            "Line": 403,
+            "Line": 401,
             "Description": "Returns whether or not a row in this database exists. This method also caches the row internally, so fetching it afterwards would be much faster.",
             "Params": [
                 "{Pathlike} Key Specifies which row to see if it exists.",
@@ -256,7 +256,7 @@
         {
             "Value": "Each",
             "Flags": [],
-            "Line": 417,
+            "Line": 415,
             "Description": "Iterates through this database's entries.",
             "Params": [
                 "{Function} Fn A function which passes on the iterating entries."
@@ -266,7 +266,7 @@
         {
             "Value": "Find",
             "Flags": [],
-            "Line": 432,
+            "Line": 430,
             "Description": "Iterates through all the entries of the database, returns the first element found.",
             "Params": [
                 "{Function} Fn A tester function which returns a boolean, based on the value(s) of the rows."
@@ -276,7 +276,7 @@
         {
             "Value": "Select",
             "Flags": [],
-            "Line": 453,
+            "Line": 451,
             "Description": "Locally filters out rows in memory to work with. Please note that this method does increase memory usage in large databases.",
             "Params": [
                 "{Function|Pathlike} FnOrPath A filter function which returns a boolean, or a row in the database."
@@ -286,7 +286,7 @@
         {
             "Value": "Push",
             "Flags": [],
-            "Line": 481,
+            "Line": 479,
             "Description": "Pushes something to an array at the path output.",
             "Params": [
                 "{Pathlike} KeyOrPath Specifies which row or nested array to push to.",
@@ -297,7 +297,7 @@
         {
             "Value": "Shift",
             "Flags": [],
-            "Line": 500,
+            "Line": 498,
             "Description": "Inserts (if defined) or removes a value to/from the front of the array.",
             "Params": [
                 "{Pathlike} KeyOrPath Specifies which row or nested array to insert to/remove from.",
@@ -308,7 +308,7 @@
         {
             "Value": "Pop",
             "Flags": [],
-            "Line": 523,
+            "Line": 521,
             "Description": "Pops something from an array at the path output.",
             "Params": [
                 "{Pathlike} KeyOrPath Specifies which row or nested array to pop from."
@@ -318,7 +318,7 @@
         {
             "Value": "Remove",
             "Flags": [],
-            "Line": 540,
+            "Line": 538,
             "Description": "Removes a specific element from this endpoint array.",
             "Params": [
                 "{Pathlike} KeyOrPath Specifies which row or nested array to remove a value from.",
@@ -329,7 +329,7 @@
         {
             "Value": "Slice",
             "Flags": [],
-            "Line": 568,
+            "Line": 566,
             "Description": "Removes elements from this endpoint array based on indexes.",
             "Params": [
                 "{Pathlike} KeyOrPath Specifies which row or nested array to slice values from.",
@@ -341,7 +341,7 @@
         {
             "Value": "Ensure",
             "Flags": [],
-            "Line": 590,
+            "Line": 588,
             "Description": "Inserts an input into a row or nested object if the key or path wasn't found at the endpoint. It can be used as a default schema of the database elements, that gets inserted if there's no entry already.",
             "Params": [
                 "{Pathlike} KeyOrPath Context key to see if it exists, either a row or nested property, and optionally insert the new value.",
@@ -353,7 +353,7 @@
         {
             "Value": "Modify",
             "Flags": [],
-            "Line": 617,
+            "Line": 613,
             "Description": "Updates a value if the entry exists by fetching it and passing it onto the callback function.",
             "Params": [
                 "{Pathlike} KeyOrPath Specifies which row or nested property to fetch.",
@@ -364,7 +364,7 @@
         {
             "Value": "Invert",
             "Flags": [],
-            "Line": 639,
+            "Line": 635,
             "Description": "Inverts a boolean, from true to false and vice-versa, at the endpoint of the path.",
             "Params": [
                 "{Pathlike} KeyOrPath Specifies which row or nested property to boolean-invert."
@@ -376,7 +376,7 @@
             "Flags": [
                 "Typedef"
             ],
-            "Line": 660,
+            "Line": 656,
             "Description": "Options for a database Connection. All integer related options are in milliseconds. ",
             "Typedef": "{Object} RawOptions",
             "Params": [
@@ -396,7 +396,7 @@
             "Flags": [
                 "Typedef"
             ],
-            "Line": 678,
+            "Line": 674,
             "Description": "An entry which has been resolved from the Connection's internal cache.",
             "Typedef": "{Object|Array} DataModel",
             "Params": [
@@ -408,7 +408,7 @@
             "Flags": [
                 "Typedef"
             ],
-            "Line": 684,
+            "Line": 680,
             "Description": "Path string to navigate entries and files of the database.",
             "Typedef": "{String} Pathlike"
         }
@@ -432,8 +432,8 @@
             ],
             "Line": 28,
             "Description": "A collection of databases this Pool holds.",
-            "Type": "{DataStore}",
-            "Reference": "https://github.com/QSmally/Qulity/blob/master/Documentation/DataStore.md"
+            "Type": "{Collection}",
+            "Reference": "https://github.com/QSmally/Qulity/blob/master/Documentation/Collection.md"
         },
         {
             "Value": "ValOptions",
@@ -467,7 +467,7 @@
             "Flags": [
                 "Typedef"
             ],
-            "Line": 97,
+            "Line": 94,
             "Description": "Options for a database Pool. All integer related options are in milliseconds. ",
             "Typedef": "{Object} PoolOptions",
             "Params": [
@@ -749,7 +749,7 @@
         {
             "Value": "Order",
             "Flags": [],
-            "Line": 113,
+            "Line": 114,
             "Description": "Sorts this Selection's values. Identical to the `ORDER BY` SQL statement.",
             "Params": [
                 "{Function} Fn Function that determines the sort order."
@@ -759,7 +759,7 @@
         {
             "Value": "Filter",
             "Flags": [],
-            "Line": 125,
+            "Line": 126,
             "Description": "Filters values that satisfy the provided function. Identical to the `FILTER BY` SQL statement.",
             "Params": [
                 "{Function} Fn Function that determines which entries to keep."
@@ -769,7 +769,7 @@
         {
             "Value": "Limit",
             "Flags": [],
-            "Line": 141,
+            "Line": 142,
             "Description": "Slices off values from this Selection. Identical to the `LIMIT` SQL statement.",
             "Params": [
                 "{Number} Begin Index that indicates the beginning to slice.",
@@ -780,7 +780,7 @@
         {
             "Value": "Group",
             "Flags": [],
-            "Line": 164,
+            "Line": 165,
             "Description": "Groups this Selection based on an identifier. Identical to the `GROUP BY` SQL statement.",
             "Params": [
                 "{Pathlike} KeyOrPath Determines by which property to group this Selection."
@@ -790,11 +790,11 @@
         {
             "Value": "Join",
             "Flags": [],
-            "Line": 191,
+            "Line": 192,
             "Description": "Joins another Selection into this instance based on a referrer field. Identical to the `FULL JOIN` SQL statement.",
             "Params": [
                 "{Selection} Secondary Another Selection instance to join into this one.",
-                "{String} Field Which field to check for a reference to this Selection's rows.",
+                "{String} Field Which field to check for a reference to this Selection's rows, or `null` to join with keys.",
                 "{Boolean|String} [Property] Boolean false to flatten the entries into this Selection's rows, a string value that implicitly indicates the property to add the merging entries, or a boolean true to use the Selection's table name as property."
             ],
             "Returns": "{Selection}"
@@ -802,7 +802,7 @@
         {
             "Value": "Map",
             "Flags": [],
-            "Line": 224,
+            "Line": 225,
             "Description": "Iterates over this Selection's values and keys, and implements the new values returned from the callback.",
             "Params": [
                 "{Function} Fn Callback function which determines the new values of the Selection."
@@ -812,7 +812,7 @@
         {
             "Value": "Merge",
             "Flags": [],
-            "Line": 239,
+            "Line": 240,
             "Description": "Automatically clones the merging Selections and adds them into this instance.",
             "Params": [
                 "{...Selection} Selections Instances to clone and merge into this one."
@@ -822,7 +822,7 @@
         {
             "Value": "Clone",
             "Flags": [],
-            "Line": 254,
+            "Line": 255,
             "Description": "Creates a new memory allocation for the copy of this Selection.",
             "Params": [
                 "{String} [Holds] Optional new identifier value for the cloned Selection."

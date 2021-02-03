@@ -33,7 +33,7 @@ const MyDBs = new QDB.Pool("lib/Databases/");
 ## [.Store](https://github.com/QSmally/QDB/blob/v4/lib/Connections/Pool.js#L28)
 > A collection of databases this Pool holds. [**Read Only**]
 >
-> Type **[{DataStore}](https://github.com/QSmally/Qulity/blob/master/Documentation/DataStore.md)**
+> Type **[{Collection}](https://github.com/QSmally/Qulity/blob/master/Documentation/Collection.md)**
 
 ## [.ValOptions](https://github.com/QSmally/QDB/blob/v4/lib/Connections/Pool.js#L40)
 > Options for this Pool. [**Read Only**]
@@ -55,7 +55,7 @@ const MyDBs = new QDB.Pool("lib/Databases/");
 > Returns **{Pool}** 
 
 # Typedefs
-## [PoolOptions](https://github.com/QSmally/QDB/blob/v4/lib/Connections/Pool.js#L97)
+## [PoolOptions](https://github.com/QSmally/QDB/blob/v4/lib/Connections/Pool.js#L94)
 > Options for a database Pool. All integer related options are in milliseconds. 
 > | Key | Type | Description |
 > | --- | --- | --- |
