@@ -4,6 +4,8 @@ module.exports = (QDB, Tap) => {
     const Con = new QDB.Connection("Test/Users.qdb");
     Con.API.prepare("DELETE FROM 'QDB';").run();
 
+    Tap("Connection", Con.State, "CONNECTED");
+
     // Base Connection functions
     Tap("Connection Set 1", Con.Set("1234", {Name: "foo", Age: 26}).Size, 1);
     Tap("Connection CacheSize 1", Con.CacheSize, 0);
@@ -269,5 +271,20 @@ module.exports = (QDB, Tap) => {
     Tap("Selection Retrieve 4", Sel.Retrieve("bar.3456.Hobbies.length"), 5);
 
     Con.Disconnect();
+
+    // Pool class
+    const Pl = new QDB.Pool("Test/");
+
+    Tap("Pool Size 1", Pl.Store.size, 1);
+
+    Tap("Pool Select 1", Pl.Select("Users"), Pl.Store.first());
+    Tap("Pool Select 2", Pl.Select("Guilds"), undefined);
+    Tap("Pool Select 3", Pl.Select("QDB"), undefined);
+
+    Tap("Pool Connection", Pl.Select("Users").Size, 4);
+
+    Pl.Disconnect();
+
+    Tap("Pool Disconnect", Pl.Store.size, 0);
 
 }
