@@ -11,7 +11,7 @@
 
     "Repository": "https://github.com/QSmally/QDB/blob/v4/",
 
-    "Keys": ["lib/Connections/Connection", "lib/Connections/Pool", "lib/Connections/Backups/Manager", "lib/Utility/Schema", "lib/Utility/Transaction", "lib/Utility/Selection"],
+    "Keys": ["lib/Connections/Connection", "lib/Connections/Pool", "lib/Connections/Backups/Manager", "lib/Utility/Schema", "lib/Utility/Selection", "lib/Utility/Transaction"],
     "Typedefs": [],
 
     "Overview": {
