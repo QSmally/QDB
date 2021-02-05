@@ -15,10 +15,10 @@ module.exports = Command => {
         ), 12)}\n`,
 
         `${Format.BOLD("EXAMPLES")}\n${[
-            "qdb make Instances.qdb",
-            "qdb Development.qdb create Users",
-            "qdb Production.qdb vacuum"
-        ].map(E => `  $ ${E}`).join("\n")}\n`,
+            "make Instances.qdb",
+            "Development.qdb create Users",
+            "Production.qdb vacuum"
+        ].map(E => `  $ qdb ${E}`).join("\n")}\n`,
 
         `${Format.BOLD("REPOSITORY")}\n  https://github.com/QSmally/QDB`
     ].join("\n"));
