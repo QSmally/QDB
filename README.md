@@ -51,6 +51,19 @@ const Users = Programmers.Select()
 .Group("Rank");
 ```
 
+
+# QDB Shell
+The library integrates a CLI for interacting with QDB deployments.
+
+Issue NPM's global installation command for accessing the shell.
+`npm install -g QSmally/QDB`
+
+```s
+$ qdb make Instances.qdb
+$ qdb Development.qdb create Users
+$ qdb Production.qdb vacuum
+```
+
 # Issues, Contributing & License
 Before making an issue for a bug or feature submittion, please ensure that it hasn't already been created [on the repository](https://github.com/QSmally/QDB/issues).
 
