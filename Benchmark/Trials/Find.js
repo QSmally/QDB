@@ -11,7 +11,9 @@ module.exports = Connection => {
     const Target = Connection.Fetch(Indexes[Indexes.length - 1]);
     const TStart = process.hrtime();
 
-    Connection.Find(({Username, Password}) => Username === Target.Username && Password === Target.Password);
+    Connection.Find(({Username, Password}) => {
+        return Username === Target.Username && Password === Target.Password;
+    });
 
     return {
         TEnd: process.hrtime(TStart),
