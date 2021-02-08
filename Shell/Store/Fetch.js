@@ -6,8 +6,8 @@ module.exports = {
     Usage: "qdb <database> fetch <name> <identifier>",
     Description: "Selects a table to fetch from and retrieves a document.",
     Examples: [
-        "qdb Users.qdb fetch Users 123456789012345678",
-        "qdb ./Internal/Guilds.qdb fetch Profiles 123456789012345678"
+        "qdb Users.qdb fetch Users 2ff46929",
+        "qdb ./Internal/Guilds.qdb fetch Profiles 396c9b85"
     ],
 
     Arguments: 2,
