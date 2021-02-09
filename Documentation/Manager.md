@@ -47,7 +47,7 @@ new QDB.BackupManager("lib/Databases/", { Destination: "/usr/local/backups/" });
 > Returns **{BackupManager}** 
 
 ## [.Spawn()](https://github.com/QSmally/QDB/blob/v4/lib/Connections/Backups/Manager.js#L106)
-> Spawns the child processor for this Manager.
+> Spawns the child process for this Manager.
 >
 > Returns **{BackupManager}** 
 

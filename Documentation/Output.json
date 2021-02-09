@@ -530,7 +530,7 @@
                 "Private"
             ],
             "Line": 79,
-            "Description": "This manager's event manager to control the flow of the backup child process.",
+            "Description": "This manager's event manager to control the information of the backup child process.",
             "Type": "{EventEmitter}"
         },
         {
@@ -548,7 +548,7 @@
             "Value": "Spawn",
             "Flags": [],
             "Line": 106,
-            "Description": "Spawns the child processor for this Manager.",
+            "Description": "Spawns the child process for this Manager.",
             "Returns": "{BackupManager}"
         },
         {
@@ -630,42 +630,6 @@
                 "{Object} Target The main entry to compare against and to merge changes into."
             ],
             "Returns": "{Object} A merged data object based on this Schema's Model."
-        }
-    ],
-    "Transaction": [
-        {
-            "Value": "_Connection",
-            "Flags": [
-                "Variable",
-                "Private"
-            ],
-            "Line": 13,
-            "Description": "Transaction's Connection reference.",
-            "Type": "{Connection}"
-        },
-        {
-            "Value": "Active",
-            "Flags": [
-                "Variable",
-                "ReadOnly"
-            ],
-            "Line": 23,
-            "Description": "Whether this Transaction is active.",
-            "Type": "{Boolean}"
-        },
-        {
-            "Value": "Commit",
-            "Flags": [],
-            "Line": 40,
-            "Description": "Publishes the changes made during this Transaction.",
-            "Returns": "{Boolean} Whether the changed were committed."
-        },
-        {
-            "Value": "Rollback",
-            "Flags": [],
-            "Line": 54,
-            "Description": "Rolls back the changes made before the start of this Transaction. This also clears the contents of the Connection's internal cache.",
-            "Returns": "{Boolean} Whether the changed were reset."
         }
     ],
     "Selection": [
@@ -828,6 +792,42 @@
                 "{String} [Holds] Optional new identifier value for the cloned Selection."
             ],
             "Returns": "{Selection}"
+        }
+    ],
+    "Transaction": [
+        {
+            "Value": "_Connection",
+            "Flags": [
+                "Variable",
+                "Private"
+            ],
+            "Line": 13,
+            "Description": "Transaction's Connection reference.",
+            "Type": "{Connection}"
+        },
+        {
+            "Value": "Active",
+            "Flags": [
+                "Variable",
+                "ReadOnly"
+            ],
+            "Line": 23,
+            "Description": "Whether this Transaction is active.",
+            "Type": "{Boolean}"
+        },
+        {
+            "Value": "Commit",
+            "Flags": [],
+            "Line": 40,
+            "Description": "Publishes the changes made during this Transaction.",
+            "Returns": "{Boolean} Whether the changed were committed."
+        },
+        {
+            "Value": "Rollback",
+            "Flags": [],
+            "Line": 54,
+            "Description": "Rolls back the changes made before the start of this Transaction. This also clears the contents of the Connection's internal cache.",
+            "Returns": "{Boolean} Whether the changed were reset."
         }
     ]
 }
