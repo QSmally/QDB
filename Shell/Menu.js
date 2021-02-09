@@ -14,7 +14,8 @@ module.exports = (Path, Arguments) => {
     if (Executable) {
         if (Arguments.length !== Executable.Arguments)
         return console.log(`${Format.DIM("Error")}: expected ${Executable.Arguments} arguments, but received ${Arguments.length}.`);
-        return Executable.Execute(Path, Arguments);
+        try { return Executable.Execute(Path, Arguments); }
+        catch (Err) { return console.log(`${Format.DIM("Error")}: ${Err.message}`); }
     }
 
     console.log([
