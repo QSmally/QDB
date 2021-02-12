@@ -140,10 +140,14 @@ module.exports = (QDB, Tap) => {
     Tap("Connection Size 15", Con.Size, 5);
     Tap("Connection CacheSize 16", Con.CacheSize, 5);
 
+    Tap("Connection Invert 5", Con.Invert("6789.Name"), false);
+    Tap("Connection Invert 6", Con.Fetch("6789.Name"), false);
+
     Tr2.Rollback();
 
     Tap("Connection Size 17", Con.Size, 4);
     Tap("Connection CacheSize 18", Con.CacheSize, 0);
+    Tap("Connection Invert 7", Con.Fetch("6789.Name"), "moo");
 
     // Iterator methods
     let Results = [];
