@@ -147,6 +147,7 @@ module.exports = (QDB, Tap) => {
 
     Tap("Connection Size 17", Con.Size, 4);
     Tap("Connection CacheSize 18", Con.CacheSize, 0);
+    Tap("Connection Fetch 9", Con.Fetch("foo"), undefined);
     Tap("Connection Invert 7", Con.Fetch("6789.Name"), "moo");
 
     // Iterator methods
