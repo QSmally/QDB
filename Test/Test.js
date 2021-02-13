@@ -148,7 +148,7 @@ module.exports = (QDB, Tap) => {
     Tr2.Rollback();
 
     Tap("Connection Size 17", Con.Size, 4);
-    Tap("Connection CacheSize 18", Con.CacheSize, 0);
+    Tap("Connection CacheSize 17", Con.CacheSize, 0);
     Tap("Connection Fetch 9", Con.Fetch("foo"), undefined);
     Tap("Connection Invert 7", Con.Fetch("6789.Name"), "moo");
 
@@ -293,5 +293,16 @@ module.exports = (QDB, Tap) => {
     Pl.Disconnect();
 
     Tap("Pool Disconnect", Pl.Store.size, 0);
+
+    // Executors
+    const ECon = new QDB.Connection("Test/Users.qdb", {
+        FetchAll: true,
+        CacheMaxSize: 2
+    });
+
+    Tap("Connection Size 16", ECon.Size, 4);
+    Tap("Connection CacheSize 18", ECon.CacheSize, 2);
+
+    ECon.Disconnect();
 
 }
