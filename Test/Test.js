@@ -2,9 +2,11 @@
 module.exports = (QDB, Tap) => {
 
     const Con = new QDB.Connection("Test/Users.qdb");
-    Con.API.prepare("DELETE FROM 'QDB';").run();
-
     Tap("Connection", Con.State, "CONNECTED");
+
+    Con.Erase(...Con.Indexes);
+    Tap("Connection Clear 1", Con.Size, 0);
+    Tap("Connection Clear 2", Con.AsObject(), {});
 
     // Base Connection functions
     Tap("Connection Set 1", Con.Set("1234", {Name: "foo", Age: 26}).Size, 1);
