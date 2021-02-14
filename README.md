@@ -55,7 +55,6 @@ const Users = Programmers.Select()
 # QDB Shell
 The library integrates a CLI for interacting with QDB deployments.
 
-Issue NPM's global installation command for accessing the shell.
 `npm install -g QSmally/QDB`
 
 ```s
