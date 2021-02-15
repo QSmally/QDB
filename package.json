@@ -32,7 +32,7 @@
   },
   "dependencies": {
     "better-sqlite3": "^7.1.2",
-    "qulity": "^2.0.0"
+    "qulity": "^2.1.0"
   },
   "devDependencies": {
     "cli-color": "^2.0.0",
