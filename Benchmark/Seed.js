@@ -69,9 +69,7 @@ module.exports = () => {
         }
     }
 
-    return {
-        Trials: FS.readdirSync("Benchmark/Trials/"),
-        Tables
-    }
+    const Trials = FS.readdirSync("Benchmark/Trials/");
+    return {Trials, Tables}
 
 }
