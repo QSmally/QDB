@@ -69,7 +69,7 @@ const Users = new QDB.Connection("lib/Databases/Users.qdb");
 ## [.Disconnect()](https://github.com/QSmally/QDB/blob/v4/lib/Connections/Connection.js#L170)
 > Disconnects from this Connection, clears in-memory rows. Only run this method when you are exiting the program, or want to fully disconnect from this database.
 >
-> Returns **{Connection}** 
+> Returns **{Connection}**
 
 ## [.AsObject()](https://github.com/QSmally/QDB/blob/v4/lib/Connections/Connection.js#L266)
 > Converts this database's rows into an Object. To use dotaccess, use `Fetch` instead.

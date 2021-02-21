@@ -54,7 +54,7 @@ A Selection allows you to filter something from the database, and perform method
 > | --- | --- | --- |
 > | KeyOrPath | Pathlike | Indicates which (nested) element to receieve. |
 >
-> Returns **{Object|Array|DataModel}** 
+> Returns **{Object|Array|DataModel}**
 
 ## [.Order(Fn)](https://github.com/QSmally/QDB/blob/v4/lib/Utility/Selection.js#L114)
 > Sorts this Selection's values. Identical to the `ORDER BY` SQL statement.
@@ -62,7 +62,7 @@ A Selection allows you to filter something from the database, and perform method
 > | --- | --- | --- |
 > | Fn | Function | Function that determines the sort order. |
 >
-> Returns **{Selection}** 
+> Returns **{Selection}**
 
 ## [.Filter(Fn)](https://github.com/QSmally/QDB/blob/v4/lib/Utility/Selection.js#L126)
 > Filters values that satisfy the provided function. Identical to the `FILTER BY` SQL statement.
@@ -70,7 +70,7 @@ A Selection allows you to filter something from the database, and perform method
 > | --- | --- | --- |
 > | Fn | Function | Function that determines which entries to keep. |
 >
-> Returns **{Selection}** 
+> Returns **{Selection}**
 
 ## [.Limit(Begin, End?)](https://github.com/QSmally/QDB/blob/v4/lib/Utility/Selection.js#L142)
 > Slices off values from this Selection. Identical to the `LIMIT` SQL statement.
@@ -79,7 +79,7 @@ A Selection allows you to filter something from the database, and perform method
 > | Begin | Number | Index that indicates the beginning to slice. |
 > | End? | Number | An index for the end of the slice. |
 >
-> Returns **{Selection}** 
+> Returns **{Selection}**
 
 ## [.Group(KeyOrPath)](https://github.com/QSmally/QDB/blob/v4/lib/Utility/Selection.js#L165)
 > Groups this Selection based on an identifier. Identical to the `GROUP BY` SQL statement.
@@ -87,7 +87,7 @@ A Selection allows you to filter something from the database, and perform method
 > | --- | --- | --- |
 > | KeyOrPath | Pathlike | Determines by which property to group this Selection. |
 >
-> Returns **{Selection}** 
+> Returns **{Selection}**
 
 ## [.Join(Secondary, Field, Property?)](https://github.com/QSmally/QDB/blob/v4/lib/Utility/Selection.js#L192)
 > Joins another Selection into this instance based on a referrer field. Identical to the `FULL JOIN` SQL statement.
@@ -97,7 +97,7 @@ A Selection allows you to filter something from the database, and perform method
 > | Field | String | Which field to check for a reference to this Selection's rows, or `null` to join with keys. |
 > | Property? | Boolean, String | Boolean false to flatten the entries into this Selection's rows, a string value that implicitly indicates the property to add the merging entries, or a boolean true to use the Selection's table name as property. |
 >
-> Returns **{Selection}** 
+> Returns **{Selection}**
 
 ## [.Map(Fn)](https://github.com/QSmally/QDB/blob/v4/lib/Utility/Selection.js#L225)
 > Iterates over this Selection's values and keys, and implements the new values returned from the callback.
@@ -105,7 +105,7 @@ A Selection allows you to filter something from the database, and perform method
 > | --- | --- | --- |
 > | Fn | Function | Callback function which determines the new values of the Selection. |
 >
-> Returns **{Selection}** 
+> Returns **{Selection}**
 
 ## [.Merge(Selections)](https://github.com/QSmally/QDB/blob/v4/lib/Utility/Selection.js#L240)
 > Automatically clones the merging Selections and adds them into this instance.
@@ -113,7 +113,7 @@ A Selection allows you to filter something from the database, and perform method
 > | --- | --- | --- |
 > | Selections | ...Selection | Instances to clone and merge into this one. |
 >
-> Returns **{Selection}** 
+> Returns **{Selection}**
 
 ## [.Clone(Holds?)](https://github.com/QSmally/QDB/blob/v4/lib/Utility/Selection.js#L255)
 > Creates a new memory allocation for the copy of this Selection.
@@ -121,4 +121,4 @@ A Selection allows you to filter something from the database, and perform method
 > | --- | --- | --- |
 > | Holds? | String | Optional new identifier value for the cloned Selection. |
 >
-> Returns **{Selection}** 
+> Returns **{Selection}**

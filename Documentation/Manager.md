@@ -44,17 +44,17 @@ new QDB.BackupManager("lib/Databases/", { Destination: "/usr/local/backups/" });
 > | Event | String | Which action to register for the listener. |
 > | Listener | Function | Function to execute upon this event. |
 >
-> Returns **{BackupManager}** 
+> Returns **{BackupManager}**
 
 ## [.Spawn()](https://github.com/QSmally/QDB/blob/v4/lib/Connections/Backups/Manager.js#L106)
 > Spawns the child process for this Manager.
 >
-> Returns **{BackupManager}** 
+> Returns **{BackupManager}**
 
 ## [.Exit()](https://github.com/QSmally/QDB/blob/v4/lib/Connections/Backups/Manager.js#L133)
 > Ends the backup process and emits the `Exit` event.
 >
-> Returns **{BackupManager}** 
+> Returns **{BackupManager}**
 
 # Typedefs
 ## [BackupOptions](https://github.com/QSmally/QDB/blob/v4/lib/Connections/Backups/Manager.js#L148)
