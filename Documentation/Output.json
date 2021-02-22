@@ -640,7 +640,7 @@
                 "ReadOnly"
             ],
             "Line": 17,
-            "Description": "Cached dataset instances of this Selection.",
+            "Description": "Cached dataset of this Selection.",
             "Type": "{Collection}",
             "Reference": "https://github.com/QSmally/Qulity/blob/master/Documentation/Collection.md"
         },

@@ -47,12 +47,12 @@ const MyDBs = new QDB.Pool("lib/Databases/");
 > | --- | --- | --- |
 > | Base | String | Reference link to the Connection to resolve. |
 >
-> Returns **{Connection}**
+> Returns **{Connection}** 
 
 ## [.Disconnect()](https://github.com/QSmally/QDB/blob/v4/lib/Connections/Pool.js#L79)
 > Disconnects from all the Connections in this Pool.
 >
-> Returns **{Pool}**
+> Returns **{Pool}** 
 
 # Typedefs
 ## [PoolOptions](https://github.com/QSmally/QDB/blob/v4/lib/Connections/Pool.js#L94)
