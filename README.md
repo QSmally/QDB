@@ -1,23 +1,20 @@
 
 # QDB4
-## An optimised, document-based SQL database
-
-[[Contribute](#issues-contributing--license)] [[Documentation](https://github.com/QSmally/QDB/blob/v4/Documentation/Index.md)]
 
 > QDB is a synchronous database module reliant on JavaScript object-documents with multiple levels of optimisation built into it.
 
 
-# Main Features
-* Optimised entry caches
-* Database schema and automatic migration
-* Selection and transaction wrappers
-* Pools with external thread support
+# Features
+* Optimised entry caches.
+* Database schema and automatic migration.
+* Selection and transaction wrappers.
+* Pools with external thread support.
 
 ## Links
 * [Documentations](https://github.com/QSmally/QDB/blob/v4/Documentation/Index.md)
 * [Github](https://github.com/QSmally/QDB)
 
-## Install/Import
+## Installation
 `npm install QSmally/QDB`
 ```js
 const QDB = require("qdatabase");
@@ -63,7 +60,5 @@ $ qdb Development.qdb create Users
 $ qdb Production.qdb vacuum
 ```
 
-# Issues, Contributing & License
-Before making an issue for a bug or feature submittion, please ensure that it hasn't already been created [on the repository](https://github.com/QSmally/QDB/issues).
 
 This module is licensed under [Apache 2.0](http://www.apache.org/licenses/LICENSE-2.0).
