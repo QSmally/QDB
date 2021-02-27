@@ -191,7 +191,7 @@
                 "{Function} [Holds] Given optional class for which instance this Manager is for."
             ],
             "Returns": "{Manager} A Manager instance with the key/model pairs.",
-            "Reference": "https://github.com/QSmally/Qulity/blob/master/Documentation/Manager.md"
+            "Reference": "https://github.com/QSmally/Qulity/blob/master/Documentation/BaseManager.md"
         },
         {
             "Value": "Transaction",
@@ -400,7 +400,7 @@
             "Description": "An entry which has been resolved from the Connection's internal cache.",
             "Typedef": "{Object|Array} DataModel",
             "Params": [
-                "{Number} _Timestamp Date when this entry was last patched, used for sweeping of the cache."
+                "{Number} _Timestamp Timestamp when this entry was last patched."
             ]
         },
         {
@@ -409,7 +409,7 @@
                 "Typedef"
             ],
             "Line": 677,
-            "Description": "Path string to navigate entries and files of the database.",
+            "Description": "Path string to navigate files.",
             "Typedef": "{String} Pathlike"
         }
     ],

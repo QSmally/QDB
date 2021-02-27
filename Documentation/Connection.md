@@ -83,7 +83,7 @@ const Users = new QDB.Connection("lib/Databases/Users.qdb");
 > | Pathlike? | Pathlike | Optional dotaccess path pointing towards what to serialise. |
 > | Holds? | Function | Given optional class for which instance this Manager is for. |
 >
-> Returns **[{Manager}](https://github.com/QSmally/Qulity/blob/master/Documentation/Manager.md)** A Manager instance with the key/model pairs.
+> Returns **[{Manager}](https://github.com/QSmally/Qulity/blob/master/Documentation/BaseManager.md)** A Manager instance with the key/model pairs.
 
 ## [.Transaction()](https://github.com/QSmally/QDB/blob/v4/lib/Connections/Connection.js#L293)
 > Creates a SQL transaction, which allows you to commit or rollback changes.
@@ -250,11 +250,11 @@ const Users = new QDB.Connection("lib/Databases/Users.qdb");
 > An entry which has been resolved from the Connection's internal cache.
 > | Key | Type | Description |
 > | --- | --- | --- |
-> | _Timestamp | Number | Date when this entry was last patched, used for sweeping of the cache. |
+> | _Timestamp | Number | Timestamp when this entry was last patched. |
 >
 > Type **{Object|Array}**
 
 ## [Pathlike](https://github.com/QSmally/QDB/blob/v4/lib/Connections/Connection.js#L677)
-> Path string to navigate entries and files of the database.
+> Path string to navigate files.
 >
 > Type **{String}**
