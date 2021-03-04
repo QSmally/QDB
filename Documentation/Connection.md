@@ -71,12 +71,12 @@ const Users = new QDB.Connection("lib/Databases/Users.qdb");
 >
 > Returns **{Connection}** 
 
-## [.AsObject()](https://github.com/QSmally/QDB/blob/v4/lib/Connections/Connection.js#L266)
+## [.AsObject()](https://github.com/QSmally/QDB/blob/v4/lib/Connections/Connection.js#L267)
 > Converts this database's rows into an Object. To use dotaccess, use `Fetch` instead.
 >
 > Returns **{Object}** An object instance with the key/value pairs of this database.
 
-## [.ToIntegratedManager(Pathlike?, Holds?)](https://github.com/QSmally/QDB/blob/v4/lib/Connections/Connection.js#L276)
+## [.ToIntegratedManager(Pathlike?, Holds?)](https://github.com/QSmally/QDB/blob/v4/lib/Connections/Connection.js#L277)
 > Converts this database, or a part of it using dotaccess, to a Manager instance.
 > | Key | Type | Description |
 > | --- | --- | --- |
@@ -85,12 +85,12 @@ const Users = new QDB.Connection("lib/Databases/Users.qdb");
 >
 > Returns **[{Manager}](https://github.com/QSmally/Qulity/blob/master/Documentation/BaseManager.md)** A Manager instance with the key/model pairs.
 
-## [.Transaction()](https://github.com/QSmally/QDB/blob/v4/lib/Connections/Connection.js#L293)
+## [.Transaction()](https://github.com/QSmally/QDB/blob/v4/lib/Connections/Connection.js#L294)
 > Creates a SQL transaction, which allows you to commit or rollback changes.
 >
 > Returns **{Transaction?}** A Transaction instance, or a nil value when already in a transaction.
 
-## [.Set(KeyOrPath, Value)](https://github.com/QSmally/QDB/blob/v4/lib/Connections/Connection.js#L306)
+## [.Set(KeyOrPath, Value)](https://github.com/QSmally/QDB/blob/v4/lib/Connections/Connection.js#L307)
 > Manages the elements of the database.
 > | Key | Type | Description |
 > | --- | --- | --- |
@@ -99,7 +99,7 @@ const Users = new QDB.Connection("lib/Databases/Users.qdb");
 >
 > Returns **{Connection}** Returns the current Connection.
 
-## [.Fetch(KeyOrPath, Cache?)](https://github.com/QSmally/QDB/blob/v4/lib/Connections/Connection.js#L329)
+## [.Fetch(KeyOrPath, Cache?)](https://github.com/QSmally/QDB/blob/v4/lib/Connections/Connection.js#L330)
 > Manages the retrieval of the database.
 > | Key | Type | Description |
 > | --- | --- | --- |
@@ -108,7 +108,7 @@ const Users = new QDB.Connection("lib/Databases/Users.qdb");
 >
 > Returns **{Object|Array|DataModel|Any}** Value of the row, or the property when using dotaccess.
 
-## [.Evict(Keys?)](https://github.com/QSmally/QDB/blob/v4/lib/Connections/Connection.js#L357)
+## [.Evict(Keys?)](https://github.com/QSmally/QDB/blob/v4/lib/Connections/Connection.js#L358)
 > Erases elements from this Connection's internal cache.
 > | Key | Type | Description |
 > | --- | --- | --- |
@@ -116,7 +116,7 @@ const Users = new QDB.Connection("lib/Databases/Users.qdb");
 >
 > Returns **{Connection}** Returns the current Connection.
 
-## [.Erase(Keys)](https://github.com/QSmally/QDB/blob/v4/lib/Connections/Connection.js#L374)
+## [.Erase(Keys)](https://github.com/QSmally/QDB/blob/v4/lib/Connections/Connection.js#L375)
 > Manages the deletion of the database.
 > | Key | Type | Description |
 > | --- | --- | --- |

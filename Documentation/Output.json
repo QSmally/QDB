@@ -177,14 +177,14 @@
         {
             "Value": "AsObject",
             "Flags": [],
-            "Line": 266,
+            "Line": 267,
             "Description": "Converts this database's rows into an Object. To use dotaccess, use `Fetch` instead.",
             "Returns": "{Object} An object instance with the key/value pairs of this database."
         },
         {
             "Value": "ToIntegratedManager",
             "Flags": [],
-            "Line": 276,
+            "Line": 277,
             "Description": "Converts this database, or a part of it using dotaccess, to a Manager instance.",
             "Params": [
                 "{Pathlike} [Pathlike] Optional dotaccess path pointing towards what to serialise.",
@@ -196,14 +196,14 @@
         {
             "Value": "Transaction",
             "Flags": [],
-            "Line": 293,
+            "Line": 294,
             "Description": "Creates a SQL transaction, which allows you to commit or rollback changes.",
             "Returns": "{Transaction?} A Transaction instance, or a nil value when already in a transaction."
         },
         {
             "Value": "Set",
             "Flags": [],
-            "Line": 306,
+            "Line": 307,
             "Description": "Manages the elements of the database.",
             "Params": [
                 "{Pathlike} KeyOrPath Specifies at what row to insert or replace the element at. Use dotaccess notation to edit properties.",
@@ -214,7 +214,7 @@
         {
             "Value": "Fetch",
             "Flags": [],
-            "Line": 329,
+            "Line": 330,
             "Description": "Manages the retrieval of the database.",
             "Params": [
                 "{Pathlike} KeyOrPath Specifies which row to fetch or get from cache. Use dotaccess to retrieve properties.",
@@ -225,7 +225,7 @@
         {
             "Value": "Evict",
             "Flags": [],
-            "Line": 357,
+            "Line": 358,
             "Description": "Erases elements from this Connection's internal cache.",
             "Params": [
                 "{...Pathlike} [Keys] A key or multiple keys to remove from cache. If none, the cache will get cleared entirely."
@@ -235,7 +235,7 @@
         {
             "Value": "Erase",
             "Flags": [],
-            "Line": 374,
+            "Line": 375,
             "Description": "Manages the deletion of the database.",
             "Params": [
                 "{...Pathlike} Keys A key or multiple keys to remove from the database. These elements will also get removed from this Connection's internal cache."
