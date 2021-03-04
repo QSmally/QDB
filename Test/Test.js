@@ -19,6 +19,14 @@ module.exports = (QDB, Tap) => {
     Tap("Connection CacheSize 3", Con.CacheSize, 1);
     Tap("Connection Size 2", Con.Size, 2);
 
+    Tap("Connection Access 1", Con.Fetch("2345.Name"), "bar");
+    Tap("Connection Access 2", Con.Fetch("2345.Name.length"), 3);
+    Tap("Connection Access 3", Con.Fetch("2345.Age"), 21);
+    Tap("Connection Access 3", Con.Fetch("2345.Age.not.exists"), undefined);
+    Tap("Connection Access 4", Con.Fetch("2345.None"), undefined);
+    Tap("Connection Access 5", typeof Con.Fetch("2345._Timestamp"), "number");
+    Tap("Connection Access 6", Con.CacheSize, 1);
+
     Tap("Connection Fetch 2", Con.Fetch("1234"), {Name: "foo", Age: 26});
     Tap("Connection CacheSize 4", Con.CacheSize, 2);
     Tap("Connection Size 3", Con.Size, 2);
