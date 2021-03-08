@@ -364,7 +364,7 @@
         {
             "Value": "Invert",
             "Flags": [],
-            "Line": 634,
+            "Line": 636,
             "Description": "Inverts a boolean, from true to false and vice-versa, at the endpoint of the path.",
             "Params": [
                 "{Pathlike} KeyOrPath Specifies which row or nested property to boolean-invert."
@@ -376,7 +376,7 @@
             "Flags": [
                 "Typedef"
             ],
-            "Line": 653,
+            "Line": 655,
             "Description": "Options for a database Connection. All integer related options are in milliseconds. ",
             "Typedef": "{Object} RawOptions",
             "Params": [
@@ -396,7 +396,7 @@
             "Flags": [
                 "Typedef"
             ],
-            "Line": 671,
+            "Line": 673,
             "Description": "An entry which has been resolved from the Connection's internal cache.",
             "Typedef": "{Object|Array} DataModel",
             "Params": [
@@ -408,7 +408,7 @@
             "Flags": [
                 "Typedef"
             ],
-            "Line": 677,
+            "Line": 679,
             "Description": "Path string to navigate files.",
             "Typedef": "{String} Pathlike"
         }
