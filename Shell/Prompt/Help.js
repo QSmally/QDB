@@ -8,19 +8,23 @@ const Commands = new Map(FS.readdirSync(`${__dirname}/../Store/`)
 
 module.exports = Command => {
     if (!Command) return console.log(["QDB Shell\n",
-        `${Format.BOLD("USAGE")}\n  $ qdb <database | make | help> [command] [parameters...]\n`,
+        Format.BOLD("USAGE"),
+        "  $ qdb <database | make | help> [command] [parameters...]\n",
 
-        `${Format.BOLD("COMMANDS")}\n${Format.LIST(Object.fromEntries(
+        Format.BOLD("COMMANDS"),
+        `${Format.LIST(Object.fromEntries(
             [...Commands.entries()].map(Entry => [Entry[0], Entry[1].Description])
         ), 12)}\n`,
 
-        `${Format.BOLD("EXAMPLES")}\n${[
+        Format.BOLD("EXAMPLES"),
+        `${[
             "make Instances.qdb",
             "Development.qdb create Users",
             "Production.qdb vacuum"
         ].map(E => `  $ qdb ${E}`).join("\n")}\n`,
 
-        `${Format.BOLD("REPOSITORY")}\n  https://github.com/QSmally/QDB`
+        Format.BOLD("REPOSITORY"),
+        "  https://github.com/QSmally/QDB"
     ].join("\n"));
 
     const Fetched = Commands.get(Command.toLowerCase());
