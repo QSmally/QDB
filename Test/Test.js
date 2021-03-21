@@ -169,6 +169,19 @@ module.exports = (QDB, Tap) => {
 
     Tap("Connection Each", Results, ["4567", "2345", "3456", "6789"]);
 
+    let Results2 = [];
+
+    for (const [Id, Document] of Con) {
+        Results2.push([Id, Document]);
+    }
+
+    Tap("Connection Iterator", Results2, [
+        ["4567", {Name: "goo", Age: 27, Hobbies: []}],
+        ["2345", {Name: "bar", Age: 30, Hobbies: ["one", "two", "three", "four"]}],
+        ["3456", {Name: "roo", Age: 29, Hobbies: ["two", "three", "-5", "loo", "1"]}],
+        ["6789", {Name: "moo", Age: -1, Hobbies: [{Programming: false}]}],
+    ]);
+
     // Selection class
     Tap("Connection Select 1", Con.Select((_Row, Key) => {
         return Key === "3456";
