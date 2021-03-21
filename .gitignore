@@ -4,6 +4,8 @@ node_modules/
 
 # Testing
 Test/Users.qdb
+Test/Users.qdb-shm
+Test/Users.qdb-wal
 
 # Benchmarking
 Benchmark/*.qdb
