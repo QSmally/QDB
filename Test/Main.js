@@ -26,12 +26,12 @@ try {
     console.log(`Successfully ran ${Object.keys(Entries).length} tests\nOf which ${Failed.length} have failed`);
 
     if (Failed.length) {
-        console.log("Failed test stack:");
+        console.log("Failed test stack:\n");
         Failed.forEach(Entry => {
-            console.log(`\n${Entry.Test}:\nGot`);
-            console.log(Entry.Output);
-            console.log("While expecting");
-            console.log(Entry.Expected);
+            console.log(Entry.Test,
+                "\n", Entry.Output,
+                "\n", Entry.Expected
+            );
         });
     }
 
