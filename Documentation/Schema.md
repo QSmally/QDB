@@ -12,7 +12,7 @@
 * [Selection](https://github.com/QSmally/QDB/blob/v4/Documentation/Selection.md)
 * [Schema](https://github.com/QSmally/QDB/blob/v4/Documentation/Schema.md)
 
-A general model that entries of a database should follow.
+A generic model that entries of a database automatically follows.
 
 | Key | Type | Description |
 | --- | --- | --- |
