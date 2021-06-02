@@ -5,9 +5,9 @@
 
 
 # Features
-* Optimised entry caches.
-* Database schema and automatic migration.
-* Selection and transaction wrappers.
+* Optimised entry caches;
+* Database schema and automatic migration;
+* Selection and transaction wrappers;
 * Pools with external thread support.
 
 ## Links
@@ -34,7 +34,7 @@ const MyDB = new QDB.Connection(Path, Options?);
 A SQL transaction manager.
 ```js
 const Transaction = MyDB.Transaction();
-// Changes in the database...
+// Perform changes in the database...
 Transaction.Commit(); // or
 Transaction.Rollback();
 ```
