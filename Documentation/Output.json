@@ -69,8 +69,8 @@
             ],
             "Line": 100,
             "Description": "In-memory cached rows.",
-            "Type": "{DataStore}",
-            "Reference": "https://github.com/QSmally/Qulity/blob/master/Documentation/DataStore.md"
+            "Type": "{Collection}",
+            "Reference": "https://github.com/QSmally/Qulity/blob/master/Documentation/Collection.md"
         },
         {
             "Value": "_Executors",
