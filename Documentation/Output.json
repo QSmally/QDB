@@ -67,7 +67,7 @@
                 "Variable",
                 "Private"
             ],
-            "Line": 100,
+            "Line": 102,
             "Description": "In-memory cached rows.",
             "Type": "{Collection}",
             "Reference": "https://github.com/QSmally/Qulity/blob/master/Documentation/Collection.md"
@@ -78,7 +78,7 @@
                 "Variable",
                 "Private"
             ],
-            "Line": 122,
+            "Line": 124,
             "Description": "An object with all additional active operators. I.e. sweep intervals, backups, fetch all entries.",
             "Type": "{Object}"
         },
@@ -87,7 +87,7 @@
             "Flags": [
                 "Variable"
             ],
-            "Line": 137,
+            "Line": 139,
             "Description": "Retrieves all the rows of this Connection.",
             "Action": "Getter",
             "Refer": "Size",
@@ -98,7 +98,7 @@
             "Flags": [
                 "Variable"
             ],
-            "Line": 148,
+            "Line": 150,
             "Description": "Retrieves all the in-memory cached rows of this Connection. Extension of what would be `<Connection>.Cache.size`, but checks for the ready state.",
             "Action": "Getter",
             "Refer": "CacheSize",
@@ -109,7 +109,7 @@
             "Flags": [
                 "Variable"
             ],
-            "Line": 159,
+            "Line": 161,
             "Description": "Retrieves all the keys of this database table.",
             "Action": "Getter",
             "Refer": "Indexes",
@@ -118,7 +118,7 @@
         {
             "Value": "Disconnect",
             "Flags": [],
-            "Line": 170,
+            "Line": 172,
             "Description": "Disconnects from this Connection, clears in-memory rows. Only run this method when you are exiting the program, or want to fully disconnect from this database.",
             "Returns": "{Connection}"
         },
@@ -128,7 +128,7 @@
                 "Variable",
                 "Private"
             ],
-            "Line": 189,
+            "Line": 191,
             "Description": "Internal getter. Checks whether this database is ready for execution.",
             "Action": "Getter",
             "Refer": "_Ready",
@@ -139,7 +139,7 @@
             "Flags": [
                 "Private"
             ],
-            "Line": 200,
+            "Line": 202,
             "Description": "Internal method. Resolves a dotaccess path or key and parses it.",
             "Params": [
                 "{Pathlike} Pathlike String input to be formed and parsed."
@@ -151,7 +151,7 @@
             "Flags": [
                 "Private"
             ],
-            "Line": 212,
+            "Line": 214,
             "Description": "Internal method. Inserts or patches something in this Connection's internal cache.",
             "Params": [
                 "{String|Number} Key As address to memory map this value to.",
@@ -165,7 +165,7 @@
             "Flags": [
                 "Private"
             ],
-            "Line": 233,
+            "Line": 235,
             "Description": "Internal method. Finds a relative dotaccess pathway of an object.",
             "Params": [
                 "{Object|Array} Frame The object-like beginning to cast.",
@@ -177,14 +177,14 @@
         {
             "Value": "AsObject",
             "Flags": [],
-            "Line": 272,
+            "Line": 274,
             "Description": "Converts this database's rows into an Object. To use dotaccess, use `Fetch` instead.",
             "Returns": "{Object} An object instance with the key/value pairs of this database."
         },
         {
             "Value": "ToIntegratedManager",
             "Flags": [],
-            "Line": 282,
+            "Line": 284,
             "Description": "Converts this database, or a part of it using dotaccess, to a Manager instance.",
             "Params": [
                 "{Pathlike} [Pathlike] Optional dotaccess path pointing towards what to serialise.",
@@ -196,14 +196,14 @@
         {
             "Value": "Transaction",
             "Flags": [],
-            "Line": 299,
+            "Line": 301,
             "Description": "Creates a SQL transaction, which allows you to commit or rollback changes.",
             "Returns": "{Transaction?} A Transaction instance, or a nil value when already in a transaction."
         },
         {
             "Value": "Set",
             "Flags": [],
-            "Line": 312,
+            "Line": 314,
             "Description": "Manages the elements of the database.",
             "Params": [
                 "{Pathlike} KeyOrPath Specifies at what row to insert or replace the element at. Use dotaccess notation to edit properties.",
@@ -214,7 +214,7 @@
         {
             "Value": "Fetch",
             "Flags": [],
-            "Line": 335,
+            "Line": 337,
             "Description": "Manages the retrieval of the database.",
             "Params": [
                 "{Pathlike} KeyOrPath Specifies which row to fetch or get from cache. Use dotaccess to retrieve properties.",
@@ -225,7 +225,7 @@
         {
             "Value": "Evict",
             "Flags": [],
-            "Line": 363,
+            "Line": 365,
             "Description": "Erases elements from this Connection's internal cache.",
             "Params": [
                 "{...Pathlike} [Keys] A key or multiple keys to remove from cache. If none, the cache will get cleared entirely."
@@ -235,7 +235,7 @@
         {
             "Value": "Erase",
             "Flags": [],
-            "Line": 380,
+            "Line": 382,
             "Description": "Manages the deletion of the database.",
             "Params": [
                 "{...Pathlike} Keys A key or multiple keys to remove from the database. These elements will also get removed from this Connection's internal cache."
@@ -245,7 +245,7 @@
         {
             "Value": "Exists",
             "Flags": [],
-            "Line": 405,
+            "Line": 407,
             "Description": "Returns whether or not a row in this database exists. This method also caches the row internally, so fetching it afterwards would be much faster.",
             "Params": [
                 "{Pathlike} Key Specifies which row to see if it exists.",
@@ -256,7 +256,7 @@
         {
             "Value": "Each",
             "Flags": [],
-            "Line": 419,
+            "Line": 421,
             "Description": "Iterates through this database's entries.",
             "Params": [
                 "{Function} Fn A function which passes on the iterating entries."
@@ -266,7 +266,7 @@
         {
             "Value": "Find",
             "Flags": [],
-            "Line": 434,
+            "Line": 436,
             "Description": "Iterates through all the entries of the database, returns the first element found.",
             "Params": [
                 "{Function} Fn A tester function which returns a boolean, based on the value(s) of the rows."
@@ -276,7 +276,7 @@
         {
             "Value": "Select",
             "Flags": [],
-            "Line": 455,
+            "Line": 457,
             "Description": "Locally filters out rows in memory to work with. Please note that this method does increase memory usage in large databases.",
             "Params": [
                 "{Function|Pathlike} FnOrPath A filter function or a path to a row."
@@ -286,7 +286,7 @@
         {
             "Value": "Push",
             "Flags": [],
-            "Line": 483,
+            "Line": 485,
             "Description": "Pushes something to an array at the path output.",
             "Params": [
                 "{Pathlike} KeyOrPath Specifies which row or nested array to push to.",
@@ -297,7 +297,7 @@
         {
             "Value": "Shift",
             "Flags": [],
-            "Line": 502,
+            "Line": 504,
             "Description": "Inserts (if defined) or removes a value to/from the front of the array.",
             "Params": [
                 "{Pathlike} KeyOrPath Specifies which row or nested array to insert to/remove from.",
@@ -308,7 +308,7 @@
         {
             "Value": "Pop",
             "Flags": [],
-            "Line": 525,
+            "Line": 527,
             "Description": "Pops something from an array at the path output.",
             "Params": [
                 "{Pathlike} KeyOrPath Specifies which row or nested array to pop from."
@@ -318,7 +318,7 @@
         {
             "Value": "Remove",
             "Flags": [],
-            "Line": 542,
+            "Line": 544,
             "Description": "Removes a specific element from this endpoint array.",
             "Params": [
                 "{Pathlike} KeyOrPath Specifies which row or nested array to remove a value from.",
@@ -329,7 +329,7 @@
         {
             "Value": "Slice",
             "Flags": [],
-            "Line": 570,
+            "Line": 572,
             "Description": "Removes elements from this endpoint array based on indexes.",
             "Params": [
                 "{Pathlike} KeyOrPath Specifies which row or nested array to slice values from.",
@@ -341,7 +341,7 @@
         {
             "Value": "Ensure",
             "Flags": [],
-            "Line": 592,
+            "Line": 594,
             "Description": "Inserts an input into a row or nested object if the key or path wasn't found at the endpoint. It can be used as a default schema of the database elements, that gets inserted if there's no entry already.",
             "Params": [
                 "{Pathlike} KeyOrPath Context key to see if it exists, either a row or nested property, and optionally insert the new value.",
@@ -353,7 +353,7 @@
         {
             "Value": "Modify",
             "Flags": [],
-            "Line": 619,
+            "Line": 621,
             "Description": "Updates a value if the entry exists by fetching it and passing it onto the callback function.",
             "Params": [
                 "{Pathlike} KeyOrPath Specifies which row or nested property to fetch.",
@@ -364,7 +364,7 @@
         {
             "Value": "Invert",
             "Flags": [],
-            "Line": 643,
+            "Line": 645,
             "Description": "Inverts a boolean, from true to false and vice-versa, at the endpoint of the path.",
             "Params": [
                 "{Pathlike} KeyOrPath Specifies which row or nested property to boolean-invert."
@@ -376,13 +376,14 @@
             "Flags": [
                 "Typedef"
             ],
-            "Line": 662,
+            "Line": 664,
             "Description": "Options for a database Connection. All integer related options are in milliseconds. ",
             "Typedef": "{Object} RawOptions",
             "Params": [
                 "{String} Table A name for the table to use at this path for this Connection.",
                 "{Schema} Schema Link to a database Schema class for automatic data migration.",
                 "{Boolean} WAL Whether or not to enable Write Ahead Logging mode. ",
+                "{Function} Queries A function that gets ran for each executed SQL query in QDB. ",
                 "{Boolean} Cache Whether to enable in-memory caching of entries in results that the next retrieval would be much faster.",
                 "{Boolean} FetchAll Whether or not to fetch all the database entries on start-up of this database Connection.",
                 "{Boolean} UtilCache Whether or not to cache entries while performing utility tasks, such as the Exists method. ",
@@ -396,7 +397,7 @@
             "Flags": [
                 "Typedef"
             ],
-            "Line": 680,
+            "Line": 684,
             "Description": "An entry which has been resolved from the Connection's internal cache.",
             "Typedef": "{Object|Array} DataModel",
             "Params": [
@@ -408,7 +409,7 @@
             "Flags": [
                 "Typedef"
             ],
-            "Line": 686,
+            "Line": 690,
             "Description": "Path string to navigate files.",
             "Typedef": "{String} Pathlike"
         }
@@ -724,7 +725,7 @@
             "Value": "OrderBy",
             "Flags": [],
             "Line": 128,
-            "Description": "Sorts this Selection's values. Identical to the `ORDER BY ... DESC` SQL statement.",
+            "Description": "Sorts this Selection's values. Identical to the `ORDER BY ... [DESC]` SQL statement.",
             "Params": [
                 "{Function} Fn Function that determines which number to order by."
             ],
@@ -733,7 +734,7 @@
         {
             "Value": "Filter",
             "Flags": [],
-            "Line": 143,
+            "Line": 144,
             "Description": "Filters values that satisfy the provided function. Identical to the `FILTER BY` SQL statement.",
             "Params": [
                 "{Function} Fn Function that determines which entries to keep."
@@ -743,7 +744,7 @@
         {
             "Value": "Limit",
             "Flags": [],
-            "Line": 159,
+            "Line": 160,
             "Description": "Slices off values from this Selection. Identical to the `LIMIT` SQL statement.",
             "Params": [
                 "{Number} Begin Index that indicates the beginning to slice.",
@@ -754,7 +755,7 @@
         {
             "Value": "Group",
             "Flags": [],
-            "Line": 182,
+            "Line": 183,
             "Description": "Groups this Selection based on an identifier. Identical to the `GROUP BY` SQL statement.",
             "Params": [
                 "{Pathlike} KeyOrPath Determines by which property to group this Selection."
@@ -764,7 +765,7 @@
         {
             "Value": "Join",
             "Flags": [],
-            "Line": 209,
+            "Line": 210,
             "Description": "Joins another Selection into this instance based on a referrer field. Identical to the `FULL JOIN` SQL statement.",
             "Params": [
                 "{Selection} Secondary Another Selection instance to join into this one.",
@@ -776,7 +777,7 @@
         {
             "Value": "Map",
             "Flags": [],
-            "Line": 242,
+            "Line": 243,
             "Description": "Iterates over this Selection's values and keys, and implements the new values returned from the callback.",
             "Params": [
                 "{Function} Fn Callback function which determines the new values of the Selection."
@@ -786,7 +787,7 @@
         {
             "Value": "Merge",
             "Flags": [],
-            "Line": 257,
+            "Line": 258,
             "Description": "Automatically clones the merging Selections and adds them into this instance.",
             "Params": [
                 "{...Selection} Selections Instances to clone and merge into this one."
@@ -796,7 +797,7 @@
         {
             "Value": "Clone",
             "Flags": [],
-            "Line": 272,
+            "Line": 273,
             "Description": "Creates a new memory allocation for the copy of this Selection.",
             "Params": [
                 "{String} [Holds] Optional new identifier value for the cloned Selection."
