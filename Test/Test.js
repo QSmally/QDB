@@ -208,8 +208,10 @@ module.exports = (QDB, Tap) => {
 
     const Sel4 = Sel.Clone();
 
-    Tap("Selection Order 1", Sel.Order((a, b) => a.Age - b.Age).Keys, ["4567", "3456", "2345"]);
-    Tap("Selection OrderBy 1", Sel.OrderBy(Item => Item.Age).Keys, ["2345", "3456", "4567"]);
+    Tap("Selection Order Arbitrary", Sel.Order((a, b) => a.Age - b.Age).Keys, ["4567", "3456", "2345"]);
+    Tap("Selection Order Descending 1", Sel.Order(Item => Item.Age, "descending").Keys, ["2345", "3456", "4567"]);
+    Tap("Selection Order Ascending", Sel.Order(Item => Item.Age, "ascending").Keys, ["4567", "3456", "2345"]);
+    Tap("Selection Order Descending 2", Sel.Order(Item => Item.Age, "descending").Keys, ["2345", "3456", "4567"]);
     Tap("Selection Filter 1", Sel.Filter((_Row, Key) => Key !== "3456").Cache.size, 2);
 
     Tap("Selection Limit 1", Sel.Limit(0, 3).Cache.size, 2);
