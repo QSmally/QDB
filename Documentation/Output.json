@@ -717,24 +717,15 @@
             "Line": 116,
             "Description": "Sorts this Selection's values. Identical to the `ORDER BY` SQL statement.",
             "Params": [
-                "{Function} Fn Function that determines the sort order with given arguments `a` and `b`."
-            ],
-            "Returns": "{Selection}"
-        },
-        {
-            "Value": "OrderBy",
-            "Flags": [],
-            "Line": 128,
-            "Description": "Sorts this Selection's values. Identical to the `ORDER BY ... [DESC]` SQL statement.",
-            "Params": [
-                "{Function} Fn Function that determines which number to order by."
+                "{Function} Fn Function which either determines the sort order with given arguments `a` and `b` when the preset is arbitrary, or a function to the target property to automatically sort with.",
+                "{Order} [Preset] A sort order, either `ascending`, `descending` or `arbitrary` (default)."
             ],
             "Returns": "{Selection}"
         },
         {
             "Value": "Filter",
             "Flags": [],
-            "Line": 144,
+            "Line": 135,
             "Description": "Filters values that satisfy the provided function. Identical to the `FILTER BY` SQL statement.",
             "Params": [
                 "{Function} Fn Function that determines which entries to keep."
@@ -744,7 +735,7 @@
         {
             "Value": "Limit",
             "Flags": [],
-            "Line": 160,
+            "Line": 151,
             "Description": "Slices off values from this Selection. Identical to the `LIMIT` SQL statement.",
             "Params": [
                 "{Number} Begin Index that indicates the beginning to slice.",
@@ -755,7 +746,7 @@
         {
             "Value": "Group",
             "Flags": [],
-            "Line": 183,
+            "Line": 174,
             "Description": "Groups this Selection based on an identifier. Identical to the `GROUP BY` SQL statement.",
             "Params": [
                 "{Pathlike} KeyOrPath Determines by which property to group this Selection."
@@ -765,7 +756,7 @@
         {
             "Value": "Join",
             "Flags": [],
-            "Line": 210,
+            "Line": 201,
             "Description": "Joins another Selection into this instance based on a referrer field. Identical to the `FULL JOIN` SQL statement.",
             "Params": [
                 "{Selection} Secondary Another Selection instance to join into this one.",
@@ -777,7 +768,7 @@
         {
             "Value": "Map",
             "Flags": [],
-            "Line": 243,
+            "Line": 234,
             "Description": "Iterates over this Selection's values and keys, and implements the new values returned from the callback.",
             "Params": [
                 "{Function} Fn Callback function which determines the new values of the Selection."
@@ -787,7 +778,7 @@
         {
             "Value": "Merge",
             "Flags": [],
-            "Line": 258,
+            "Line": 249,
             "Description": "Automatically clones the merging Selections and adds them into this instance.",
             "Params": [
                 "{...Selection} Selections Instances to clone and merge into this one."
@@ -797,7 +788,7 @@
         {
             "Value": "Clone",
             "Flags": [],
-            "Line": 273,
+            "Line": 264,
             "Description": "Creates a new memory allocation for the copy of this Selection.",
             "Params": [
                 "{String} [Holds] Optional new identifier value for the cloned Selection."
