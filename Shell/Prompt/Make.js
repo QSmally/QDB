@@ -2,20 +2,20 @@
 const FS     = require("fs");
 const Format = require("../Format");
 
-module.exports = Database => {
-    if (!Database) return console.log([
-        `QDB Shell - ${Format.BOLD("make")}`,
+module.exports = database => {
+    if (!database) return console.log([
+        `QDB Shell - ${Format.bold("make")}`,
         "\nMakes a new, QDB-formatted database file at the given path.\n",
-        Format.BOLD("EXAMPLES"),
+        Format.bold("EXAMPLES"),
         "  qdb make Users.qdb",
-        "  qdb make ./Content/Guilds.qdb",
-        "  qdb make /usr/xy/Client.qdb"
+        "  qdb make ./Cellar/Guilds.qdb",
+        "  qdb make /usr/xy/Service.qdb"
     ].join("\n"));
-    
-    if (FS.existsSync(Database)) return console.log(
-        `${Format.DIM("Error")}: file '${Database}' already exists.`
+
+    if (FS.existsSync(database)) return console.log(
+        `${Format.dim("Error")}: file '${database}' already exists.`
     );
 
-    FS.appendFileSync(Database, "");
-    console.log(`${Format.DIM("Success")}: database '${Database}' has been created.`);
+    FS.appendFileSync(database, "");
+    console.log(`${Format.dim("Success")}: database file '${database}' has been created.`);
 }

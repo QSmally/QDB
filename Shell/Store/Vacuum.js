@@ -4,29 +4,27 @@ const Format = require("../Format");
 const SQL    = require("better-sqlite3");
 
 module.exports = {
-    Usage: "qdb <database> vacuum",
-    Description: "Rebuilds this database, repacking it into a minimal amount of disk space.",
-    Examples: [
+    usage: "qdb <database> vacuum",
+    description: "Rebuilds this database, repacking it into a minimal amount of disk space.",
+    examples: [
         "qdb Guilds.qdb vacuum",
     ],
 
-    Arguments: 0,
+    arguments: 0,
 
-    Execute: Path => {
-
-        const Connection = new SQL(Path);
-        const Size = FS.lstatSync(Path).size;
+    execute: path => {
+        const connection = new SQL(path);
+        const size = FS.lstatSync(path).size;
 
         process.stdout.write("Repacking database file... ");
-        Connection.prepare("VACUUM;").run();
-        Connection.close();
+        connection.prepare("VACUUM;").run();
+        connection.close();
 
-        const RepackedSize = Size - FS.lstatSync(Path).size;
-        const Units        = ["bytes", "KiB", "MiB", "GiB", "TiB", "PiB"];
-        const Idx          = RepackedSize !== 0 ? Math.floor(Math.log(RepackedSize) / Math.log(1024)) : 0;
+        const repackedSize = size - FS.lstatSync(path).size;
+        const units        = ["bytes", "KiB", "MiB", "GiB", "TiB", "PiB"];
+        const idx          = repackedSize !== 0 ? Math.floor(Math.log(repackedSize) / Math.log(1024)) : 0;
 
-        console.log(`Successfully reclaimed ${Format.BOLD(`${Math.round(RepackedSize / Math.pow(1024, Idx))} ${Units[Idx]}`)} of disk space.`);
+        console.log(`Successfully reclaimed ${Format.bold(`${Math.round(repackedSize / Math.pow(1024, idx))} ${units[idx]}`)} of disk space.`);
         return true;
-
     }
 };

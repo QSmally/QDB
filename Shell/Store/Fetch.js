@@ -3,31 +3,29 @@ const Format = require("../Format");
 const SQL    = require("better-sqlite3");
 
 module.exports = {
-    Usage: "qdb <database> fetch <name> <identifier>",
-    Description: "Selects a table to fetch from and retrieves a document.",
-    Examples: [
+    usage: "qdb <database> fetch <name> <identifier>",
+    description: "Selects a table to fetch from and retrieves a document.",
+    examples: [
         "qdb Users.qdb fetch Users 2ff46929",
         "qdb ./Internal/Guilds.qdb fetch Profiles 396c9b85"
     ],
 
-    Arguments: 2,
+    arguments: 2,
 
-    Execute: (Path, Arguments) => {
+    execute: (path, arguments) => {
+        const connection = new SQL(path);
+        const table = arguments.shift();
 
-        const Connection = new SQL(Path);
-        const Table = Arguments.shift();
-        
-        const ExistingTable = Connection.prepare("SELECT name FROM 'sqlite_master' WHERE type = 'table' AND name = ?;").get(Table);
-        if (!ExistingTable) return console.log(`${Format.DIM("Error")}: there's no table with the name '${Table}'.`);
+        const existingTable = connection.prepare("SELECT name FROM 'sqlite_master' WHERE type = 'table' AND name = ?;").get(table);
+        if (!existingTable) return console.log(`${Format.dim("Error")}: there's no table with the name '${table}'.`);
 
-        const Identifier = Arguments.shift();
+        const identifier = arguments.shift();
 
-        const Document = Connection.prepare(`SELECT Val FROM '${Table}' WHERE Key = ?;`).get(Identifier);
-        if (!Document) console.log(`${Format.DIM("Error")}: unknown identifier '${Identifier}'.`);
-        else console.log(JSON.parse(Document.Val));
-        
-        Connection.close();
+        const documentObject = connection.prepare(`SELECT Val FROM '${table}' WHERE Key = ?;`).get(identifier);
+        if (!documentObject) console.log(`${Format.dim("Error")}: unknown identifier '${identifier}'.`);
+        else console.log(JSON.parse(documentObject.Val));
+
+        connection.close();
         return true;
-
     }
 };

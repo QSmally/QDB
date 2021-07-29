@@ -4,37 +4,38 @@ const Format = require("../Format");
 const SQL    = require("better-sqlite3");
 
 module.exports = {
-    Usage: "qdb <database> list",
-    Description: "Lists this database's statistics together with the tables.",
-    Examples: [
+    usage: "qdb <database> list",
+    description: "Lists this database's statistics together with the tables.",
+    examples: [
         "qdb Users.qdb list",
         "qdb /etc/databases/Service.qdb list",
         "qdb ./Internal/Guilds.qdb list"
     ],
 
-    Arguments: 0,
+    arguments: 0,
 
-    Execute: Path => {
+    execute: path => {
+        const connection = new SQL(path);
 
-        const Connection = new SQL(Path);
-        
-        const Tables = Connection.prepare("SELECT name FROM 'sqlite_master' WHERE type = 'table';").all()
-        .map(Row => Row.name).map(Table => [Table, Connection.prepare(`SELECT COUNT(*) FROM '${Table}';`).get()["COUNT(*)"]])
-        .map(Entry => [Format.BOLD(Entry[0]), `${Entry[1]} rows`]);
+        const tables = connection
+            .prepare("SELECT name FROM 'sqlite_master' WHERE type = 'table';")
+            .all()
+            .map(row => row.name)
+            .map(table => [table, connection.prepare(`SELECT COUNT(*) FROM '${table}';`).get()["COUNT(*)"]])
+            .map(entry => [Format.bold(entry[0]), `${entry[1]} rows`]);
 
-        const Size  = FS.lstatSync(Path).size;
-        const Units = ["bytes", "KiB", "MiB", "GiB", "TiB", "PiB"];
-        const Idx   = Size !== 0 ? Math.floor(Math.log(Size) / Math.log(1024)) : 0;
+        const size  = FS.lstatSync(path).size;
+        const units = ["bytes", "KiB", "MiB", "GiB", "TiB", "PiB"];
+        const idx   = size !== 0 ? Math.floor(Math.log(size) / Math.log(1024)) : 0;
 
         console.log([
-            Format.DIM(Path),
-            `Size: ${Format.BOLD(`${Math.round(Size / Math.pow(1024, Idx))} ${Units[Idx]}`)}`,
-            `Tables: ${Format.BOLD(Tables.length)}\n`,
-            Format.LIST(Object.fromEntries(Tables), 26, true)
+            Format.dim(path),
+            `Size: ${Format.bold(`${Math.round(size / Math.pow(1024, idx))} ${units[idx]}`)}`,
+            `Tables: ${Format.bold(tables.length)}\n`,
+            Format.list(Object.fromEntries(tables), 26, true)
         ].join("\n"));
-        
-        Connection.close();
-        return true;
 
+        connection.close();
+        return true;
     }
 };

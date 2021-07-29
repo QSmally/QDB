@@ -3,28 +3,26 @@ const Format = require("../Format");
 const SQL    = require("better-sqlite3");
 
 module.exports = {
-    Usage: "qdb <database> create <name>",
-    Description: "Adds an additional table in the given database file.",
-    Examples: [
+    usage: "qdb <database> create <name>",
+    description: "Adds an additional table in the given database file.",
+    examples: [
         "qdb Users.qdb create Users",
         "qdb ./Internal/Guilds.qdb create Profiles"
     ],
 
-    Arguments: 1,
+    arguments: 1,
 
-    Execute: (Path, Arguments) => {
-
-        const Connection = new SQL(Path);
-        const Table = Arguments.shift();
+    execute: (path, arguments) => {
+        const connection = new SQL(path);
+        const table = arguments.shift();
         
-        const ExistingTable = Connection.prepare("SELECT name FROM 'sqlite_master' WHERE type = 'table' AND name = ?;").get(Table);
-        if (ExistingTable) return console.log(`${Format.DIM("Error")}: another table exists with the name '${Table}'.`);
+        const existingTable = connection.prepare("SELECT name FROM 'sqlite_master' WHERE type = 'table' AND name = ?;").get(table);
+        if (existingTable) return console.log(`${Format.dim("Error")}: another table exists with the name '${table}'.`);
 
-        Connection.prepare(`CREATE TABLE '${Table}' ('Key' VARCHAR PRIMARY KEY, 'Val' TEXT);`).run();
-        console.log(`Successfully created table '${Format.BOLD(Table)}'.`);
-        Connection.close();
+        connection.prepare(`CREATE TABLE '${table}' ('Key' VARCHAR PRIMARY KEY, 'Val' TEXT);`).run();
+        console.log(`Successfully created table '${Format.bold(table)}'.`);
+        connection.close();
 
         return true;
-
     }
 };
