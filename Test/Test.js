@@ -1,330 +1,331 @@
 
-module.exports = (QDB, Tap) => {
+module.exports = (QDB, tap) => {
+    const con = new QDB.Connection("Test/Users.qdb");
+    tap("Connection", con.state, "CONNECTED");
 
-    const Con = new QDB.Connection("Test/Users.qdb");
-    Tap("Connection", Con.State, "CONNECTED");
-
-    Con.Erase(...Con.Indexes);
-    Tap("Connection Clear 1", Con.Size, 0);
-    Tap("Connection Clear 2", Con.AsObject(), {});
+    con.erase(...con.indexes);
+    tap("Connection Clear 1", con.size, 0);
+    tap("Connection Clear 2", con.asObject(), {});
 
     // Base Connection functions
-    Tap("Connection Set 1", Con.Set("1234", {Name: "foo", Age: 26}).Size, 1);
-    Tap("Connection CacheSize 1", Con.CacheSize, 0);
-    Tap("Connection Set 2", Con.Set("2345", {Name: "bar", Age: 21}).Size, 2);
-    Tap("Connection CacheSize 2", Con.CacheSize, 0);
-    Tap("Connection Size 1", Con.Size, 2);
+    tap("Connection Set 1", con.set("1234", { name: "foo", age: 26 }).size, 1);
+    tap("Connection CacheSize 1", con.cacheSize, 0);
+    tap("Connection Set 2", con.set("2345", { name: "bar", age: 21 }).size, 2);
+    tap("Connection CacheSize 2", con.cacheSize, 0);
+    tap("Connection Size 1", con.size, 2);
 
-    Tap("Connection Fetch 1", Con.Fetch("2345"), {Name: "bar", Age: 21});
-    Tap("Connection CacheSize 3", Con.CacheSize, 1);
-    Tap("Connection Size 2", Con.Size, 2);
+    tap("Connection Fetch 1", con.fetch("2345"), { name: "bar", age: 21 });
+    tap("Connection CacheSize 3", con.cacheSize, 1);
+    tap("Connection Size 2", con.size, 2);
 
-    Tap("Connection Access 1", Con.Fetch("2345.Name"), "bar");
-    Tap("Connection Access 2", Con.Fetch("2345.Name.length"), 3);
-    Tap("Connection Access 3", Con.Fetch("2345.Age"), 21);
-    Tap("Connection Access 3", Con.Fetch("2345.Age.not.exists"), undefined);
-    Tap("Connection Access 4", Con.Fetch("2345.None"), undefined);
-    Tap("Connection Access 5", typeof Con.Fetch("2345._Timestamp"), "number");
-    Tap("Connection Access 6", Con.CacheSize, 1);
+    tap("Connection Access 1", con.fetch("2345.name"), "bar");
+    tap("Connection Access 2", con.fetch("2345.name.length"), 3);
+    tap("Connection Access 3", con.fetch("2345.age"), 21);
+    tap("Connection Access 3", con.fetch("2345.age.not.exists"), undefined);
+    tap("Connection Access 4", con.fetch("2345.none"), undefined);
+    tap("Connection Access 5", typeof con.fetch("2345._timestamp"), "number");
+    tap("Connection Access 6", con.cacheSize, 1);
 
-    Tap("Connection Fetch 2", Con.Fetch("1234"), {Name: "foo", Age: 26});
-    Tap("Connection CacheSize 4", Con.CacheSize, 2);
-    Tap("Connection Size 3", Con.Size, 2);
+    tap("Connection Fetch 2", con.fetch("1234"), { name: "foo", age: 26 });
+    tap("Connection CacheSize 4", con.cacheSize, 2);
+    tap("Connection Size 3", con.size, 2);
 
-    Tap("Connection Fetch 3", Con.Fetch("2345"), {Name: "bar", Age: 21});
-    Tap("Connection CacheSize 5", Con.CacheSize, 2);
-    Tap("Connection Size 4", Con.Size, 2);
+    tap("Connection Fetch 3", con.fetch("2345"), { name: "bar", age: 21 });
+    tap("Connection CacheSize 5", con.cacheSize, 2);
+    tap("Connection Size 4", con.size, 2);
 
-    Tap("Connection Evict 1", Con.Evict("2345").CacheSize, 1);
+    tap("Connection Evict 1", con.evict("2345").cacheSize, 1);
 
-    Tap("Connection Set 3", Con.Set("3456", {Name: "roo", Age: 29}).Size, 3);
-    Tap("Connection CacheSize 6", Con.CacheSize, 1);
-    Tap("Connection Set 4", Con.Set("4567", {Name: "goo", Age: 27}).Size, 4);
-    Tap("Connection CacheSize 7", Con.CacheSize, 1);
-    Tap("Connection Size 5", Con.Size, 4);
+    tap("Connection Set 3", con.set("3456", { name: "roo", age: 29 }).size, 3);
+    tap("Connection CacheSize 6", con.cacheSize, 1);
+    tap("Connection Set 4", con.set("4567", { name: "goo", age: 27 }).size, 4);
+    tap("Connection CacheSize 7", con.cacheSize, 1);
+    tap("Connection Size 5", con.size, 4);
 
-    Tap("Connection Fetch 4", Con.Fetch("3456"), {Name: "roo", Age: 29});
-    Tap("Connection Fetch 5", Con.Fetch("2345"), {Name: "bar", Age: 21});
-    Tap("Connection Fetch 6", Con.Fetch("1234"), {Name: "foo", Age: 26});
-    Tap("Connection Fetch 5", Con.Fetch("4567"), {Name: "goo", Age: 27});
-    Tap("Connection Evict 2", Con.Evict("2345", "3456").CacheSize, 2);
+    tap("Connection Fetch 4", con.fetch("3456"), { name: "roo", age: 29 });
+    tap("Connection Fetch 5", con.fetch("2345"), { name: "bar", age: 21 });
+    tap("Connection Fetch 6", con.fetch("1234"), { name: "foo", age: 26 });
+    tap("Connection Fetch 5", con.fetch("4567"), { name: "goo", age: 27 });
+    tap("Connection Evict 2", con.evict("2345", "3456").cacheSize, 2);
 
-    Tap("Connection Erase 1", Con.Erase("1234").Size, 3);
-    Tap("Connection CacheSize 8", Con.CacheSize, 1);
+    tap("Connection Erase 1", con.erase("1234").size, 3);
+    tap("Connection CacheSize 8", con.cacheSize, 1);
 
     // Lookup methods
-    Tap("Connection Exist 1", Con.Exists("1234"), false);
-    Tap("Connection Exist 2", Con.Exists("2345"), true);
-    Tap("Connection Exist 3", Con.Exists("6789"), false);
-    Tap("Connection CacheSize 9", Con.CacheSize, 2);
+    tap("Connection Exist 1", con.exists("1234"), false);
+    tap("Connection Exist 2", con.exists("2345"), true);
+    tap("Connection Exist 3", con.exists("6789"), false);
+    tap("Connection CacheSize 9", con.cacheSize, 2);
 
-    Tap("Connection Find 1", Con.Find((_e, i) => i.startsWith("34")), {Name: "roo", Age: 29});
-    Tap("Connection CacheSize 10", Con.CacheSize, 2);
+    tap("Connection Find 1", con.find((_e, i) => i.startsWith("34")), { name: "roo", age: 29 });
+    tap("Connection CacheSize 10", con.cacheSize, 2);
 
-    Tap("Connection Find 2", Con.Find((_e, i) => i === "1289"), undefined);
-    Tap("Connection CacheSize 11", Con.CacheSize, 2);
+    tap("Connection Find 2", con.find((_e, i) => i === "1289"), undefined);
+    tap("Connection CacheSize 11", con.cacheSize, 2);
 
-    Tap("Connection Find 3", Con.Find((_e, i) => i.startsWith("34")), {Name: "roo", Age: 29});
-    Tap("Connection CacheSize 12", Con.CacheSize, 2);
+    tap("Connection Find 3", con.find((_e, i) => i.startsWith("34")), { name: "roo", age: 29 });
+    tap("Connection CacheSize 12", con.cacheSize, 2);
 
-    Tap("Connection Evict 3", Con.Evict().CacheSize, 0);
+    tap("Connection Evict 3", con.evict().cacheSize, 0);
 
-    Tap("Connection Set 5", Con.Set("2345.Age", 30).Size, 3);
-    Tap("Connection Fetch 6", Con.Fetch("2345"), {Name: "bar", Age: 30});
+    tap("Connection Set 5", con.set("2345.age", 30).size, 3);
+    tap("Connection Fetch 6", con.fetch("2345"), { name: "bar", age: 30 });
 
     // Array methods
-    const IdxList = Con.Indexes;
-    for (const Idx in IdxList)
-    Tap(`Connection Set ${parseInt(Idx) + 6}`, Con.Set(`${IdxList[Idx]}.Hobbies`, []).Size, 3);
-    
-    Tap("Connection Push 1", Con.Push("3456", "wontWork"), null);
-    Tap("Connection Push 2", Con.Push("3456.Hobbies", "foo"), 1);
-    Tap("Connection Push 3", Con.Push("3456.Hobbies", "bar"), 2);
-    Tap("Connection Push 4", Con.Push("2345.Hobbies", "roo"), 1);
+    const idxList = con.indexes;
+    for (const idx in idxList)
+        tap(`Connection Set ${parseInt(idx) + 6}`, con.set(`${idxList[idx]}.hobbies`, []).size, 3);
 
-    Tap("Connection Pop 1", Con.Pop("3456"), null);
-    Tap("Connection Pop 2", Con.Pop("3456.Hobbies"), "bar");
-    Tap("Connection Pop 3", Con.Fetch("3456.Hobbies.length"), 1);
-    Tap("Connection Pop 4", Con.Pop("3456.Hobbies"), "foo");
-    Tap("Connection Pop 5", Con.Fetch("3456.Hobbies.length"), 0);
-    Tap("Connection Pop 6", Con.Pop("3456.Hobbies"), undefined);
-    Tap("Connection Pop 7", Con.Fetch("3456.Hobbies.length"), 0);
+    tap("Connection Push 1", con.push("3456", "wontWork"), null);
+    tap("Connection Push 2", con.push("3456.hobbies", "foo"), 1);
+    tap("Connection Push 3", con.push("3456.hobbies", "bar"), 2);
+    tap("Connection Push 4", con.push("2345.hobbies", "roo"), 1);
 
-    Tap("Connection Evict 4", Con.Evict("3456").CacheSize, 2);
+    tap("Connection Pop 1", con.pop("3456"), null);
+    tap("Connection Pop 2", con.pop("3456.hobbies"), "bar");
+    tap("Connection Pop 3", con.fetch("3456.hobbies.length"), 1);
+    tap("Connection Pop 4", con.pop("3456.hobbies"), "foo");
+    tap("Connection Pop 5", con.fetch("3456.hobbies.length"), 0);
+    tap("Connection Pop 6", con.pop("3456.hobbies"), undefined);
+    tap("Connection Pop 7", con.fetch("3456.hobbies.length"), 0);
 
-    Tap("Connection Push 5", Con.Push("3456.Hobbies", "goo"), 1);
-    Tap("Connection Push 6", Con.Push("3456.Hobbies", "loo"), 2);
+    tap("Connection Evict 4", con.evict("3456").cacheSize, 2);
 
-    Tap("Connection Remove 1", Con.Remove("3456", F => F === "goo"), null);
-    Tap("Connection Remove 2", Con.Remove("3456.Hobbies", F => F === "foo"), 2);
-    Tap("Connection Remove 3", Con.Remove("3456.Hobbies", 5), 2);
-    Tap("Connection Remove 4", Con.Remove("3456.Hobbies", 1), 1);
+    tap("Connection Push 5", con.push("3456.hobbies", "goo"), 1);
+    tap("Connection Push 6", con.push("3456.hobbies", "loo"), 2);
 
-    Tap("Connection Push 6", Con.Push("3456.Hobbies", "loo"), 2);
-    Tap("Connection Push 7", Con.Push("3456.Hobbies", "1", "2", "3"), 5);
+    tap("Connection Remove 1", con.remove("3456", F => F === "goo"), null);
+    tap("Connection Remove 2", con.remove("3456.hobbies", F => F === "foo"), 2);
+    tap("Connection Remove 3", con.remove("3456.hobbies", 5), 2);
+    tap("Connection Remove 4", con.remove("3456.hobbies", 1), 1);
 
-    Tap("Connection Shift 1", Con.Shift("3456.Hobbies"), "goo");
-    Tap("Connection Shift 2", Con.Shift("3456.Hobbies", "-5"), 5);
-    Tap("Connection Shift 3", Con.Shift("3456.Hobbies", "one", "two", "three"), 8);
+    tap("Connection Push 6", con.push("3456.hobbies", "loo"), 2);
+    tap("Connection Push 7", con.push("3456.hobbies", "1", "2", "3"), 5);
 
-    Tap("Connection Set 10", Con.Set("2345.Hobbies", ["one", "two", "three", "four"]).Fetch("2345.Hobbies.length"), 4);
+    tap("Connection Shift 1", con.shift("3456.hobbies"), "goo");
+    tap("Connection Shift 2", con.shift("3456.hobbies", "-5"), 5);
+    tap("Connection Shift 3", con.shift("3456.hobbies", "one", "two", "three"), 8);
 
-    Tap("Connection Slice 1", Con.Slice("3456.Hobbies"), 8);
-    Tap("Connection Slice 1", Con.Slice("3456.Hobbies", 1), 7);
-    Tap("Connection Slice 1", Con.Slice("3456.Hobbies", 0, 5), 5);
+    tap("Connection Set 10", con.set("2345.hobbies", ["one", "two", "three", "four"]).fetch("2345.hobbies.length"), 4);
+
+    tap("Connection Slice 1", con.slice("3456.hobbies"), 8);
+    tap("Connection Slice 1", con.slice("3456.hobbies", 1), 7);
+    tap("Connection Slice 1", con.slice("3456.hobbies", 0, 5), 5);
 
     // Utility methods
-    Tap("Connection Ensure 1", Con.Ensure("2345", {Name: "nope", Age: -1, Hobbies: []}), false);
-    Tap("Connection Ensure 2", Con.Ensure("6789", {Name: "Untitled", Age: -1, Hobbies: []}), true);
+    tap("Connection Ensure 1", con.ensure("2345", { name: "nope", age: -1, hobbies: [] }), false);
+    tap("Connection Ensure 2", con.ensure("6789", { name: "Untitled", age: -1, hobbies: [] }), true);
 
-    const Tr = Con.Transaction();
+    const tr = con.transaction();
 
-    Tap("Connection Modify 1", Con.Modify("6789.Name", Name => {
-        Name = "moo";
-        return Name;
-    }), {Name: "moo", Age: -1, Hobbies: []});
+    tap("Connection Modify 1", con.modify("6789.name", name => {
+        name = "moo";
+        return name;
+    }), {
+        name: "moo", age: -1, hobbies: []
+    });
 
-    Tap("Connection Modify 2", Con.Modify("6789.Hobbies", Hob => {
-        Hob.push({Programming: false});
-        return Hob;
-    }), {Name: "moo", Age: -1, Hobbies: [{Programming: false}]});
+    tap("Connection Modify 2", con.modify("6789.hobbies", hob => {
+        hob.push({ programming: false });
+        return hob;
+    }), {
+        name: "moo", age: -1, hobbies: [{ programming: false }]
+    });
 
-    Tap("Connection CacheSize 13", Con.CacheSize, 4);
+    tap("Connection CacheSize 13", con.cacheSize, 4);
 
-    Tr.Commit();
-    
-    Tap("Connection CacheSize 14", Con.CacheSize, 4);
-    Tap("Connection Fetch 7", Con.Fetch("6789"), {Name: "moo", Age: -1, Hobbies: [{Programming: false}]});
+    tr.commit();
 
-    Tap("Connection Invert 1", Con.Invert("6789.Hobbies.0.Programming"), true);
-    Tap("Connection Invert 2", Con.Invert("6789.Hobbies.0.Programming"), false);
-    Tap("Connection Invert 3", Con.Invert("6789.Hobbies.0.Programming"), true);
-    Tap("Connection Invert 4", Con.Invert("6789.Hobbies.0.Programming"), false);
+    tap("Connection CacheSize 14", con.cacheSize, 4);
+    tap("Connection Fetch 7", con.fetch("6789"), { name: "moo", age: -1, hobbies: [{ programming: false }]});
+
+    tap("Connection Invert 1", con.invert("6789.hobbies.0.programming"), true);
+    tap("Connection Invert 2", con.invert("6789.hobbies.0.programming"), false);
+    tap("Connection Invert 3", con.invert("6789.hobbies.0.programming"), true);
+    tap("Connection Invert 4", con.invert("6789.hobbies.0.programming"), false);
 
     // Transaction tests
-    const Tr2 = Con.Transaction();
+    const tr2 = con.transaction();
 
-    Tap("Connection Set 11", Con.Set("foo", {bar: "roo!"}).Size, 5);
-    Tap("Connection Fetch 8", Con.Fetch("foo"), {bar: "roo!"});
+    tap("Connection Set 11", con.set("foo", { bar: "roo!" }).size, 5);
+    tap("Connection Fetch 8", con.fetch("foo"), { bar: "roo!" });
 
-    Tap("Connection Size 15", Con.Size, 5);
-    Tap("Connection CacheSize 16", Con.CacheSize, 5);
+    tap("Connection Size 15", con.size, 5);
+    tap("Connection CacheSize 16", con.cacheSize, 5);
 
-    Tap("Connection Invert 5", Con.Invert("6789.Name"), false);
-    Tap("Connection Invert 6", Con.Fetch("6789.Name"), false);
+    tap("Connection Invert 5", con.invert("6789.name"), false);
+    tap("Connection Invert 6", con.fetch("6789.name"), false);
 
-    Tr2.Rollback();
+    tr2.rollback();
 
-    Tap("Connection Size 17", Con.Size, 4);
-    Tap("Connection CacheSize 17", Con.CacheSize, 0);
-    Tap("Connection Fetch 9", Con.Fetch("foo"), undefined);
-    Tap("Connection Invert 7", Con.Fetch("6789.Name"), "moo");
+    tap("Connection Size 17", con.size, 4);
+    tap("Connection CacheSize 17", con.cacheSize, 0);
+    tap("Connection Fetch 9", con.fetch("foo"), undefined);
+    tap("Connection Invert 7", con.fetch("6789.name"), "moo");
 
     // Iterator methods
-    let Results = [];
+    let results = [];
 
-    Con.Each((_Row, Key) => {
-        Results.push(Key);
+    con.each((_row, key) => {
+        results.push(key);
     }, true);
 
-    Tap("Connection Each", Results, ["4567", "2345", "3456", "6789"]);
+    tap("Connection Each", results, ["4567", "2345", "3456", "6789"]);
 
-    let Results2 = [];
+    let results2 = [];
 
-    for (const [Id, Document] of Con) {
-        Results2.push([Id, Document]);
+    for (const [id, documentObject] of con) {
+        results2.push([id, documentObject]);
     }
 
-    Tap("Connection Iterator", Results2, [
-        ["4567", {Name: "goo", Age: 27, Hobbies: []}],
-        ["2345", {Name: "bar", Age: 30, Hobbies: ["one", "two", "three", "four"]}],
-        ["3456", {Name: "roo", Age: 29, Hobbies: ["two", "three", "-5", "loo", "1"]}],
-        ["6789", {Name: "moo", Age: -1, Hobbies: [{Programming: false}]}],
+    tap("Connection Iterator", results2, [
+        ["4567", { name: "goo", age: 27, hobbies: [] }],
+        ["2345", { name: "bar", age: 30, hobbies: ["one", "two", "three", "four"] }],
+        ["3456", { name: "roo", age: 29, hobbies: ["two", "three", "-5", "loo", "1"] }],
+        ["6789", { name: "moo", age: -1, hobbies: [{ programming: false }] }],
     ]);
 
     // Selection class
-    Tap("Connection Select 1", Con.Select((_Row, Key) => {
-        return Key === "3456";
-    }).Holds, "QDB");
+    tap("Connection Select 1", con.select((_row, key) => {
+        return key === "3456";
+    }).holds, "QDB");
 
-    Tap("Connection Select 2", Con.Select().Cache.size, 4);
+    tap("Connection Select 2", con.select().cache.size, 4);
     
-    const Sel = Con.Select((_Row, Key) => Key.includes("4"));
-    Tap("Connection Select 3", Sel.Cache.size, 3);
+    const sel = con.select((_row, key) => key.includes("4"));
+    tap("Connection Select 3", sel.cache.size, 3);
 
-    Tap("Selection Keys 1", Sel.Keys, ["2345", "3456", "4567"]);
+    tap("Selection Keys 1", sel.keys, ["2345", "3456", "4567"]);
 
-    Tap("Selection Values 1", Sel.Values, [
-        {Name: "bar", Age: 30, Hobbies: ["one", "two", "three", "four"]},
-        {Name: "roo", Age: 29, Hobbies: ["two", "three", "-5", "loo", "1"]},
-        {Name: "goo", Age: 27, Hobbies: []}
+    tap("Selection Values 1", sel.values, [
+        { name: "bar", age: 30, hobbies: ["one", "two", "three", "four"] },
+        { name: "roo", age: 29, hobbies: ["two", "three", "-5", "loo", "1"] },
+        { name: "goo", age: 27, hobbies: [] }
     ]);
 
-    Tap("Selection AsObject 1", Sel.AsObject, {
-        "2345": {Name: "bar", Age: 30, Hobbies: ["one", "two", "three", "four"]},
-        "3456": {Name: "roo", Age: 29, Hobbies: ["two", "three", "-5", "loo", "1"]},
-        "4567": {Name: "goo", Age: 27, Hobbies: []}
+    tap("Selection AsObject 1", sel.asObject, {
+        "2345": { name: "bar", age: 30, hobbies: ["one", "two", "three", "four"] },
+        "3456": { name: "roo", age: 29, hobbies: ["two", "three", "-5", "loo", "1"] },
+        "4567": { name: "goo", age: 27, hobbies: [] }
     });
 
-    const Sel4 = Sel.Clone();
+    const sel4 = sel.clone();
 
-    Tap("Selection Order 1", Sel.Order((a, b) => a.Age - b.Age).Keys, ["4567", "3456", "2345"]);
-    Tap("Selection OrderBy 1", Sel.OrderBy(Item => Item.Age).Keys, ["2345", "3456", "4567"]);
-    Tap("Selection Filter 1", Sel.Filter((_Row, Key) => Key !== "3456").Cache.size, 2);
+    tap("Selection Order 1", sel.order((a, b) => a.age - b.age).keys, ["4567", "3456", "2345"]);
+    tap("Selection Filter 1", sel.filter((_row, key) => key !== "3456").cache.size, 2);
 
-    Tap("Selection Limit 1", Sel.Limit(0, 3).Cache.size, 2);
-    Tap("Selection Limit 2", Sel.Limit(1, 5).Cache.size, 1);
-    Tap("Selection Limit 3", Sel.Limit(1).Cache.size, 0);
+    tap("Selection Limit 1", sel.limit(0, 3).cache.size, 2);
+    tap("Selection Limit 2", sel.limit(1, 5).cache.size, 1);
+    tap("Selection Limit 3", sel.limit(1).cache.size, 0);
 
-    const Sel2 = Con.Select();
-    Tap("Selection Select 4", Sel2.Cache.size, 4);
-    
-    Sel2.Map((Val, Key) => {
-        Val = {...Val};
-        Val.foo = Key === "3456" ? "bar" : "roo";
-        return Val;
+    const sel2 = con.select();
+    tap("Selection Select 4", sel2.cache.size, 4);
+
+    sel2.map((val, key) => {
+        val = {...val};
+        val.foo = key === "3456" ? "bar" : "roo";
+        return val;
     });
 
-    Tap("Selection Map 1", Sel2.Cache.get("2345").foo, "roo");
-    Tap("Selection Map 2", Sel2.Cache.get("3456").foo, "bar");
-    Tap("Selection Map 3", Sel2.Cache.get("4567").foo, "roo");
-    Tap("Selection Map 4", Sel2.Cache.get("6789").foo, "roo");
+    tap("Selection Map 1", sel2.cache.get("2345").foo, "roo");
+    tap("Selection Map 2", sel2.cache.get("3456").foo, "bar");
+    tap("Selection Map 3", sel2.cache.get("4567").foo, "roo");
+    tap("Selection Map 4", sel2.cache.get("6789").foo, "roo");
 
-    Sel2.Group("foo");
+    sel2.group("foo");
 
-    Tap("Selection Group 1", Object.keys(Sel2.Cache.get("bar")).length, 1);
-    Tap("Selection Group 2", Object.keys(Sel2.Cache.get("roo")).length, 3);
+    tap("Selection Group 1", Object.keys(sel2.cache.get("bar")).length, 1);
+    tap("Selection Group 2", Object.keys(sel2.cache.get("roo")).length, 3);
 
-    const Sel3 = Sel2.Clone();
-    Sel3.Cache.set("boo", {Name: "boo", Age: 23, Hobbies: ["slep"]});
+    const sel3 = sel2.clone();
+    sel3.cache.set("boo", { name: "boo", age: 23, hobbies: ["slep"] });
 
-    Tap("Selection Clone 1", Sel3.Cache.size, 3);
-    Tap("Selection Clone 2", Sel2.Cache.size, 2);
+    tap("Selection Clone 1", sel3.cache.size, 3);
+    tap("Selection Clone 2", sel2.cache.size, 2);
 
     // Object reference tests
     const Selection = require("../lib/Utility/Selection");
 
-    const Projects = new Selection({
-        fooProj: {UserId: "4567", Does: ["nothing", "foo"]},
-        barProj: {UserId: "2345", Does: ["sleep"]},
-        rooProj: {UserId: "4567", Does: ["mind read"]},
-    }, "Projects");
+    const projects = new Selection({
+        fooProj: { userId: "4567", does: ["nothing", "foo"]},
+        barProj: { userId: "2345", does: ["sleep"]},
+        rooProj: { userId: "4567", does: ["mind read"]},
+    }, "projects");
 
-    const CopySel4 = Sel4.Clone();
-    Sel4.Join(Projects.Clone(), "UserId");
+    const copySel4 = sel4.clone();
+    sel4.join(projects.clone(), "userId");
 
-    Tap("Selection Join 1", Sel4.Cache.get("4567").Projects.fooProj.Does, ["nothing", "foo"]);
-    Tap("Selection Join 2", Sel4.Cache.get("2345").Projects.barProj.Does, ["sleep"]);
-    Tap("Selection Join 3", Sel4.Cache.get("4567").Projects.rooProj.Does, ["mind read"]);
+    tap("Selection Join 1", sel4.cache.get("4567").projects.fooProj.does, ["nothing", "foo"]);
+    tap("Selection Join 2", sel4.cache.get("2345").projects.barProj.does, ["sleep"]);
+    tap("Selection Join 3", sel4.cache.get("4567").projects.rooProj.does, ["mind read"]);
 
-    const CopyCloneSel4 = CopySel4.Clone();
-    const CopyCloneSel5 = CopySel4.Clone();
-    CopySel4.Join(Projects.Clone(), "UserId", "Customs");
+    const copyCloneSel4 = copySel4.clone();
+    const copyCloneSel5 = copySel4.clone();
+    copySel4.join(projects.clone(), "userId", "customs");
 
-    Tap("Selection Join 4", CopySel4.Cache.get("4567").Customs.fooProj.Does, ["nothing", "foo"]);
-    Tap("Selection Join 5", CopySel4.Cache.get("2345").Customs.barProj.Does, ["sleep"]);
-    Tap("Selection Join 6", CopySel4.Cache.get("4567").Customs.rooProj.Does, ["mind read"]);
+    tap("Selection Join 4", copySel4.cache.get("4567").customs.fooProj.does, ["nothing", "foo"]);
+    tap("Selection Join 5", copySel4.cache.get("2345").customs.barProj.does, ["sleep"]);
+    tap("Selection Join 6", copySel4.cache.get("4567").customs.rooProj.does, ["mind read"]);
 
-    CopyCloneSel4.Join(Projects.Clone(), "UserId", false);
+    copyCloneSel4.join(projects.clone(), "userId", false);
 
-    Tap("Selection Join 7", CopyCloneSel4.Cache.get("4567").fooProj.Does, ["nothing", "foo"]);
-    Tap("Selection Join 8", CopyCloneSel4.Cache.get("2345").barProj.Does, ["sleep"]);
-    Tap("Selection Join 9", CopyCloneSel4.Cache.get("4567").rooProj.Does, ["mind read"]);
+    tap("Selection Join 7", copyCloneSel4.cache.get("4567").fooProj.does, ["nothing", "foo"]);
+    tap("Selection Join 8", copyCloneSel4.cache.get("2345").barProj.does, ["sleep"]);
+    tap("Selection Join 9", copyCloneSel4.cache.get("4567").rooProj.does, ["mind read"]);
 
-    CopyCloneSel5.Join(Projects.Clone().Map(Item => {
-        Item.Example = {UserId: Item.UserId};
-        return Item;
-    }), "Example.UserId");
+    copyCloneSel5.join(projects.clone().map(item => {
+        item.example = { userId: item.userId };
+        return item;
+    }), "example.userId");
 
-    Tap("Selection Join 10", CopyCloneSel5.Cache.get("4567").Projects.fooProj.Does, ["nothing", "foo"]);
-    Tap("Selection Join 11", CopyCloneSel5.Cache.get("2345").Projects.barProj.Does, ["sleep"]);
-    Tap("Selection Join 12", CopyCloneSel5.Cache.get("4567").Projects.rooProj.Does, ["mind read"]);
+    tap("Selection Join 10", copyCloneSel5.cache.get("4567").projects.fooProj.does, ["nothing", "foo"]);
+    tap("Selection Join 11", copyCloneSel5.cache.get("2345").projects.barProj.does, ["sleep"]);
+    tap("Selection Join 12", copyCloneSel5.cache.get("4567").projects.rooProj.does, ["mind read"]);
 
-    Sel.Merge(Sel3, Sel4);
+    sel.merge(sel3, sel4);
 
-    Tap("Selection Merge 1", Sel.Cache.size, 6);
-    Tap("Selection Merge 2", Sel3.Cache.size, 3);
-    Tap("Selection Merge 3", Sel4.Cache.size, 3);
+    tap("Selection Merge 1", sel.cache.size, 6);
+    tap("Selection Merge 2", sel3.cache.size, 3);
+    tap("Selection Merge 3", sel4.cache.size, 3);
 
-    Tap("Selection Merge 4", Sel.Keys, [
+    tap("Selection Merge 4", sel.keys, [
         "roo", "bar", "boo",
         "2345", "3456", "4567"
     ]);
 
-    Tap("Selection Retrieve 1", Sel.Retrieve("bar"), {
-        "3456": {Name: "roo", Age: 29, Hobbies: ["two", "three", "-5", "loo", "1"], foo: "bar"}
+    tap("Selection Retrieve 1", sel.retrieve("bar"), {
+        "3456": { name: "roo", age: 29, hobbies: ["two", "three", "-5", "loo", "1"], foo: "bar" }
     });
 
-    Tap("Selection Retrieve 2", Sel.Retrieve("bar.Age"), undefined);
-    Tap("Selection Retrieve 3", Sel.Retrieve("bar.3456.Age"), 29);
-    Tap("Selection Retrieve 4", Sel.Retrieve("bar.3456.Hobbies.length"), 5);
+    tap("Selection Retrieve 2", sel.retrieve("bar.age"), undefined);
+    tap("Selection Retrieve 3", sel.retrieve("bar.3456.age"), 29);
+    tap("Selection Retrieve 4", sel.retrieve("bar.3456.hobbies.length"), 5);
 
-    Con.Disconnect();
+    con.disconnect();
 
     // Pool class
-    const Pl = new QDB.Pool("Test/");
+    const pl = new QDB.Pool("Test/");
 
-    Tap("Pool Size 1", Pl.Store.size, 1);
+    tap("Pool Size 1", pl.store.size, 1);
 
-    Tap("Pool Select 1", Pl.Select("Users"), Pl.Store.first());
-    Tap("Pool Select 2", Pl.Select("Guilds"), undefined);
-    Tap("Pool Select 3", Pl.Select("QDB"), undefined);
+    tap("Pool Select 1", pl.select("Users"), pl.store.first());
+    tap("Pool Select 2", pl.select("Guilds"), undefined);
+    tap("Pool Select 3", pl.select("QDB"), undefined);
 
-    Tap("Pool Connection", Pl.Select("Users").Size, 4);
+    tap("Pool Connection", pl.select("Users").size, 4);
 
-    Pl.Disconnect();
+    pl.disconnect();
 
-    Tap("Pool Disconnect", Pl.Store.size, 0);
+    tap("Pool Disconnect", pl.store.size, 0);
 
     // Executors
-    const ECon = new QDB.Connection("Test/Users.qdb", {
-        FetchAll: true,
-        CacheMaxSize: 2
+    const eCon = new QDB.Connection("Test/Users.qdb", {
+        fetchAll: true,
+        cacheMaxSize: 2
     });
 
-    Tap("Connection Size 16", ECon.Size, 4);
-    Tap("Connection CacheSize 18", ECon.CacheSize, 2);
+    tap("Connection Size 16", eCon.size, 4);
+    tap("Connection CacheSize 18", eCon.cacheSize, 2);
 
-    ECon.Disconnect();
-
+    eCon.disconnect();
 }
