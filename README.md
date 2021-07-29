@@ -27,25 +27,25 @@ const QDB = require("qdatabase");
 ## [Connection](https://github.com/QSmally/QDB/blob/v4/Documentation/Connection.md)
 The main interface for interacting with QDB.
 ```js
-const MyDB = new QDB.Connection(Path, Options?);
+const myDB = new QDB.Connection(path, options?);
 ```
 
 ## [Transaction](https://github.com/QSmally/QDB/blob/v4/Documentation/Transaction.md)
 A SQL transaction manager.
 ```js
-const Transaction = MyDB.Transaction();
+const transaction = myDB.Transaction();
 // Perform changes in the database...
-Transaction.Commit(); // or
-Transaction.Rollback();
+transaction.commit(); // or
+transaction.rollback();
 ```
 
 ## [Selection](https://github.com/QSmally/QDB/blob/v4/Documentation/Selection.md)
 An unchanged piece of the database in memory.
 ```js
-const Users = Programmers.Select()
-.Join(Projects, "UserId", "Projects")
-.OrderBy(User => Object.keys(User.Projects).length)
-.Group("Rank");
+const users = programmers.select()
+    .join(projects, "UserId", "Projects")
+    .order(user => Object.keys(user.Projects).length, "descending")
+    .group("Rank");
 ```
 
 
