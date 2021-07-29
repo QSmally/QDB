@@ -3,51 +3,50 @@ const QDB = require("../QDB");
 const CLI = require("cli-color");
 
 process.stdout.write(CLI.reset);
-const {Trials, Tables} = require("./Seed")();
+const { trials, tables } = require("./Seed")();
 process.stdout.write(CLI.cyan.bold("Running benchmarks...\n"));
 
-const Times = new Map();
+const times = new Map();
 
-for (const Trial of Trials) {
-    const Test = Trial.split(".")[0];
-    const Benchmark = require(`./Trials/${Trial}`);
-    process.stdout.write(CLI.white(`· Sampling '${CLI.bold(Test)}' benchmark...`));
+for (const trial of trials) {
+    const test = trial.split(".")[0];
+    const benchmark = require(`./Trials/${trial}`);
+    process.stdout.write(CLI.white(`· Sampling '${CLI.bold(test)}' benchmark...`));
 
-    Times.set(Test, {});
+    times.set(test, {});
 
     // Test each table's performance
-    for (const [Table, Size] of Tables) {
-        const Connection = new QDB.Connection("Benchmark/Guilds.qdb", {
-            Table, SweepInterval: false
+    for (const [table, size] of tables) {
+        const connection = new QDB.Connection("Benchmark/Guilds.qdb", {
+            table, sweepInterval: false
         });
 
-        const {Amount, TEnd} = Benchmark(Connection);
-        const Time = TEnd[0] + (TEnd[1] / 1000000000);
+        const { amount, tEnd } = benchmark(connection);
+        const time = tEnd[0] + (tEnd[1] / 1000000000);
 
-        Times.get(Test)[Table] = {
-            OpsPerSec: Amount / Time,
-            Time, Amount, Size
+        times.get(test)[table] = {
+            opsPerSec: amount / time,
+            time, amount, size
         };
 
-        Connection.Disconnect();
+        connection.disconnect();
     }
 
-
     // Publish trial time
-    const Current = Times.get(Test);
+    const current = times.get(test);
     process.stdout.write(CLI.erase.line);
-    process.stdout.write(CLI.move(-31 - Test.length));
+    process.stdout.write(CLI.move(-31 - test.length));
 
-    process.stdout.write(CLI.magenta(CLI.bold(Test) +
-        `\n  (${Math.round(Math.max(...Object.values(Current).map(M => M.OpsPerSec)))} ops/s)` +
-        `\n  (${Current[Object.keys(Current).pop()].Amount} entries)`
+    process.stdout.write(CLI.magenta(CLI.bold(test) +
+        `\n  (${Math.round(Math.max(...Object.values(current).map(M => M.opsPerSec)))} ops/s)` +
+        `\n  (${current[Object.keys(current).pop()].amount} entries)`
     ));
 
-    for (const Table in Current)
-    process.stdout.write(CLI.white(
-        `\n· ${CLI.bold(Table.padEnd(15))}` +
-        CLI.green.bold(`${Current[Table].Time.toFixed(3)}s`)
-    ));
+    for (const table in current)
+        process.stdout.write(CLI.white(
+            `\n· ${CLI.bold(table.padEnd(15))}` +
+            CLI.green.bold(`${current[table].time.toFixed(3)}s`)
+        ));
 
     process.stdout.write("\n\n");
 }

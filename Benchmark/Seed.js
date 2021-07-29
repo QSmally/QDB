@@ -1,5 +1,5 @@
 
-const Tables = new Map([
+const tables = new Map([
     ["Small", 100],
     ["Medium", 20000],
     ["Large", 50000],
@@ -7,12 +7,11 @@ const Tables = new Map([
 ]);
 
 module.exports = () => {
-
     const FS  = require("fs");
     const CLI = require("cli-color");
 
     if (process.argv.includes("--no-enterprise")) {
-        Tables.delete("Enterprise");
+        tables.delete("Enterprise");
     }
 
     if (!process.argv.includes("--skip")) {
@@ -21,32 +20,34 @@ module.exports = () => {
         const Crypto = require("crypto");
         const QDB    = require("../QDB");
         const SQL    = require("better-sqlite3");
-        const Master = new SQL("Benchmark/Guilds.qdb");
+
+        const master = new SQL("Benchmark/Guilds.qdb");
 
         // Completely remove tables
-        Master.prepare("SELECT name FROM 'sqlite_master' WHERE type = 'table';")
-        .all().forEach(Entry => Master.prepare(`DROP TABLE '${Entry.name}';`).run());
-        Master.close();
+        master.prepare("SELECT name FROM 'sqlite_master' WHERE type = 'table';")
+            .all()
+            .forEach(entry => master.prepare(`DROP TABLE '${entry.name}';`).run());
+        master.close();
 
         // Create new Connections
-        for (const [Table, Size] of Tables) {
-            const Connection = new QDB.Connection("Benchmark/Guilds.qdb", {
-                Cache: false, Table
+        for (const [table, size] of tables) {
+            const connection = new QDB.Connection("Benchmark/Guilds.qdb", {
+                cache: false, table
             });
 
-            process.stdout.write(CLI.white(`· Creating '${CLI.bold(Table)}' table... `));
-            const Transaction = Connection.Transaction();
-            const TStart = process.hrtime();
+            process.stdout.write(CLI.white(`· Creating '${CLI.bold(table)}' table... `));
+            const transaction = connection.transaction();
+            const tStart = process.hrtime();
 
-            for (let i = 0; i < Size; i++) {
-                Connection.Set(Crypto.randomBytes(8).toString("hex"), {
-                    Username: [
+            for (let i = 0; i < size; i++) {
+                connection.set(Crypto.randomBytes(8).toString("hex"), {
+                    username: [
                         "Jake", "Smally", "Amy", "Foo", "Bar", "Apolly"
                     ][i % 6],
 
-                    Password: Crypto.randomBytes(32).toString("hex"),
+                    password: Crypto.randomBytes(32).toString("hex"),
 
-                    Hobbies: [
+                    hobbies: [
                         ["Sleep", "Programming"],
                         ["Eating", "Yoga"],
                         ["Skating"]
@@ -54,22 +55,21 @@ module.exports = () => {
                 });
             }
 
-            Transaction.Commit();
+            transaction.commit();
 
-            const TEnd = process.hrtime(TStart);
-            const Time = TEnd[0] + (TEnd[1] / 1000000000);
+            const tEnd = process.hrtime(tStart);
+            const time = tEnd[0] + (tEnd[1] / 1000000000);
 
             process.stdout.write(
-                Table.padEnd(10, " ").slice(Table.length) +
-                CLI.green(`Created ${CLI.bold(Connection.Size)} entries `) +
-                CLI.white(`(${Time.toFixed(3)}s)\n`)
+                table.padEnd(10, " ").slice(table.length) +
+                CLI.green(`Created ${CLI.bold(connection.size)} entries `) +
+                CLI.white(`(${time.toFixed(3)}s)\n`)
             );
 
-            Connection.Disconnect();
+            connection.disconnect();
         }
     }
 
-    const Trials = FS.readdirSync("Benchmark/Trials/");
-    return {Trials, Tables}
-
+    const trials = FS.readdirSync("Benchmark/Trials/");
+    return { trials, tables};
 }

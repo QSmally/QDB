@@ -1,13 +1,13 @@
 
-module.exports = Connection => {
-    const TStart = process.hrtime();
+module.exports = connection => {
+    const tStart = process.hrtime();
 
-    const Selection = Connection.Select(User => {
-        return User.Username === "Amy";
+    const selection = connection.select(user => {
+        return user.username === "Amy";
     });
 
     return {
-        TEnd: process.hrtime(TStart),
-        Amount: Selection.Cache.size
+        tEnd: process.hrtime(tStart),
+        amount: selection.cache.size
     };
 }
