@@ -717,14 +717,15 @@
             "Line": 114,
             "Description": "Sorts this Selection's values. Identical to the `ORDER BY` SQL statement.",
             "Params": [
-                "{Function} predicate Function that determines the sort order with given arguments `a` and `b`."
+                "{Function} predicate Function which either determines the sort order with given arguments `a` and `b` when the preset is arbitrary, or a function to the target property to automatically sort with.",
+                "{Order} [preset] A sort order, either `ascending`, `descending` or `arbitrary` (default)."
             ],
             "Returns": "{Selection}"
         },
         {
             "Value": "filter",
             "Flags": [],
-            "Line": 126,
+            "Line": 133,
             "Description": "Filters values that satisfy the provided function. Identical to the `FILTER BY` SQL statement.",
             "Params": [
                 "{Function} predicate Function that determines which entries to keep."
@@ -734,7 +735,7 @@
         {
             "Value": "limit",
             "Flags": [],
-            "Line": 144,
+            "Line": 151,
             "Description": "Slices off values from this Selection. Identical to the `LIMIT` SQL statement.",
             "Params": [
                 "{Number} begin Index that indicates the beginning to slice.",
@@ -745,7 +746,7 @@
         {
             "Value": "group",
             "Flags": [],
-            "Line": 167,
+            "Line": 174,
             "Description": "Groups this Selection based on an identifier. Identical to the `GROUP BY` SQL statement.",
             "Params": [
                 "{Pathlike} keyOrPath Determines by which property to group this Selection."
@@ -755,7 +756,7 @@
         {
             "Value": "join",
             "Flags": [],
-            "Line": 194,
+            "Line": 201,
             "Description": "Joins another Selection into this instance based on a referrer field. Identical to the `FULL JOIN` SQL statement.",
             "Params": [
                 "{Selection} secondary Another Selection instance to join into this one.",
@@ -767,7 +768,7 @@
         {
             "Value": "map",
             "Flags": [],
-            "Line": 228,
+            "Line": 235,
             "Description": "Iterates over this Selection's values and keys, and implements the new values returned from the callback.",
             "Params": [
                 "{Function} fn Callback function which determines the new values of the Selection."
@@ -777,7 +778,7 @@
         {
             "Value": "merge",
             "Flags": [],
-            "Line": 243,
+            "Line": 250,
             "Description": "Automatically clones the merging Selections and adds them into this instance.",
             "Params": [
                 "{...Selection} selections Instances to clone and merge into this one."
@@ -787,7 +788,7 @@
         {
             "Value": "clone",
             "Flags": [],
-            "Line": 258,
+            "Line": 265,
             "Description": "Creates a new memory allocation for the copy of this Selection.",
             "Params": [
                 "{String} [holds] Optional new identifier value for the cloned Selection."

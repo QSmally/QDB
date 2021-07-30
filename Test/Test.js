@@ -211,7 +211,10 @@ module.exports = (QDB, tap) => {
 
     const sel4 = sel.clone();
 
-    tap("Selection Order 1", sel.order((a, b) => a.age - b.age).keys, ["4567", "3456", "2345"]);
+    tap("Selection Order Arbitrary", sel.order((a, b) => a.age - b.age).keys, ["4567", "3456", "2345"]);
+    tap("Selection Order Descending 1", sel.order(item => item.age, "descending").keys, ["2345", "3456", "4567"]);
+    tap("Selection Order Ascending", sel.order(item => item.age, "ascending").keys, ["4567", "3456", "2345"]);
+    tap("Selection Order Descending 2", sel.order(item => item.age, "descending").keys, ["2345", "3456", "4567"]);
     tap("Selection Filter 1", sel.filter((_row, key) => key !== "3456").cache.size, 2);
 
     tap("Selection Limit 1", sel.limit(0, 3).cache.size, 2);
