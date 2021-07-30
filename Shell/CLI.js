@@ -1,7 +1,7 @@
 #!/usr/bin/env node
 "use strict";
 
-const { existsSync, readdirSync} = require("fs");
+const { existsSync, readdirSync } = require("fs");
 
 const Format    = require("./Format");
 const arguments = process.argv.slice(2);
