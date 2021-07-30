@@ -1,26 +1,30 @@
 
-const FS     = require("fs");
+const { readdirSync } = require("fs");
+
 const Format = require("./Format");
 
-const Commands = new Map(FS.readdirSync(`${__dirname}/Store/`)
+const commands = new Map(readdirSync(`${__dirname}/Store/`)
     .map(C => [C.split(".")[0].toLowerCase(), require(`./Store/${C}`)])
 );
 
-module.exports = (Path, Arguments) => {
+module.exports = (path, arguments) => {
+    const command = arguments.shift() || "list";
+    const executable = commands.get(command.toLowerCase());
 
-    const Command    = Arguments.shift() || "list";
-    const Executable = Commands.get(Command.toLowerCase());
+    if (executable) {
+        if (arguments.length !== executable.arguments)
+            return console.log(`${Format.dim("Error")}: expected ${executable.arguments} arguments, but received ${arguments.length}.`);
 
-    if (Executable) {
-        if (Arguments.length !== Executable.Arguments)
-        return console.log(`${Format.DIM("Error")}: expected ${Executable.Arguments} arguments, but received ${Arguments.length}.`);
-        try { return Executable.Execute(Path, Arguments); }
-        catch (Err) { return console.log(`${Format.DIM("Error")}: ${Err.message}`); }
+        try {
+            return executable.execute(path, arguments);
+        } catch (error) {
+            const issue = `${Format.dim("Error")}: ${error.message}`;
+            return console.log(issue);
+        }
     }
 
     console.log([
-        `${Format.DIM("Error")}: command '${Command}' does not exist.`,
+        `${Format.dim("Error")}: command '${command}' does not exist.`,
         "See a list of commands by invoking 'qdb help [command]'."
     ].join("\n"));
-
 }

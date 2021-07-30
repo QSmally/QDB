@@ -1,17 +1,17 @@
 
-module.exports = Connection => {
-    const Indexes = Connection.Indexes;
-    const Amount  = 1000 * 1000;
+module.exports = connection => {
+    const indexes = connection.indexes;
+    const amount  = 1000 * 1000;
 
-    const TStart = process.hrtime();
+    const tStart = process.hrtime();
 
-    for (let i = 0; i < Amount; i++) {
-        const Id = Indexes[Math.round(Math.random() * (Indexes.length - 1))];
-        Connection.Fetch(Id);
+    for (let i = 0; i < amount; i++) {
+        const id = indexes[Math.round(Math.random() * (indexes.length - 1))];
+        connection.fetch(id);
     }
 
     return {
-        TEnd: process.hrtime(TStart),
-        Amount
+        tEnd: process.hrtime(tStart),
+        amount
     };
 }

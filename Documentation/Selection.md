@@ -22,104 +22,104 @@ A Selection allows you to filter something from the database, and perform method
 
 
 # Values
-## [.Cache](https://github.com/QSmally/QDB/blob/v4/lib/Utility/Selection.js#L17)
+## [.cache](https://github.com/QSmally/QDB/blob/v4/lib/Utility/Selection.js#L16)
 > Cached dataset of this Selection. [**Read Only**]
 >
 > Type **[{Collection}](https://github.com/QSmally/Qulity/blob/master/Documentation/Collection.md)**
 
-## [.Holds](https://github.com/QSmally/QDB/blob/v4/lib/Utility/Selection.js#L32)
+## [.holds](https://github.com/QSmally/QDB/blob/v4/lib/Utility/Selection.js#L31)
 > Reference to the table this Selection holds. [**Read Only**]
 >
 > Type **{String}**
 
-## [.Keys](https://github.com/QSmally/QDB/blob/v4/lib/Utility/Selection.js#L46)
+## [.keys](https://github.com/QSmally/QDB/blob/v4/lib/Utility/Selection.js#L44)
 > Serialises this Selection's keys into an array.
 >
 > Type **{Array}**
 
-## [.Values](https://github.com/QSmally/QDB/blob/v4/lib/Utility/Selection.js#L55)
+## [.values](https://github.com/QSmally/QDB/blob/v4/lib/Utility/Selection.js#L53)
 > Serialises this Selection's values into an array.
 >
 > Type **{Array}**
 
-## [.AsObject](https://github.com/QSmally/QDB/blob/v4/lib/Utility/Selection.js#L64)
+## [.asObject](https://github.com/QSmally/QDB/blob/v4/lib/Utility/Selection.js#L62)
 > Serialises this Selection into an object.
 >
 > Type **{Object}**
 
 # Methods
-## [.Retrieve(KeyOrPath)](https://github.com/QSmally/QDB/blob/v4/lib/Utility/Selection.js#L74)
+## [.retrieve(keyOrPath)](https://github.com/QSmally/QDB/blob/v4/lib/Utility/Selection.js#L72)
 > Returns the given document by its key from this Selection.
 > | Key | Type | Description |
 > | --- | --- | --- |
-> | KeyOrPath | Pathlike | Indicates which (nested) element to receieve. |
+> | keyOrPath | Pathlike | Indicates which (nested) element to receieve. |
 >
 > Returns **{Object|Array|DataModel}** 
 
-## [.Order(Fn, Preset?)](https://github.com/QSmally/QDB/blob/v4/lib/Utility/Selection.js#L116)
+## [.order(predicate, preset?)](https://github.com/QSmally/QDB/blob/v4/lib/Utility/Selection.js#L114)
 > Sorts this Selection's values. Identical to the `ORDER BY` SQL statement.
 > | Key | Type | Description |
 > | --- | --- | --- |
-> | Fn | Function | Function which either determines the sort order with given arguments `a` and `b` when the preset is arbitrary, or a function to the target property to automatically sort with. |
-> | Preset? | Order | A sort order, either `ascending`, `descending` or `arbitrary` (default). |
+> | predicate | Function | Function which either determines the sort order with given arguments `a` and `b` when the preset is arbitrary, or a function to the target property to automatically sort with. |
+> | preset? | Order | A sort order, either `ascending`, `descending` or `arbitrary` (default). |
 >
 > Returns **{Selection}** 
 
-## [.Filter(Fn)](https://github.com/QSmally/QDB/blob/v4/lib/Utility/Selection.js#L135)
+## [.filter(predicate)](https://github.com/QSmally/QDB/blob/v4/lib/Utility/Selection.js#L133)
 > Filters values that satisfy the provided function. Identical to the `FILTER BY` SQL statement.
 > | Key | Type | Description |
 > | --- | --- | --- |
-> | Fn | Function | Function that determines which entries to keep. |
+> | predicate | Function | Function that determines which entries to keep. |
 >
 > Returns **{Selection}** 
 
-## [.Limit(Begin, End?)](https://github.com/QSmally/QDB/blob/v4/lib/Utility/Selection.js#L151)
+## [.limit(begin, end?)](https://github.com/QSmally/QDB/blob/v4/lib/Utility/Selection.js#L151)
 > Slices off values from this Selection. Identical to the `LIMIT` SQL statement.
 > | Key | Type | Description |
 > | --- | --- | --- |
-> | Begin | Number | Index that indicates the beginning to slice. |
-> | End? | Number | An index for the end of the slice. |
+> | begin | Number | Index that indicates the beginning to slice. |
+> | end? | Number | An index for the end of the slice. |
 >
 > Returns **{Selection}** 
 
-## [.Group(KeyOrPath)](https://github.com/QSmally/QDB/blob/v4/lib/Utility/Selection.js#L174)
+## [.group(keyOrPath)](https://github.com/QSmally/QDB/blob/v4/lib/Utility/Selection.js#L174)
 > Groups this Selection based on an identifier. Identical to the `GROUP BY` SQL statement.
 > | Key | Type | Description |
 > | --- | --- | --- |
-> | KeyOrPath | Pathlike | Determines by which property to group this Selection. |
+> | keyOrPath | Pathlike | Determines by which property to group this Selection. |
 >
 > Returns **{Selection}** 
 
-## [.Join(Secondary, Field, Property?)](https://github.com/QSmally/QDB/blob/v4/lib/Utility/Selection.js#L201)
+## [.join(secondary, field, property?)](https://github.com/QSmally/QDB/blob/v4/lib/Utility/Selection.js#L201)
 > Joins another Selection into this instance based on a referrer field. Identical to the `FULL JOIN` SQL statement.
 > | Key | Type | Description |
 > | --- | --- | --- |
-> | Secondary | Selection | Another Selection instance to join into this one. |
-> | Field | String | Which field to check for a reference to this Selection's rows, or `null` to join with keys. |
-> | Property? | Boolean, String | Boolean false to flatten the entries into this Selection's rows, a string value that implicitly indicates the property to add the merging entries, or a boolean true to use the Selection's table name as property. |
+> | secondary | Selection | Another Selection instance to join into this one. |
+> | field | String | Which field to check for a reference to this Selection's rows, or `null` to join with keys. |
+> | property? | Boolean, String | Boolean false to flatten the entries into this Selection's rows, a string value that implicitly indicates the property to add the merging entries, or a boolean true to use the Selection's table name as property. |
 >
 > Returns **{Selection}** 
 
-## [.Map(Fn)](https://github.com/QSmally/QDB/blob/v4/lib/Utility/Selection.js#L234)
+## [.map(fn)](https://github.com/QSmally/QDB/blob/v4/lib/Utility/Selection.js#L235)
 > Iterates over this Selection's values and keys, and implements the new values returned from the callback.
 > | Key | Type | Description |
 > | --- | --- | --- |
-> | Fn | Function | Callback function which determines the new values of the Selection. |
+> | fn | Function | Callback function which determines the new values of the Selection. |
 >
 > Returns **{Selection}** 
 
-## [.Merge(Selections)](https://github.com/QSmally/QDB/blob/v4/lib/Utility/Selection.js#L249)
+## [.merge(selections)](https://github.com/QSmally/QDB/blob/v4/lib/Utility/Selection.js#L250)
 > Automatically clones the merging Selections and adds them into this instance.
 > | Key | Type | Description |
 > | --- | --- | --- |
-> | Selections | ...Selection | Instances to clone and merge into this one. |
+> | selections | ...Selection | Instances to clone and merge into this one. |
 >
 > Returns **{Selection}** 
 
-## [.Clone(Holds?)](https://github.com/QSmally/QDB/blob/v4/lib/Utility/Selection.js#L264)
+## [.clone(holds?)](https://github.com/QSmally/QDB/blob/v4/lib/Utility/Selection.js#L265)
 > Creates a new memory allocation for the copy of this Selection.
 > | Key | Type | Description |
 > | --- | --- | --- |
-> | Holds? | String | Optional new identifier value for the cloned Selection. |
+> | holds? | String | Optional new identifier value for the cloned Selection. |
 >
 > Returns **{Selection}** 

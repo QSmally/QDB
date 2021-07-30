@@ -1,14 +1,16 @@
 
-const C = {
-    DIM:   "\x1b[40m",
-    BOLD:  "\x1b[1m",
-    RESET: "\x1b[0m"
-};
+class CLIFormatter {
+    static formats = {
+        dim:   "\x1b[40m",
+        bold:  "\x1b[1m",
+        reset: "\x1b[0m"
+    };
 
-module.exports = {
-    DIM: Text => `${C.DIM}${Text}${C.RESET}`,
-    BOLD: Text => `${C.BOLD}${Text}${C.RESET}`,
-    LIST: (Items, Padding, Dashes) => Object.keys(Items)
-        .map(Item => `${Dashes ? " -" : " "} ${Item}:`.padEnd(Padding) + Items[Item])
-        .join("\n")
-};
+    static dim = text => `${CLIFormatter.formats.dim}${text}${CLIFormatter.formats.reset}`;
+    static bold = text => `${CLIFormatter.formats.bold}${text}${CLIFormatter.formats.reset}`;
+    static list = (items, padding, dashes) => Object.keys(items)
+        .map(item => `${dashes ? " -" : " "} ${item}:`.padEnd(padding) + items[item])
+        .join("\n");
+}
+
+module.exports = CLIFormatter;

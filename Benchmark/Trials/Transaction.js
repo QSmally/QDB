@@ -1,21 +1,20 @@
 
 const Crypto = require("crypto");
 
-module.exports = Connection => {
-    const Amount  = 1000;
+module.exports = connection => {
+    const tStart = process.hrtime();
+    const t = connection.transaction();
+    const amount  = 1000;
 
-    const TStart = process.hrtime();
-    const T = Connection.Transaction();
-
-    for (let i = 0; i < Amount; i++) {
-        const Id = Crypto.randomBytes(8).toString("hex");
-        Connection.Set(Id, {Test: "Transaction"});
+    for (let i = 0; i < amount; i++) {
+        const id = Crypto.randomBytes(8).toString("hex");
+        connection.set(id, { test: "Transaction" });
     }
 
-    T.Commit();
+    t.commit();
 
     return {
-        TEnd: process.hrtime(TStart),
-        Amount
+        tEnd: process.hrtime(tStart),
+        amount
     };
 }

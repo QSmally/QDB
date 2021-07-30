@@ -1,43 +1,43 @@
 
 const QDB = require("../QDB");
-const Entries = {};
+const entries = {};
 
 try {
 
-    require("./Test")(QDB, (Name, Output, Expected) => {
-        Entries[Name] = {
-            Passed:   JSON.stringify(Output) == JSON.stringify(Expected),
-            Output:   Output,
-            Expected: Expected
+    require("./Test")(QDB, (name, output, expected) => {
+        entries[name] = {
+            passed:   JSON.stringify(output) == JSON.stringify(expected),
+            output:   output,
+            expected: expected
         };
     });
 
-    const Failed = [];
+    const failed = [];
 
-    for (const Key in Entries) {
-        if (!Entries[Key].Passed)
-        Failed.push({
-            Test:     Key,
-            Output:   Entries[Key].Output,
-            Expected: Entries[Key].Expected
+    for (const key in entries) {
+        if (!entries[key].passed)
+        failed.push({
+            test:     key,
+            output:   entries[key].output,
+            expected: entries[key].expected
         });
     }
 
-    console.log(`Successfully ran ${Object.keys(Entries).length} tests\nOf which ${Failed.length} have failed`);
+    console.log(`Successfully ran ${Object.keys(entries).length} tests\nOf which ${failed.length} have failed`);
 
-    if (Failed.length) {
+    if (failed.length) {
         console.log("Failed test stack:\n");
-        Failed.forEach(Entry => {
-            console.log(Entry.Test,
-                "\n", Entry.Output,
-                "\n", Entry.Expected
+        failed.forEach(entry => {
+            console.log(entry.test,
+                "\n", entry.output,
+                "\n", entry.expected
             );
         });
     }
 
-} catch (Err) {
+} catch (err) {
     console.error("Failed to run tests");
-    console.error(Err);
+    console.error(err);
 } finally {
-    if (process.argv.includes("-d")) console.debug(Entries);
+    if (process.argv.includes("-d")) console.debug(entries);
 }

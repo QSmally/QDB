@@ -1,31 +1,29 @@
 #!/usr/bin/env node
 "use strict";
 
-const FS        = require("fs");
+const { existsSync, readdirSync } = require("fs");
+
 const Format    = require("./Format");
-const Arguments = process.argv.slice(2);
+const arguments = process.argv.slice(2);
 
-const Menu = require("./Menu");
-const Help = require("./Prompt/Help");
+const menu = require("./Menu");
+const help = require("./Prompt/Help");
 
-if (!Arguments.length) {
-    Help();
+if (!arguments.length) {
+    help();
 } else {
-
-    const Commands = new Map(FS.readdirSync(`${__dirname}/Prompt/`)
+    const commands = new Map(readdirSync(`${__dirname}/Prompt/`)
         .map(C => [C.split(".")[0].toLowerCase(), require(`./Prompt/${C}`)])
     );
 
-    const Action = Arguments.shift();
-    const Executable = Commands.get(Action.toLowerCase());
-    if (Executable) return Executable(Arguments.shift());
-    
+    const action = arguments.shift();
+    const executable = commands.get(action.toLowerCase());
+    if (executable) return executable(arguments.shift());
 
-    if (!FS.existsSync(Action)) return console.log([
-        `${Format.DIM("Error")}: '${Action}' does not exist.`,
+    if (!existsSync(action)) return console.log([
+        `${Format.dim("Error")}: '${action}' does not exist.`,
         "Use 'qdb make <database>' to create a new database file."
     ].join("\n"));
 
-    Menu(Action, Arguments);
-
+    menu(action, arguments);
 }

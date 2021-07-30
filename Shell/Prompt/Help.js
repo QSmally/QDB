@@ -2,39 +2,39 @@
 const FS     = require("fs");
 const Format = require("../Format");
 
-const Commands = new Map(FS.readdirSync(`${__dirname}/../Store/`)
+const commands = new Map(FS.readdirSync(`${__dirname}/../Store/`)
     .map(C => [C.split(".")[0].toLowerCase(), require(`../Store/${C}`)])
 );
 
-module.exports = Command => {
-    if (!Command) return console.log(["QDB Shell\n",
-        Format.BOLD("USAGE"),
+module.exports = command => {
+    if (!command) return console.log(["QDB Shell\n",
+        Format.bold("USAGE"),
         "  $ qdb <database | make | help> [command] [parameters...]\n",
 
-        Format.BOLD("COMMANDS"),
-        `${Format.LIST(Object.fromEntries(
-            [...Commands.entries()].map(Entry => [Entry[0], Entry[1].Description])
+        Format.bold("COMMANDS"),
+        `${Format.list(Object.fromEntries(
+            [...commands.entries()].map(entry => [entry[0], entry[1].description])
         ), 12)}\n`,
 
-        Format.BOLD("EXAMPLES"),
+        Format.bold("EXAMPLES"),
         `${[
             "make Instances.qdb",
             "Development.qdb create Users",
             "Production.qdb vacuum"
         ].map(E => `  $ qdb ${E}`).join("\n")}\n`,
 
-        Format.BOLD("REPOSITORY"),
+        Format.bold("REPOSITORY"),
         "  https://github.com/QSmally/QDB"
     ].join("\n"));
 
-    const Fetched = Commands.get(Command.toLowerCase());
-    if (!Fetched) return console.log(`${Format.DIM("Error")}: command '${Command}' does not exist.`);
+    const fetchedCommand = commands.get(command.toLowerCase());
+    if (!fetchedCommand) return console.log(`${Format.dim("Error")}: command '${command}' does not exist.`);
 
     console.log([
-        `QDB Shell - ${Format.BOLD(Command)}`,
-        Format.DIM(Fetched.Usage),
-        `\n${Fetched.Description}\n`,
+        `QDB Shell - ${Format.bold(command)}`,
+        Format.dim(fetchedCommand.usage),
+        `\n${fetchedCommand.description}\n`,
         Format.BOLD("EXAMPLES"),
-        ...Fetched.Examples.map(E => `  $ ${E}`)
+        ...fetchedCommand.examples.map(E => `  $ ${E}`)
     ].join("\n"));
 }
