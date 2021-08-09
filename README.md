@@ -33,7 +33,7 @@ const myDB = new QDB.Connection(path, options?);
 ## [Transaction](https://github.com/QSmally/QDB/blob/v4/Documentation/Transaction.md)
 A SQL transaction manager.
 ```js
-const transaction = myDB.Transaction();
+const transaction = myDB.transaction();
 // Perform changes in the database...
 transaction.commit(); // or
 transaction.rollback();
