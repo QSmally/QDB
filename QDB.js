@@ -20,11 +20,21 @@ module.exports = {
     Pool:          require("./lib/Connections/Pool"),
     BackupManager: require("./lib/Connections/Backups/Manager"),
 
+    // Utility
     Schema: DataSchema.Schema,
 
+    // Model bindings
     model: id => {
         if (typeof id !== "string") return null;
         return DataSchema.modelStore.resolve(id);
-    }
+    },
+
+    // Order enumeration
+    // These are left out as strings to be as backwards- compatible
+    // as possible. As the previous version had just strings as inputs,
+    // this was necessary.
+    arbitrary: "arbitrary",
+    ascending: "ascending",
+    descending: "descending"
 
 };
