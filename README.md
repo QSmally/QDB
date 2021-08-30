@@ -5,10 +5,11 @@
 
 
 # Features
-* Optimised entry caches;
-* Database schema and automatic migration;
+* Non-blocking;
+* Optimised memory cache;
+* Schema objects and automatic migration;
 * Selection and transaction wrappers;
-* Pools with external thread support.
+* Connection pools with external thread support.
 
 ## Links
 * [Documentations](https://github.com/QSmally/QDB/blob/v4/Documentation/Index.md)
@@ -27,14 +28,17 @@ const QDB = require("qdatabase");
 ## [Connection](https://github.com/QSmally/QDB/blob/v4/Documentation/Connection.md)
 The main interface for interacting with QDB.
 ```js
-const myDB = new QDB.Connection(path, options?);
+const service = new QDB.Connection(path, options?);
 ```
 
 ## [Transaction](https://github.com/QSmally/QDB/blob/v4/Documentation/Transaction.md)
 A SQL transaction manager.
 ```js
-const transaction = myDB.transaction();
-// Perform changes in the database...
+// Instantiates a transaction within the database. It is required
+// to call 'commit' or 'rollback' on the returned Transaction.
+const transaction = service.transaction();
+
+// Perform changes in the connection...
 transaction.commit(); // or
 transaction.rollback();
 ```
@@ -42,9 +46,11 @@ transaction.rollback();
 ## [Selection](https://github.com/QSmally/QDB/blob/v4/Documentation/Selection.md)
 An unchanged piece of the database in memory.
 ```js
-const users = programmers.select()
+// Aggregate with certain instructions, like joining tables,
+// ordering them and regrouping them by a property.
+const users = service.select()
     .join(projects, "UserId", "Projects")
-    .order(user => Object.keys(user.Projects).length, "descending")
+    .order(user => Object.keys(user.Projects).length, QDB.descending)
     .group("Rank");
 ```
 
