@@ -71,5 +71,5 @@ module.exports = () => {
     }
 
     const trials = FS.readdirSync("Benchmark/Trials/");
-    return { trials, tables};
+    return { trials, tables };
 }
