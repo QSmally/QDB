@@ -452,14 +452,14 @@
             "Line": 67,
             "Description": "Retrieves a database Connection from this Pool instance.",
             "Params": [
-                "{String} base Reference link to the Connection to resolve."
+                "{String} representativeString A reference to resolve."
             ],
             "Returns": "{Connection}"
         },
         {
             "Value": "disconnect",
             "Flags": [],
-            "Line": 78,
+            "Line": 76,
             "Description": "Disconnects from all the Connections in this Pool.",
             "Returns": "{Pool}"
         },
@@ -468,7 +468,7 @@
             "Flags": [
                 "Typedef"
             ],
-            "Line": 93,
+            "Line": 91,
             "Description": "Options for a database Pool. All integer related options are in milliseconds. ",
             "Typedef": "{Object} PoolOptions",
             "Params": [
@@ -640,7 +640,7 @@
                 "Variable",
                 "ReadOnly"
             ],
-            "Line": 16,
+            "Line": 18,
             "Description": "Cached dataset of this Selection.",
             "Type": "{Collection}",
             "Reference": "https://github.com/QSmally/Qulity/blob/master/Documentation/Collection.md"
@@ -651,7 +651,7 @@
                 "Variable",
                 "ReadOnly"
             ],
-            "Line": 31,
+            "Line": 33,
             "Description": "Reference to the table this Selection holds.",
             "Type": "{String}"
         },
@@ -660,7 +660,7 @@
             "Flags": [
                 "Variable"
             ],
-            "Line": 44,
+            "Line": 46,
             "Description": "Serialises this Selection's keys into an array.",
             "Action": "Getter",
             "Refer": "keys",
@@ -671,7 +671,7 @@
             "Flags": [
                 "Variable"
             ],
-            "Line": 53,
+            "Line": 55,
             "Description": "Serialises this Selection's values into an array.",
             "Action": "Getter",
             "Refer": "values",
@@ -682,7 +682,7 @@
             "Flags": [
                 "Variable"
             ],
-            "Line": 62,
+            "Line": 64,
             "Description": "Serialises this Selection into an object.",
             "Action": "Getter",
             "Refer": "asObject",
@@ -691,7 +691,7 @@
         {
             "Value": "retrieve",
             "Flags": [],
-            "Line": 72,
+            "Line": 74,
             "Description": "Returns the given document by its key from this Selection.",
             "Params": [
                 "{Pathlike} keyOrPath Indicates which (nested) element to receieve."
@@ -703,7 +703,7 @@
             "Flags": [
                 "Private"
             ],
-            "Line": 89,
+            "Line": 91,
             "Description": "Internal method. Finds a relative dotaccess pathway of an object.",
             "Params": [
                 "{Object|Array} frame The object-like beginning to cast.",
@@ -714,18 +714,18 @@
         {
             "Value": "order",
             "Flags": [],
-            "Line": 114,
+            "Line": 116,
             "Description": "Sorts this Selection's values. Identical to the `ORDER BY` SQL statement.",
             "Params": [
                 "{Function} predicate Function which either determines the sort order with given arguments `a` and `b` when the preset is arbitrary, or a function to the target property to automatically sort with.",
-                "{Order} [preset] A sort order, either `ascending`, `descending` or `arbitrary` (default)."
+                "{Order} [preset] A sort order, an enum from QDB being `ascending`, `descending` or `arbitrary` (default)."
             ],
             "Returns": "{Selection}"
         },
         {
             "Value": "filter",
             "Flags": [],
-            "Line": 133,
+            "Line": 135,
             "Description": "Filters values that satisfy the provided function. Identical to the `FILTER BY` SQL statement.",
             "Params": [
                 "{Function} predicate Function that determines which entries to keep."
@@ -735,7 +735,7 @@
         {
             "Value": "limit",
             "Flags": [],
-            "Line": 151,
+            "Line": 153,
             "Description": "Slices off values from this Selection. Identical to the `LIMIT` SQL statement.",
             "Params": [
                 "{Number} begin Index that indicates the beginning to slice.",
@@ -746,7 +746,7 @@
         {
             "Value": "group",
             "Flags": [],
-            "Line": 174,
+            "Line": 176,
             "Description": "Groups this Selection based on an identifier. Identical to the `GROUP BY` SQL statement.",
             "Params": [
                 "{Pathlike} keyOrPath Determines by which property to group this Selection."
@@ -756,7 +756,7 @@
         {
             "Value": "join",
             "Flags": [],
-            "Line": 201,
+            "Line": 203,
             "Description": "Joins another Selection into this instance based on a referrer field. Identical to the `FULL JOIN` SQL statement.",
             "Params": [
                 "{Selection} secondary Another Selection instance to join into this one.",
@@ -768,7 +768,7 @@
         {
             "Value": "map",
             "Flags": [],
-            "Line": 235,
+            "Line": 237,
             "Description": "Iterates over this Selection's values and keys, and implements the new values returned from the callback.",
             "Params": [
                 "{Function} fn Callback function which determines the new values of the Selection."
@@ -778,7 +778,7 @@
         {
             "Value": "merge",
             "Flags": [],
-            "Line": 250,
+            "Line": 252,
             "Description": "Automatically clones the merging Selections and adds them into this instance.",
             "Params": [
                 "{...Selection} selections Instances to clone and merge into this one."
@@ -788,7 +788,7 @@
         {
             "Value": "clone",
             "Flags": [],
-            "Line": 265,
+            "Line": 267,
             "Description": "Creates a new memory allocation for the copy of this Selection.",
             "Params": [
                 "{String} [holds] Optional new identifier value for the cloned Selection."

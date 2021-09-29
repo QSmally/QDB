@@ -41,21 +41,21 @@ const myDBs = new QDB.Pool("/usr/Production/Cellar/");
 > Type **{PoolOptions}**
 
 # Methods
-## [.select(base)](https://github.com/QSmally/QDB/blob/v4/lib/Connections/Pool.js#L67)
+## [.select(representativeString)](https://github.com/QSmally/QDB/blob/v4/lib/Connections/Pool.js#L67)
 > Retrieves a database Connection from this Pool instance.
 > | Key | Type | Description |
 > | --- | --- | --- |
-> | base | String | Reference link to the Connection to resolve. |
+> | representativeString | String | A reference to resolve. |
 >
 > Returns **{Connection}** 
 
-## [.disconnect()](https://github.com/QSmally/QDB/blob/v4/lib/Connections/Pool.js#L78)
+## [.disconnect()](https://github.com/QSmally/QDB/blob/v4/lib/Connections/Pool.js#L76)
 > Disconnects from all the Connections in this Pool.
 >
 > Returns **{Pool}** 
 
 # Typedefs
-## [PoolOptions](https://github.com/QSmally/QDB/blob/v4/lib/Connections/Pool.js#L93)
+## [PoolOptions](https://github.com/QSmally/QDB/blob/v4/lib/Connections/Pool.js#L91)
 > Options for a database Pool. All integer related options are in milliseconds. 
 > | Key | Type | Description |
 > | --- | --- | --- |
