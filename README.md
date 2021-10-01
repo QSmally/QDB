@@ -1,22 +1,21 @@
 
 # QDB4
 
-> QDB is a synchronous database module reliant on JavaScript object-documents with multiple levels of optimisation built into it.
+> QDB is a SQLite framework reliant on JavaScript documents with various optimisations included.
 
 
 # Features
-* Non-blocking;
-* Optimised memory cache;
-* Schema objects and automatic migration;
-* Selection and transaction wrappers;
-* Connection pools with external thread support.
+* Synchronous, yet non-blocking (built on [`better-sqlite3`](https://github.com/JoshuaWise/better-sqlite3));
+* Configurable cache;
+* Schema objects and automatic table migration;
+* Selection and transaction support.
 
 ## Links
 * [Documentations](https://github.com/QSmally/QDB/blob/v4/Documentation/Index.md)
 * [Github](https://github.com/QSmally/QDB)
 
 ## Installation
-`npm install QSmally/QDB`
+`npm install QSmally/QDB#staging`
 ```js
 const QDB = require("qdatabase");
 // ...
