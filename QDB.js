@@ -8,4 +8,8 @@
 // and limitations under the License.
 //
 
-module.exports = {};
+module.exports = {
+
+    Connection: require("./Sources/Connection")
+
+};
