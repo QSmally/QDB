@@ -3,6 +3,8 @@
 
 const SQL = require("better-sqlite3");
 
+const Journal = require("./Enumerations/Journal");
+
 class Connection {
 
     /**
@@ -14,7 +16,7 @@ class Connection {
      * A set of options for a QDB Connection instance.
      * @typedef {Object} QDBConfiguration
      * @property {String} [table] A name for the table to use at the path for this Connection.
-     * @property {Boolean} [WAL] Whether or not to enable Write Ahead Logging mode.
+     * @property {Journal} [journal] The journal mode of this database, which defaults to Write Ahead Logging.
      * @property {Number} [diskCacheSize] The maximum amount of pages on disk SQLite will hold.
      */
 
@@ -47,8 +49,8 @@ class Connection {
          */
         this.configuration = {
             table: "QDB",
-            WAL: true,
-            diskCacheSize: this.constructor.diskCacheSize,
+            journal: Journal.logAhead,
+            diskCacheSize: 64e3,
 
             ...configuration
         };
@@ -76,24 +78,11 @@ class Connection {
             this.API
                 .prepare(`CREATE TABLE IF NOT EXISTS ? ('Key' VARCHAR PRIMARY KEY, 'Val' TEXT);`)
                 .run(this.table);
-            this.API.pragma(`journal_mode = ${this.journalConfiguration};`);
+            this.API.pragma(`journal_mode = ${this.configuration.journal};`);
             this.API.pragma(`cache_size = ${this.configuration.diskCacheSize};`);
             // TODO: implement a synchronisation config property with enumeration.
             this.API.pragma("synchronous = 1");
         }
-    }
-
-    /**
-     * A journal mode this Connection implements.
-     * @name Connection#journalConfiguration
-     * @type {String}
-     * @private
-     */
-    get journalConfiguration() {
-        // TODO: create type enumeration for this property.
-        return this.configuration.WAL ?
-            "wal" :
-            "delete";
     }
 }
 

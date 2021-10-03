@@ -10,6 +10,10 @@
 
 module.exports = {
 
-    Connection: require("./Sources/Connection")
+    // QDB
+    Connection: require("./Sources/Connection"),
+
+    // Enumerations
+    Journal: require("./Sources/Enumerations/Journal")
 
 };
