@@ -4,7 +4,8 @@
 const { Collection } = require("qulity");
 const SQL            = require("better-sqlite3");
 
-const Journal = require("./Enumerations/Journal");
+const Journal         = require("./Enumerations/Journal");
+const Synchronisation = require("./Enumerations/Synchronisation");
 
 class Connection {
 
@@ -17,8 +18,9 @@ class Connection {
      * A set of options for a QDB Connection instance.
      * @typedef {Object} QDBConfiguration
      * @property {String} [table] A name for the table to use at the path for this Connection.
-     * @property {Journal} [journal] The journal mode of this database, which defaults to Write Ahead Logging.
-     * @property {Number} [diskCacheSize] The maximum amount of pages on disk SQLite will hold.
+     * @property {Journal} [journal] The journal mode of this database, which defaults to Write Ahead Logging. See https://sqlite.org/pragma.html#pragma_journal_mode.
+     * @property {Number} [diskCacheSize] The maximum amount of pages on disk SQLite will hold. See https://sqlite.org/pragma.html#pragma_cache_size.
+     * @property {Synchronisation} [synchronisation] SQLite synchronisation, which defaults to 'normal'. See https://sqlite.org/pragma.html#pragma_synchronous.
      */
 
     /**
@@ -52,6 +54,7 @@ class Connection {
             table: "QDB",
             journal: Journal.writeAhead,
             diskCacheSize: 64e3,
+            synchronisation: Synchronisation.full,
 
             ...configuration
         };
@@ -89,8 +92,7 @@ class Connection {
                 .run(this.table);
             this.API.pragma(`journal_mode = ${this.configuration.journal};`);
             this.API.pragma(`cache_size = ${this.configuration.diskCacheSize};`);
-            // TODO: implement a synchronisation config property with enumeration.
-            this.API.pragma("synchronous = 1");
+            this.API.pragma(`synchronous = ${this.configuration.synchronisation};`);
         }
     }
 
