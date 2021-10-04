@@ -1,7 +1,8 @@
 
 "use strict";
 
-const SQL = require("better-sqlite3");
+const { Collection } = require("qulity");
+const SQL            = require("better-sqlite3");
 
 const Journal = require("./Enumerations/Journal");
 
@@ -49,7 +50,7 @@ class Connection {
          */
         this.configuration = {
             table: "QDB",
-            journal: Journal.logAhead,
+            journal: Journal.writeAhead,
             diskCacheSize: 64e3,
 
             ...configuration
@@ -72,6 +73,14 @@ class Connection {
          */
         this.API = new SQL(pathURL);
 
+        /**
+         * In-memory cached rows.
+         * @name Connection#memory
+         * @type {Collection<String, DataModel>}
+         * @private
+         */
+        this.memory = new Collection();
+
         if (!this.API) {
             throw new Error("A QDB Connection could not be created.");
         } else {
@@ -83,6 +92,41 @@ class Connection {
             // TODO: implement a synchronisation config property with enumeration.
             this.API.pragma("synchronous = 1");
         }
+    }
+
+    /**
+     * Retrieves the amount of rows in this database table.
+     * @name Connection#size
+     * @type {Number}
+     * @readonly
+     */
+    get size() {
+        return this.API
+            .prepare(`SELECT COUNT(*) FROM ?;`)
+            .get(this.table)["COUNT(*)"];
+    }
+
+    /**
+     * Retrieves the amount of the cached data models of this Connection.
+     * @name Connection#cacheSize
+     * @type {Number}
+     * @readonly
+     */
+    get cacheSize() {
+        return this.memory.size;
+    }
+
+    /**
+     * Retrieves all the keys of this database table.
+     * @name Connection#indexes
+     * @type {Array<String>}
+     * @readonly
+     */
+    get indexes() {
+        return this.API
+            .prepare(`SELECT Key FROM ?;`)
+            .all(this.table)
+            .map(row => row["Key"]);
     }
 }
 
