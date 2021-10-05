@@ -10,17 +10,17 @@ const Synchronisation = require("./Enumerations/Synchronisation");
 class Connection {
 
     /**
-     * Path string to navigate files.
-     * @typedef {String} Pathlike
-     */
-
-    /**
      * A set of options for a QDB Connection instance.
      * @typedef {Object} QDBConfiguration
      * @property {String} [table] A name for the table to use at the path for this Connection.
      * @property {Journal} [journal] The journal mode of this database, which defaults to Write Ahead Logging. See https://sqlite.org/pragma.html#pragma_journal_mode.
      * @property {Number} [diskCacheSize] The maximum amount of pages on disk SQLite will hold. See https://sqlite.org/pragma.html#pragma_cache_size.
      * @property {Synchronisation} [synchronisation] SQLite synchronisation, which defaults to 'normal'. See https://sqlite.org/pragma.html#pragma_synchronous.
+     */
+
+    /**
+     * Path string to navigate data models.
+     * @typedef {String} Pathlike
      */
 
     /**
@@ -31,7 +31,7 @@ class Connection {
 
     /**
      * The main interface for interacting with QDB.
-     * @param {Pathlike} pathURL Path to the database file of this Connection.
+     * @param {String} pathURL Path to the database file of this Connection.
      * @param {QDBConfiguration} [configuration] Options for this Connection.
      * @example const users = new QDB.Connection("/opt/company/Cellar/Users.qdb");
      */
@@ -39,7 +39,7 @@ class Connection {
         /**
          * Path string to the database.
          * @name Connection#path
-         * @type {Pathlike}
+         * @type {String}
          * @readonly
          */
         this.path = pathURL;
@@ -130,6 +130,63 @@ class Connection {
             .all(this.table)
             .map(row => row["Key"]);
     }
+
+    // Private methods
+
+    /**
+     * Internal method.
+     * Resolves a dot-separated path to a key and rest path.
+     * @param {Pathlike} pathlike String input to be formed and parsed.
+     * @returns {Array}
+     * @private
+     */
+    _resolveKeyPath(pathlike) {
+        const path = pathlike.split(/\.+/g);
+        return [path[0], path.slice(1)];
+    }
+
+    /**
+     * Internal method.
+     * Finds a relative dot-separated pathway of a data model.
+     * @param {DataModel} dataObject The object-like target.
+     * @param {Array<String>} path A parsed array of a pathlike notation from '_resolveKeyPath'.
+     * @param {*} [item] A value to place into the pathway endpoint.
+     * @returns {*}
+     * @private
+     */
+    _pathCast(dataObject, path, item) {
+        const originalDataObject = dataObject;
+        const finalKey = pathlike.pop();
+
+        for (const key of path) {
+            if (typeof dataObject !== "object") return;
+            if (!dataObject.hasOwnProperty(key) && item === undefined) return;
+            if (!dataObject.hasOwnProperty(key)) dataObject[key] = {};
+
+            dataObject = dataObject[key];
+        }
+
+        if (dataObject) {
+            if (item === undefined) return dataObject[finalKey];
+            dataObject[finalKey] = item;
+            return originalDataObject;
+        }
+    }
+
+    // Integrations
+    // ... iterator, transaction
+
+    // Standard methods
+    // ... set, fetch, evict, erase
+
+    // Search methods
+    // ... exists, each, find, select
+
+    // Array methods
+    // ... push, shift, pop, remove, slice
+
+    // Utility methods
+    // ... ensure, modify, insert
 }
 
 module.exports = Connection;
