@@ -200,6 +200,59 @@ class Connection {
     // Standard methods
     // ... set, fetch, evict, erase
 
+    /**
+     * Manages the elements of the database.
+     * @param {Pathlike} pathlike Specifies at which row and nested property to insert or replace the element at.
+     * @param {DataModel|*} document Any data to set at the row address, or the location of the key-path.
+     * @returns {Connection}
+     */
+    set(pathlike, document) {
+        const [key, path] = this._resolveKeyPath(pathlike);
+
+        if (typeof path !== undefined) {
+            const documentOld = this.fetch(key) ?? {};
+            document = this._pathCast(documentOld, path, document);
+        }
+
+        this.API
+            .prepare(`INSERT OR REPLACE INTO ? ('Key', 'Val) VALUES (?, ?);`)
+            .run(this.table, key, JSON.stringify(document));
+        if (this.memory.has(key)) this._patch(key, document);
+
+        return this;
+    }
+
+    /**
+     * Manages the retrieval of the database.
+     * @param {Pathlike} pathlike Specifies which row and nested property to fetch or get from the cache.
+     * @returns {*}
+     */
+    fetch(pathlike) {
+        // TODO:
+        // Implement manual cache toggle whenever the other cache management
+        // things are also implemented.
+        const [key, path] = this._resolveKeyPath(pathlike);
+
+        const fetched = this.memory.get(key) ?? (() => {
+            const { Val: document } = this.API
+                .prepare(`SELECT Val FROM ? WHERE KEY = ?`)
+                .get(this.table, key) ?? {};
+            if (document !== undefined) return JSON.parse(document);
+            return document;
+        })();
+
+        if (fetched == undefined) return fetched;
+        if (!this.memory.has(key)) this._patch(key, fetched);
+
+        let documentFetchClone = Array.isArray(fetched) ?
+            [ ...document ] :
+            { ...document };
+        if (path !== undefined) documentFetchClone = this._pathCast(documentFetchClone, path);
+        if (fetched && typeof fetched === "object") delete documentFetchClone._timestamp;
+
+        return documentFetchClone;
+    }
+
     // Search methods
     // ... exists, each, find, select
 
