@@ -173,6 +173,27 @@ class Connection {
         }
     }
 
+    /**
+     * Internal method.
+     * Inserts or patches something in this Connection's internal cache.
+     * @param {String} keyContext As address to memory map this data model to.
+     * @param {DataModel} document The value to set in the cache, as a parsed memory model.
+     * @returns {Collection}
+     * @private
+     */
+    _patch(keyContext, document) {
+        // TODO:
+        // Implement a cache manager and eviction policies as configurable
+        // asset in a Connection's configuration.
+        const value = Array.isArray(document) ?
+            [ ...document ] :
+            { ...document };
+        value._timestamp = Date.now();
+
+        this.memory.set(keyContext, value);
+        return this.memory;
+    }
+
     // Integrations
     // ... iterator, transaction
 
