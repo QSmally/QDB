@@ -28,7 +28,7 @@ class Connection {
     /**
      * An entry which has been fetched from the Connection's internal cache.
      * @typedef {Object|Array} DataModel
-     * @property {Number} _timestamp Timestamp when this entry was last resolved or patched.
+     * @property {Number} _timestamp Timestamp when this entry was last resolved or patched, provided by the cache.
      */
 
     /**
@@ -226,7 +226,7 @@ class Connection {
     /**
      * Manages the elements of the database.
      * @param {Pathlike} pathContext Specifies at which row and nested property to insert or replace the element at.
-     * @param {DataModel|*} document Any data to set at the row address, or the location of the key-path.
+     * @param {DataModel|*} document Any data to set at the row address or the location of the key-path.
      * @returns {Connection}
      */
     set(pathContext, document) {
@@ -272,7 +272,7 @@ class Connection {
         if (!this.memory.has(keyContext)) this._patch(keyContext, fetched);
 
         let documentClone = Connection.clone(fetched);
-        if (path !== undefined) documentClone = this._pathCast(documentClone, path);
+        if (path.length) documentClone = this._pathCast(documentClone, path);
         if (Connection.isDataModel(documentClone)) delete documentClone._timestamp;
 
         return documentClone;
@@ -295,7 +295,7 @@ class Connection {
                 .map(_ => "?")
                 .join(", ");
             this.API
-                .prepare(`DELETE FROM '${this.table}' WHERE Key IN ${escapeCharacters}`)
+                .prepare(`DELETE FROM '${this.table}' WHERE Key IN (${escapeCharacters});`)
                 .run(...rows);
         }
 
