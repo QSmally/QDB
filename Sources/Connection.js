@@ -7,6 +7,8 @@ const SQL            = require("better-sqlite3");
 const Journal         = require("./Enumerations/Journal");
 const Synchronisation = require("./Enumerations/Synchronisation");
 
+const { serialize, deserialize } = require("v8");
+
 class Connection {
 
     /**
@@ -88,13 +90,36 @@ class Connection {
             throw new Error("A QDB Connection could not be created.");
         } else {
             this.API
-                .prepare(`CREATE TABLE IF NOT EXISTS ? ('Key' VARCHAR PRIMARY KEY, 'Val' TEXT);`)
-                .run(this.table);
+                .prepare(`CREATE TABLE IF NOT EXISTS '${this.table}' ('Key' VARCHAR PRIMARY KEY, 'Val' TEXT);`)
+                .run();
             this.API.pragma(`journal_mode = ${this.configuration.journal};`);
             this.API.pragma(`cache_size = ${this.configuration.diskCacheSize};`);
             this.API.pragma(`synchronous = ${this.configuration.synchronisation};`);
         }
     }
+
+    /**
+     * Internal method.
+     * A shorthand to cloning data models using the serialisation API of v8.
+     * @param {DataModel} dataObject A structure to copy.
+     * @returns {DataModel}
+     * @private
+     */
+    static clone(dataObject) {
+        return deserialize(serialize(dataObject));
+    }
+
+    /**
+     * Internal method.
+     * Returns whether or not an entry conforms to being a data model's root.
+     * @param {*} dataObject An entry which can be a data model.
+     * @returns {Boolean}
+     */
+    static isDataModel(dataObject) {
+        return dataObject && typeof dataObject === "object";
+    }
+
+    // Statistics
 
     /**
      * Retrieves the amount of rows in this database table.
@@ -104,8 +129,8 @@ class Connection {
      */
     get size() {
         return this.API
-            .prepare(`SELECT COUNT(*) FROM ?;`)
-            .get(this.table)["COUNT(*)"];
+            .prepare(`SELECT COUNT(*) FROM '${this.table}';`)
+            .get()["COUNT(*)"];
     }
 
     /**
@@ -126,8 +151,8 @@ class Connection {
      */
     get indexes() {
         return this.API
-            .prepare(`SELECT Key FROM ?;`)
-            .all(this.table)
+            .prepare(`SELECT Key FROM '${this.table}';`)
+            .all()
             .map(row => row["Key"]);
     }
 
@@ -149,16 +174,16 @@ class Connection {
      * Internal method.
      * Finds a relative dot-separated pathway of a data model.
      * @param {DataModel} dataObject The object-like target.
-     * @param {Array<String>} path A parsed array of a pathlike notation from '_resolveKeyPath'.
+     * @param {Array<String>} pathContext A parsed array of a pathlike notation from '_resolveKeyPath'.
      * @param {*} [item] A value to place into the pathway endpoint.
      * @returns {*}
      * @private
      */
-    _pathCast(dataObject, path, item) {
+    _pathCast(dataObject, pathContext, item) {
         const originalDataObject = dataObject;
-        const finalKey = pathlike.pop();
+        const finalKey = pathContext.pop();
 
-        for (const key of path) {
+        for (const key of pathContext) {
             if (typeof dataObject !== "object") return;
             if (!dataObject.hasOwnProperty(key) && item === undefined) return;
             if (!dataObject.hasOwnProperty(key)) dataObject[key] = {};
@@ -185,12 +210,10 @@ class Connection {
         // TODO:
         // Implement a cache manager and eviction policies as configurable
         // asset in a Connection's configuration.
-        const value = Array.isArray(document) ?
-            [ ...document ] :
-            { ...document };
-        value._timestamp = Date.now();
+        const documentClone = Connection.clone(document);
+        documentClone._timestamp = Date.now();
 
-        this.memory.set(keyContext, value);
+        this.memory.set(keyContext, documentClone);
         return this.memory;
     }
 
@@ -207,17 +230,20 @@ class Connection {
      * @returns {Connection}
      */
     set(pathlike, document) {
-        const [key, path] = this._resolveKeyPath(pathlike);
+        const [keyContext, path] = this._resolveKeyPath(pathlike);
 
-        if (typeof path !== undefined) {
-            const documentOld = this.fetch(key) ?? {};
+        if (path.length) {
+            const documentOld = this.fetch(keyContext) ?? {};
             document = this._pathCast(documentOld, path, document);
+        } else {
+            if (!Connection.isDataModel(document))
+                throw new TypeError("Type of 'document' must be a data model for the root path.");
         }
 
         this.API
-            .prepare(`INSERT OR REPLACE INTO ? ('Key', 'Val) VALUES (?, ?);`)
-            .run(this.table, key, JSON.stringify(document));
-        if (this.memory.has(key)) this._patch(key, document);
+            .prepare(`INSERT OR REPLACE INTO '${this.table}' ('Key', 'Val') VALUES (?, ?);`)
+            .run(keyContext, JSON.stringify(document));
+        if (this.memory.has(keyContext)) this._patch(keyContext, document);
 
         return this;
     }
@@ -231,26 +257,25 @@ class Connection {
         // TODO:
         // Implement manual cache toggle whenever the other cache management
         // things are also implemented.
-        const [key, path] = this._resolveKeyPath(pathlike);
+        const [keyContext, path] = this._resolveKeyPath(pathlike);
 
-        const fetched = this.memory.get(key) ?? (() => {
+        const fetched = this.memory.get(keyContext) ?? (() => {
             const { Val: document } = this.API
-                .prepare(`SELECT Val FROM ? WHERE KEY = ?`)
-                .get(this.table, key) ?? {};
-            if (document !== undefined) return JSON.parse(document);
-            return document;
+                .prepare(`SELECT Val FROM '${this.table}' WHERE KEY = ?;`)
+                .get(keyContext) ?? {};
+            return document === undefined ?
+                document :
+                JSON.parse(document);
         })();
 
         if (fetched == undefined) return fetched;
-        if (!this.memory.has(key)) this._patch(key, fetched);
+        if (!this.memory.has(keyContext)) this._patch(keyContext, fetched);
 
-        let documentFetchClone = Array.isArray(fetched) ?
-            [ ...document ] :
-            { ...document };
-        if (path !== undefined) documentFetchClone = this._pathCast(documentFetchClone, path);
-        if (fetched && typeof fetched === "object") delete documentFetchClone._timestamp;
+        let documentClone = Connection.clone(fetched);
+        if (path !== undefined) documentClone = this._pathCast(documentClone, path);
+        if (Connection.isDataModel(documentClone)) delete documentClone._timestamp;
 
-        return documentFetchClone;
+        return documentClone;
     }
 
     // Search methods
