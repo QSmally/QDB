@@ -225,12 +225,12 @@ class Connection {
 
     /**
      * Manages the elements of the database.
-     * @param {Pathlike} pathlike Specifies at which row and nested property to insert or replace the element at.
+     * @param {Pathlike} pathContext Specifies at which row and nested property to insert or replace the element at.
      * @param {DataModel|*} document Any data to set at the row address, or the location of the key-path.
      * @returns {Connection}
      */
-    set(pathlike, document) {
-        const [keyContext, path] = this._resolveKeyPath(pathlike);
+    set(pathContext, document) {
+        const [keyContext, path] = this._resolveKeyPath(pathContext);
 
         if (path.length) {
             const documentOld = this.fetch(keyContext) ?? {};
@@ -250,18 +250,18 @@ class Connection {
 
     /**
      * Manages the retrieval of the database.
-     * @param {Pathlike} pathlike Specifies which row and nested property to fetch or get from the cache.
+     * @param {Pathlike} pathContext Specifies which row and nested property to fetch or get from the cache.
      * @returns {*}
      */
-    fetch(pathlike) {
+    fetch(pathContext) {
         // TODO:
         // Implement manual cache toggle whenever the other cache management
         // things are also implemented.
-        const [keyContext, path] = this._resolveKeyPath(pathlike);
+        const [keyContext, path] = this._resolveKeyPath(pathContext);
 
         const fetched = this.memory.get(keyContext) ?? (() => {
             const { Val: document } = this.API
-                .prepare(`SELECT Val FROM '${this.table}' WHERE KEY = ?;`)
+                .prepare(`SELECT Val FROM '${this.table}' WHERE Key = ?;`)
                 .get(keyContext) ?? {};
             return document === undefined ?
                 document :
@@ -276,6 +276,30 @@ class Connection {
         if (Connection.isDataModel(documentClone)) delete documentClone._timestamp;
 
         return documentClone;
+    }
+
+    /**
+     * Manages the deletion of the database.
+     * @param {...Pathlike} keyContexts Specifies which rows to remove from the database.
+     * @returns {Connection}
+     */
+    erase(...keyContexts) {
+        const rows = keyContexts
+            .map(key => this._resolveKeyPath(key)[0]);
+
+        if (rows.length) {
+            // TODO:
+            // Implement eviction method and replace this function with that method.
+            rows.forEach(key => this.memory.delete(key));
+            const escapeCharacters = rows
+                .map(_ => "?")
+                .join(", ");
+            this.API
+                .prepare(`DELETE FROM '${this.table}' WHERE Key IN ${escapeCharacters}`)
+                .run(...rows);
+        }
+
+        return this;
     }
 
     // Search methods
