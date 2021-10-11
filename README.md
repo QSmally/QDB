@@ -1,13 +1,13 @@
 
-# QDB4
+# QDB 4.1
 
 > QDB is a SQLite framework reliant on JavaScript documents with various optimisations included.
 
 
 # Features
 * Synchronous, yet non-blocking (built on [`better-sqlite3`](https://github.com/JoshuaWise/better-sqlite3));
-* Configurable cache;
-* Schema objects and automatic table migration;
+* Configurable cache with eviction strategies;
+* Schema objects and automatic migration;
 * Selection and transaction support.
 
 ## Links
@@ -17,7 +17,7 @@
 ## Installation
 `npm install QSmally/QDB#staging`
 ```js
-const QDB = require("qdatabase");
+const { Connection, CacheStrategy } = require("qdatabase");
 // ...
 ```
 
@@ -27,14 +27,16 @@ const QDB = require("qdatabase");
 ## [Connection](https://github.com/QSmally/QDB/blob/v4/Documentation/Connection.md)
 The main interface for interacting with QDB.
 ```js
-const service = new QDB.Connection(path, options?);
+const service = new Connection("/opt/company/Cellar/Users.qdb", {
+    cache: CacheStrategy.managed({ maxSize: 1e4 })
+});
 ```
 
 ## [Transaction](https://github.com/QSmally/QDB/blob/v4/Documentation/Transaction.md)
 A SQL transaction manager.
 ```js
-// Instantiates a transaction within the database. It is required
-// to call 'commit' or 'rollback' on the returned Transaction.
+// Instantiates a transaction within the database. It is required to
+// call 'commit' or 'rollback' on the returned Transaction struct.
 const transaction = service.transaction();
 
 // Perform changes in the connection...

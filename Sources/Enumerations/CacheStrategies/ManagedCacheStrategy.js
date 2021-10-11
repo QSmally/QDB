@@ -18,7 +18,8 @@ class ManagedCacheStrategy extends CacheStrategy {
         super();
 
         /**
-         * An interval at which to sweep the cache at, depending on the lifetime of entries.
+         * An interval at which to sweep the cache at, depending on the lifetime of
+         * entries.
          * @name ManagedCacheStrategy#interval
          * @type {Number}
          * @readonly
@@ -26,7 +27,8 @@ class ManagedCacheStrategy extends CacheStrategy {
         this.interval = interval;
 
         /**
-         * The minimum lifetime of a data model entry before being able to be swept at an interval.
+         * The minimum lifetime of a data model entry before being able to be swept
+         * at an interval.
          * @name ManagedCacheStrategy#lifetime
          * @type {Number}
          * @readonly
@@ -51,7 +53,8 @@ class ManagedCacheStrategy extends CacheStrategy {
     timer = setInterval(() => this.onSweepTick(), this.interval);
 
     /**
-     * Is called on each iteration of the timer. Sweeps the items which are older than the set lifetime of this strategy.
+     * Is called on each iteration of the timer. Sweeps the items which are older
+     * than the set lifetime of this strategy.
      * @private
      */
     onSweepTick() {
@@ -62,7 +65,8 @@ class ManagedCacheStrategy extends CacheStrategy {
     }
 
     /**
-     * Applies the eviction mode to the passing elements of the cache, calls the default method if it passes.
+     * Applies the eviction mode to the passing elements of the cache, calls the
+     * default method if it passes.
      * @param {String} keyContext As address to memory map this data model to.
      * @param {DataModel} document The value to set in the cache, as a parsed memory model.
      */

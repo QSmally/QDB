@@ -6,7 +6,8 @@ const Generics = require("../Generics");
 class CacheStrategy {
 
     /**
-     * A default cache strategy which sets up a scheduler to sweep memory entries older than some age, every some interval.
+     * A default cache strategy which sets up a scheduler to sweep memory entries
+     * older than some age, every some interval.
      * @param {SweepStrategyProperties} [properties] Behavioural properties of this caching strategy.
      * @returns {ManagedCacheStrategy}
      */
@@ -20,7 +21,8 @@ class CacheStrategy {
     }
 
     /**
-     * A caching strategy which automatically moves all entries of the database into working memory.
+     * A caching strategy which automatically moves all entries of the database
+     * into working memory.
      * @returns {FetchAllCacheStrategy}
      */
     static fetchAll() {
@@ -30,7 +32,8 @@ class CacheStrategy {
     }
 
     /**
-     * A caching strategy with no sweeping or automatic eviction logic implemented.
+     * A caching strategy with no sweeping or automatic eviction logic
+     * implemented.
      * @returns {CacheStrategy}
      */
     static unlimited() {
