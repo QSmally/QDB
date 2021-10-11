@@ -1,13 +1,12 @@
 
 "use strict";
 
-const { Collection } = require("qulity");
-const SQL            = require("better-sqlite3");
+const SQL = require("better-sqlite3");
+
+const Generics = require("./Generics");
 
 const Journal         = require("./Enumerations/Journal");
 const Synchronisation = require("./Enumerations/Synchronisation");
-
-const { serialize, deserialize } = require("v8");
 
 class Connection {
 
@@ -78,14 +77,6 @@ class Connection {
          */
         this.API = new SQL(pathURL);
 
-        /**
-         * In-memory cached rows.
-         * @name Connection#memory
-         * @type {Collection<String, DataModel>}
-         * @private
-         */
-        this.memory = new Collection();
-
         if (!this.API) {
             throw new Error("A QDB Connection could not be created.");
         } else {
@@ -99,27 +90,14 @@ class Connection {
     }
 
     /**
-     * Internal method.
-     * A shorthand to cloning data models using the serialisation API of v8.
-     * @param {DataModel} dataObject A structure to copy.
-     * @returns {DataModel}
-     * @private
+     * Table name of this Connection.
+     * @name Connection#table
+     * @type {String}
+     * @readonly
      */
-    static clone(dataObject) {
-        return deserialize(serialize(dataObject));
+    get table() {
+        return this.configuration.table;
     }
-
-    /**
-     * Internal method.
-     * Returns whether or not an entry conforms to being a data model's root.
-     * @param {*} dataObject An entry which can be a data model.
-     * @returns {Boolean}
-     */
-    static isDataModel(dataObject) {
-        return dataObject && typeof dataObject === "object";
-    }
-
-    // Statistics
 
     /**
      * Retrieves the amount of rows in this database table.
@@ -236,7 +214,7 @@ class Connection {
             const documentOld = this.fetch(keyContext) ?? {};
             document = this._pathCast(documentOld, path, document);
         } else {
-            if (!Connection.isDataModel(document))
+            if (!Generics.isDataModel(document))
                 throw new TypeError("Type of 'document' must be a data model for the root path.");
         }
 
@@ -271,9 +249,9 @@ class Connection {
         if (fetched == undefined) return fetched;
         if (!this.memory.has(keyContext)) this._patch(keyContext, fetched);
 
-        let documentClone = Connection.clone(fetched);
+        let documentClone = Generics.clone(fetched);
         if (path.length) documentClone = this._pathCast(documentClone, path);
-        if (Connection.isDataModel(documentClone)) delete documentClone._timestamp;
+        if (Generics.isDataModel(documentClone)) delete documentClone._timestamp;
 
         return documentClone;
     }
