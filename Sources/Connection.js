@@ -6,6 +6,7 @@ const SQL = require("better-sqlite3");
 const Generics = require("./Generics");
 
 const Journal         = require("./Enumerations/Journal");
+const CacheStrategy   = require("./Enumerations/CacheStrategy");
 const Synchronisation = require("./Enumerations/Synchronisation");
 
 class Connection {
@@ -17,6 +18,7 @@ class Connection {
      * @property {Journal} [journal] The journal mode of this database, which defaults to Write Ahead Logging. See https://sqlite.org/pragma.html#pragma_journal_mode.
      * @property {Number} [diskCacheSize] The maximum amount of pages on disk SQLite will hold. See https://sqlite.org/pragma.html#pragma_cache_size.
      * @property {Synchronisation} [synchronisation] SQLite synchronisation, which defaults to 'normal'. See https://sqlite.org/pragma.html#pragma_synchronous.
+     * @property {CacheStrategy} [cache] A cache strategy and host for the 'memory' property of the Connection.
      */
 
     /**
@@ -57,16 +59,10 @@ class Connection {
             diskCacheSize: 64e3,
             synchronisation: Synchronisation.full,
 
+            cache: CacheStrategy.managed(),
+
             ...configuration
         };
-
-        /**
-         * Table name of this Connection.
-         * @name Connection#table
-         * @type {String}
-         * @readonly
-         */
-        this.table = this.configuration.table;
 
         /**
          * Raw SQL property.
@@ -137,6 +133,28 @@ class Connection {
     // Private methods
 
     /**
+     * Internal computed property.
+     * A Connection's internal memory controller to hold its cache.
+     * @name Connection#cacheController
+     * @type {CacheStrategy}
+     * @private
+     */
+    get cacheController() {
+        return this.configuration.cache;
+    }
+
+    /**
+     * Internal computed property.
+     * In-memory cached rows.
+     * @name Connection#cache
+     * @type {Collection<String, DataModel>}
+     * @private
+     */
+    get memory() {
+        return this.configuration.cache.memory;
+    }
+
+    /**
      * Internal method.
      * Resolves a dot-separated path to a key and rest path.
      * @param {Pathlike} pathlike String input to be formed and parsed.
@@ -176,25 +194,6 @@ class Connection {
         }
     }
 
-    /**
-     * Internal method.
-     * Inserts or patches something in this Connection's internal cache.
-     * @param {String} keyContext As address to memory map this data model to.
-     * @param {DataModel} document The value to set in the cache, as a parsed memory model.
-     * @returns {Collection}
-     * @private
-     */
-    _patch(keyContext, document) {
-        // TODO:
-        // Implement a cache manager and eviction policies as configurable
-        // asset in a Connection's configuration.
-        const documentClone = Connection.clone(document);
-        documentClone._timestamp = Date.now();
-
-        this.memory.set(keyContext, documentClone);
-        return this.memory;
-    }
-
     // Integrations
     // ... iterator, transaction
 
@@ -221,7 +220,7 @@ class Connection {
         this.API
             .prepare(`INSERT OR REPLACE INTO '${this.table}' ('Key', 'Val') VALUES (?, ?);`)
             .run(keyContext, JSON.stringify(document));
-        if (this.memory.has(keyContext)) this._patch(keyContext, document);
+        if (this.memory.has(keyContext)) this.cacheController.patch(keyContext, document);
 
         return this;
     }
@@ -247,7 +246,7 @@ class Connection {
         })();
 
         if (fetched == undefined) return fetched;
-        if (!this.memory.has(keyContext)) this._patch(keyContext, fetched);
+        if (!this.memory.has(keyContext)) this.cacheController.patch(keyContext, fetched);
 
         let documentClone = Generics.clone(fetched);
         if (path.length) documentClone = this._pathCast(documentClone, path);

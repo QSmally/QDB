@@ -14,6 +14,8 @@ module.exports = {
     Connection: require("./Sources/Connection"),
 
     // Enumerations
-    Journal: require("./Sources/Enumerations/Journal")
+    Journal:         require("./Sources/Enumerations/Journal"),
+    CacheStrategy:   require("./Sources/Enumerations/CacheStrategy"),
+    Synchronisation: require("./Sources/Enumerations/Synchronisation")
 
 };
