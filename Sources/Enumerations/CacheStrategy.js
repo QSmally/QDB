@@ -8,7 +8,7 @@ class CacheStrategy {
     /**
      * A default cache strategy which sets up a scheduler to sweep memory entries
      * older than some age, every some interval.
-     * @param {SweepStrategyProperties} [properties] Behavioural properties of this caching strategy.
+     * @param {ManagedStrategyProperties} [properties] Behavioural properties of this caching strategy.
      * @returns {ManagedCacheStrategy}
      */
     static managed({
@@ -21,14 +21,24 @@ class CacheStrategy {
     }
 
     /**
-     * A caching strategy which automatically moves all entries of the database
-     * into working memory.
-     * @returns {FetchAllCacheStrategy}
+     * A caching strategy with a maximum size, but not automatic sweeping.
+     * @param {RestrictedStrategyProperties} [properties] Behaviour properties of this caching strategy.
+     * @returns {RestrictedCacheStrategy}
      */
-    static fetchAll() {
-        // TODO:
-        // Implement the fetch-all caching strategy class.
-        return new CacheStrategy();
+    static restricted({
+        maxSize = Infinity
+    } = {}) {
+        const RestrictedCacheStrategy = require("./CacheStrategies/RestrictedCacheStrategy");
+        return new RestrictedCacheStrategy({ maxSize });
+    }
+
+    /**
+     * Applies no cache to the target Connection.
+     * @returns {DisabledCacheStategy}
+     */
+    static none() {
+        const DisabledCacheStategy = require("./CacheStrategies/DisabledCacheStrategy");
+        return new DisabledCacheStategy();
     }
 
     /**
@@ -51,7 +61,6 @@ class CacheStrategy {
     memory = new Collection();
 
     /**
-     * Internal method.
      * Inserts or patches something in the Connection's internal cache.
      * @param {String} keyContext As address to memory map this data model to.
      * @param {DataModel} document The value to set in the cache, as a parsed memory model.

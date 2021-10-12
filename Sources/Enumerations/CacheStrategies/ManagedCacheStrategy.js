@@ -1,7 +1,7 @@
 
-const CacheStrategy = require("../CacheStrategy");
+const RestrictedCacheStrategy = require("./RestrictedCacheStrategy");
 
-class ManagedCacheStrategy extends CacheStrategy {
+class ManagedCacheStrategy extends RestrictedCacheStrategy {
 
     /**
      * @typedef {Object} ManagedStrategyProperties
@@ -15,7 +15,7 @@ class ManagedCacheStrategy extends CacheStrategy {
      * @param {ManagedStrategyProperties} properties
      */
     constructor({ interval, lifetime, maxSize }) {
-        super();
+        super({ maxSize });
 
         /**
          * An interval at which to sweep the cache at, depending on the lifetime of
@@ -34,14 +34,6 @@ class ManagedCacheStrategy extends CacheStrategy {
          * @readonly
          */
         this.lifetime = lifetime;
-
-        /**
-         * A maximum size for the cache of the Connection.
-         * @name ManagedCacheStrategy#maxSize
-         * @type {Number}
-         * @readonly
-         */
-        this.maxSixe = maxSize;
     }
 
     /**
