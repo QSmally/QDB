@@ -3,11 +3,12 @@
 
 const SQL = require("better-sqlite3");
 
-const Generics = require("./Generics");
-
+const Generics        = require("./Generics");
 const Journal         = require("./Enumerations/Journal");
 const CacheStrategy   = require("./Enumerations/CacheStrategy");
 const Synchronisation = require("./Enumerations/Synchronisation");
+
+const { readdirSync } = require("fs");
 
 class Connection {
 
@@ -19,6 +20,7 @@ class Connection {
      * @property {Number} [diskCacheSize] The maximum amount of pages on disk SQLite will hold. See https://sqlite.org/pragma.html#pragma_cache_size.
      * @property {Synchronisation} [synchronisation] SQLite synchronisation, which defaults to 'normal'. See https://sqlite.org/pragma.html#pragma_synchronous.
      * @property {CacheStrategy} [cache] A cache strategy and host for the 'memory' property of the Connection.
+     * @property {Number} [fetchAll] If enabled, an integer being the batch size of each database call and insertion to eventually fetch everything.
      */
 
     /**
@@ -60,6 +62,7 @@ class Connection {
             synchronisation: Synchronisation.full,
 
             cache: CacheStrategy.managed(),
+            fetchAll: null,
 
             ...configuration
         };
@@ -83,6 +86,11 @@ class Connection {
             this.API.pragma(`cache_size = ${this.configuration.diskCacheSize};`);
             this.API.pragma(`synchronous = ${this.configuration.synchronisation};`);
         }
+
+        readdirSync("Sources/Modifiers/")
+            .filter(file => file.endsWith(".js"))
+            .map(file => require(`./Modifiers/${file}`))
+            .map(Modifier => new Modifier(this));
     }
 
     /**
@@ -220,7 +228,10 @@ class Connection {
         this.API
             .prepare(`INSERT OR REPLACE INTO '${this.table}' ('Key', 'Val') VALUES (?, ?);`)
             .run(keyContext, JSON.stringify(document));
-        if (this.memory.has(keyContext)) this.cacheController.patch(keyContext, document);
+
+        if (this.memory.has(keyContext) || this.configuration.fetchAll > 0) {
+            this.cacheController.patch(keyContext, document);
+        }
 
         return this;
     }

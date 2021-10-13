@@ -13,6 +13,9 @@ module.exports = {
     // QDB
     Connection: require("./Sources/Connection"),
 
+    // Generics
+    Generics: require("./Sources/Generics"),
+
     // Enumerations
     Journal:         require("./Sources/Enumerations/Journal"),
     CacheStrategy:   require("./Sources/Enumerations/CacheStrategy"),
