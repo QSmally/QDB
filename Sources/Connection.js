@@ -20,6 +20,7 @@ class Connection {
      * @property {Number} [diskCacheSize] The maximum amount of pages on disk SQLite will hold. See https://sqlite.org/pragma.html#pragma_cache_size.
      * @property {Synchronisation} [synchronisation] SQLite synchronisation, which defaults to 'normal'. See https://sqlite.org/pragma.html#pragma_synchronous.
      * @property {CacheStrategy} [cache] A cache strategy and host for the 'memory' property of the Connection.
+     * @property {Boolean} [insertionCache] Automatically inserts the new entry of a `set` operation into the Connection's internal cache.
      * @property {Number} [fetchAll] If enabled, an integer being the batch size of each database call and insertion to eventually fetch everything.
      */
 
@@ -62,6 +63,7 @@ class Connection {
             synchronisation: Synchronisation.full,
 
             cache: CacheStrategy.managed(),
+            insertionCache: true,
             fetchAll: null,
 
             ...configuration
@@ -154,7 +156,7 @@ class Connection {
     /**
      * Internal computed property.
      * In-memory cached rows.
-     * @name Connection#cache
+     * @name Connection#memory
      * @type {Collection<String, DataModel>}
      * @private
      */
@@ -206,15 +208,15 @@ class Connection {
     // ... iterator, transaction
 
     // Standard methods
-    // ... set, fetch, evict, erase
 
     /**
      * Manages the elements of the database.
      * @param {Pathlike} pathContext Specifies at which row and nested property to insert or replace the element at.
      * @param {DataModel|*} document Any data to set at the row address or the location of the key-path.
+     * @param {Boolean} [cache] A flag to insert this entry into the Connection's cache if not already, defaults to the `insertionCache` configuration option.
      * @returns {Connection}
      */
-    set(pathContext, document) {
+    set(pathContext, document, cache = this.configuration.insertionCache) {
         const [keyContext, path] = this._resolveKeyPath(pathContext);
 
         if (path.length) {
@@ -229,7 +231,7 @@ class Connection {
             .prepare(`INSERT OR REPLACE INTO '${this.table}' ('Key', 'Val') VALUES (?, ?);`)
             .run(keyContext, JSON.stringify(document));
 
-        if (this.memory.has(keyContext) || this.configuration.fetchAll > 0) {
+        if (cache || this.memory.has(keyContext) || this.configuration.fetchAll > 0) {
             this.cacheController.patch(keyContext, document);
         }
 
@@ -239,12 +241,10 @@ class Connection {
     /**
      * Manages the retrieval of the database.
      * @param {Pathlike} pathContext Specifies which row and nested property to fetch or get from the cache.
+     * @param {Boolean} [cache] A flag to insert this entry into the Connection's cache, defaults to true.
      * @returns {*}
      */
-    fetch(pathContext) {
-        // TODO:
-        // Implement manual cache toggle whenever the other cache management
-        // things are also implemented.
+    fetch(pathContext, cache = true) {
         const [keyContext, path] = this._resolveKeyPath(pathContext);
 
         const fetched = this.memory.get(keyContext) ?? (() => {
@@ -257,13 +257,30 @@ class Connection {
         })();
 
         if (fetched == undefined) return fetched;
-        if (!this.memory.has(keyContext)) this.cacheController.patch(keyContext, fetched);
+        if (cache && !this.memory.has(keyContext)) this.cacheController.patch(keyContext, fetched);
 
         let documentClone = Generics.clone(fetched);
         if (path.length) documentClone = this._pathCast(documentClone, path);
         if (Generics.isDataModel(documentClone)) delete documentClone._timestamp;
 
         return documentClone;
+    }
+
+    /**
+     * Manages the deletion of elements from the Connection's internal cache.
+     * @param {...Pathlike} keyContexts Specifies which rows to evict from the Connection's internal cache.
+     * @returns {Connection}
+     */
+    evict(...keyContexts) {
+        if (keyContexts.length) {
+            keyContexts
+                .map(key => this._resolveKeyPath(key)[0])
+                .forEach(keyContext => this.memory.delete(keyContext));
+        } else {
+            this.memory.clear();
+        }
+
+        return this;
     }
 
     /**
@@ -276,9 +293,7 @@ class Connection {
             .map(key => this._resolveKeyPath(key)[0]);
 
         if (rows.length) {
-            // TODO:
-            // Implement eviction method and replace this function with that method.
-            rows.forEach(key => this.memory.delete(key));
+            this.evict(...rows);
             const escapeCharacters = rows
                 .map(_ => "?")
                 .join(", ");
