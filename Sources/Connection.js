@@ -207,6 +207,13 @@ class Connection {
     // Integrations
     // ... iterator, transaction
 
+    * [Symbol.iterator]() {
+        yield* this.API
+            .prepare(`SELECT Key, Val FROM '${this.table}';`)
+            .all()
+            .map(row => [row["Key"], JSON.parse(row["Val"])]);
+    }
+
     // Standard methods
 
     /**
@@ -312,7 +319,7 @@ class Connection {
     // ... push, shift, pop, remove, slice
 
     // Utility methods
-    // ... ensure, modify, insert
+    // ... ensure, modify, invert
 }
 
 module.exports = Connection;
