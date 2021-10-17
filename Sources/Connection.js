@@ -21,6 +21,7 @@ class Connection {
      * @property {Synchronisation} [synchronisation] SQLite synchronisation, which defaults to 'normal'. See https://sqlite.org/pragma.html#pragma_synchronous.
      * @property {CacheStrategy} [cache] A cache strategy and host for the 'memory' property of the Connection.
      * @property {Boolean} [insertionCache] Automatically inserts the new entry of a `set` operation into the Connection's internal cache.
+     * @property {Boolean} [utilityCache] Automatically inserts the new entry of any utility operation, like `exists`, into the Connection's internal cache.
      * @property {Number} [fetchAll] If enabled, an integer being the batch size of each database call and insertion to eventually fetch everything.
      */
 
@@ -64,6 +65,7 @@ class Connection {
 
             cache: CacheStrategy.managed(),
             insertionCache: true,
+            utilityCache: true,
             fetchAll: null,
 
             ...configuration
@@ -257,7 +259,7 @@ class Connection {
 
     /**
      * Manages the retrieval of the database.
-     * @param {Pathlike} pathContext Specifies which row and nested property to fetch or get from the cache.
+     * @param {Pathlike} pathContext Specifies which row or nested property to fetch or get from the cache.
      * @param {Boolean} [cache] A flag to insert this entry into the Connection's cache, defaults to true.
      * @returns {*}
      */
@@ -324,6 +326,58 @@ class Connection {
 
     // Search methods
     // ... exists, each, find, select
+
+    /**
+     * Returns whether or not a property in this database exists. As this method
+     * fetches from the Connection, it will automatically be cached, making a
+     * subsequent much faster.
+     * @param {Pathlike} pathlike Specifies which row or nested property to see if it exists.
+     * @param {Boolean} [cache] A flag to insert this entry into the Connection's cache if not already, defaults to the `utilityCache` configuration option.
+     * @returns {Boolean}
+     */
+    exists(pathlike, cache = this.configuration.utilityCache) {
+        const document = this.fetch(pathlike, cache);
+        return document !== undefined;
+    }
+
+    /**
+     * Iterates through the entries of the database, returns the first element
+     * which passes the test. If enabled, the cache will first be scanned for
+     * a passing entity.
+     * @param {Function} predicate A tester function which returns a boolean based on the properties of the row.
+     * @param {Boolean} [cache] A flag to first scan the cache before searching elements in the database, defaults to the `utilityCache` configuration option.
+     * @returns {DataModel?}
+     */
+    find(predicate, cache = this.configuration.utilityCache) {
+        if (cache) {
+            for (const [keyContext, document] of this.memory)
+                if (predicate(document, keyContext)) return document;
+        }
+
+        const rows = this.API
+            .prepare(`SELECT Key, Val FROM '${this.table}';`)
+            .all();
+
+        for (const { Key: keyContext, Val: value } of rows) {
+            const document = JSON.parse(value);
+            if (predicate(document, keyContext)) return document;
+        }
+    }
+
+    /**
+     * Iterates through this database's elements.
+     * @param {Function} iterator A function which passes on the iterating entities.
+     * @returns {Connection}
+     */
+    each(iterator) {
+        const rows = this.API
+            .prepare(`SELECT Key, Val FROM '${this.table}';`)
+            .all();
+
+        for (const { Key: keyContext, Val: value } of rows)
+            iterator(JSON.parse(value), keyContext);
+        return this;
+    }
 
     // Array methods
     // ... push, shift, pop, remove, slice
