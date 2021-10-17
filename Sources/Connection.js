@@ -205,13 +205,23 @@ class Connection {
     }
 
     // Integrations
-    // ... iterator, transaction
 
     * [Symbol.iterator]() {
         yield* this.API
             .prepare(`SELECT Key, Val FROM '${this.table}';`)
             .all()
             .map(row => [row["Key"], JSON.parse(row["Val"])]);
+    }
+
+    /**
+     * Creates a SQL transaction which allows you to commit or rollback changes in
+     * an optimised manner.
+     * @returns {Transaction?} A Transaction instance, or a nil value if already in a transaction.
+     */
+    transaction() {
+        if (this.API.inTransaction) return;
+        const Transaction = require("./Structures/Transaction");
+        return new Transaction(this);
     }
 
     // Standard methods
