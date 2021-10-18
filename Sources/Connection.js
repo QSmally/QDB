@@ -1,7 +1,8 @@
 
 "use strict";
 
-const SQL = require("better-sqlite3");
+const { Collection } = require("qulity");
+const SQL            = require("better-sqlite3");
 
 const Generics        = require("./Generics");
 const Journal         = require("./Enumerations/Journal");
@@ -325,7 +326,6 @@ class Connection {
     }
 
     // Search methods
-    // ... exists, each, find, select
 
     /**
      * Returns whether or not a property in this database exists. As this method
@@ -377,6 +377,35 @@ class Connection {
         for (const { Key: keyContext, Val: value } of rows)
             iterator(JSON.parse(value), keyContext);
         return this;
+    }
+
+    /**
+     * Creates an in-memory selection of rows based on the nested path, row or
+     * filtered rows. It is to note that this method increases usage of memory
+     * by a lot in large databases.
+     * @param {Function|Pathlike} [predicateOrPathlike] A tester function or a path to a row or nested property.
+     * @returns {Selection} A Selection instance.
+     */
+    select(predicateOrPathlike = () => true) {
+        const entitiesSelectedObject = typeof predicateOrPathlike === "string" ?
+            this.fetch(predicateOrPathlike, this.configuration.utilityCache) :
+            (() => {
+                const rows = this.API
+                    .prepare(`SELECT Key, Val FROM '${this.table}';`)
+                    .all();
+                const accumulatedEntities = new Collection();
+
+                for (const { Key: keyContext, Val: document } of rows) {
+                    const decodedEntity = JSON.parse(document);
+                    if (predicateOrPathlike(decodedEntity, keyContext))
+                        accumulatedEntities.set(keyContext, decodedEntity);
+                }
+
+                return accumulatedEntities;
+            })();
+
+        const Selection = require("./Structures/Selection");
+        return new Selection(entitiesSelectedObject, this.table);
     }
 
     // Array methods
