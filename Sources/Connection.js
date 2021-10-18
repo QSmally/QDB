@@ -380,7 +380,89 @@ class Connection {
     }
 
     // Array methods
-    // ... push, shift, pop, remove, slice
+
+    /**
+     * Appends values to the end of the array at the located path.
+     * @param {Pathlike} pathlike Specifies which row or nested property to fetch the an array.
+     * @param {...Any} values A list of values to insert into the array.
+     * @returns {Number} The new length of the array.
+     */
+    push(pathlike, ...values) {
+        const sourceArray = this.fetch(pathlike, this.configuration.utilityCache);
+
+        sourceArray.push(...values);
+        this.set(pathlike, sourceArray);
+        return sourceArray.length;
+    }
+
+    /**
+     * Inserts or removes value(s) to/from the front of the array at the located path.
+     * @param {Pathlike} pathlike Specifies which row or nested property to fetch the an array.
+     * @param {...Any} [values] If defined, inserts the new values at the front of the array, otherwise removes one.
+     * @returns {Number|*} The new length of the array if values were added, or the shifted value.
+     */
+    shift(pathlike, ...values) {
+        const sourceArray = this.fetch(pathlike, this.configuration.utilityCache);
+
+        const returnable = values.length ?
+            sourceArray.unshift(...values) :
+            sourceArray.shift();
+
+        this.set(pathlike, sourceArray);
+        return returnable;
+    }
+
+    /**
+     * Pops a value from the array at the located path.
+     * @param {Pathlike} pathlike Specifies which row or nested property to fetch the an array.
+     * @returns {*} A popped value.
+     */
+    pop(pathlike) {
+        const sourceArray = this.fetch(pathlike, this.configuration.utilityCache);
+
+        const popped = sourceArray.pop();
+        this.set(pathlike, sourceArray);
+        return popped;
+    }
+
+    /**
+     * Removes a specific element from the array at the located path.
+     * @param {Pathlike} pathlike Specifies which row or nested property to fetch the an array.
+     * @param {Function|Number} predicateOrIndex A function or an index to indicate which element to remove.
+     * @returns {Number} The new length of the array.
+     */
+    remove(pathlike, predicateOrIndex) {
+        const sourceArray = this.fetch(pathlike, this.configuration.utilityCache);
+
+        if (typeof predicateOrIndex === "function") {
+            for (const index in sourceArray) {
+                if (predicateOrIndex(sourceArray[index], index)) {
+                    sourceArray.splice(index, 1);
+                    break;
+                }
+            }
+        } else {
+            sourceArray.splice(predicateOrIndex, 1);
+        }
+
+        this.set(pathlike, sourceArray);
+        return sourceArray.length;
+    }
+
+    /**
+     * Inserts an extracted portion of the array at the located path based on the indexes.
+     * @param {Pathlike} pathlike Specifies which row or nested property to fetch the an array.
+     * @param {Number} startIndex A zero-based index at whichi to start extraction.
+     * @param {Number} [endIndex] An optional zero-based idnex before which to end extraction, and defaults to the length of the array.
+     * @returns {Number} The new length of the array.
+     */
+    slice(pathlike, startIndex, endIndex) {
+        const sourceArray = this.fetch(pathlike, this.configuration.utilityCache);
+
+        const outputArray = sourceArray.slice(startIndex, endIndex);
+        this.set(pathlike, outputArray);
+        return outputArray.length;
+    }
 
     // Utility methods
     // ... ensure, modify, invert
