@@ -143,7 +143,7 @@ class Connection {
             .map(row => row["Key"]);
     }
 
-    // Private methods
+    // Private computed properties
 
     /**
      * Internal computed property.
@@ -165,46 +165,6 @@ class Connection {
      */
     get memory() {
         return this.configuration.cache.memory;
-    }
-
-    /**
-     * Internal method.
-     * Resolves a dot-separated path to a key and rest path.
-     * @param {Pathlike} pathlike String input to be formed and parsed.
-     * @returns {Array}
-     * @private
-     */
-    _resolveKeyPath(pathlike) {
-        const path = pathlike.split(/\.+/g);
-        return [path[0], path.slice(1)];
-    }
-
-    /**
-     * Internal method.
-     * Finds a relative dot-separated pathway of a data model.
-     * @param {DataModel} dataObject The object-like target.
-     * @param {Array<String>} pathContext A parsed array of a pathlike notation from '_resolveKeyPath'.
-     * @param {*} [item] A value to place into the pathway endpoint.
-     * @returns {*}
-     * @private
-     */
-    _pathCast(dataObject, pathContext, item) {
-        const originalDataObject = dataObject;
-        const finalKey = pathContext.pop();
-
-        for (const key of pathContext) {
-            if (typeof dataObject !== "object") return;
-            if (!dataObject.hasOwnProperty(key) && item === undefined) return;
-            if (!dataObject.hasOwnProperty(key)) dataObject[key] = {};
-
-            dataObject = dataObject[key];
-        }
-
-        if (dataObject) {
-            if (item === undefined) return dataObject[finalKey];
-            dataObject[finalKey] = item;
-            return originalDataObject;
-        }
     }
 
     // Integrations
@@ -237,11 +197,11 @@ class Connection {
      * @returns {Connection}
      */
     set(pathContext, document, cache = this.configuration.insertionCache) {
-        const [keyContext, path] = this._resolveKeyPath(pathContext);
+        const [keyContext, path] = Generics.resolveKeyPath(pathContext);
 
         if (path.length) {
             const documentOld = this.fetch(keyContext) ?? {};
-            document = this._pathCast(documentOld, path, document);
+            document = Generics.pathCast(documentOld, path, document);
         } else {
             if (!Generics.isDataModel(document))
                 throw new TypeError("Type of 'document' must be a data model for the root path.");
@@ -265,7 +225,7 @@ class Connection {
      * @returns {*}
      */
     fetch(pathContext, cache = true) {
-        const [keyContext, path] = this._resolveKeyPath(pathContext);
+        const [keyContext, path] = Generics.resolveKeyPath(pathContext);
 
         const fetched = this.memory.get(keyContext) ?? (() => {
             const { Val: document } = this.API
@@ -280,7 +240,7 @@ class Connection {
         if (cache && !this.memory.has(keyContext)) this.cacheController.patch(keyContext, fetched);
 
         let documentClone = Generics.clone(fetched);
-        if (path.length) documentClone = this._pathCast(documentClone, path);
+        if (path.length) documentClone = Generics.pathCast(documentClone, path);
         if (Generics.isDataModel(documentClone)) delete documentClone._timestamp;
 
         return documentClone;
@@ -294,7 +254,7 @@ class Connection {
     evict(...keyContexts) {
         if (keyContexts.length) {
             keyContexts
-                .map(key => this._resolveKeyPath(key)[0])
+                .map(key => Generics.resolveKeyPath(key)[0])
                 .forEach(keyContext => this.memory.delete(keyContext));
         } else {
             this.memory.clear();
@@ -310,7 +270,7 @@ class Connection {
      */
     erase(...keyContexts) {
         const rows = keyContexts
-            .map(key => this._resolveKeyPath(key)[0]);
+            .map(key => Generics.resolveKeyPath(key)[0]);
 
         if (rows.length) {
             this.evict(...rows);

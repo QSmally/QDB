@@ -3,6 +3,8 @@
 
 const { Collection } = require("qulity");
 
+const Generics = require("../Generics");
+
 class Selection {
 
     /**
@@ -40,6 +42,46 @@ class Selection {
          */
         this.holds = holds;
     }
+
+    /**
+     * Retrieves an array of keys of the Selection.
+     * @name Selection#indexes
+     * @type {Array}
+     * @readonly
+     */
+    get indexes() {
+        return this.cache.toKeyArray();
+    }
+
+    /**
+     * Retrives an array of the values of the Selection.
+     * @name Selection#documents
+     * @type {Array}
+     * @readonly
+     */
+    get documents() {
+        return this.cache.toArray();
+    }
+
+    /**
+     * Manages individual retrieval of the Selection.
+     * @param {Pathlike} pathlike Specifies which row or nested property to retrieve from the Selection.
+     * @returns {*}
+     */
+    retrieve(pathlike) {
+        const [keyContext, path] = Generics.resolveKeyPath(pathlike);
+        const documentObject = this.cache.get(keyContext);
+
+        return path.length ?
+            Generics.pathCast(documentObject, path) :
+            documentObject;
+    }
+
+    // SQL methods
+    // ... order, filter, limit, group, join
+
+    // Utility methods
+    // ... map, merge, clone
 }
 
 module.exports = Selection;
