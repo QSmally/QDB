@@ -13,11 +13,7 @@ class Selection {
      * @param {String} holds A table name as reference for this Selection to hold.
      */
     constructor(entities, holds) {
-        // TODO:
-        // 'typeof' is a generally faster method of retrieving the abstract
-        // type of an object, and 'Collection' is a function as opposed to
-        // an object (although Maps are objects).
-        const isInitialCollection = entities instanceof Collection;
+        const isInitialCollection = typeof entities === "function";
 
         /**
          * Cached entities of this Selection.
