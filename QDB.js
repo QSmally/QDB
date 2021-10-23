@@ -17,8 +17,10 @@ module.exports = {
     Generics: require("./Sources/Generics"),
 
     // Enumerations
-    Journal:         require("./Sources/Enumerations/Journal"),
-    CacheStrategy:   require("./Sources/Enumerations/CacheStrategy"),
-    Synchronisation: require("./Sources/Enumerations/Synchronisation")
+    Journal:          require("./Sources/Enumerations/Journal"),
+    JoinStrategy:     require("./Sources/Enumerations/JoinStrategy"),
+    CacheStrategy:    require("./Sources/Enumerations/CacheStrategy"),
+    Synchronisation:  require("./Sources/Enumerations/Synchronisation"),
+    SortingPredicate: require("./Sources/Enumerations/SortingPredicate")
 
 };

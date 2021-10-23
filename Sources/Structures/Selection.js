@@ -3,7 +3,8 @@
 
 const { Collection } = require("qulity");
 
-const Generics = require("../Generics");
+const Generics     = require("../Generics");
+const JoinStrategy = require("../Enumerations/JoinStrategy");
 
 class Selection {
 
@@ -74,7 +75,17 @@ class Selection {
     }
 
     // SQL methods
-    // ... order, filter, limit, group, join
+
+    /**
+     * Sorts the values of this Selection by some property.
+     * Identical to the `ORDER BY` SQL statement.
+     * @param {SortingPredicate} predicateType A predicate which sorts the Selection's entities based on a property, or a custom function which determines the order.
+     * @returns {Selection}
+     */
+    order(predicateType) {
+        this.cache.sort(predicateType);
+        return this;
+    }
 
     /**
      * Sweeps the values that don't satisfy the provided function.
@@ -120,18 +131,42 @@ class Selection {
      * @returns {Selection}
      */
     group(pathlike) {
-        const [_, path] = Generics.resolveKeyPath(pathlike);
+        const [key, path] = Generics.resolveKeyPath(pathlike);
         const originalSelectionObject = this.cache.toPairObject();
         this.cache.clear();
 
         for (const index in originalSelectionObject) {
             const documentObject = originalSelectionObject[index];
-            const property = Generics.pathCast(documentObject, path);
+            const property = Generics.pathCast(documentObject, [key, ...path]);
             const existingGroup = this.cache.get(property);
 
             existingGroup ?
                 existingGroup[index] = documentObject :
                 this.cache.set(property, { [index]: documentObject });
+        }
+
+        return this;
+    }
+
+    /**
+     * Joins another Selection into this instance based on a referrer field.
+     * Identical to the `FULL JOIN` SQL statement.
+     * @param {Selection} secondarySelection Another Selection instance to be joined into this one.
+     * @param {JoinStrategy} [joinStrategy] A strategy to decide how to join the documents into this Selection's documents, defaults to the secondary Selection's table name.
+     * @param {Pathlike} [field] A path to some property to reference how to join the secondary Selection.
+     * @returns {Selection}
+     */
+    join(secondarySelection, joinStrategy = JoinStrategy.property(secondarySelection.holds), field = null) {
+        const resolvedKeyPath = field ?
+            field.split(/\.+/g) :
+            null;
+
+        for (const [index, joinObject] of secondarySelection.cache) {
+            const fieldId = field ?
+                Generics.pathCast(joinObject, resolvedKeyPath) :
+                index;
+            const documentObject = this.cache.get(fieldId);
+            if (documentObject) joinStrategy(documentObject, index, joinObject);
         }
 
         return this;
