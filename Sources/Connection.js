@@ -347,7 +347,7 @@ class Connection {
      * @returns {Selection} A Selection instance.
      */
     select(predicateOrPathlike = () => true) {
-        const entitiesSelectedObject = typeof predicateOrPathlike === "string" ?
+        const selection = typeof predicateOrPathlike === "string" ?
             this.fetch(predicateOrPathlike, this.configuration.utilityCache) :
             (() => {
                 const rows = this.API
@@ -356,16 +356,16 @@ class Connection {
                 const accumulatedEntities = new Collection();
 
                 for (const { Key: keyContext, Val: document } of rows) {
-                    const decodedEntity = JSON.parse(document);
-                    if (predicateOrPathlike(decodedEntity, keyContext))
-                        accumulatedEntities.set(keyContext, decodedEntity);
+                    const decodedDocumentEntity = JSON.parse(document);
+                    if (predicateOrPathlike(decodedDocumentEntity, keyContext))
+                        accumulatedEntities.set(keyContext, decodedDocumentEntity);
                 }
 
                 return accumulatedEntities;
             })();
 
         const Selection = require("./Structures/Selection");
-        return new Selection(entitiesSelectedObject, this.table);
+        return new Selection(selection, this.table);
     }
 
     // Array methods
@@ -448,9 +448,9 @@ class Connection {
     slice(pathlike, startIndex, endIndex) {
         const sourceArray = this.fetch(pathlike, this.configuration.utilityCache);
 
-        const outputArray = sourceArray.slice(startIndex, endIndex);
-        this.set(pathlike, outputArray);
-        return outputArray.length;
+        const mutatedArray = sourceArray.slice(startIndex, endIndex);
+        this.set(pathlike, mutatedArray);
+        return mutatedArray.length;
     }
 
     // Utility methods
