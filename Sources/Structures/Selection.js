@@ -173,7 +173,18 @@ class Selection {
     }
 
     // Utility methods
-    // ... map, merge, clone
+
+    /**
+     * Iterates over this Selection's entries and implements the new values
+     * returned from the callback.
+     * @param {Function} transformer A function which returns the new states of the iterating rows.
+     * @returns {Selection}
+     */
+    map(transformer) {
+        for (const [keyContext, document] of this.cache)
+            this.cache.set(keyContext, transformer(document, keyContext));
+        return this;
+    }
 }
 
 module.exports = Selection;
