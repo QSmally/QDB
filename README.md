@@ -17,7 +17,7 @@
 ## Installation
 `npm install QSmally/QDB#staging`
 ```js
-const { Connection, CacheStrategy } = require("qdatabase");
+const { Connection, ... } = require("qdatabase");
 // ...
 ```
 
@@ -50,9 +50,9 @@ An unchanged piece of the database in memory.
 // Aggregate with certain instructions, like joining tables,
 // ordering them and regrouping them by a property.
 const users = service.select()
-    .join(projects, "UserId", "Projects")
-    .order(user => Object.keys(user.Projects).length, QDB.descending)
-    .group("Rank");
+    .join(projects, JoinStrategy.property("projects"), "userId")
+    .order(SortingPredicate.descending(user => Object.keys(user.projects).length))
+    .group("rank");
 ```
 
 
