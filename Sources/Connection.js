@@ -62,7 +62,7 @@ class Connection {
             table: "QDB",
             journal: Journal.writeAhead,
             diskCacheSize: 64e3,
-            synchronisation: Synchronisation.full,
+            synchronisation: Synchronisation.normal,
 
             cache: CacheStrategy.managed(),
             insertionCache: true,
@@ -185,6 +185,21 @@ class Connection {
         if (this.API.inTransaction) return;
         const Transaction = require("./Structures/Transaction");
         return new Transaction(this);
+    }
+
+    /**
+     * Disconnects from this Connection, clears the internal cache. Only run this
+     * method when you are exiting the program, or want to fully disconnect from
+     * this instance.
+     * @returns {Connection}
+     */
+    disconnect() {
+        this.API.close();
+        this.memory.clear();
+
+        if (this.cacheController.timer)
+            clearInterval(this.cacheController.timer);
+        return this;
     }
 
     // Standard methods

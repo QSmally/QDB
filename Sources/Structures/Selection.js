@@ -14,7 +14,7 @@ class Selection {
      * @param {String} holds A table name as reference for this Selection to hold.
      */
     constructor(entities, holds) {
-        const isInitialCollection = typeof entities === "function";
+        const isInitialCollection = entities instanceof Collection;
 
         /**
          * Cached entities of this Selection.
@@ -161,7 +161,7 @@ class Selection {
             field.split(/\.+/g) :
             null;
 
-        for (const [index, joinObject] of secondarySelection.cache) {
+        for (const [index, joinObject] of Generics.clone(secondarySelection.cache)) {
             const fieldId = field ?
                 Generics.pathCast(joinObject, resolvedKeyPath) :
                 index;
