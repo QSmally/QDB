@@ -1,4 +1,11 @@
 
+const { Connection } = require("../QDB");
+
+const FS     = require("fs");
+const Crypto = require("crypto");
+const CLI    = require("cli-color");
+const SQL    = require("better-sqlite3");
+
 const tables = new Map([
     ["Small", 100],
     ["Medium", 20000],
@@ -7,19 +14,12 @@ const tables = new Map([
 ]);
 
 module.exports = () => {
-    const FS  = require("fs");
-    const CLI = require("cli-color");
-
     if (process.argv.includes("--no-enterprise")) {
         tables.delete("Enterprise");
     }
 
     if (!process.argv.includes("--skip")) {
         process.stdout.write(CLI.cyan.bold("Generating tables for benchmark...\n"));
-
-        const Crypto = require("crypto");
-        const QDB    = require("../QDB");
-        const SQL    = require("better-sqlite3");
 
         const master = new SQL("Benchmark/Guilds.qdb");
 
@@ -29,10 +29,11 @@ module.exports = () => {
             .forEach(entry => master.prepare(`DROP TABLE '${entry.name}';`).run());
         master.close();
 
-        // Create new Connections
+        // Populate the databases
         for (const [table, size] of tables) {
-            const connection = new QDB.Connection("Benchmark/Guilds.qdb", {
-                cache: false, table
+            const connection = new Connection("Benchmark/Guilds.qdb", {
+                insertionCache: false,
+                table
             });
 
             process.stdout.write(CLI.white(`· Creating '${CLI.bold(table)}' table... `));

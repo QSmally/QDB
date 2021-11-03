@@ -10,6 +10,9 @@
 * Schema objects and automatic migration;
 * Selection and transaction support.
 
+## Performance
+The QDB 4.1 build reaches similar insert and retrieval rates as opposed to QDB 4.0, while implementing additional security features such as cloning entries from the cache before returning them. Methods such as `find` have drastically improved in performance.
+
 ## Links
 * [Documentations](https://github.com/QSmally/QDB/blob/v4/Documentation/Index.md)
 * [Github](https://github.com/QSmally/QDB)
