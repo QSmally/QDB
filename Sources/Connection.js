@@ -454,7 +454,47 @@ class Connection {
     }
 
     // Utility methods
-    // ... ensure, modify, invert
+
+    /**
+     * Inserts a value into a row or nested object if the endpoint of the path
+     * returned undefined.
+     * @param {Pathlike} pathlike Specifies at which row and nested property to optionally insert the element at.
+     * @param {DataModel|*} document If the path doesn't already exist, any data to set at the address of the key-path.
+     * @returns {DataModel}
+     */
+    ensure(pathlike, document) {
+        if (!this.exists(pathlike)) {
+            this.set(pathlike, document);
+            return document;
+        } else {
+            return this.fetch(pathlike, this.configuration.utilityCache);
+        }
+    }
+
+    /**
+     * Updates any value by fetching it and passing it onto the callback function.
+     * @param {Pathlike} pathlike Specifies which row or nested property to initially fetch.
+     * @param {Function} newEntityCallback A function which accepts the old element, returning the new and updated element.
+     * @returns {DataModel|*}
+     */
+    modify(pathlike, newEntityCallback) {
+        const sourceEntity = this.fetch(pathlike, this.configuration.utilityCache);
+
+        const mutatedEntity = newEntityCallback(sourceEntity, pathlike);
+        this.set(pathlike, mutatedEntity);
+        return mutatedEntity;
+    }
+
+    /**
+     * Inverts a value and reinserts it, and returns the new property.
+     * @param {Pathlike} pathlike Specifies which row or nested property to invert.
+     * @returns {Boolean}
+     */
+    invert(pathlike) {
+        const inversion = !this.fetch(pathlike, this.configuration.utilityCache);
+        this.set(pathlike, inversion);
+        return inversion;
+    }
 }
 
 module.exports = Connection;
