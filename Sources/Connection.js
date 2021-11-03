@@ -222,7 +222,7 @@ class Connection {
      * Manages the retrieval of the database.
      * @param {Pathlike} pathContext Specifies which row or nested property to fetch or get from the cache.
      * @param {Boolean} [cache] A flag to insert this entry into the Connection's cache, defaults to true.
-     * @returns {*}
+     * @returns {DataModel|*}
      */
     fetch(pathContext, cache = true) {
         const [keyContext, path] = Generics.resolveKeyPath(pathContext);
@@ -302,8 +302,8 @@ class Connection {
 
     /**
      * Iterates through the entries of the database, returns the first element
-     * which passes the test. If enabled, the cache will first be scanned for
-     * a passing entity.
+     * which passes the test. If enabled, the cache will first be scanned for a
+     * passing entity.
      * @param {Function} predicate A tester function which returns a boolean based on the properties of the row.
      * @param {Boolean} [cache] A flag to first scan the cache before searching elements in the database, defaults to the `utilityCache` configuration option.
      * @returns {DataModel?}
@@ -341,8 +341,8 @@ class Connection {
 
     /**
      * Creates an in-memory selection of rows based on the nested path, row or
-     * filtered rows. It is to note that this method increases usage of memory
-     * by a lot in large databases.
+     * filtered rows. It is to note that this method increases usage of memory by
+     * a lot in large databases.
      * @param {Function|Pathlike} [predicateOrPathlike] A tester function or a path to a row or nested property.
      * @returns {Selection} A Selection instance.
      */
@@ -385,7 +385,8 @@ class Connection {
     }
 
     /**
-     * Inserts or removes value(s) to/from the front of the array at the located path.
+     * Inserts or removes value(s) to/from the front of the array at the located
+     * path.
      * @param {Pathlike} pathlike Specifies which row or nested property to fetch the an array.
      * @param {...Any} [values] If defined, inserts the new values at the front of the array, otherwise removes one.
      * @returns {Number|*} The new length of the array if values were added, or the shifted value.
@@ -439,7 +440,8 @@ class Connection {
     }
 
     /**
-     * Inserts an extracted portion of the array at the located path based on the indexes.
+     * Inserts an extracted portion of the array at the located path based on the
+     * indexes.
      * @param {Pathlike} pathlike Specifies which row or nested property to fetch the an array.
      * @param {Number} startIndex A zero-based index at whichi to start extraction.
      * @param {Number} [endIndex] An optional zero-based idnex before which to end extraction, and defaults to the length of the array.
