@@ -153,7 +153,7 @@ class Selection {
      * Identical to the `FULL JOIN` SQL statement.
      * @param {Selection} secondarySelection Another Selection instance to be joined into this one.
      * @param {JoinStrategy} [joinStrategy] A strategy to decide how to join the documents into this Selection's documents, defaults to the secondary Selection's table name.
-     * @param {Pathlike} [field] A path to some property to reference how to join the secondary Selection.
+     * @param {Pathlike} [field] A path to some property to reference how to join the secondary Selection. If none, the key of the document is used.
      * @returns {Selection}
      */
     join(secondarySelection, joinStrategy = JoinStrategy.property(secondarySelection.holds), field = null) {
