@@ -185,6 +185,21 @@ class Selection {
             this.cache.set(keyContext, transformer(document, keyContext));
         return this;
     }
+
+    /**
+     * Automatically clones the merging Selections and adds them into this
+     * instance.
+     * @param {...Selection} selections Selection instances to be cloned and merged into this one.
+     * @returns {Selection}
+     */
+    merge(...selections) {
+        for (const selection of selections) {
+            for (const [keyContext, document] of Generics.clone(selection.cache))
+                this.cache.set(keyContext, document);
+        }
+
+        return this;
+    }
 }
 
 module.exports = Selection;
