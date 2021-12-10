@@ -24,6 +24,8 @@ class Connection {
      * @property {Boolean} [insertionCache] Automatically inserts the new entry of a `set` operation into the Connection's internal cache.
      * @property {Boolean} [utilityCache] Automatically inserts the new entry of any utility operation, like `exists`, into the Connection's internal cache.
      * @property {Number} [fetchAll] If enabled, an integer being the batch size of each database call and insertion to eventually fetch everything.
+     * @property {Schema|String} [model] A schema for every entity in this Connection to follow.
+     * @property {Boolean} [migrate] Whether to migrate every entity in the Connection's database to its (new) schema.
      */
 
     /**
@@ -68,6 +70,9 @@ class Connection {
             insertionCache: true,
             utilityCache: true,
             fetchAll: null,
+
+            model: null,
+            migrate: false,
 
             ...configuration
         };
