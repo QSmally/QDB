@@ -1,9 +1,7 @@
 
-class Generics {
-    static clone          = require("./Clone");
-    static isDataModel    = require("./IsDataModel");
-    static pathCast       = require("./PathCast");
-    static resolveKeyPath = require("./ResolveKeyPath");
-}
-
-module.exports = Generics;
+module.exports = {
+    clone:          require("./Clone"),
+    isDataModel:    require("./IsDataModel"),
+    pathCast:       require("./PathCast"),
+    resolveKeyPath: require("./ResolveKeyPath")
+};
