@@ -10,7 +10,7 @@ class Selection {
 
     /**
      * An unchanged piece of the database in working memory.
-     * @param {Object|Collection} entities The initial selection of elements for this Selection instance.
+     * @param {Object|Collection} entities The initial set of elements for this Selection instance.
      * @param {String} holds A table name as reference for this Selection to hold.
      */
     constructor(entities, holds) {

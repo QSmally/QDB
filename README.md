@@ -5,7 +5,7 @@
 
 
 # Features
-* Synchronous, yet non-blocking (built on [`better-sqlite3`](https://github.com/JoshuaWise/better-sqlite3));
+* Synchronous, non-blocking API (built on [`better-sqlite3`](https://github.com/JoshuaWise/better-sqlite3));
 * Configurable cache with eviction strategies;
 * Schema objects and automatic migration;
 * Selection and transaction support.
