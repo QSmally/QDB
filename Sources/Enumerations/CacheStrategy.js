@@ -1,5 +1,5 @@
 
-const BaseCacheStrategy = require("../Structures/BaseCacheStrategy");
+const CacheStrategy = require("../Structures/CacheStrategy");
 
 module.exports = {
 
@@ -42,9 +42,9 @@ module.exports = {
     /**
      * A caching strategy with no sweeping or automatic eviction logic
      * implemented.
-     * @returns {BaseCacheStrategy}
+     * @returns {CacheStrategy}
      */
     unlimited() {
-        return new BaseCacheStrategy();
+        return new CacheStrategy();
     }
 };

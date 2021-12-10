@@ -1,7 +1,7 @@
 
-const BaseCacheStrategy = require("../../Structures/BaseCacheStrategy");
+const CacheStrategy = require("../../Structures/CacheStrategy");
 
-class RestrictedCacheStrategy extends BaseCacheStrategy {
+class RestrictedCacheStrategy extends CacheStrategy {
 
     /**
      * @typedef {Object} RestrictedStrategyProperties

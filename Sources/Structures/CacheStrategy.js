@@ -3,11 +3,11 @@ const { Collection } = require("qulity");
 
 const Generics = require("../Generics");
 
-class BaseCacheStrategy {
+class CacheStrategy {
 
     /**
      * In-memory cached rows.
-     * @name BaseCacheStrategy#memory
+     * @name CacheStrategy#memory
      * @type {Collection<String, DataModel>}
      * @private
      */
@@ -26,4 +26,4 @@ class BaseCacheStrategy {
     }
 }
 
-module.exports = BaseCacheStrategy;
+module.exports = CacheStrategy;

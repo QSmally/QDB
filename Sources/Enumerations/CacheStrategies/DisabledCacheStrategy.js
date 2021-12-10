@@ -1,7 +1,7 @@
 
-const BaseCacheStrategy = require("../../Structures/BaseCacheStrategy");
+const CacheStrategy = require("../../Structures/CacheStrategy");
 
-class DisabledCacheStrategy extends BaseCacheStrategy {
+class DisabledCacheStrategy extends CacheStrategy {
 
     /**
      * A patch method which doesn't insert or modify any entries in the cache
