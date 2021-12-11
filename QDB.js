@@ -12,9 +12,7 @@ module.exports = {
 
     // QDB
     Connection: require("./Sources/Connection"),
-
-    // Schema
-    Schema: require("./Sources/Implementations/Schema"),
+    Schema:     require("./Sources/Schema"),
 
     // Generics
     Generics: require("./Sources/Generics"),
