@@ -1,29 +1,65 @@
 #!/usr/bin/env node
 "use strict";
 
+const Formatter = require("./Formatter");
+
 const { existsSync, readdirSync } = require("fs");
 
-const Format = require("./Format");
-const toolArguments = process.argv.slice(2);
+class CLIStateController {
 
-const menu = require("./Menu");
-const help = require("./Prompt/Help");
+    static parameters = process.argv.slice(2);
 
-if (!toolArguments.length) {
-    help();
-} else {
-    const commands = new Map(readdirSync(`${__dirname}/Prompt/`)
-        .map(C => [C.split(".")[0].toLowerCase(), require(`./Prompt/${C}`)])
+    static commands = new Map(readdirSync(`${__dirname}/Commands/`)
+        .map(file => [file.split(".").shift().toLowerCase(), require(`./Commands/${file}`)])
     );
 
-    const action = toolArguments.shift();
-    const executable = commands.get(action.toLowerCase());
-    if (executable) return executable(toolArguments.shift());
+    constructor() {
+        CLIStateController.parameters.length ?
+            this.handleCommand(CLIStateController.parameters.shift()) :
+            CLIStateController.commands.get("help")();
+    }
 
-    if (!existsSync(action)) return console.log([
-        `${Format.dim("Error")}: '${action}' does not exist.`,
-        "Use 'qdb make <database>' to create a new database file."
-    ].join("\n"));
+    static newline = console.log;
 
-    menu(action, toolArguments);
+    handleCommand(actionOrFile) {
+        const executable = CLIStateController.commands.get(actionOrFile.toLowerCase());
+        if (executable) return executable(CLIStateController.parameters.shift());
+
+        if (existsSync(actionOrFile)) {
+            return this.handleConnectionCommand(actionOrFile);
+        }
+
+        CLIStateController.newline([
+            `${Formatter.dim("Error")}: '${actionOrFile}' does not exist.`,
+            "Use 'qdb make <database>' to create a new database file."
+        ].join("\n"));
+    }
+
+    handleConnectionCommand(database) {
+        const commands = new Map(readdirSync(`${__dirname}/Connection/`)
+            .map(file => [file.split(".").shift().toLowerCase(), require(`./Connection/${file}`)])
+        );
+
+        const target = CLIStateController.parameters.shift() ?? "list";
+        const command = commands.get(target.toLowerCase());
+    
+        if (command) {
+            if (CLIStateController.parameters.length !== command.arguments)
+                return CLIStateController.newline(`${Format.dim("Error")}: expected ${command.arguments} arguments, but received ${CLIStateController.parameters.length}.`);
+    
+            try {
+                return command.execute(database, CLIStateController.parameters);
+            } catch (error) {
+                const message = `${Formatter.dim("Error")}: ${error.message.toLowerCase()}`;
+                return CLIStateController.newline(message);
+            }
+        }
+
+        CLIStateController.newline([
+            `${Formatter.dim("Error")}: database command '${target}' does not exist.`,
+            "See a list of commands by invoking 'qdb help [command]'."
+        ].join("\n"));
+    }
 }
+
+new CLIStateController();

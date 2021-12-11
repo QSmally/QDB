@@ -1,5 +1,6 @@
 
 class CLIFormatter {
+
     static formats = {
         dim:   "\x1b[40m",
         bold:  "\x1b[1m",

@@ -1,6 +1,6 @@
 
 const FS     = require("fs");
-const Format = require("../Format");
+const Format = require("../Formatter");
 const SQL    = require("better-sqlite3");
 
 module.exports = {

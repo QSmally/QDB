@@ -1,6 +1,6 @@
 
 const FS     = require("fs");
-const Format = require("../Format");
+const Format = require("../Formatter");
 
 module.exports = database => {
     if (!database) return console.log([

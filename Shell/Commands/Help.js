@@ -1,9 +1,9 @@
 
 const FS     = require("fs");
-const Format = require("../Format");
+const Format = require("../Formatter");
 
-const commands = new Map(FS.readdirSync(`${__dirname}/../Store/`)
-    .map(C => [C.split(".")[0].toLowerCase(), require(`../Store/${C}`)])
+const commands = new Map(FS.readdirSync(`${__dirname}/../Connection/`)
+    .map(C => [C.split(".")[0].toLowerCase(), require(`../Connection/${C}`)])
 );
 
 module.exports = command => {
