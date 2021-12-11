@@ -1,31 +1,43 @@
 
-const Format = require("../Formatter");
-const SQL    = require("better-sqlite3");
+const SQL = require("better-sqlite3");
 
-module.exports = {
-    usage: "qdb <database> fetch <name> <identifier>",
-    description: "Selects a table to fetch from and retrieves a document.",
-    examples: [
+const Command   = require("../Command");
+const Formatter = require("../Formatter");
+
+class ConnectionCommand extends Command {
+
+    static name = "fetch";
+    static usage = "qdb <database> fetch <name> <identifier>";
+    static description = "Selects a table to fetch from and retrieves a document.";
+
+    static examples = [
         "qdb Users.qdb fetch Users 2ff46929",
         "qdb ./Internal/Guilds.qdb fetch Profiles 396c9b85"
-    ],
+    ];
 
-    arguments: 2,
+    static arguments = 2;
 
-    execute: (path, arguments) => {
-        const connection = new SQL(path);
-        const table = arguments.shift();
+    connection = new SQL(this.path);
 
-        const existingTable = connection.prepare("SELECT name FROM 'sqlite_master' WHERE type = 'table' AND name = ?;").get(table);
-        if (!existingTable) return console.log(`${Format.dim("Error")}: there's no table with the name '${table}'.`);
+    execute() {
+        const table = this.parameters.shift();
 
-        const identifier = arguments.shift();
+        const existingTable = this.connection
+            .prepare("SELECT name FROM 'sqlite_master' WHERE type = 'table' AND name = ?;")
+            .get(table);
+        if (!existingTable) return console.log(`${Formatter.dim("Error")}: there's no table with the name '${table}'.`);
 
-        const documentObject = connection.prepare(`SELECT Val FROM '${table}' WHERE Key = ?;`).get(identifier);
-        if (!documentObject) console.log(`${Format.dim("Error")}: unknown identifier '${identifier}'.`);
-        else console.log(JSON.parse(documentObject.Val));
+        const identifier = this.parameters.shift();
 
-        connection.close();
+        const documentObject = this.connection
+            .prepare(`SELECT Val FROM '${table}' WHERE Key = ?;`)
+            .get(identifier);
+        if (!documentObject) console.log(`${Formatter.dim("Error")}: unknown identifier '${identifier}'.`);
+        else console.log(JSON.parse(documentObject["Val"]));
+
+        this.connection.close();
         return true;
     }
-};
+}
+
+module.exports = ConnectionCommand;

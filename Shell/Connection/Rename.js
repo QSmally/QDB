@@ -1,30 +1,42 @@
 
-const Format = require("../Formatter");
-const SQL    = require("better-sqlite3");
+const SQL = require("better-sqlite3");
 
-module.exports = {
-    usage: "qdb <database> rename <name> <new-name>",
-    description: "Alters the selected table and renames it to a given string.",
-    examples: [
+const Command   = require("../Command");
+const Formatter = require("../Formatter");
+
+class ConnectionCommand extends Command {
+
+    static name = "rename";
+    static usage = "qdb <database> rename <name> <new-name>";
+    static description = "Alters the selected table and renames it to a given string.";
+
+    static examples = [
         "qdb Users.qdb rename Users Customers",
         "qdb ./Internal/Guilds.qdb rename Profiles Instances"
-    ],
+    ];
 
-    arguments: 2,
+    static arguments = 2;
 
-    execute: async (path, arguments) => {
-        const connection = new SQL(path);
-        const table = arguments.shift();
+    connection = new SQL(this.path);
 
-        const existingTable = connection.prepare("SELECT name FROM 'sqlite_master' WHERE type = 'table' AND name = ?;").get(table);
-        if (!existingTable) return console.log(`${Format.dim("Error")}: there's no table with the name '${table}'.`);
+    execute() {
+        const table = this.parameters.shift();
 
-        const name = arguments.shift();
+        const existingTable = this.connection
+            .prepare("SELECT name FROM 'sqlite_master' WHERE type = 'table' AND name = ?;")
+            .get(table);
+        if (!existingTable) return console.log(`${Formatter.dim("Error")}: there's no table with the name '${table}'.`);
 
-        connection.prepare(`ALTER TABLE '${table}' RENAME TO '${name}';`).run();
-        console.log(`Successfully renamed table '${table}' to '${Format.bold(name)}'.`);
-        connection.close();
+        const name = this.parameters.shift();
+
+        this.connection
+            .prepare(`ALTER TABLE '${table}' RENAME TO '${name}';`)
+            .run();
+        console.log(`Successfully renamed table '${table}' to '${Formatter.bold(name)}'.`);
+        this.connection.close();
 
         return true;
     }
-};
+}
+
+module.exports = ConnectionCommand;

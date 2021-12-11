@@ -1,40 +1,62 @@
 
-const FS     = require("fs");
-const Format = require("../Formatter");
+const Command   = require("../Command");
+const Formatter = require("../Formatter");
 
-const commands = new Map(FS.readdirSync(`${__dirname}/../Connection/`)
-    .map(C => [C.split(".")[0].toLowerCase(), require(`../Connection/${C}`)])
-);
+const { readdirSync } = require("fs");
 
-module.exports = command => {
-    if (!command) return console.log(["QDB Shell\n",
-        Format.bold("USAGE"),
-        "  $ qdb <database | make | help> [command] [parameters...]\n",
+class HelpCommand extends Command {
 
-        Format.bold("COMMANDS"),
-        `${Format.list(Object.fromEntries(
-            [...commands.entries()].map(entry => [entry[0], entry[1].description])
-        ), 12)}\n`,
+    static name = "help";
 
-        Format.bold("EXAMPLES"),
-        `${[
-            "make Instances.qdb",
-            "Development.qdb create Users",
-            "Production.qdb vacuum"
-        ].map(E => `  $ qdb ${E}`).join("\n")}\n`,
+    examples = [
+        "make Instances.qdb",
+        "Development.qdb create Users",
+        "Production.qdb vacuum"
+    ]
 
-        Format.bold("REPOSITORY"),
-        "  https://github.com/QSmally/QDB"
-    ].join("\n"));
+    commands = new Map(readdirSync(`${__dirname}/../Connection/`)
+        .map(file => require(`../Connection/${file}`))
+        .map(Command => [Command.name, Command])
+    );
 
-    const fetchedCommand = commands.get(command.toLowerCase());
-    if (!fetchedCommand) return console.log(`${Format.dim("Error")}: command '${command}' does not exist.`);
+    get view() {
+        let commands = [...this.commands.values()]
+            .map(Command => [Command.name, Command.description])
+        return Object.fromEntries(commands);
+    }
 
-    console.log([
-        `QDB Shell - ${Format.bold(command)}`,
-        Format.dim(fetchedCommand.usage),
-        `\n${fetchedCommand.description}\n`,
-        Format.BOLD("EXAMPLES"),
-        ...fetchedCommand.examples.map(E => `  $ ${E}`)
-    ].join("\n"));
+    execute() {
+        if (!this.path) return console.log([
+            "QDB Shell",
+
+            Formatter.bold("\nUSAGE"),
+            "  $ qdb <database | make | help> [command] [parameters...]",
+
+            Formatter.bold("\nCOMMANDS"),
+            Formatter.list(this.view, 12),
+
+            Formatter.bold("\nEXAMPLES"),
+            this.examples
+                .map(example => `  $ qdb ${example}`)
+                .join("\n"),
+
+            Formatter.bold("\nREPOSITORY"),
+            "  https://github.com/QSmally/QDB"
+        ].join("\n"));
+
+        const fetchedCommand = this.commands.get(this.path.toLowerCase());
+        if (!fetchedCommand) return console.log(`${Format.dim("Error")}: command '${this.path}' does not exist.`);
+
+        console.log([
+            `QDB Shell - ${Formatter.bold(fetchedCommand.name)}`,
+            Formatter.dim(fetchedCommand.usage),
+
+            `\n${fetchedCommand.description}`,
+
+            Formatter.bold("\nEXAMPLES"),
+            ...fetchedCommand.examples.map(example => `  $ ${example}`)
+        ].join("\n"));
+    }
 }
+
+module.exports = HelpCommand;

@@ -1,41 +1,51 @@
 
-const FS     = require("fs");
-const Format = require("../Formatter");
-const SQL    = require("better-sqlite3");
+const SQL = require("better-sqlite3");
 
-module.exports = {
-    usage: "qdb <database> list",
-    description: "Lists this database's statistics together with the tables.",
-    examples: [
+const Command   = require("../Command");
+const Formatter = require("../Formatter");
+
+const { lstatSync } = require("fs");
+
+class ConnectionCommand extends Command {
+
+    static name = "list";
+    static usage = "qdb <database> list";
+    static description = "Lists this database's statistics together with the tables.";
+
+    static examples = [
         "qdb Users.qdb list",
         "qdb /etc/databases/Service.qdb list",
         "qdb ./Internal/Guilds.qdb list"
-    ],
+    ];
 
-    arguments: 0,
+    static arguments = 0;
+    static units = ["bytes", "KiB", "MiB", "GiB", "TiB", "PiB"];
 
-    execute: path => {
-        const connection = new SQL(path);
+    connection = new SQL(this.path);
 
-        const tables = connection
+    execute() {
+        const tables = this.connection
             .prepare("SELECT name FROM 'sqlite_master' WHERE type = 'table';")
             .all()
             .map(row => row.name)
             .map(table => [table, connection.prepare(`SELECT COUNT(*) FROM '${table}';`).get()["COUNT(*)"]])
-            .map(entry => [Format.bold(entry[0]), `${entry[1]} rows`]);
+            .map(entry => [Formatter.bold(entry[0]), `${entry[1]} rows`]);
 
-        const size  = FS.lstatSync(path).size;
-        const units = ["bytes", "KiB", "MiB", "GiB", "TiB", "PiB"];
-        const idx   = size !== 0 ? Math.floor(Math.log(size) / Math.log(1024)) : 0;
+        const { size } = lstatSync(path);
+        const index = size > 0 ?
+            Math.floor(Math.log(size) / Math.log(1024)) :
+            0;
 
         console.log([
-            Format.dim(path),
-            `Size: ${Format.bold(`${Math.round(size / Math.pow(1024, idx))} ${units[idx]}`)}`,
-            `Tables: ${Format.bold(tables.length)}\n`,
-            Format.list(Object.fromEntries(tables), 26, true)
+            Formatter.dim(this.path),
+            `Size: ${Formatter.bold(`${Math.round(size / Math.pow(1024, index))} ${ConnectionCommand.units[index]}`)}`,
+            `Tables: ${Formatter.bold(tables.length)}\n`,
+            Formatter.list(Object.fromEntries(tables), 26, true)
         ].join("\n"));
 
-        connection.close();
+        this.connection.close();
         return true;
     }
-};
+}
+
+module.exports = ConnectionCommand;

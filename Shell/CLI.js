@@ -10,20 +10,21 @@ class CLIStateController {
     static parameters = process.argv.slice(2);
 
     static commands = new Map(readdirSync(`${__dirname}/Commands/`)
-        .map(file => [file.split(".").shift().toLowerCase(), require(`./Commands/${file}`)])
+        .map(file => require(`./Commands/${file}`))
+        .map(Command => [Command.name, Command])
     );
 
     constructor() {
         CLIStateController.parameters.length ?
             this.handleCommand(CLIStateController.parameters.shift()) :
-            CLIStateController.commands.get("help")();
+            new (CLIStateController.commands.get("help"))().execute();
     }
 
     static newline = console.log;
 
     handleCommand(actionOrFile) {
-        const executable = CLIStateController.commands.get(actionOrFile.toLowerCase());
-        if (executable) return executable(CLIStateController.parameters.shift());
+        const Executable = CLIStateController.commands.get(actionOrFile.toLowerCase());
+        if (Executable) return new Executable(CLIStateController.parameters.shift()).execute();
 
         if (existsSync(actionOrFile)) {
             return this.handleConnectionCommand(actionOrFile);
@@ -41,14 +42,14 @@ class CLIStateController {
         );
 
         const target = CLIStateController.parameters.shift() ?? "list";
-        const command = commands.get(target.toLowerCase());
+        const Command = commands.get(target.toLowerCase());
     
-        if (command) {
-            if (CLIStateController.parameters.length !== command.arguments)
-                return CLIStateController.newline(`${Format.dim("Error")}: expected ${command.arguments} arguments, but received ${CLIStateController.parameters.length}.`);
+        if (Command) {
+            if (Command.arguments > CLIStateController.parameters.length)
+                return CLIStateController.newline(`${Format.dim("Error")}: expected ${Command.arguments} arguments, but received ${CLIStateController.parameters.length}.`);
     
             try {
-                return command.execute(database, CLIStateController.parameters);
+                return new Command(database, CLIStateController.parameters).execute();
             } catch (error) {
                 const message = `${Formatter.dim("Error")}: ${error.message.toLowerCase()}`;
                 return CLIStateController.newline(message);
