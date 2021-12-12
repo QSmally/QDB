@@ -331,7 +331,7 @@ class Connection {
     find(predicate, cache = this.configuration.utilityCache) {
         if (cache) {
             for (const [keyContext, document] of this.memory)
-                if (predicate(document, keyContext)) return document;
+                if (predicate(document, keyContext)) return Generics.clone(document);
         }
 
         const rows = this.API
