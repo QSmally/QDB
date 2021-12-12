@@ -464,7 +464,7 @@ class Connection {
      * indexes.
      * @param {Pathlike} pathlike Specifies which row or nested property to fetch the an array.
      * @param {Number} startIndex A zero-based index at whichi to start extraction.
-     * @param {Number} [endIndex] An optional zero-based idnex before which to end extraction, and defaults to the length of the array.
+     * @param {Number} [endIndex] An optional zero-based index before which to end extraction, and defaults to the length of the array.
      * @returns {Number} The new length of the array.
      */
     slice(pathlike, startIndex, endIndex) {
