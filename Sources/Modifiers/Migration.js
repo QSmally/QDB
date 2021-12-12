@@ -1,6 +1,6 @@
 
+const Schema   = require("../Schema");
 const Modifier = require("../Structures/Modifier");
-const Schema   = require("../Implementations/Schema");
 
 class MigrationModifier extends Modifier {
 
