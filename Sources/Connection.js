@@ -97,7 +97,7 @@ class Connection {
             this.API.pragma(`synchronous = ${this.configuration.synchronisation};`);
         }
 
-        readdirSync("Sources/Modifiers/")
+        readdirSync(`${__dirname}/Modifiers/`)
             .filter(file => file.endsWith(".js"))
             .map(file => require(`./Modifiers/${file}`))
             .map(Modifier => new Modifier(this));
