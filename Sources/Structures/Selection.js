@@ -157,13 +157,13 @@ class Selection {
      * @returns {Selection}
      */
     join(secondarySelection, joinStrategy = JoinStrategy.property(secondarySelection.holds), field = null) {
-        const resolvedKeyPath = field ?
-            field.split(/\.+/g) :
-            null;
+        const [key, path] = field ?
+            Generics.resolveKeyPath(field) :
+            [[], []];
 
         for (const [index, joinObject] of Generics.clone(secondarySelection.cache)) {
             const fieldId = field ?
-                Generics.pathCast(joinObject, resolvedKeyPath) :
+                Generics.pathCast(joinObject, [key, ...path]) :
                 index;
             const documentObject = this.cache.get(fieldId);
             if (documentObject) joinStrategy(documentObject, index, joinObject);
