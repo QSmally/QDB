@@ -200,6 +200,15 @@ class Selection {
 
         return this;
     }
+
+    /**
+     * Creates a new memory allocation for a copy of this Selection.
+     * @param {String} [holds] An optional new identifier for the cloned Selection.
+     * @returns {Selection}
+     */
+    clone(holds = null) {
+        return new Selection(this.cache.toPairObject(), holds ?? this.holds);
+    }
 }
 
 module.exports = Selection;
