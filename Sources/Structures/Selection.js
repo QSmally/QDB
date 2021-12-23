@@ -122,6 +122,8 @@ class Selection {
                 this.cache.delete(keyContext);
             pointer++;
         }
+
+        return this;
     }
 
     /**
