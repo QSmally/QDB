@@ -61,6 +61,20 @@ class Selection {
     }
 
     /**
+     * Retrieves an array of the values of the Selection, in addition to 'Id' properties.
+     * @name Selection#entities
+     * @type {Array}
+     * @readonly
+     */
+    get entities() {
+        return this.indexes.map(keyContext => {
+            const documentObject = this.cache.get(keyContext);
+            documentObject["Id"] = keyContext;
+            return documentObject
+        });
+    }
+
+    /**
      * Manages individual retrieval of the Selection.
      * @param {Pathlike} pathlike Specifies which row or nested property to retrieve from the Selection.
      * @returns {*}
