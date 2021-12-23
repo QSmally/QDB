@@ -88,6 +88,20 @@ class Selection {
             documentObject;
     }
 
+    /**
+     * Retrieves the unique elements from the path.
+     * Identical to the `SELECT DISTINCT` SQL statement.
+     * @param {Pathlike} pathlike Specifies which row or nested properties to retrieve.
+     * @returns {Array}
+     */
+    distinct(pathlike) {
+        const [keyContext, path] = Generics.resolveKeyPath(pathlike);
+
+        return this.cache
+            .map(documentObject => Generics.pathCast(documentObject, [keyContext, ...path]))
+            .filter((entity, position, array) => array.indexOf(entity) === position);
+    }
+
     // SQL methods
 
     /**
@@ -147,13 +161,13 @@ class Selection {
      * @returns {Selection}
      */
     group(pathlike) {
-        const [key, path] = Generics.resolveKeyPath(pathlike);
+        const [keyContext, path] = Generics.resolveKeyPath(pathlike);
         const originalSelectionObject = this.cache.toPairObject();
         this.cache.clear();
 
         for (const index in originalSelectionObject) {
             const documentObject = originalSelectionObject[index];
-            const property = Generics.pathCast(documentObject, [key, ...path]);
+            const property = Generics.pathCast(documentObject, [keyContext, ...path]);
             const existingGroup = this.cache.get(property);
 
             existingGroup ?
@@ -173,13 +187,13 @@ class Selection {
      * @returns {Selection}
      */
     join(secondarySelection, joinStrategy = JoinStrategy.property(secondarySelection.holds), field = null) {
-        const [key, path] = field ?
+        const [keyContext, path] = field ?
             Generics.resolveKeyPath(field) :
             [[], []];
 
         for (const [index, joinObject] of Generics.clone(secondarySelection.cache)) {
             const fieldId = field ?
-                Generics.pathCast(joinObject, [key, ...path]) :
+                Generics.pathCast(joinObject, [keyContext, ...path]) :
                 index;
             const documentObject = this.cache.get(fieldId);
             if (documentObject) joinStrategy(documentObject, index, joinObject);
