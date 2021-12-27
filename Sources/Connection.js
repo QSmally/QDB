@@ -510,7 +510,10 @@ class Connection {
 
         const mutatedEntity = newEntityCallback(sourceEntity, pathlike);
         this.set(pathlike, mutatedEntity);
-        return mutatedEntity;
+
+        return this.fetch(
+            Generics.resolveKeyPath(pathlike)[0],
+            this.configuration.utilityCache);
     }
 
     /**
