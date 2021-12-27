@@ -44,11 +44,13 @@ class Transaction {
      * Rolls back the changes made before the start of this Transaction, and
      * also clears the contents of the Connection's internal cache.
      * @returns {Boolean} Whether the changes were rolled back or not.
+     * @todo Invalidate only the entries which were added or modified, not everything.
      */
     rollback() {
         if (!this.active) return false;
 
         this.connection.API.prepare("ROLLBACK;").run();
+        this.connection.memory.clear();
         this.active = false;
         return true;
     }
