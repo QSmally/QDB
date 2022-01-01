@@ -2,6 +2,7 @@
 "use strict";
 
 const { Collection } = require("qulity");
+const Schema         = require("./Schema");
 const SQL            = require("better-sqlite3");
 
 const Generics        = require("./Generics");
@@ -482,6 +483,25 @@ class Connection {
     }
 
     // Utility methods
+
+    /**
+     * Like `Connection#ensure()`, but merges a starting model with this
+     * Connection's schema, if any.
+     * @param {Pathlike} keyContext Specifies which row to ensure the Connection's schema.
+     * @param {DataModel} [document] A partial data model to merge with the schema.
+     * @returns {Connection}
+     */
+     default(keyContext, document = {}) {
+        if (!this.exists(keyContext)) {
+            const { model } = this.configuration;
+            const schema = typeof model === "string" ?
+                Schema.models.get(model) :
+                model;
+            this.set(keyContext, schema.instance(document));
+        }
+
+        return this;
+    }
 
     /**
      * Inserts a value into a row or nested object if the endpoint of the path
