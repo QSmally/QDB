@@ -5,6 +5,5 @@
  * @returns {Array}
  */
 module.exports = pathlike => {
-    const path = pathlike.split(/\.+/g);
-    return [path[0], path.slice(1)];
+    return pathlike.split(/\.+/g);
 }

@@ -80,7 +80,7 @@ class Selection {
      * @returns {*}
      */
     retrieve(pathlike) {
-        const [keyContext, path] = Generics.resolveKeyPath(pathlike);
+        const [keyContext, ...path] = Generics.resolveKeyPath(pathlike);
         const documentObject = this.cache.get(keyContext);
 
         return path.length ?
@@ -95,10 +95,10 @@ class Selection {
      * @returns {Array}
      */
     distinct(pathlike) {
-        const [keyContext, path] = Generics.resolveKeyPath(pathlike);
+        const pathContext = Generics.resolveKeyPath(pathlike);
 
         return this.cache
-            .map(documentObject => Generics.pathCast(documentObject, [keyContext, ...path]))
+            .map(documentObject => Generics.pathCast(documentObject, pathContext))
             .filter((entity, position, array) => array.indexOf(entity) === position);
     }
 
@@ -161,13 +161,13 @@ class Selection {
      * @returns {Selection}
      */
     group(pathlike) {
-        const [keyContext, path] = Generics.resolveKeyPath(pathlike);
+        const pathContext = Generics.resolveKeyPath(pathlike);
         const originalSelectionObject = this.cache.toPairObject();
         this.cache.clear();
 
         for (const index in originalSelectionObject) {
             const documentObject = originalSelectionObject[index];
-            const property = Generics.pathCast(documentObject, [keyContext, ...path]);
+            const property = Generics.pathCast(documentObject, pathContext);
             const existingGroup = this.cache.get(property);
 
             existingGroup ?
@@ -187,13 +187,13 @@ class Selection {
      * @returns {Selection}
      */
     join(secondarySelection, joinStrategy = JoinStrategy.property(secondarySelection.holds), field = null) {
-        const [keyContext, path] = field ?
+        const pathContext = field ?
             Generics.resolveKeyPath(field) :
             [[], []];
 
         for (const [index, joinObject] of Generics.clone(secondarySelection.cache)) {
             const fieldId = field ?
-                Generics.pathCast(joinObject, [keyContext, ...path]) :
+                Generics.pathCast(joinObject, pathContext) :
                 index;
             const documentObject = this.cache.get(fieldId);
             if (documentObject) joinStrategy(documentObject, index, joinObject);

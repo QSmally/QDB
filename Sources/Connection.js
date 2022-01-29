@@ -220,7 +220,7 @@ class Connection {
      * @returns {Connection}
      */
     set(pathContext, document, cache = this.configuration.insertionCache) {
-        const [keyContext, path] = Generics.resolveKeyPath(pathContext);
+        const [keyContext, ...path] = Generics.resolveKeyPath(pathContext);
 
         if (path.length) {
             const documentOld = this.fetch(keyContext) ?? {};
@@ -248,7 +248,7 @@ class Connection {
      * @returns {DataModel|*}
      */
     fetch(pathContext, cache = true) {
-        const [keyContext, path] = Generics.resolveKeyPath(pathContext);
+        const [keyContext, ...path] = Generics.resolveKeyPath(pathContext);
 
         if (this.configuration.unsafeAssumeCache) {
             return this.memory.get(keyContext);
@@ -281,7 +281,7 @@ class Connection {
     evict(...keyContexts) {
         if (keyContexts.length) {
             keyContexts
-                .map(key => Generics.resolveKeyPath(key)[0])
+                .map(key => Generics.resolveKeyPath(key).shift())
                 .forEach(keyContext => this.memory.delete(keyContext));
         } else {
             this.memory.clear();
@@ -297,7 +297,7 @@ class Connection {
      */
     erase(...keyContexts) {
         const rows = keyContexts
-            .map(key => Generics.resolveKeyPath(key)[0]);
+            .map(key => Generics.resolveKeyPath(key).shift());
 
         if (rows.length) {
             this.evict(...rows);
@@ -532,7 +532,7 @@ class Connection {
         this.set(pathlike, mutatedEntity);
 
         return this.fetch(
-            Generics.resolveKeyPath(pathlike)[0],
+            Generics.resolveKeyPath(pathlike).shift(),
             this.configuration.utilityCache);
     }
 
