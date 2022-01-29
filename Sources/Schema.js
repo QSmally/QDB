@@ -14,9 +14,9 @@ class Schema {
     static models = new Collection();
 
     /**
-     * 
-     * @param {String} identifier 
-     * @param {DataModel} model 
+     * The object which holds and controls data migration for a particular table.
+     * @param {String} identifier Any name to give this model.
+     * @param {DataModel} model An abstract representation of structure and default values for the schema.
      */
     constructor(identifier, model) {
         /**
