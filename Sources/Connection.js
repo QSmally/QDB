@@ -491,7 +491,7 @@ class Connection {
      * @param {DataModel} [document] A partial data model to merge with the schema.
      * @returns {Connection}
      */
-     default(keyContext, document = {}) {
+    default(keyContext, document = {}) {
         if (!this.exists(keyContext)) {
             const { model } = this.configuration;
             const schema = typeof model === "string" ?
