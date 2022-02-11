@@ -1,40 +1,27 @@
 
-/*
-    QDB is built from the ground up by QSmally.
-    QDB © 2018-2021 by QSmally, all rights reserved.
-    Please report bugs by creating an issue on the repo.
-
-    Obviously the Node runtime (and all respective libraries)
-    are not created by myself, they're created by their
-    owners. All rights are reserved.
-
-    Qulity © 2021 by QSmally.
-*/
-
-
-const DataSchema = require("./lib/Utility/Schema");
+//
+// QDB version 4.1
+//
+// Unless required by applicable law or agreed to in writing, software distributed under the
+// License is distributed on an "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND,
+// either express or implied. See the License for the specific language governing permissions
+// and limitations under the License.
+//
 
 module.exports = {
 
-    Connection:    require("./lib/Connections/Connection"),
-    Pool:          require("./lib/Connections/Pool"),
-    BackupManager: require("./lib/Connections/Backups/Manager"),
+    // QDB
+    Connection: require("./Sources/Connection"),
+    Schema:     require("./Sources/Schema"),
 
-    // Utility
-    Schema: DataSchema.Schema,
+    // Generics
+    Generics: require("./Sources/Generics"),
 
-    // Model bindings
-    model: id => {
-        if (typeof id !== "string") return null;
-        return DataSchema.modelStore.resolve(id);
-    },
-
-    // Order enumeration
-    // These are left out as strings to be as backwards- compatible
-    // as possible. As the previous version had just strings as inputs,
-    // this was necessary.
-    arbitrary: "arbitrary",
-    ascending: "ascending",
-    descending: "descending"
+    // Enumerations
+    Journal:          require("./Sources/Enumerations/Journal"),
+    JoinStrategy:     require("./Sources/Enumerations/JoinStrategy"),
+    CacheStrategy:    require("./Sources/Enumerations/CacheStrategy"),
+    Synchronisation:  require("./Sources/Enumerations/Synchronisation"),
+    SortingPredicate: require("./Sources/Enumerations/SortingPredicate")
 
 };

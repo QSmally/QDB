@@ -1,24 +1,26 @@
 
-# QDB4
+# QDB 4.1
 
-> QDB is a synchronous database module reliant on JavaScript object-documents with multiple levels of optimisation built into it.
+> QDB is a SQLite framework reliant on JavaScript documents with various optimisations included.
 
 
 # Features
-* Non-blocking;
-* Optimised memory cache;
+* Synchronous, non-blocking API (built on [`better-sqlite3`](https://github.com/JoshuaWise/better-sqlite3));
+* Configurable cache with eviction strategies;
 * Schema objects and automatic migration;
-* Selection and transaction wrappers;
-* Connection pools with external thread support.
+* Selection and transaction support.
+
+## Performance
+The QDB 4.1 build reaches similar insert and retrieval rates as opposed to QDB 4.0, while implementing additional security features such as cloning entries from the cache before returning them. Methods such as `find` have drastically improved in performance.
 
 ## Links
 * [Documentations](https://github.com/QSmally/QDB/blob/v4/Documentation/Index.md)
 * [Github](https://github.com/QSmally/QDB)
 
 ## Installation
-`npm install QSmally/QDB`
+`npm install QSmally/QDB#staging`
 ```js
-const QDB = require("qdatabase");
+const { Connection, ... } = require("qdatabase");
 // ...
 ```
 
@@ -28,14 +30,16 @@ const QDB = require("qdatabase");
 ## [Connection](https://github.com/QSmally/QDB/blob/v4/Documentation/Connection.md)
 The main interface for interacting with QDB.
 ```js
-const service = new QDB.Connection(path, options?);
+const service = new Connection("/opt/company/Cellar/Users.qdb", {
+    cache: CacheStrategy.managed({ maxSize: 1e4 })
+});
 ```
 
 ## [Transaction](https://github.com/QSmally/QDB/blob/v4/Documentation/Transaction.md)
 A SQL transaction manager.
 ```js
-// Instantiates a transaction within the database. It is required
-// to call 'commit' or 'rollback' on the returned Transaction.
+// Instantiates a transaction within the database. It is required to
+// call 'commit' or 'rollback' on the returned Transaction struct.
 const transaction = service.transaction();
 
 // Perform changes in the connection...
@@ -49,9 +53,9 @@ An unchanged piece of the database in memory.
 // Aggregate with certain instructions, like joining tables,
 // ordering them and regrouping them by a property.
 const users = service.select()
-    .join(projects, "UserId", "Projects")
-    .order(user => Object.keys(user.Projects).length, QDB.descending)
-    .group("Rank");
+    .join(projects, JoinStrategy.property("projects"), "userId")
+    .order(SortingPredicate.descending(user => Object.keys(user.projects).length))
+    .group("rank");
 ```
 
 

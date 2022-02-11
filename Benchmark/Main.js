@@ -1,54 +1,78 @@
 
-const QDB = require("../QDB");
 const CLI = require("cli-color");
 
-process.stdout.write(CLI.reset);
-const { trials, tables } = require("./Seed")();
-process.stdout.write(CLI.cyan.bold("Running benchmarks...\n"));
+const { Connection, CacheStrategy } = require("../QDB");
 
-const times = new Map();
+class Benchmark {
 
-for (const trial of trials) {
-    const test = trial.split(".")[0];
-    const benchmark = require(`./Trials/${trial}`);
-    process.stdout.write(CLI.white(`· Sampling '${CLI.bold(test)}' benchmark...`));
+    times = new Map();
+    assets = require("./InsertionSeed")();
 
-    times.set(test, {});
+    constructor() {
+        Benchmark.stdout(CLI.cyan.bold("Running benchmarks...\n"));
 
-    // Test each table's performance
-    for (const [table, size] of tables) {
-        const connection = new QDB.Connection("Benchmark/Guilds.qdb", {
-            table, sweepInterval: false
-        });
+        for (const trial of this.assets.trials) {
+            const testIdentifier = trial.split(".")[0];
+            const benchmark = require(`./Trials/${trial}`);
+            Benchmark.stdout(CLI.white(`· Sampling '${CLI.bold(testIdentifier)}' benchmark...`));
 
-        const { amount, tEnd } = benchmark(connection);
-        const time = tEnd[0] + (tEnd[1] / 1000000000);
+            // Test each table's performance
+            this.times.set(testIdentifier, {});
+            this.test(testIdentifier, benchmark);
 
-        times.get(test)[table] = {
-            opsPerSec: amount / time,
-            time, amount, size
-        };
+            // Publish trial time
+            const current = this.times.get(testIdentifier);
+            Benchmark.stdout(CLI.erase.line);
+            Benchmark.stdout(CLI.move(-31 - testIdentifier.length));
 
-        connection.disconnect();
+            const operationsPerSecond = Math.round(Math.max(...Object
+                .values(current)
+                .map(table => table.opsPerSec)));
+            const amountOfEntities = current[Object.keys(current).pop()].amount;
+
+            Benchmark.stdout(CLI.magenta(CLI.bold(testIdentifier) +
+                `\n  (${operationsPerSecond} ops/s)` +
+                `\n  (${amountOfEntities} entries)`
+            ));
+
+            for (const table in current)
+                Benchmark.stdout(CLI.white(
+                    `\n· ${CLI.bold(table.padEnd(15))}` +
+                    CLI.green.bold(`${current[table].time.toFixed(3)}s`)
+                ));
+
+            Benchmark.stdout("\n\n");
+        }
     }
 
-    // Publish trial time
-    const current = times.get(test);
-    process.stdout.write(CLI.erase.line);
-    process.stdout.write(CLI.move(-31 - test.length));
+    static stdout(textContent) {
+        process.stdout.write(textContent);
+    }
 
-    process.stdout.write(CLI.magenta(CLI.bold(test) +
-        `\n  (${Math.round(Math.max(...Object.values(current).map(M => M.opsPerSec)))} ops/s)` +
-        `\n  (${current[Object.keys(current).pop()].amount} entries)`
-    ));
-
-    for (const table in current)
-        process.stdout.write(CLI.white(
-            `\n· ${CLI.bold(table.padEnd(15))}` +
-            CLI.green.bold(`${current[table].time.toFixed(3)}s`)
-        ));
-
-    process.stdout.write("\n\n");
+    test(testIdentifier, benchmark) {
+        for (const [table, size] of this.assets.tables) {
+            const connection = new Connection("Benchmark/Guilds.qdb", {
+                cache: CacheStrategy.unlimited(),
+                table
+            });
+    
+            const { amount, tEnd } = benchmark(connection);
+            const time = tEnd[0] + (tEnd[1] / 1e9);
+    
+            this.times.get(testIdentifier)[table] = {
+                opsPerSec: amount / time,
+                time,
+                amount,
+                size
+            };
+    
+            connection.disconnect();
+        }
+    }
 }
 
-process.stdout.write(CLI.green("Completed running benchmarks!\n"));
+Benchmark.stdout(CLI.reset);
+new Benchmark();
+
+Benchmark.stdout(CLI.green("Completed running benchmarks!\n"));
+process.exit(0);
