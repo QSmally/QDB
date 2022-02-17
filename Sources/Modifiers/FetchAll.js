@@ -21,8 +21,8 @@ class FetchAllModifier extends Modifier {
     batch(batch, batchSize) {
         setImmediate(() => {
             this.connection.API
-                .prepare(`SELECT Key, Val FROM '${this.connection.table}' LIMIT ${batch * batchSize},${batchSize};`)
-                .all()
+                .prepare(`SELECT Key, Val FROM '${this.connection.table}' LIMIT ?,?;`)
+                .all(batch * batchSize, batchSize)
                 .forEach(entry => this.patch(entry));
         });
     }
