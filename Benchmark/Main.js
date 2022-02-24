@@ -31,8 +31,8 @@ class Benchmark {
             const amountOfEntities = current[Object.keys(current).pop()].amount;
 
             Benchmark.stdout(CLI.magenta(CLI.bold(testIdentifier) +
-                `\n  (${operationsPerSecond} ops/s)` +
-                `\n  (${amountOfEntities} entries)`
+                `\n  (${operationsPerSecond.toLocaleString()} ops/s)` +
+                `\n  (${amountOfEntities.toLocaleString()} entries)`
             ));
 
             for (const table in current)

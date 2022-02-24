@@ -63,7 +63,7 @@ module.exports = () => {
 
             process.stdout.write(
                 table.padEnd(10, " ").slice(table.length) +
-                CLI.green(`Created ${CLI.bold(connection.size)} entries `) +
+                CLI.green(`Created ${CLI.bold(connection.size.toLocaleString())} entries `) +
                 CLI.white(`(${time.toFixed(3)}s)\n`)
             );
 
