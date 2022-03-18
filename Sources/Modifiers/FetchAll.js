@@ -27,9 +27,9 @@ class FetchAllModifier extends Modifier {
         });
     }
 
-    patch(entry) {
+    patch({ Key: keyContext, Val: document }) {
         this.connection.cacheController
-            .patch(entry["Key"], JSON.parse(entry["Val"]));
+            .patch(keyContext, JSON.parse(document));
     }
 }
 
