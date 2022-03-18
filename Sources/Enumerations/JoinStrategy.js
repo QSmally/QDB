@@ -18,9 +18,9 @@ module.exports = {
      */
     property(name) {
         return (documentObject, keyContext, value) => {
-            documentObject.hasOwnProperty(name) ?
-                documentObject[name][keyContext] = value :
-                documentObject[name] = { [keyContext]: value };
+            documentObject.hasOwnProperty(keyContext) ?
+                documentObject[keyContext][name] = value :
+                documentObject[keyContext] = { [name]: value };
         }
     }
 };
