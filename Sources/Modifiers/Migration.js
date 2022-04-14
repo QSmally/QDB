@@ -6,9 +6,7 @@ class MigrationModifier extends Modifier {
 
     get enabled() {
         const { model, migrate } = this.connection.configuration;
-        this.model = typeof model === "string" ?
-            Schema.models.get(model) :
-            model;
+        this.model = Schema.castType(model);
         return this.model && migrate;
     }
 

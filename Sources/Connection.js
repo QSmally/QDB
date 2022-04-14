@@ -494,9 +494,7 @@ class Connection {
     default(keyContext, document = {}) {
         if (!this.exists(keyContext)) {
             const { model } = this.configuration;
-            const schema = typeof model === "string" ?
-                Schema.models.get(model) :
-                model;
+            const schema = Schema.castType(model);
             this.set(keyContext, schema.instance(document));
         }
 

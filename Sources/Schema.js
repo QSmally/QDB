@@ -39,6 +39,17 @@ class Schema {
     }
 
     /**
+     * Ensures the type returning from this associated function.
+     * @param {Schema|String} model Either a Schema model or string identifier of it.
+     * @returns {Schema?}
+     */
+    static castType(model) {
+        return typeof model === "string" ?
+            Schema.models.get(model) :
+            model;
+    }
+
+    /**
      * Depth Object Control:
      * - The root object is always controlled fully (deleted and filled);
      * - If an object with a depth > 0 has content in it, it will also fully control that;
