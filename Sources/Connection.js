@@ -26,7 +26,7 @@ class Connection {
      * @property {Boolean} [insertionCache] Automatically inserts the new entry of a `set` operation into the Connection's internal cache.
      * @property {Boolean} [utilityCache] Automatically inserts the new entry of any utility operation, like `exists`, into the Connection's internal cache.
      * @property {Number} [fetchAll] If enabled, an integer being the batch size of each database call and insertion to eventually fetch everything.
-     * @property {Boolean} [unsafeAssumeCache] If set, discards a database lookup and only return the result from the cache. It does not return a clone.
+     * @property {Boolean} [unsafeAssumeCache] If set, discards a database lookup and only returns results from cache. It does not return a clone. For this to work properly, eviction must be off, insertion cache and fetch-all must be on.
      * @property {Schema|String} [model] A Schema for every entity in this Connection to follow.
      * @property {Boolean} [migrate] Whether to migrate every entity in the Connection's database to its (new) model.
      */
@@ -254,7 +254,12 @@ class Connection {
         const [keyContext, ...path] = Generics.resolveKeyPath(pathContext);
 
         if (this.configuration.unsafeAssumeCache) {
-            return this.memory.get(keyContext);
+            const cachedObject = this.memory.get(keyContext);
+            if (cachedObject == undefined) return cachedObject;
+
+            return path.length ?
+                Generics.pathCast(cachedObject, path) :
+                cachedObject;
         }
 
         const fetched = this.memory.get(keyContext) ?? (() => {
