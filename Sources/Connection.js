@@ -21,6 +21,7 @@ class Connection {
      * @property {Journal} [journal] The journal mode of this database, which defaults to Write Ahead Logging. See https://sqlite.org/pragma.html#pragma_journal_mode.
      * @property {Number} [diskCacheSize] The maximum amount of pages on disk SQLite will hold. See https://sqlite.org/pragma.html#pragma_cache_size.
      * @property {Synchronisation} [synchronisation] SQLite synchronisation, which defaults to 'normal'. See https://sqlite.org/pragma.html#pragma_synchronous.
+     * @property {Function} [output] An output subroutine with, as parameter, the query string inputted to SQLite.
      * @property {CacheStrategy} [cache] A cache strategy and host for the 'memory' property of the Connection.
      * @property {Boolean} [insertionCache] Automatically inserts the new entry of a `set` operation into the Connection's internal cache.
      * @property {Boolean} [utilityCache] Automatically inserts the new entry of any utility operation, like `exists`, into the Connection's internal cache.
@@ -68,6 +69,8 @@ class Connection {
             diskCacheSize: 64e3,
             synchronisation: Synchronisation.normal,
 
+            output: _query => {},
+
             cache: CacheStrategy.managed(),
             insertionCache: true,
             utilityCache: true,
@@ -87,7 +90,7 @@ class Connection {
          * @link https://github.com/JoshuaWise/better-sqlite3/blob/master/docs/api.md
          * @private
          */
-        this.API = new SQL(pathURL);
+        this.API = new SQL(pathURL, { verbose: this.configuration.output });
 
         if (!this.API) {
             throw new Error("A QDB Connection could not be created.");
