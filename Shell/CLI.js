@@ -20,8 +20,6 @@ class CLIStateController {
             new (CLIStateController.commands.get("help"))().execute();
     }
 
-    static newline = console.log;
-
     handleCommand(actionOrFile) {
         const Executable = CLIStateController.commands.get(actionOrFile.toLowerCase());
         if (Executable) return new Executable(CLIStateController.parameters.shift()).execute();
@@ -30,7 +28,7 @@ class CLIStateController {
             return this.handleConnectionCommand(actionOrFile);
         }
 
-        CLIStateController.newline([
+        console.log([
             `${Formatter.dim("Error")}: '${actionOrFile}' does not exist.`,
             "Use 'qdb make <database>' to create a new database file."
         ].join("\n"));
@@ -46,17 +44,17 @@ class CLIStateController {
     
         if (Command) {
             if (Command.arguments > CLIStateController.parameters.length)
-                return CLIStateController.newline(`${Format.dim("Error")}: expected ${Command.arguments} arguments, but received ${CLIStateController.parameters.length}.`);
+                return console.log(`${Format.dim("Error")}: expected ${Command.arguments} arguments, but received ${CLIStateController.parameters.length}.`);
     
             try {
                 return new Command(database, CLIStateController.parameters).execute();
             } catch (error) {
                 const message = `${Formatter.dim("Error")}: ${error.message.toLowerCase()}`;
-                return CLIStateController.newline(message);
+                return console.log(message);
             }
         }
 
-        CLIStateController.newline([
+        console.log([
             `${Formatter.dim("Error")}: database command '${target}' does not exist.`,
             "See a list of commands by invoking 'qdb help [command]'."
         ].join("\n"));

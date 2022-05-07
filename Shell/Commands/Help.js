@@ -8,7 +8,7 @@ class HelpCommand extends Command {
 
     static name = "help";
 
-    examples = [
+    static examples = [
         "make Instances.qdb",
         "Development.qdb create Users",
         "Production.qdb vacuum"
@@ -36,7 +36,7 @@ class HelpCommand extends Command {
             Formatter.list(this.view, 12),
 
             Formatter.bold("\nEXAMPLES"),
-            this.examples
+            HelpCommand.examples
                 .map(example => `  $ qdb ${example}`)
                 .join("\n"),
 
