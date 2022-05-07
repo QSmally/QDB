@@ -190,7 +190,7 @@ class Connection {
     /**
      * Creates a SQL transaction which allows you to commit or rollback changes in
      * an optimised manner.
-     * @returns {Transaction?} A Transaction instance, or a nil value if already in a transaction.
+     * @returns {Transaction?} A Transaction instance, or a nil value if the database is already in a transaction.
      */
     transaction() {
         if (this.API.inTransaction) return;
@@ -282,7 +282,7 @@ class Connection {
     }
 
     /**
-     * Manages the deletion of elements from the Connection's internal cache.
+     * Manages the removal of elements from the Connection's internal cache.
      * @param {...Pathlike} keyContexts Specifies which rows to evict from the Connection's internal cache.
      * @returns {Connection}
      */
@@ -325,7 +325,7 @@ class Connection {
     /**
      * Returns whether or not a property in this database exists. As this method
      * fetches from the Connection, it will automatically be cached, making a
-     * subsequent much faster.
+     * subsequent fetch much faster.
      * @param {Pathlike} pathlike Specifies which row or nested property to see if it exists.
      * @param {Boolean} [cache] A flag to insert this entry into the Connection's cache if not already, defaults to the `utilityCache` configuration option.
      * @returns {Boolean}
