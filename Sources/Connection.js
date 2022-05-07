@@ -138,7 +138,7 @@ class Connection {
      * @readonly
      */
     get cacheSize() {
-        return this.memory.size;
+        return this.memoryStore.size;
     }
 
     /**
@@ -159,23 +159,23 @@ class Connection {
     /**
      * Internal computed property.
      * A Connection's internal memory controller to hold its cache.
-     * @name Connection#cacheController
+     * @name Connection#cacheStrategyController
      * @type {CacheStrategy}
      * @private
      */
-    get cacheController() {
+    get cacheStrategyController() {
         return this.configuration.cache;
     }
 
     /**
      * Internal computed property.
      * In-memory cached rows.
-     * @name Connection#memory
+     * @name Connection#memoryStore
      * @type {Collection<String, DataModel>}
      * @private
      */
-    get memory() {
-        return this.configuration.cache.memory;
+    get memoryStore() {
+        return this.configuration.cache.memoryStore;
     }
 
     // Integrations
@@ -206,10 +206,10 @@ class Connection {
      */
     disconnect() {
         this.API.close();
-        this.memory.clear();
+        this.memoryStore.clear();
 
-        if (this.cacheController.timer)
-            clearInterval(this.cacheController.timer);
+        if (this.cacheStrategyController.timer)
+            clearInterval(this.cacheStrategyController.timer);
         return this;
     }
 
@@ -237,8 +237,8 @@ class Connection {
             .prepare(`INSERT OR REPLACE INTO '${this.table}' ('Key', 'Val') VALUES (?, ?);`)
             .run(keyContext, JSON.stringify(document));
 
-        if (cache || this.memory.has(keyContext) || this.configuration.fetchAll > 0) {
-            this.cacheController.patch(keyContext, document);
+        if (cache || this.memoryStore.has(keyContext) || this.configuration.fetchAll > 0) {
+            this.cacheStrategyController.patch(keyContext, document);
         }
 
         return this;
@@ -254,7 +254,7 @@ class Connection {
         const [keyContext, ...path] = Generics.resolveKeyPath(pathContext);
 
         if (this.configuration.unsafeAssumeCache) {
-            const cachedObject = this.memory.get(keyContext);
+            const cachedObject = this.memoryStore.get(keyContext);
             if (cachedObject == undefined) return cachedObject;
 
             return path.length ?
@@ -262,7 +262,7 @@ class Connection {
                 cachedObject;
         }
 
-        const fetched = this.memory.get(keyContext) ?? (() => {
+        const fetched = this.memoryStore.get(keyContext) ?? (() => {
             const { Val: document } = this.API
                 .prepare(`SELECT Val FROM '${this.table}' WHERE Key = ?;`)
                 .get(keyContext) ?? {};
@@ -272,7 +272,7 @@ class Connection {
         })();
 
         if (fetched == undefined) return fetched;
-        if (cache && !this.memory.has(keyContext)) this.cacheController.patch(keyContext, fetched);
+        if (cache && !this.memoryStore.has(keyContext)) this.cacheStrategyController.patch(keyContext, fetched);
 
         let documentClone = Generics.clone(fetched);
         if (path.length) documentClone = Generics.pathCast(documentClone, path);
@@ -290,9 +290,9 @@ class Connection {
         if (keyContexts.length) {
             keyContexts
                 .map(key => Generics.resolveKeyPath(key).shift())
-                .forEach(keyContext => this.memory.delete(keyContext));
+                .forEach(keyContext => this.memoryStore.delete(keyContext));
         } else {
-            this.memory.clear();
+            this.memoryStore.clear();
         }
 
         return this;
@@ -345,7 +345,7 @@ class Connection {
      */
     find(predicate, cache = this.configuration.utilityCache) {
         if (cache) {
-            for (const [keyContext, document] of this.memory)
+            for (const [keyContext, document] of this.memoryStore)
                 if (predicate(document, keyContext)) return Generics.clone(document);
         }
 

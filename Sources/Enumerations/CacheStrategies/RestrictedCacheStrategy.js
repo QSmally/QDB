@@ -29,11 +29,12 @@ class RestrictedCacheStrategy extends CacheStrategy {
      * default method if it passes.
      * @param {String} keyContext As address to memory map this data model to.
      * @param {DataModel} document The value to set in the cache, as a parsed memory model.
+     * @todo Eviction modes
      */
     patch(keyContext, document) {
         if (this.maxSize !== Infinity &&
-            this.memory.size >= this.maxSixe &&
-            !this.memory.has(keyContext)) return;
+            this.memoryStore.size >= this.maxSixe &&
+            !this.memoryStore.has(keyContext)) return;
         super.patch(keyContext, document);
     }
 }

@@ -50,7 +50,7 @@ class Transaction {
         if (!this.active) return false;
 
         this.connection.API.prepare("ROLLBACK;").run();
-        this.connection.memory.clear();
+        this.connection.memoryStore.clear();
         this.active = false;
         return true;
     }

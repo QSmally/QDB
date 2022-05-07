@@ -51,22 +51,9 @@ class ManagedCacheStrategy extends RestrictedCacheStrategy {
      */
     onSweepTick() {
         const now = Date.now();
-        this.memory
+        this.memoryStore
             .filter(entry => now - entry._timestamp >= this.lifetime)
-            .each((_, keyContext) => this.memory.delete(keyContext));
-    }
-
-    /**
-     * Applies the eviction mode to the passing elements of the cache, calls the
-     * default method if it passes.
-     * @param {String} keyContext As address to memory map this data model to.
-     * @param {DataModel} document The value to set in the cache, as a parsed memory model.
-     */
-    patch(keyContext, document) {
-        if (this.maxSize !== Infinity &&
-            this.memory.size >= this.maxSize &&
-            !this.memory.has(keyContext)) return;
-        super.patch(keyContext, document);
+            .each((_, keyContext) => this.memoryStore.delete(keyContext));
     }
 }
 

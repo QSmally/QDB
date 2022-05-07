@@ -7,11 +7,11 @@ class CacheStrategy {
 
     /**
      * In-memory cached rows.
-     * @name CacheStrategy#memory
+     * @name CacheStrategy#memoryStore
      * @type {Collection<String, DataModel>}
      * @private
      */
-    memory = new Collection();
+    memoryStore = new Collection();
 
      /**
       * Inserts or patches something in the Connection's internal cache.
@@ -22,7 +22,7 @@ class CacheStrategy {
     patch(keyContext, document) {
         const documentClone = Generics.clone(document);
         documentClone._timestamp = Date.now();
-        this.memory.set(keyContext, documentClone);
+        this.memoryStore.set(keyContext, documentClone);
     }
 }
 

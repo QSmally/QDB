@@ -10,7 +10,7 @@ class FetchAllModifier extends Modifier {
 
     execute() {
         const { fetchAll: batchSize } = this.connection.configuration;
-        const maxSize = this.connection.cacheController.maxSize ?? Infinity;
+        const maxSize = this.connection.cacheStrategyController.maxSize ?? Infinity;
         const batchAmount = Math.ceil(Math.min(this.connection.size, maxSize) / batchSize);
 
         for (let batch = 0;
@@ -28,7 +28,7 @@ class FetchAllModifier extends Modifier {
     }
 
     patch({ Key: keyContext, Val: document }) {
-        this.connection.cacheController
+        this.connection.cacheStrategyController
             .patch(keyContext, JSON.parse(document));
     }
 }
