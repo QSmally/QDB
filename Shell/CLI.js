@@ -44,7 +44,7 @@ class CLIStateController {
     
         if (Command) {
             if (Command.arguments > CLIStateController.parameters.length)
-                return console.log(`${Format.dim("Error")}: expected ${Command.arguments} arguments, but received ${CLIStateController.parameters.length}.`);
+                return console.log(`${Formatter.dim("Error")}: expected ${Command.arguments} arguments, but received ${CLIStateController.parameters.length}.`);
     
             try {
                 return new Command(database, CLIStateController.parameters).execute();
