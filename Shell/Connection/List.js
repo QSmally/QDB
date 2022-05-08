@@ -35,12 +35,13 @@ class ConnectionCommand extends Command {
         const index = size > 0 ?
             Math.floor(Math.log(size) / Math.log(1024)) :
             0;
+        const indent = Math.max(...tables.map(entry => entry[0].length)) + 5;
 
         console.log([
             `Label:  ${Formatter.dim(this.path)}`,
             `Size:   ${Formatter.bold(`${Math.round(size / Math.pow(1024, index))} ${ConnectionCommand.units[index]}`)}`,
             `Tables: ${Formatter.bold(tables.length)}\n`,
-            Formatter.list(Object.fromEntries(tables), 26, true)
+            Formatter.list(Object.fromEntries(tables), indent, true)
         ].join("\n"));
 
         this.connection.close();
