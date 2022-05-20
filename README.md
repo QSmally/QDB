@@ -11,10 +11,10 @@
 * Selection and transaction support.
 
 ## Performance
-The QDB 4.1 build reaches similar insert and retrieval rates as opposed to QDB 4.0, while implementing additional security features such as cloning entries from the cache before returning them. Methods such as `find` have drastically improved in performance.
+The QDB 4.1 build reaches similar insert and retrieval rates as opposed to QDB 4.0, while implementing additional security features such as cloning entries from the cache before returning them. Methods such as `.find()` have drastically improved in performance.
 
 ## Links
-* [Documentations](https://github.com/QSmally/QDB/blob/v4/Documentation/Index.md)
+<!-- * [Documentations](https://github.com/QSmally/QDB) -->
 * [Github](https://github.com/QSmally/QDB)
 
 ## Installation
@@ -27,7 +27,7 @@ const { Connection, ... } = require("qdatabase");
 
 # Usage
 
-## [Connection](https://github.com/QSmally/QDB/blob/v4/Documentation/Connection.md)
+## [Connection](https://github.com/QSmally/QDB)
 The main interface for interacting with QDB.
 ```js
 const service = new Connection("/opt/company/Cellar/Users.qdb", {
@@ -35,7 +35,7 @@ const service = new Connection("/opt/company/Cellar/Users.qdb", {
 });
 ```
 
-## [Transaction](https://github.com/QSmally/QDB/blob/v4/Documentation/Transaction.md)
+## [Transaction](https://github.com/QSmally/QDB)
 A SQL transaction manager.
 ```js
 // Instantiates a transaction within the database. It is required to
@@ -47,7 +47,7 @@ transaction.commit(); // or
 transaction.rollback();
 ```
 
-## [Selection](https://github.com/QSmally/QDB/blob/v4/Documentation/Selection.md)
+## [Selection](https://github.com/QSmally/QDB)
 An unchanged piece of the database in memory.
 ```js
 // Aggregate with certain instructions, like joining tables,
@@ -62,7 +62,7 @@ const users = service.select()
 # QDB Shell
 The library integrates a CLI for interacting with QDB deployments.
 
-`npm install -g QSmally/QDB`
+`npm install -g QSmally/QDB#staging`
 
 ```s
 $ qdb make Instances.qdb
