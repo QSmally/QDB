@@ -67,10 +67,10 @@ class Selection {
      * @readonly
      */
     get entities() {
-        return this.indexes.map(keyContext => {
-            const documentObject = this.cache.get(keyContext);
-            documentObject["Id"] = keyContext;
-            return documentObject
+        return this.cache.map((documentObject, key) => {
+            const documentObjectClone = Generics.clone(documentObject);
+            documentObjectClone["Id"] = key;
+            return documentObjectClone;
         });
     }
 
