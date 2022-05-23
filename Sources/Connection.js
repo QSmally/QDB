@@ -2,8 +2,10 @@
 "use strict";
 
 const { Collection } = require("qulity");
-const Schema         = require("./Schema");
 const SQL            = require("better-sqlite3");
+
+const Schema   = require("./Schema");
+const Compiler = require("./Structures/Compiler");
 
 const Generics        = require("./Generics");
 const Journal         = require("./Enumerations/Journal");
@@ -91,6 +93,14 @@ class Connection {
          * @private
          */
         this.API = new SQL(pathURL, { verbose: this.configuration.output });
+
+        /**
+         * The JIT-compiler used for generating SQL queries.
+         * @name Connection#compiler
+         * @type {Compiler}
+         * @private
+         */
+        this.compiler = new Compiler(this.API, this.table);
 
         if (!this.API) {
             throw new Error("A QDB Connection could not be created.");
@@ -181,8 +191,7 @@ class Connection {
     // Integrations
 
     * [Symbol.iterator]() {
-        yield* this.API
-            .prepare(`SELECT Key, Val FROM '${this.table}';`)
+        yield* this.compiler.list
             .all()
             .map(row => [row["Key"], JSON.parse(row["Val"])]);
     }
@@ -233,9 +242,7 @@ class Connection {
                 throw new TypeError("Type of 'document' must be a data model for the root path.");
         }
 
-        this.API
-            .prepare(`INSERT OR REPLACE INTO '${this.table}' ('Key', 'Val') VALUES (?, ?);`)
-            .run(keyContext, JSON.stringify(document));
+        this.compiler.insert.run(keyContext, JSON.stringify(document));
 
         if (cache || this.memoryStore.has(keyContext) || this.configuration.fetchAll > 0) {
             this.cacheStrategyController.patch(keyContext, document);
@@ -263,9 +270,7 @@ class Connection {
         }
 
         const fetched = this.memoryStore.get(keyContext) ?? (() => {
-            const { Val: document } = this.API
-                .prepare(`SELECT Val FROM '${this.table}' WHERE Key = ?;`)
-                .get(keyContext) ?? {};
+            const { Val: document } = this.compiler.fetch.get(keyContext) ?? {};
             return document === undefined ?
                 document :
                 JSON.parse(document);
@@ -349,9 +354,7 @@ class Connection {
                 if (predicate(document, keyContext)) return Generics.clone(document);
         }
 
-        const rows = this.API
-            .prepare(`SELECT Key, Val FROM '${this.table}';`)
-            .all();
+        const rows = this.compiler.list.all();
 
         for (const { Key: keyContext, Val: value } of rows) {
             const document = JSON.parse(value);
@@ -365,9 +368,7 @@ class Connection {
      * @returns {Connection}
      */
     each(iterator) {
-        const rows = this.API
-            .prepare(`SELECT Key, Val FROM '${this.table}';`)
-            .all();
+        const rows = this.compiler.list.all();
 
         for (const { Key: keyContext, Val: value } of rows)
             iterator(JSON.parse(value), keyContext);
@@ -385,9 +386,7 @@ class Connection {
         const selection = typeof predicateOrPathlike === "string" ?
             this.fetch(predicateOrPathlike, this.configuration.utilityCache) :
             (() => {
-                const rows = this.API
-                    .prepare(`SELECT Key, Val FROM '${this.table}';`)
-                    .all();
+                const rows = this.compiler.list.all();
                 const accumulatedEntities = new Collection();
 
                 for (const { Key: keyContext, Val: document } of rows) {
