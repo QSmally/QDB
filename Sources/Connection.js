@@ -136,8 +136,8 @@ class Connection {
      * @readonly
      */
     get size() {
-        return this.API
-            .prepare(`SELECT COUNT(*) FROM '${this.table}';`)
+        return this.compiler
+            .query(Compiler.countStatement)
             .get()["COUNT(*)"];
     }
 
@@ -158,8 +158,8 @@ class Connection {
      * @readonly
      */
     get indexes() {
-        return this.API
-            .prepare(`SELECT Key FROM '${this.table}';`)
+        return this.compiler
+            .query(Compiler.listKeysStatement)
             .all()
             .map(row => row["Key"]);
     }
@@ -191,7 +191,8 @@ class Connection {
     // Integrations
 
     * [Symbol.iterator]() {
-        yield* this.compiler.list
+        yield* this.compiler
+            .query(Compiler.listStatement)
             .all()
             .map(row => [row["Key"], JSON.parse(row["Val"])]);
     }
@@ -242,7 +243,9 @@ class Connection {
                 throw new TypeError("Type of 'document' must be a data model for the root path.");
         }
 
-        this.compiler.insert.run(keyContext, JSON.stringify(document));
+        this.compiler
+            .query(Compiler.insertStatement)
+            .run(keyContext, JSON.stringify(document));
 
         if (cache || this.memoryStore.has(keyContext) || this.configuration.fetchAll > 0) {
             this.cacheStrategyController.patch(keyContext, document);
@@ -270,7 +273,9 @@ class Connection {
         }
 
         const fetched = this.memoryStore.get(keyContext) ?? (() => {
-            const { Val: document } = this.compiler.fetch.get(keyContext) ?? {};
+            const { Val: document } = this.compiler
+                .query(Compiler.fetchStatement)
+                .get(keyContext) ?? {};
             return document === undefined ?
                 document :
                 JSON.parse(document);
@@ -354,7 +359,9 @@ class Connection {
                 if (predicate(document, keyContext)) return Generics.clone(document);
         }
 
-        const rows = this.compiler.list.all();
+        const rows = this.compiler
+            .query(Compiler.listStatement)
+            .all();
 
         for (const { Key: keyContext, Val: value } of rows) {
             const document = JSON.parse(value);
@@ -368,7 +375,9 @@ class Connection {
      * @returns {Connection}
      */
     each(iterator) {
-        const rows = this.compiler.list.all();
+        const rows = this.compiler
+            .query(Compiler.listStatement)
+            .all();
 
         for (const { Key: keyContext, Val: value } of rows)
             iterator(JSON.parse(value), keyContext);
@@ -386,7 +395,9 @@ class Connection {
         const selection = typeof predicateOrPathlike === "string" ?
             this.fetch(predicateOrPathlike, this.configuration.utilityCache) :
             (() => {
-                const rows = this.compiler.list.all();
+                const rows = this.compiler
+                    .query(Compiler.listStatement)
+                    .all();
                 const accumulatedEntities = new Collection();
 
                 for (const { Key: keyContext, Val: document } of rows) {

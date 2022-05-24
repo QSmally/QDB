@@ -1,31 +1,34 @@
 
 class Compiler {
 
-    insertStatement = null;
-    fetchStatement = null;
-    listStatement = null;
+    static insertStatement = Symbol();
+    static fetchStatement = Symbol();
+    static countStatement = Symbol();
+    static listKeysStatement = Symbol();
+    static listStatement = Symbol();
+
+    cache = new Map();
 
     constructor(API, table) {
         this.API = API;
         this.table = table;
     }
 
-    get insert() {
-        if (this.insertStatement) return this.insertStatement;
-        this.insertStatement = this.API.prepare(`INSERT OR REPLACE INTO '${this.table}' ('Key', 'Val') VALUES (?, ?);`);
-        return this.insertStatement;
-    }
+    query(ofQueryKey) {
+        const compiledQuery = this.cache.get(ofQueryKey);
+        if (compiledQuery) return compiledQuery;
 
-    get fetch() {
-        if (this.fetchStatement) return this.fetchStatement;
-        this.fetchStatement = this.API.prepare(`SELECT Val FROM '${this.table}' WHERE Key = ?;`);
-        return this.fetchStatement;
-    }
+        const queryString = {
+            [Compiler.insertStatement]:   `INSERT OR REPLACE INTO '${this.table}' ('Key', 'Val') VALUES (?, ?);`,
+            [Compiler.fetchStatement]:    `SELECT Val FROM '${this.table}' WHERE Key = ?;`,
+            [Compiler.countStatement]:    `SELECT COUNT(*) FROM '${this.table}';`,
+            [Compiler.listKeysStatement]: `SELECT Key FROM '${this.table}';`,
+            [Compiler.listStatement]:     `SELECT Key, Val FROM '${this.table}';`
+        }[ofQueryKey];
 
-    get list() {
-        if (this.listStatement) return this.listStatement;
-        this.listStatement = this.API.prepare(`SELECT Key, Val FROM '${this.table}';`);
-        return this.listStatement;
+        const query = this.API.prepare(queryString);
+        this.cache.set(ofQueryKey, query);
+        return query;
     }
 }
 
