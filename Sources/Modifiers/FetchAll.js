@@ -1,5 +1,6 @@
 
 const Modifier = require("../Structures/Modifier");
+const Compiler = require("../Structures/Compiler");
 
 class FetchAllModifier extends Modifier {
 
@@ -20,8 +21,8 @@ class FetchAllModifier extends Modifier {
 
     batch(batch, batchSize) {
         setImmediate(() => {
-            this.connection.API
-                .prepare(`SELECT Key, Val FROM '${this.connection.table}' LIMIT ?,?;`)
+            this.connection.compiler
+                .query(Compiler.batchListStatement)
                 .all(batch * batchSize, batchSize)
                 .forEach(entry => this.patch(entry));
         });
