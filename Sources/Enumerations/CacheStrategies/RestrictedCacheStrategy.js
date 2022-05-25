@@ -41,7 +41,7 @@ class RestrictedCacheStrategy extends CacheStrategy {
      */
     patch(keyContext, document) {
         if (this.maxSize !== Infinity &&
-            this.memoryStore.size >= this.maxSixe &&
+            this.memoryStore.size >= this.maxSize &&
             !this.memoryStore.has(keyContext) &&
             !this.replacement(this.memoryStore)) return;
         super.patch(keyContext, document);
