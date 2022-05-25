@@ -8,14 +8,15 @@ class ManagedCacheStrategy extends RestrictedCacheStrategy {
      * @property {Number} [interval] An interval at which to sweep the cache at, depending on the lifetime of entries.
      * @property {Number} [lifetime] The minimum lifetime of a data model entry before being able to be swept at an interval.
      * @property {Number} [maxSize] A maximum size for the cache of the Connection.
+     * @property {EvictionPolicy} [replacement] An eviction mode for this cache.
      */
 
     /**
      * Initialises the caching strategy.
      * @param {ManagedStrategyProperties} properties
      */
-    constructor({ interval, lifetime, maxSize }) {
-        super({ maxSize });
+    constructor({ interval, lifetime, maxSize, replacement }) {
+        super({ maxSize, replacement });
 
         /**
          * An interval at which to sweep the cache at, depending on the lifetime of

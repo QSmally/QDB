@@ -1,6 +1,8 @@
 
 const CacheStrategy = require("../Structures/CacheStrategy");
 
+const EvictionPolicy = require("./EvictionPolicy");
+
 module.exports = {
 
     /**
@@ -12,10 +14,11 @@ module.exports = {
     managed({
         interval = 3e5,
         lifetime = 9e5,
-        maxSize = Infinity
+        maxSize = Infinity,
+        replacement = EvictionPolicy.block()
     } = {}) {
         const ManagedCacheStrategy = require("./CacheStrategies/ManagedCacheStrategy");
-        return new ManagedCacheStrategy({ interval, lifetime, maxSize });
+        return new ManagedCacheStrategy({ interval, lifetime, maxSize, replacement });
     },
 
     /**
@@ -24,10 +27,11 @@ module.exports = {
      * @returns {RestrictedCacheStrategy}
      */
     restricted({
-        maxSize = Infinity
+        maxSize = Infinity,
+        replacement = EvictionPolicy.block()
     } = {}) {
         const RestrictedCacheStrategy = require("./CacheStrategies/RestrictedCacheStrategy");
-        return new RestrictedCacheStrategy({ maxSize });
+        return new RestrictedCacheStrategy({ maxSize, replacement });
     },
 
     /**

@@ -21,6 +21,7 @@ module.exports = {
     Journal:          require("./Sources/Enumerations/Journal"),
     JoinStrategy:     require("./Sources/Enumerations/JoinStrategy"),
     CacheStrategy:    require("./Sources/Enumerations/CacheStrategy"),
+    EvictionPolicy:   require("./Sources/Enumerations/EvictionPolicy"),
     Synchronisation:  require("./Sources/Enumerations/Synchronisation"),
     SortingPredicate: require("./Sources/Enumerations/SortingPredicate")
 
