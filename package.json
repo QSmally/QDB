@@ -4,10 +4,9 @@
   "description": "An optimised, document-based SQL database",
   "main": "QDB.js",
   "scripts": {
-    "test": "node Test/Main.js",
+    "test": "node Test/Test.js",
     "debug": "node Test/Main.js -d",
-    "benchmark": "node Benchmark/Main.js",
-    "docs": "gendocs Test/DocConf.json"
+    "benchmark": "node Benchmark/Main.js"
   },
   "bin": {
     "qdb": "Shell/CLI.js"
