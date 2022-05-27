@@ -6,14 +6,14 @@ class RestrictedCacheStrategy extends CacheStrategy {
     /**
      * @typedef {Object} RestrictedStrategyProperties
      * @property {Number} [maxSize] A maximum size for the cache of the Connection.
-     * @property {EvictionPolicy} [replacement] An eviction mode for this cache.
+     * @property {EvictionPolicy} [evictionAlgorithm] An eviction mode for this cache.
      */
 
     /**
      * Initialises the caching strategy.
      * @param {RestrictedStrategyProperties} properties
      */
-    constructor({ maxSize, replacement }) {
+    constructor({ maxSize, evictionAlgorithm }) {
         super();
 
         /**
@@ -26,11 +26,11 @@ class RestrictedCacheStrategy extends CacheStrategy {
 
         /**
          * An eviction mode for this cache.
-         * @name RestrictedCacheStrategy#replacement
+         * @name RestrictedCacheStrategy#evictionAlgorithm
          * @type {EvictionPolicy}
          * @readonly
          */
-        this.replacement = replacement;
+        this.evictionAlgorithm = evictionAlgorithm;
     }
 
     /**
@@ -43,7 +43,7 @@ class RestrictedCacheStrategy extends CacheStrategy {
         if (this.maxSize !== Infinity &&
             this.memoryStore.size >= this.maxSize &&
             !this.memoryStore.has(keyContext) &&
-            !this.replacement(this.memoryStore)) return;
+            !this.evictionAlgorithm(this.memoryStore)) return;
         super.patch(keyContext, document);
     }
 }
