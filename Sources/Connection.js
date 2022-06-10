@@ -21,7 +21,7 @@ class Connection {
      * @typedef {Object} QDBConfiguration
      * @property {String} [table] A name for the table to use at the path for this Connection.
      * @property {Journal} [journal] The journal mode of this database, which defaults to Write Ahead Logging. See https://sqlite.org/pragma.html#pragma_journal_mode.
-     * @property {Number} [diskCacheSize] The maximum amount of pages on disk SQLite will hold. See https://sqlite.org/pragma.html#pragma_cache_size.
+     * @property {Number} [diskCacheSize] The maximum amount of 'pages' or '-kib' SQLite will hold on disk. See https://sqlite.org/pragma.html#pragma_cache_size.
      * @property {Synchronisation} [synchronisation] SQLite synchronisation, which defaults to 'normal'. See https://sqlite.org/pragma.html#pragma_synchronous.
      * @property {Function} [output] An output subroutine with, as parameter, the query string inputted to SQLite.
      * @property {CacheStrategy} [cache] A cache strategy and host for the 'memory' property of the Connection.
