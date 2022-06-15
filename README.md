@@ -3,7 +3,6 @@
 
 > QDB is a SQLite framework reliant on JavaScript documents with various optimisations included.
 
-
 # Features
 * Synchronous, non-blocking API (built on [`better-sqlite3`](https://github.com/JoshuaWise/better-sqlite3));
 * Configurable cache with eviction strategies;
@@ -23,7 +22,6 @@ The QDB 4.1 build reaches similar insert rates and faster retrieval speeds as op
 const { Connection, ... } = require("qdatabase");
 // ...
 ```
-
 
 # Usage
 
@@ -58,7 +56,6 @@ const users = service.select()
     .group("rank");
 ```
 
-
 # QDB Shell
 The library integrates a CLI for interacting with QDB deployments.
 
@@ -69,6 +66,5 @@ $ qdb make Instances.qdb
 $ qdb Development.qdb create Users
 $ qdb Production.qdb vacuum
 ```
-
 
 This module is licensed under [Apache 2.0](http://www.apache.org/licenses/LICENSE-2.0).
