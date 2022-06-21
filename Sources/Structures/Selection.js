@@ -146,7 +146,7 @@ class Selection {
         let pointer = 0;
 
         for (const [keyContext] of this.cache) {
-            if (extractionStartOffset > pointer && pointer >= extractionStartOffset + amount)
+            if (extractionStartOffset > pointer || pointer >= extractionStartOffset + amount)
                 this.cache.delete(keyContext);
             pointer++;
         }
