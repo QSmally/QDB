@@ -4,8 +4,8 @@ module.exports = connection => {
     const pattern = 3;
 
     for (let i = 0; i < indexes.length; i++) {
-        if (i % pattern !== 0) continue;
-        connection.fetch(indexes[i]);
+        if (i % pattern === 0)
+            connection.fetch(indexes[i]);
     }
 
     const target = connection.fetch(indexes[indexes.length - 1]);
