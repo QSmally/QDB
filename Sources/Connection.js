@@ -137,7 +137,7 @@ class Connection {
      */
     get size() {
         return this.compiler
-            .query(Compiler.countStatement)
+            .query(Compiler.statements.count)
             .get()["COUNT(*)"];
     }
 
@@ -159,7 +159,7 @@ class Connection {
      */
     get indexes() {
         return this.compiler
-            .query(Compiler.listKeysStatement)
+            .query(Compiler.statements.listKeys)
             .all()
             .map(row => row["Key"]);
     }
@@ -192,7 +192,7 @@ class Connection {
 
     * [Symbol.iterator]() {
         yield* this.compiler
-            .query(Compiler.listStatement)
+            .query(Compiler.statements.list)
             .all()
             .map(row => [row["Key"], JSON.parse(row["Val"])]);
     }
@@ -244,7 +244,7 @@ class Connection {
         }
 
         this.compiler
-            .query(Compiler.insertStatement)
+            .query(Compiler.statements.insert)
             .run(keyContext, JSON.stringify(document));
 
         if (cache || this.memoryStore.has(keyContext) || this.configuration.fetchAll > 0) {
@@ -274,7 +274,7 @@ class Connection {
 
         const fetched = this.memoryStore.get(keyContext) ?? (() => {
             const { Val: document } = this.compiler
-                .query(Compiler.fetchStatement)
+                .query(Compiler.statements.fetch)
                 .get(keyContext) ?? {};
             return document === undefined ?
                 document :
@@ -360,7 +360,7 @@ class Connection {
         }
 
         const rows = this.compiler
-            .query(Compiler.listStatement)
+            .query(Compiler.statements.list)
             .all();
 
         for (const { Key: keyContext, Val: value } of rows) {
@@ -376,7 +376,7 @@ class Connection {
      */
     each(iterator) {
         const rows = this.compiler
-            .query(Compiler.listStatement)
+            .query(Compiler.statements.list)
             .all();
 
         for (const { Key: keyContext, Val: value } of rows)
@@ -396,7 +396,7 @@ class Connection {
             this.fetch(predicateOrPathlike, this.configuration.utilityCache) :
             (() => {
                 const rows = this.compiler
-                    .query(Compiler.listStatement)
+                    .query(Compiler.statements.list)
                     .all();
                 const accumulatedEntities = new Collection();
 

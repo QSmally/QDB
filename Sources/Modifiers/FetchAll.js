@@ -22,7 +22,7 @@ class FetchAllModifier extends Modifier {
     batch(batch, batchSize) {
         setImmediate(() => {
             this.connection.compiler
-                .query(Compiler.batchListStatement)
+                .query(Compiler.statements.batchList)
                 .all(batch * batchSize, batchSize)
                 .forEach(entry => this.patch(entry));
         });

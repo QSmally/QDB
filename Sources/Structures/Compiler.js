@@ -1,12 +1,13 @@
 
 class Compiler {
 
-    static insertStatement = Symbol();
-    static fetchStatement = Symbol();
-    static countStatement = Symbol();
-    static listKeysStatement = Symbol();
-    static listStatement = Symbol();
-    static batchListStatement = Symbol();
+    static statements = {
+        insert: Symbol(),
+        fetch: Symbol(),
+        count: Symbol(),
+        listKeys: Symbol(),
+        list: Symbol(),
+        batchList: Symbol() };
 
     cache = new Map();
 
@@ -20,12 +21,12 @@ class Compiler {
         if (compiledQuery) return compiledQuery;
 
         const queryString = {
-            [Compiler.insertStatement]:    `INSERT OR REPLACE INTO '${this.table}' ('Key', 'Val') VALUES (?, ?);`,
-            [Compiler.fetchStatement]:     `SELECT Val FROM '${this.table}' WHERE Key = ?;`,
-            [Compiler.countStatement]:     `SELECT COUNT(*) FROM '${this.table}';`,
-            [Compiler.listKeysStatement]:  `SELECT Key FROM '${this.table}';`,
-            [Compiler.listStatement]:      `SELECT Key, Val FROM '${this.table}';`,
-            [Compiler.batchListStatement]: `SELECT Key, Val FROM '${this.table}' LIMIT ?,?;`
+            [Compiler.statements.insert]:    `INSERT OR REPLACE INTO '${this.table}' ('Key', 'Val') VALUES (?, ?);`,
+            [Compiler.statements.fetch]:     `SELECT Val FROM '${this.table}' WHERE Key = ?;`,
+            [Compiler.statements.count]:     `SELECT COUNT(*) FROM '${this.table}';`,
+            [Compiler.statements.listKeys]:  `SELECT Key FROM '${this.table}';`,
+            [Compiler.statements.list]:      `SELECT Key, Val FROM '${this.table}';`,
+            [Compiler.statements.batchList]: `SELECT Key, Val FROM '${this.table}' LIMIT ?,?;`
         }[ofQueryKey];
 
         const query = this.API.prepare(queryString);
