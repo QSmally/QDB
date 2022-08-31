@@ -25,33 +25,33 @@ const { Connection, ... } = require("qdatabase");
 
 # Usage
 
-## [Connection](https://github.com/QSmally/QDB)
+## [Connection](https://github.com/QSmally/QDB/blob/staging/Sources/Connection.js)
 The main interface for interacting with QDB.
 ```js
-const service = new Connection("/opt/company/Cellar/Users.qdb", {
+const persistentStorage = new Connection("/opt/company/Cellar/Users.qdb", {
     cache: CacheStrategy.managed({ maxSize: 1e4 })
 });
 ```
 
-## [Transaction](https://github.com/QSmally/QDB)
+## [Transaction](https://github.com/QSmally/QDB/blob/staging/Sources/Structures/Transaction.js)
 A SQL transaction manager.
 ```js
 // Instantiates a transaction within the database. It is required to
 // call 'commit' or 'rollback' on the returned Transaction struct.
-const transaction = service.transaction();
+const transaction = persistentStorage.transaction();
 
 // Perform changes in the connection...
 transaction.commit(); // or
 transaction.rollback();
 ```
 
-## [Selection](https://github.com/QSmally/QDB)
+## [Selection](https://github.com/QSmally/QDB/blob/staging/Sources/Structures/Selection.js)
 An unchanged piece of the database in memory.
 ```js
 // Aggregate with certain instructions, like joining tables,
 // ordering them and regrouping them by a property.
-const users = service.select()
-    .join(projects, JoinStrategy.property("projects"), "userId")
+const users = persistentStorage.select()
+    .join(projectsStorage, JoinStrategy.property("projects"), "userId")
     .order(SortingPredicate.descending(user => Object.keys(user.projects).length))
     .group("rank");
 ```
