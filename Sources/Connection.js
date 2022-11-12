@@ -430,7 +430,7 @@ class Connection {
      */
     select(predicateOrPathlike = () => true) {
         const selection = typeof predicateOrPathlike === "string" ?
-            this.fetch(predicateOrPathlike, this.configuration.utilityCache) :
+            this.fetch(predicateOrPathlike, { cache: this.configuration.utilityCache }) :
             (() => {
                 const rows = this.compiler
                     .query(Compiler.statements.list)
@@ -459,7 +459,7 @@ class Connection {
      * @returns {Number} The new length of the array.
      */
     push(pathlike, ...values) {
-        const sourceArray = this.fetch(pathlike, this.configuration.utilityCache);
+        const sourceArray = this.fetch(pathlike, { cache: this.configuration.utilityCache });
 
         sourceArray.push(...values);
         this.set(pathlike, sourceArray);
@@ -474,7 +474,7 @@ class Connection {
      * @returns {Number|*} The new length of the array if values were added, or the shifted value.
      */
     shift(pathlike, ...values) {
-        const sourceArray = this.fetch(pathlike, this.configuration.utilityCache);
+        const sourceArray = this.fetch(pathlike, { cache: this.configuration.utilityCache });
 
         const returnable = values.length ?
             sourceArray.unshift(...values) :
@@ -490,7 +490,7 @@ class Connection {
      * @returns {*} A popped value.
      */
     pop(pathlike) {
-        const sourceArray = this.fetch(pathlike, this.configuration.utilityCache);
+        const sourceArray = this.fetch(pathlike, { cache: this.configuration.utilityCache });
 
         const popped = sourceArray.pop();
         this.set(pathlike, sourceArray);
@@ -504,7 +504,7 @@ class Connection {
      * @returns {Number} The new length of the array.
      */
     remove(pathlike, predicateOrIndex) {
-        const sourceArray = this.fetch(pathlike, this.configuration.utilityCache);
+        const sourceArray = this.fetch(pathlike, { cache: this.configuration.utilityCache });
 
         if (typeof predicateOrIndex === "function") {
             for (const index in sourceArray) {
@@ -530,7 +530,7 @@ class Connection {
      * @returns {Number} The new length of the array.
      */
     slice(pathlike, startIndex, endIndex) {
-        const sourceArray = this.fetch(pathlike, this.configuration.utilityCache);
+        const sourceArray = this.fetch(pathlike, { cache: this.configuration.utilityCache });
 
         const mutatedArray = sourceArray.slice(startIndex, endIndex);
         this.set(pathlike, mutatedArray);
@@ -564,7 +564,7 @@ class Connection {
             this.set(pathlike, document);
             return document;
         } else {
-            return this.fetch(pathlike, this.configuration.utilityCache);
+            return this.fetch(pathlike, { cache: this.configuration.utilityCache });
         }
     }
 
@@ -575,14 +575,14 @@ class Connection {
      * @returns {DataModel|*}
      */
     modify(pathlike, newEntityCallback) {
-        const sourceEntity = this.fetch(pathlike, this.configuration.utilityCache);
+        const sourceEntity = this.fetch(pathlike, { cache: this.configuration.utilityCache });
 
         const mutatedEntity = newEntityCallback(sourceEntity, pathlike);
         this.set(pathlike, mutatedEntity);
 
         return this.fetch(
             Generics.resolveKeyPath(pathlike).shift(),
-            this.configuration.utilityCache);
+            { cache: this.configuration.utilityCache });
     }
 
     /**
@@ -591,7 +591,7 @@ class Connection {
      * @returns {Boolean}
      */
     invert(pathlike) {
-        const inversion = !this.fetch(pathlike, this.configuration.utilityCache);
+        const inversion = !this.fetch(pathlike, { cache: this.configuration.utilityCache });
         this.set(pathlike, inversion);
         return inversion;
     }
