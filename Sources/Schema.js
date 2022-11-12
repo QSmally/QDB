@@ -1,17 +1,7 @@
 
 "use strict";
 
-const { Collection } = require("qulity");
-
 class Schema {
-
-    /**
-     * A dictionary of instantiated Schema models.
-     * @name Schema#models
-     * @type {Collection<String, Schema>}
-     * @private
-     */
-    static models = new Collection();
 
     /**
      * The object which holds and controls data migration for a particular table.
@@ -34,19 +24,6 @@ class Schema {
          * @readonly
          */
         this.model = model;
-
-        Schema.models.set(identifier, this);
-    }
-
-    /**
-     * Ensures the type returning from this associated function.
-     * @param {Schema|String} model Either a Schema model or string identifier of it.
-     * @returns {Schema?}
-     */
-    static castType(model) {
-        return typeof model === "string" ?
-            Schema.models.get(model) :
-            model;
     }
 
     /**

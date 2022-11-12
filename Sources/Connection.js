@@ -29,8 +29,9 @@ class Connection {
      * @property {Boolean} [utilityCache] Automatically inserts the new entry of any utility operation, like `exists`, into the Connection's internal cache.
      * @property {Number} [fetchAll] If enabled, an integer being the batch size of each database call and insertion to eventually fetch everything.
      * @property {Boolean} [unsafeAssumeCache] If set, discards a database lookup and only returns results from cache. It does not return a clone. For this to work properly, eviction must be off, insertion cache and fetch-all must be on.
-     * @property {Schema|String} [model] A Schema for every entity in this Connection to follow.
-     * @property {Boolean} [migrate] Whether to migrate every entity in the Connection's database to its (new) model.
+     * @property {Schema} [dataSchema] A Schema for every entity in this Connection to follow.
+     * @property {Boolean} [migrate] A boolean whether to migrate every entity in the Connection's database to its (new) model.
+     * @property {Boolean} [defaults] A boolean whether to return the model's default values if a row wasn't found in the Connection's database.
      */
 
     /**
@@ -79,8 +80,9 @@ class Connection {
             fetchAll: null,
             unsafeAssumeCache: false,
 
-            model: null,
+            dataSchema: null,
             migrate: false,
+            defaults: false,
 
             ...configuration
         };
@@ -227,13 +229,26 @@ class Connection {
 
     /**
      * Manages the elements of the database.
-     * @param {Pathlike} pathContext Specifies at which row and nested property to insert or replace the element at.
+     * @param {Pathlike} path Specifies at which row and nested property to insert or replace the element at.
      * @param {DataModel|*} document Any data to set at the row address or the location of the key-path.
-     * @param {Boolean} [cache] A flag to insert this entry into the Connection's cache if not already, defaults to the `insertionCache` configuration option.
+     * @param {Object} [options] Additional configuration options for this specified Connection operation.
+     * @param {Boolean} [options.cache] A flag to insert this entry into the Connection's cache if not already, defaults to the `insertionCache` configuration option.
+     * @param {Boolean} [options.defaults] A flag to set a model into the database if no existing row would be found, defaults to the `defaults` configuration option.
      * @returns {Connection}
      */
-    set(pathContext, document, cache = this.configuration.insertionCache) {
-        const [keyContext, ...path] = Generics.resolveKeyPath(pathContext);
+    set(pathlike, document, {
+        cache = this.configuration.insertionCache,
+        defaults = this.configuration.defaults
+    } = {}) {
+        const [keyContext, ...path] = Generics.resolveKeyPath(pathlike);
+
+        if (defaults && this.configuration.dataSchema && !this.exists(keyContext)) {
+            const model = Generics.clone(this.configuration.dataSchema.model);
+            if (path.length) Generics.pathCast(model, path, document);
+            return this.set(keyContext, model, {
+                cache,
+                defaults: false });
+        }
 
         if (path.length) {
             const documentOld = this.fetch(keyContext) ?? {};
@@ -256,20 +271,40 @@ class Connection {
 
     /**
      * Manages the retrieval of the database.
-     * @param {Pathlike} pathContext Specifies which row or nested property to fetch or get from the cache.
-     * @param {Boolean} [cache] A flag to insert this entry into the Connection's cache, defaults to true.
+     * @param {Pathlike} pathlike Specifies which row or nested property to fetch or get from the cache.
+     * @param {Object} [options] Additional configuration options for this specified Connection operation.
+     * @param {Boolean} [options.cache] A flag to insert this entry into the Connection's cache, defaults to true.
+     * @param {Boolean} [options.assumeCache] A flag to discard a database lookup and only returns results from cache, defaults to the `unsafeAssumeCache` configuration option.
+     * @param {Boolean} [options.defaults] A flag to return the Connection's model if no existing row would be found, defaults to the `defaults` configuration option.
      * @returns {DataModel|*}
      */
-    fetch(pathContext, cache = true) {
-        const [keyContext, ...path] = Generics.resolveKeyPath(pathContext);
+    fetch(pathlike, {
+        cache = true,
+        assumeCache = this.configuration.unsafeAssumeCache,
+        defaults = this.configuration.defaults
+    } = {}) {
+        const [keyContext, ...path] = Generics.resolveKeyPath(pathlike);
 
-        if (this.configuration.unsafeAssumeCache) {
+        if (assumeCache) {
             const cachedObject = this.memoryStore.get(keyContext);
-            if (cachedObject == undefined) return cachedObject;
+            return cachedObject == undefined ?
+                cachedObject :
+                Generics.pathCast(cachedObject, path);
+        }
 
-            return path.length ?
-                Generics.pathCast(cachedObject, path) :
-                cachedObject;
+        if (defaults && this.configuration.dataSchema) {
+            const value = this.fetch(pathlike, {
+                cache,
+                assumeCache,
+                defaults: false });
+
+            if (value === undefined && this.configuration.dataSchema.model) {
+                const defaultValue = Generics.pathCast(this.configuration.dataSchema.model, path);
+                if (cache && !this.memoryStore.has(keyContext)) this.cacheStrategyController.patch(keyContext, this.configuration.dataSchema.model);
+                return defaultValue;
+            } else {
+                return value;
+            }
         }
 
         const fetched = this.memoryStore.get(keyContext) ?? (() => {
@@ -510,12 +545,8 @@ class Connection {
      * @returns {Connection}
      */
     default(keyContext, document = {}) {
-        if (!this.exists(keyContext)) {
-            const { model } = this.configuration;
-            const schema = Schema.castType(model);
-            this.set(keyContext, schema.instance(document));
-        }
-
+        if (this.configuration.dataSchema && !this.exists(keyContext))
+            this.set(keyContext, this.configuration.dataSchema.instance(document));
         return this;
     }
 
