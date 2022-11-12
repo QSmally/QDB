@@ -247,7 +247,7 @@ class Connection {
             .query(Compiler.statements.insert)
             .run(keyContext, JSON.stringify(document));
 
-        if (cache || this.memoryStore.has(keyContext) || this.configuration.fetchAll > 0) {
+        if (cache || this.configuration.fetchAll > 0 || this.memoryStore.has(keyContext)) {
             this.cacheStrategyController.patch(keyContext, document);
         }
 
