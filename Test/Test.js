@@ -8,7 +8,7 @@ const users = new Connection("Test/Users.qdb", {
 });
 
 // Connection: remove everything
-    users.set("foo", { bar: "roo" }, false);
+    users.set("foo", { bar: "roo" }, { cache: false });
     users.API
         .prepare(`DELETE FROM ${users.table};`)
         .run();
