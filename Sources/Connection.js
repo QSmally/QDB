@@ -372,11 +372,12 @@ class Connection {
      * fetches from the Connection, it will automatically be cached, making a
      * subsequent fetch much faster.
      * @param {Pathlike} pathlike Specifies which row or nested property to see if it exists.
-     * @param {Boolean} [cache] A flag to insert this entry into the Connection's cache if not already, defaults to the `utilityCache` configuration option.
+     * @param {Object} [options] Additional configuration options for this specified Connection operation.
+     * @param {Boolean} [options.cache] A flag to insert this entry into the Connection's cache if not already, defaults to the `utilityCache` configuration option.
      * @returns {Boolean}
      */
-    exists(pathlike, cache = this.configuration.utilityCache) {
-        const document = this.fetch(pathlike, cache);
+    exists(pathlike, { cache = this.configuration.utilityCache } = {}) {
+        const document = this.fetch(pathlike, { cache });
         return document !== undefined;
     }
 
@@ -385,10 +386,11 @@ class Connection {
      * which passes the test. If enabled, the cache will first be scanned for a
      * passing entity.
      * @param {Function} predicate A tester function which returns a boolean based on the properties of the row.
-     * @param {Boolean} [cache] A flag to first scan the cache before searching elements in the database, defaults to the `utilityCache` configuration option.
+     * @param {Object} [options] Additional configuration options for this specified Connection operation.
+     * @param {Boolean} [options.cache] A flag to first scan the cache before searching elements in the database, defaults to the `utilityCache` configuration option.
      * @returns {DataModel?}
      */
-    find(predicate, cache = this.configuration.utilityCache) {
+    find(predicate, { cache = this.configuration.utilityCache } = {}) {
         if (cache) {
             for (const [keyContext, document] of this.memoryStore)
                 if (predicate(document, keyContext)) return Generics.clone(document);
