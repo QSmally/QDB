@@ -157,10 +157,11 @@ class Selection {
     /**
      * Groups the Selection's values based on a particular property.
      * Identical to the `GROUP BY` SQL statement.
-     * @param {Pathlike} pathlike Specifies which row or nested property to group by.
+     * @param {Object} options A configuration object with options for this GROUP operation.
+     * @param {Pathlike} options.byPath Specifies which row or nested property to group by.
      * @returns {Selection}
      */
-    group(pathlike) {
+    group({ byPath: pathlike }) {
         const pathContext = Generics.resolveKeyPath(pathlike);
         const originalSelectionObject = this.cache.toPairObject();
         this.cache.clear();
@@ -181,17 +182,18 @@ class Selection {
     /**
      * Joins another Selection into this instance based on a referrer field.
      * Identical to the `FULL JOIN` SQL statement.
-     * @param {Selection} secondarySelection Another Selection instance to be joined into this one.
-     * @param {JoinStrategy} [joinStrategy] A strategy to decide how to join the documents into this Selection's documents, defaults to the secondary Selection's table name.
-     * @param {Pathlike} [field] A path to some property to reference how to join the secondary Selection. If none, the key of the document is used.
+     * @param {Object} options A configuration object with options for this JOIN operation.
+     * @param {Selection} options.selection Another Selection instance to be joined into this one.
+     * @param {JoinStrategy} [options.joinStrategy] A strategy to decide how to join the documents into this Selection's documents, defaults to the secondary Selection's table name.
+     * @param {Pathlike} [options.field] A path to some property to reference how to join the secondary Selection. If none, the key of the document is used.
      * @returns {Selection}
      */
-    join(secondarySelection, joinStrategy = JoinStrategy.property(secondarySelection.holds), field = null) {
+    join({ selection, joinStrategy = JoinStrategy.property(selection.holds), field = null }) {
         const pathContext = field ?
             Generics.resolveKeyPath(field) :
             [[], []];
 
-        for (const [index, joinObject] of Generics.clone(secondarySelection.cache)) {
+        for (const [index, joinObject] of Generics.clone(selection.cache)) {
             const fieldId = field ?
                 Generics.pathCast(joinObject, pathContext) :
                 index;
