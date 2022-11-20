@@ -184,11 +184,11 @@ class Selection {
      * Identical to the `FULL JOIN` SQL statement.
      * @param {Object} options A configuration object with options for this JOIN operation.
      * @param {Selection} options.selection Another Selection instance to be joined into this one.
-     * @param {JoinStrategy} [options.joinStrategy] A strategy to decide how to join the documents into this Selection's documents, defaults to the secondary Selection's table name.
+     * @param {JoinStrategy} [options.strategy] A strategy to decide how to join the documents into this Selection's documents, defaults to the secondary Selection's table name.
      * @param {Pathlike} [options.field] A path to some property to reference how to join the secondary Selection. If none, the key of the document is used.
      * @returns {Selection}
      */
-    join({ selection, joinStrategy = JoinStrategy.property(selection.holds), field = null }) {
+    join({ selection, strategy = JoinStrategy.property(selection.holds), field = null }) {
         const pathContext = field ?
             Generics.resolveKeyPath(field) :
             [[], []];
@@ -198,7 +198,7 @@ class Selection {
                 Generics.pathCast(joinObject, pathContext) :
                 index;
             const documentObject = this.cache.get(fieldId);
-            if (documentObject) joinStrategy(documentObject, index, joinObject);
+            if (documentObject) strategy(documentObject, index, joinObject);
         }
 
         return this;

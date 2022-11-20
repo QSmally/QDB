@@ -51,9 +51,12 @@ An unchanged piece of the database in memory.
 // Aggregate with certain instructions, like joining tables,
 // ordering them and regrouping them by a property.
 const users = persistentStorage.select()
-    .join(projectsStorage, JoinStrategy.property("projects"), "userId")
+    .join({
+        selection: projectsStorage,
+        strategy: JoinStrategy.property("projects"),
+        field: "userId" })
     .order(SortingPredicate.descending(user => Object.keys(user.projects).length))
-    .group("rank");
+    .group({ byPath: "rank" });
 ```
 
 # QDB Shell
