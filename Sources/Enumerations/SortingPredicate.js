@@ -12,7 +12,7 @@ module.exports = {
      * @returns {SortStrategy}
      */
     ascending(selector) {
-        return (node_0, node_1) => selector(node_0) > selector(node_1);
+        return (node_0, node_1) => selector(node_0) > selector(node_1) ? 1 : -1;
     },
 
     /**
@@ -21,6 +21,6 @@ module.exports = {
      * @returns {SortStrategy}
      */
     descending(selector) {
-        return (node_0, node_1) => selector(node_0) < selector(node_1);
+        return (node_0, node_1) => selector(node_0) < selector(node_1) ? 1 : -1;
     }
 };
