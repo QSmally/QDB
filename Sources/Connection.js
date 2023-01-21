@@ -454,7 +454,7 @@ class Connection {
 
     /**
      * Appends values to the end of the array at the located path.
-     * @param {Pathlike} pathlike Specifies which row or nested property to fetch the an array.
+     * @param {Pathlike} pathlike Specifies which row or nested property to fetch the array.
      * @param {...Any} values A list of values to insert into the array.
      * @returns {Number} The new length of the array.
      */
@@ -469,7 +469,7 @@ class Connection {
     /**
      * Inserts or removes value(s) to/from the front of the array at the located
      * path.
-     * @param {Pathlike} pathlike Specifies which row or nested property to fetch the an array.
+     * @param {Pathlike} pathlike Specifies which row or nested property to fetch the array.
      * @param {...Any} [values] If defined, inserts the new values at the front of the array, otherwise removes one.
      * @returns {Number|*} The new length of the array if values were added, or the shifted value.
      */
@@ -486,7 +486,7 @@ class Connection {
 
     /**
      * Pops a value from the array at the located path.
-     * @param {Pathlike} pathlike Specifies which row or nested property to fetch the an array.
+     * @param {Pathlike} pathlike Specifies which row or nested property to fetch the array.
      * @returns {*} A popped value.
      */
     pop(pathlike) {
@@ -499,7 +499,7 @@ class Connection {
 
     /**
      * Removes a specific element from the array at the located path.
-     * @param {Pathlike} pathlike Specifies which row or nested property to fetch the an array.
+     * @param {Pathlike} pathlike Specifies which row or nested property to fetch the array.
      * @param {Function|Number} predicateOrIndex A function or an index to indicate which element to remove.
      * @returns {Number} The new length of the array.
      */
@@ -524,7 +524,7 @@ class Connection {
     /**
      * Inserts an extracted portion of the array at the located path based on the
      * indexes.
-     * @param {Pathlike} pathlike Specifies which row or nested property to fetch the an array.
+     * @param {Pathlike} pathlike Specifies which row or nested property to fetch the array.
      * @param {Number} startIndex A zero-based index at whichi to start extraction.
      * @param {Number} [endIndex] An optional zero-based index before which to end extraction, and defaults to the length of the array.
      * @returns {Number} The new length of the array.
@@ -535,6 +535,17 @@ class Connection {
         const mutatedArray = sourceArray.slice(startIndex, endIndex);
         this.set(pathlike, mutatedArray);
         return mutatedArray.length;
+    }
+
+    /**
+     * Retrieves the size of the array at the located path.
+     * @param {Pathlike} pathlike Specifies which row or nested property to fetch the array.
+     * @returns {Number} The current length of the array.
+     */
+    size(pathlike) {
+        return this
+            .fetch(pathlike, { cache: this.configuration.utilityCache })
+            .length;
     }
 
     // Utility methods
